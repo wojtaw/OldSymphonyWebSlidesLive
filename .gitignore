@@ -1,0 +1,11 @@
+/app/cache/*
+/app/logs/*
+/vendor/*
+!/app/config/parameters.ini
+
+/nbproject/*
+
+/app/bootstrap.php.cache
+
+!.keepdir
+*~

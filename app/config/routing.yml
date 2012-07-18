@@ -2,3 +2,7 @@
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #   prefix:   /_internal
+
+SlidesLiveBundle:
+    resource: "@SlidesLiveBundle/Resources/config/routing.yml"
+    prefix:   /

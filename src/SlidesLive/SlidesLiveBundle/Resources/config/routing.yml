@@ -8,8 +8,8 @@ homepage:
 
 _welcome:
     pattern: /
-#    defaults: { _controller: SlidesLiveBundle:Default:index }
-    defaults: { _controller: SlidesLiveBundle:Default:homepage }
+    defaults: { _controller: SlidesLiveBundle:Default:index }
+#    defaults: { _controller: SlidesLiveBundle:Default:homepage }
     
 setLanguage:
     pattern: /setLanguage/{language}

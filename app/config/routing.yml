@@ -16,6 +16,11 @@ login_check:
     
 logout:
     pattern: /logout
+    
+# -----APP------------------------------------
+app_news:
+    pattern: /anews
+    defaults: { _controller: AppBundle:Default:news }
 
 # -----BUNDLE ROUTES REGISTRATION-------------
 StaticBundle:

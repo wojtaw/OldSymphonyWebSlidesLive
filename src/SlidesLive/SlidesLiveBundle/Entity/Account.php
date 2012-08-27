@@ -7,12 +7,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
-// @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\AccountRepository")
-
 /**
  * SlidesLive\SlidesLiveBundle\Entity\Account
  *
- * @ORM\Table(name="account") 
+ * @ORM\Table(name="account")
+ * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\AccountRepository")  
  */
 class Account implements AdvancedUserInterface {
 

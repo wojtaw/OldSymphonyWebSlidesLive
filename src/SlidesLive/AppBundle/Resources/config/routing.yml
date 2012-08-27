@@ -1,3 +1,15 @@
-AppBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: AppBundle:Default:index }
+app_index:
+    pattern: /index
+    defaults: { _controller: MetaBundle:App:index }
+#    requirements:
+#        _method:  POST
+
+app_create_presentation:
+    pattern: /create_presentation
+    defaults: { _controller: MetaBundle:App:createPresentation }
+#    requirements:
+#        _method:  POST
+        
+app_logout:
+    pattern: /logout
+

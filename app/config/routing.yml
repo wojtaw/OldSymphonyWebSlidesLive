@@ -17,6 +17,16 @@ login_check:
 logout:
     pattern: /logout
     
+# ------REGISTRATION------------------------------------------------------------
+registration:
+    pattern: /registration
+    defaults: { _controller: SlidesLiveBundle:Registration:registration }
+    
+registration_result:
+    pattern: /registration/result
+    defaults: { _controller: SlidesLiveBundle:Registration:result }
+
+    
 # -----APP------------------------------------
 app_news:
     pattern: /anews

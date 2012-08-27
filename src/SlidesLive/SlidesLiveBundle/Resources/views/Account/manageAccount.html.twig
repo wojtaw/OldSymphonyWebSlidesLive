@@ -1,0 +1,17 @@
+{# src/SlidesLive/SlidesLiveBundle/Resources/views/Account/login.html.twig #}
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+
+
+{% block content %}
+<div class="siteContent clearfix">
+<h2>Edit personal data:</h2>
+{{ accountEditForm.content|raw }}
+<br>
+<h2>Edit channel data:</h2>
+{{ channelEditForm.content|raw }}
+
+<br>
+<h2>Change password:</h2>
+{{ passwordChangeForm.content|raw }}
+</div>
+{% endblock %}

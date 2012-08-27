@@ -1,0 +1,84 @@
+{% block form_row %}
+{% spaceless %}
+    <tr class="form_row">
+      <td></td>
+      <td class="form_row_error">
+        {{ form_errors(form) }}  
+      </td>
+    </tr>
+    <tr class="form_row">
+      <td class="form_row_label">
+        {{ form_label(form, label|default(null)) }}
+      </td>
+      <td class="form_row_widget">
+        {{ form_widget(form) }}
+      </td>
+    </tr>
+{% endspaceless %}
+{% endblock form_row %}
+
+
+
+
+
+
+{% block text_widget %}
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" size="40em"/>
+{% endblock text_widget %}
+
+{% block password_widget %}
+    {% set type = type|default('password') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" size="40em"/>
+{% endblock password_widget %}
+
+{% block email_widget %}
+    {% set type = type|default('email') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} value="{{ value }}" size="40em"/>
+{% endblock email_widget %}
+
+{% block textarea_widget %}
+    <textarea {{ block('widget_attributes') }} cols="50" rows="7">
+    {{ value }}    
+    </textarea>
+{% endblock textarea_widget %}
+
+{% block field_label %}
+{% spaceless %}
+    {% set attr = attr|merge({'for': id}) %}
+    {{ block('generic_label') }}
+    {% if required %}
+      <span class='required' title='Required field.'>*</span>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_label %}
+
+{# -------------------------------------------------------------------------- #}
+
+{% block field_rows %}
+{% spaceless %}    
+    {% for child in form %}
+        {{ form_row(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock field_rows %}
+
+{% block repeated_row %}
+  {% spaceless %}
+      <tr class="form_row">
+        <td></td>
+        <td class="form_row_error">
+          {{ form_errors(form) }}  
+        </td>
+      </tr>
+    {% for child in form %}
+      <tr class="form_row">
+        <td class="form_row_label">
+          {{ form_label(child) }}   
+        </td><td class="form_row_widget">
+          {{ form_widget(child) }}      
+        </td>
+      </tr> 
+    {% endfor %}
+  {% endspaceless %}
+{% endblock repeated_row %}

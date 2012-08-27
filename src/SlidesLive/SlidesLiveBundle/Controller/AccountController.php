@@ -1,33 +1,26 @@
 <?php
 
-namespace Meta\MetaBundle\Controller;
+namespace SlidesLive\SlidesLiveBundle\Controller;
 
-//use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
-use Meta\MetaBundle\Controller\BaseController;
-use Meta\MetaBundle\Entity\Channel;
-use Meta\MetaBundle\Entity\Presentation;
-use Meta\MetaBundle\Entity\User;
-use Meta\MetaBundle\Entity\Folder;
-use Meta\MetaBundle\Form\ChannelEditForm;
-use Meta\MetaBundle\Form\AccountEditForm;
-use Meta\MetaBundle\Form\PresentationEditForm;
+use SlidesLive\SlidesLiveBundle\Entity\Account;
+use SlidesLive\SlidesLiveBundle\Entity\Presentation;
+use SlidesLive\SlidesLiveBundle\Entity\Folder;
+use SlidesLive\SlidesLiveBundle\Form\ChannelEditForm;
+use SlidesLive\SlidesLiveBundle\Form\AccountEditForm;
+use SlidesLive\SlidesLiveBundle\Form\PresentationEditForm;
 
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\MinLength;
 
-class AccountController extends BaseController
+class AccountController extends Controller
 {                                         
     
-    public function __construct() {
-      parent::__construct();     
-    }
-    
     public function channelEditFormAction() {
-      $this->start();
       $request = $this->getRequest();
       $user = $this->get('security.context')->getToken()->getUser();
       $channel = $user->getChannel();
@@ -50,7 +43,6 @@ class AccountController extends BaseController
     }
     
     public function accountEditFormAction(Request $request) {
-      $this->start();
       $user = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       
@@ -119,24 +111,17 @@ class AccountController extends BaseController
       $this->data['form'] = $form->createView();
       return $this->render('MetaBundle:Account:passwordChangeForm.html.twig', $this->data);    
     }
-    
-    private function redirectAdmin() {
-      $context = $this->get('security.context');
-      if ($context->isGranted('ROLE_ADMIN')) {
-        return $this->redirect($this->generateUrl('adminPage'));
-      }    
-    }
                                              
-    public function channelAction() {
-        $this->start();
-        $this->redirectAdmin();// tohle je FUJ to se musi predelat                            
+    public function manageAccountAction() {                            
         
-        $this->data['channelEditForm'] = $this->forward('MetaBundle:Account:channelEditForm');
-        $this->data['accountEditForm'] = $this->forward('MetaBundle:Account:accountEditForm');
-        $this->data['passwordChangeForm'] = $this->forward('MetaBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('accountChannel')));
+        //$this->data['channelEditForm'] = $this->forward('MetaBundle:Account:channelEditForm');
+        //$this->data['accountEditForm'] = $this->forward('MetaBundle:Account:accountEditForm');
+        //$this->data['passwordChangeForm'] = $this->forward('MetaBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('accountChannel')));
         
-        return $this->render('MetaBundle:Account:channel.html.twig', $this->data);
+        return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
+    
+    // -------------------------------------------------------------------------------------------------    
     
      public function presentationEditFormAction($action, $presentation) {
       $request = $this->getRequest();
@@ -158,8 +143,7 @@ class AccountController extends BaseController
       return $this->render('MetaBundle:Account:presentationEditForm.html.twig', $this->data);    
     }
     
-    public function presentationsAction($presentationId) {
-        $this->start();
+    public function managePresentationsAction($presentationId) {
         $presentations = $this->get('security.context')->getToken()->getUser()->getChannel()->getPresentations();
         if (count($presentations) < 1) {
           $this->data['presentations'] = null;        
@@ -186,7 +170,6 @@ class AccountController extends BaseController
     }
     
     public function routerAction() {
-      $this->start();
       $context = $this->get('security.context');
       if ($context->isGranted('ROLE_USER')) {
         $user = $context->getToken()->getUser();

@@ -30,7 +30,8 @@ class Account implements AdvancedUserInterface {
         $this->description = '';
         $this->privateCode = $this->generatePrivateCode();
         $this->ratig = 0;
-        $this->private = false;  
+        $this->private = false;
+        $this->website = '';  
     }
     
     /**

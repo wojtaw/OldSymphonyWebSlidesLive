@@ -1,2 +1,7 @@
 # \src\Meta\SlidesLiveBundle\Resources\config\routing.yml
 
+manageAccount:
+  pattern:  /
+  defaults: { _controller: SlidesLiveBundle:Default:manageAccount }
+  
+

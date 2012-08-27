@@ -1,12 +1,2 @@
 # \src\Meta\SlidesLiveBundle\Resources\config\routing.yml
 
-# -------Homepage---------------------------------------------------------------
-
-_welcome:
-    pattern: /
-    defaults: { _controller: SlidesLiveBundle:Default:index }
-#    defaults: { _controller: SlidesLiveBundle:Default:homepage }
-
-    
-#--------Private links----------------------------------------------------------
-

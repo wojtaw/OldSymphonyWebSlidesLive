@@ -1,0 +1,22 @@
+# src/SlidesLive/StaticBundle/Resources/config/routing.yml
+
+homepage:
+    pattern:  /
+    defaults: { _controller: StaticBundle:Default:index }
+    
+tour:
+    pattern: /tour
+    defaults: { _controller: StaticBundle:Default:tour }
+    
+about:
+    pattern: /about
+    defaults: { _controller: StaticBundle:Default:about }
+    
+terms:
+    pattern: /termsandconditions
+    defaults: { _controller: StaticBundle:Default:terms }
+    
+policy:
+    pattern: /privacyandpolicy
+    defaults: { _controller: StaticBundle:Default:policy }
+    

@@ -1,38 +1,57 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        #Symfony\Component\Security\Core\User\User: plaintext
+        
+        SlidesLive\SlidesLiveBundle\Entity\Account:
+          algorithm: sha1
+          encode_as_base64: false
+          iterations: 1
+          
+        #Symfony\Component\Security\Core\User\User:
+        #  algorithm: plaintext
 
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    #role_hierarchy:
+        #ROLE_ADMIN:           [ROLE_META_PLUS_USER, ROLE_ALLOWED_TO_SWITCH]
+        #ROLE_META_PLUS_USER:  ROLE_USER
 
     providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        #in_memory:
+        #    users:
+        #        user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+        #        admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        user_db:
+          entity: {class: SlidesLiveBundle:Account, property:username }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
+            
+        app:        
+            pattern: ^/app
+            anonymous: false
+            http_basic:
+                realm: "Meta Edu Studio API"
+                provider: user_db
+            logout:
+                path: /app/logout
+                target: /    
 
         secured_area:
-            pattern:    ^/demo/secured/
+            pattern:    ^/
+            anonymous: ~
             form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
+                check_path: /login_check
+                login_path: /login
+                #default_target_path:  /account/channel
+                #default_target_path:  /account/router
+                default_target_path:  /account/
+                
             logout:
-                path:   /demo/secured/logout
-                target: /demo/
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+                path:   /logout
+                target: /
 
     access_control:
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+        - { path: ^/account, roles: 'ROLE_USER'}#, requires_channel: https }
+        - { path: ^/app, roles: 'ROLE_USER'}
+        #- { path: ^/admin, roles: 'ROLE_ADMIN'}

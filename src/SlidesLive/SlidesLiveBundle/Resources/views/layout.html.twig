@@ -1,16 +1,12 @@
-{% extends 'SlidesLiveBundle::base.html.twig' %}
-	{% block body %}
-  <div class="fixedHeader">
-    <div class="headerContent">  
-  		<div class="topMenuItem">Hello SlidesLive1</div>
-	</div>		
-  </div>	
+{# scr/SlidesLive/SlidesLiveBundle/Resources/views/layout.html.twig #}
+{% extends '::base.html.twig' %}
+
+  {% block stylesheet %}
+    <link href="{{ asset('./bundles/slideslive/css/SlidesLiveStylesMain.css') }}" rel="stylesheet" type="text/css" />
+  {% endblock %}
   
-<div class="centerWrapper">
-    <div class="contentWrapper clearfix">
-      {# Page content #}
-         
-        {% block content %}{% endblock content %}                                                 
-        
+	{% block content %}
+    <div class="account_background">
+      {% block accountContent %}{% endblock %}
     </div>
-	{% endblock %}
+  {% endblock %}

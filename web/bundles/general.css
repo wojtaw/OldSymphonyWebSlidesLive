@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*-----ADDED---------------------*/
+.footer {
+  color: white;
+  background-color: black;
+}
+
+/*-----SITE STRUCTURE------------*/
+.fixedHeader {
+	position: fixed;
+    top:0;
+    left:0;	
+	width:100%;
+	background-color:#000000;
+	background-image:url(../styleImages/header-bg.png);
+	background-repeat:repeat-x;	
+	z-index:20;	
+}
+
+.centerWrapper {
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:60px;	
+	width:960px;
+	background-color:#990;
+}
+
+.contentWrapper {
+
+}
+
+.siteContent {
+	float:left;
+	width:650px;
+	margin-top:3px;	
+	min-height:800px;	
+}
+
+.headerContent {
+	margin-left:auto;
+	margin-right:auto;
+	width:960px;	
+	height:64px;
+}
+
+/*-----TEXTS------------*/
+.topMenuItem {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:20px;
+	color:#FFFFFF;	
+}
+
+/*-----CLEARFIX------------*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+

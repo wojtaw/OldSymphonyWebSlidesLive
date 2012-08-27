@@ -8,12 +8,6 @@ use SlidesLive\SlidesLiveBundle\Controller\BaseController;
 
 class DefaultController extends Controller { 
 
-                                              
-    public function indexAction()
-    {
-        return $this->render('SlidesLiveBundle:Homepage:index.html.twig');
-    }
-    
-                     
+                                                                  
 }
 

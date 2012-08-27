@@ -1,8 +1,31 @@
+# app/config/routing.yml
+
+# -----SYMFONY INTERNALS----------------------
 # Internal routing configuration to handle ESI
 #_internal:
 #   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
 #   prefix:   /_internal
 
+# -----LOGIN/LOGOUT ROUTES--------------------
+login:
+    pattern: /login
+    defaults: { _controller: SlidesLiveBundle:Login:login }
+    
+login_check:
+    pattern: /login_check
+    
+logout:
+    pattern: /logout
+
+# -----BUNDLE ROUTES REGISTRATION-------------
+StaticBundle:
+    resource: "@StaticBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+AppBundle:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /app
+
 SlidesLiveBundle:
     resource: "@SlidesLiveBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /account

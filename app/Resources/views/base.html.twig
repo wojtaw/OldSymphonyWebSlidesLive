@@ -1,13 +1,78 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="google-site-verification" content="k6rQywy6tzc20h1fL1H7XlLoS2A1vX7mdGl46rbMG24" />
+  {% block facebookMetaTags %}{% endblock %}
+    
+  {% block stylesheetBase %}
+      <link href="{{ asset('bundles/general.css') }}" rel="stylesheet" type="text/css">
+      {% block stylesheet %}{% endblock %}
+  {% endblock %}
+  
+  {% block favicon %}
+      <link href="{{ asset('bundles/favicon-sl-gif.gif') }}" rel="icon" type="image/png" />
+  {% endblock %}
+   
+  <title>
+      {% block titleBase %}
+        &lt;META&gt; - 
+          {% block title %}
+            Online education platform
+          {% endblock %}
+      {% endblock %}
+  </title>
+  
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33478098-1']);
+  _gaq.push(['_setDomainName', 'slideslive.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+    {# Page header #}
+    <div class="fixedHeader">
+      <div class="headerContent">  
+        <div class="topMenuItem">
+          SlidesLive(Beta),
+          <a href="{{ path('homepage') }}">Home</a>,
+          <a href="{{ path('tour') }}">Tour</a>,
+          <a href="{{ path('about') }}">About</a>, 
+          <a href="{{ path('login') }}">Login</a>  
+        </div>
+      </div>		
+    </div>
+    
+    <div class="centerWrapper">
+      <div class="contentWrapper clearfix">
+      
+        {# Page content #}     
+        {% block content %}{% endblock content %}
+
+        {# Page footer #}        
+        <div class="footer">
+          Copyright 2012 SlidesLive.com. All rights reserved.
+          <a href="{{ path('terms') }}">Terms & Conditions</a>,
+          <a href="{{ path('policy') }}">Privacy & Policy</a>
+        </div>                                                     
+        
+      </div>
+    </div>
+    
+    {% block javascripts %}{% endblock %}
+    
+</body>
 </html>

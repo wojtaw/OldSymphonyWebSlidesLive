@@ -1,15 +1,15 @@
 <?php
 
-namespace Meta\MetaBundle\Entity;
+namespace SlidesLive\SlidesLiveBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Meta\MetaBundle\Entity\Presentation
+ * SlidesLive\SlidesLiveBundle\Entity\Presentation
  *
  * @ORM\Table(name="presentation") 
- * @ORM\Entity(repositoryClass="Meta\MetaBundle\Repository\PresentationRepository")
+ * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\PresentationRepository")
  */
 class Presentation
 {
@@ -67,13 +67,13 @@ class Presentation
         );
         $thumbnail = null;
         foreach ($imgFormats as $format) {
-            if (file_exists('./bundles/meta/player/VideoThumbs/'.sprintf("%d",$this->id).'.'.$format)) {
-                $thumbnail = './bundles/meta/player/VideoThumbs/'.sprintf("%d",$this->id).'.'.$format;
+            if (file_exists('./bundles/slideslive/player/VideoThumbs/'.sprintf("%d",$this->id).'.'.$format)) {
+                $thumbnail = './bundles/slideslive/player/VideoThumbs/'.sprintf("%d",$this->id).'.'.$format;
                 break;
             }
         }
         if (\is_null($thumbnail)) {
-            $thumbnail = './bundles/meta/images/no-image.jpg';
+            $thumbnail = './bundles/slideslive/images/no-image.jpg';
         }
         return $thumbnail;
     }
@@ -81,9 +81,9 @@ class Presentation
 // =============================================================================
 
     /**
-     *@ORM\ManyToOne(targetEntity="Channel", inversedBy="presentations")
+     *@ORM\ManyToOne(targetEntity="Account", inversedBy="presentations")
      */              
-    protected $channel;
+    protected $account;
     
     /**
      * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="presentations")
@@ -175,8 +175,17 @@ class Presentation
      * @ORM\Column(name="show_speaker", type="boolean")          
      */         
     protected $showSpeaker;
+    
+    /**
+     * @var string video_source
+     *
+     * @ORM\Column(name="video_source", type="string", length="255")
+     */                   
+    protected $videoSource;
 
 // =============================================================================
+
+    
 
     /**
      * Get id
@@ -186,186 +195,6 @@ class Presentation
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set dateRecorded
-     *
-     * @param datetime $dateRecorded
-     */
-    public function setDateRecorded($dateRecorded)
-    {
-        $this->dateRecorded = $dateRecorded;
-    }
-
-    /**
-     * Get dateRecorded
-     *
-     * @return datetime 
-     */
-    public function getDateRecorded()
-    {
-        return $this->dateRecorded;
-    }
-
-    /**
-     * Set vimeo
-     *
-     * @param integer $vimeo
-     */
-    public function setVimeo($vimeo)
-    {
-        $this->vimeo = $vimeo;
-    }
-
-    /**
-     * Get vimeo
-     *
-     * @return integer 
-     */
-    public function getVimeo()
-    {
-        return $this->vimeo;
-    }
-
-    /**
-     * Set length
-     *
-     * @param smallint $length
-     */
-    public function setLength($length)
-    {
-        $this->length = $length;
-    }
-
-    /**
-     * Get length
-     *
-     * @return smallint 
-     */
-    public function getLength()
-    {
-        return $this->length;
-    }
-
-    /**
-     * Set lang
-     *
-     * @param string $lang
-     */
-    public function setLang($lang)
-    {
-        $this->lang = $lang;
-    }
-
-    /**
-     * Get lang
-     *
-     * @return string 
-     */
-    public function getLang()
-    {
-        return $this->lang;
-    }
-
-    /**
-     * Set service
-     *
-     * @param string $service
-     */
-    public function setService($service)
-    {
-        $this->service = $service;
-    }
-
-    /**
-     * Get service
-     *
-     * @return string 
-     */
-    public function getService()
-    {
-        return $this->service;
-    }
-
-    /**
-     * Set service_id
-     *
-     * @param integer $serviceId
-     */
-    public function setServiceId($serviceId)
-    {
-        $this->service_id = $serviceId;
-    }
-
-    /**
-     * Get service_id
-     *
-     * @return integer 
-     */
-    public function getServiceId()
-    {
-        return $this->service_id;
-    }
-
-    /**
-     * Set slides
-     *
-     * @param boolean $slides
-     */
-    public function setSlides($slides)
-    {
-        $this->slides = $slides;
-    }
-
-    /**
-     * Get slides
-     *
-     * @return boolean 
-     */
-    public function getSlides()
-    {
-        return $this->slides;
-    }
-
-    /**
-     * Add speakers
-     *
-     * @param Meta\MetaBundle\Entity\Speaker $speakers
-     */
-    public function addSpeaker(\Meta\MetaBundle\Entity\Speaker $speakers)
-    {
-        $this->speakers[] = $speakers;
-    }
-
-    /**
-     * Get speakers
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getSpeakers()
-    {
-        return $this->speakers;
-    }
-
-    /**
-     * Set video
-     *
-     * @param boolean $video
-     */
-    public function setVideo($video)
-    {
-        $this->video = $video;
-    }
-
-    /**
-     * Get video
-     *
-     * @return boolean 
-     */
-    public function getVideo()
-    {
-        return $this->video;
     }
 
     /**
@@ -408,45 +237,144 @@ class Presentation
         return $this->description;
     }
 
-
     /**
-     * Set folder
+     * Set lang
      *
-     * @param Meta\MetaBundle\Entity\Folder $folder
+     * @param string $lang
      */
-    public function setFolder(\Meta\MetaBundle\Entity\Folder $folder)
+    public function setLang($lang)
     {
-        $this->folder = $folder;
+        $this->lang = $lang;
     }
 
     /**
-     * Get folder
+     * Get lang
      *
-     * @return Meta\MetaBundle\Entity\Folder 
+     * @return string 
      */
-    public function getFolder()
+    public function getLang()
     {
-        return $this->folder;
+        return $this->lang;
     }
 
     /**
-     * Set channel
+     * Set dateRecorded
      *
-     * @param Meta\MetaBundle\Entity\Channel $channel
+     * @param datetime $dateRecorded
      */
-    public function setChannel(\Meta\MetaBundle\Entity\Channel $channel)
+    public function setDateRecorded($dateRecorded)
     {
-        $this->channel = $channel;
+        $this->dateRecorded = $dateRecorded;
     }
 
     /**
-     * Get channel
+     * Get dateRecorded
      *
-     * @return Meta\MetaBundle\Entity\Channel 
+     * @return datetime 
      */
-    public function getChannel()
+    public function getDateRecorded()
     {
-        return $this->channel;
+        return $this->dateRecorded;
+    }
+
+    /**
+     * Set service
+     *
+     * @param string $service
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * Get service
+     *
+     * @return string 
+     */
+    public function getService()
+    {
+        return $this->service;
+    }
+
+    /**
+     * Set service_id
+     *
+     * @param string $serviceId
+     */
+    public function setServiceId($serviceId)
+    {
+        $this->service_id = $serviceId;
+    }
+
+    /**
+     * Get service_id
+     *
+     * @return string 
+     */
+    public function getServiceId()
+    {
+        return $this->service_id;
+    }
+
+    /**
+     * Set length
+     *
+     * @param smallint $length
+     */
+    public function setLength($length)
+    {
+        $this->length = $length;
+    }
+
+    /**
+     * Get length
+     *
+     * @return smallint 
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * Set slides
+     *
+     * @param boolean $slides
+     */
+    public function setSlides($slides)
+    {
+        $this->slides = $slides;
+    }
+
+    /**
+     * Get slides
+     *
+     * @return boolean 
+     */
+    public function getSlides()
+    {
+        return $this->slides;
+    }
+
+    /**
+     * Set video
+     *
+     * @param boolean $video
+     */
+    public function setVideo($video)
+    {
+        $this->video = $video;
+    }
+
+    /**
+     * Get video
+     *
+     * @return boolean 
+     */
+    public function getVideo()
+    {
+        return $this->video;
     }
 
     /**
@@ -467,5 +395,85 @@ class Presentation
     public function getShowSpeaker()
     {
         return $this->showSpeaker;
+    }
+
+    /**
+     * Set account
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Account $account
+     */
+    public function setAccount(\SlidesLive\SlidesLiveBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+    }
+
+    /**
+     * Get account
+     *
+     * @return SlidesLive\SlidesLiveBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Add speakers
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Speaker $speakers
+     */
+    public function addSpeaker(\SlidesLive\SlidesLiveBundle\Entity\Speaker $speakers)
+    {
+        $this->speakers[] = $speakers;
+    }
+
+    /**
+     * Get speakers
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSpeakers()
+    {
+        return $this->speakers;
+    }
+
+    /**
+     * Set folder
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Folder $folder
+     */
+    public function setFolder(\SlidesLive\SlidesLiveBundle\Entity\Folder $folder)
+    {
+        $this->folder = $folder;
+    }
+
+    /**
+     * Get folder
+     *
+     * @return SlidesLive\SlidesLiveBundle\Entity\Folder 
+     */
+    public function getFolder()
+    {
+        return $this->folder;
+    }
+
+    /**
+     * Set videoSource
+     *
+     * @param string $videoSource
+     */
+    public function setVideoSource($videoSource)
+    {
+        $this->videoSource = $videoSource;
+    }
+
+    /**
+     * Get videoSource
+     *
+     * @return string 
+     */
+    public function getVideoSource()
+    {
+        return $this->videoSource;
     }
 }

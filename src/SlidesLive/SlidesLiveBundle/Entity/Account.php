@@ -259,8 +259,17 @@ class Account implements AdvancedUserInterface {
      * @ORM\Column(name="private", type="boolean")
      */
      protected $private;
+     
+     /**
+      *  @var string website
+      *        
+      *  @ORM\Column(name="website", type="string", length="255")
+      */                 
+     protected $website;
 
 // =============================================================================
+
+    
 
     /**
      * Get id
@@ -270,186 +279,6 @@ class Account implements AdvancedUserInterface {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param text $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * Get description
-     *
-     * @return text 
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Add subscribes
-     *
-     * @param Meta\MetaBundle\Entity\Subscribe $subscribes
-     */
-    public function addSubscribe(\Meta\MetaBundle\Entity\Subscribe $subscribes)
-    {
-        $this->subscribes[] = $subscribes;
-    }
-
-    /**
-     * Get subscribes
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getSubscribes()
-    {
-        return $this->subscribes;
-    }
-
-    /**
-     * Set private
-     *
-     * @param boolean $private
-     */
-    public function setPrivate($private)
-    {
-        $this->private = $private;
-    }
-
-    /**
-     * Get private
-     *
-     * @return boolean 
-     */
-    public function getPrivate()
-    {
-        return $this->private;
-    }
-
-    /**
-     * Set canonicalName
-     *
-     * @param string $canonicalName
-     */
-    public function setCanonicalName($canonicalName)
-    {
-        $this->canonicalName = $canonicalName;
-    }
-
-    /**
-     * Get canonicalName
-     *
-     * @return string 
-     */
-    public function getCanonicalName()
-    {
-        return $this->canonicalName;
-    }
-
-    /**
-     * Set privateCode
-     *
-     * @param string $privateCode
-     */
-    public function setPrivateCode($privateCode)
-    {
-        $this->privateCode = $privateCode;
-    }
-
-    /**
-     * Get privateCode
-     *
-     * @return string 
-     */
-    public function getPrivateCode()
-    {
-        return $this->privateCode;
-    }
-
-    /**
-     * Add folders
-     *
-     * @param Meta\MetaBundle\Entity\Folder $folders
-     */
-    public function addFolder(\Meta\MetaBundle\Entity\Folder $folders)
-    {
-        $this->folders[] = $folders;
-    }
-
-    /**
-     * Get folders
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getFolders()
-    {
-        return $this->folders;
-    }
-
-    /**
-     * Set primaryFolder
-     *
-     * @param Meta\MetaBundle\Entity\Folder $primaryFolder
-     */
-    public function setPrimaryFolder(\Meta\MetaBundle\Entity\Folder $primaryFolder)
-    {
-        $this->primaryFolder = $primaryFolder;
-    }
-
-    /**
-     * Get primaryFolder
-     *
-     * @return Meta\MetaBundle\Entity\Folder 
-     */
-    public function getPrimaryFolder()
-    {
-        return $this->primaryFolder;
-    }
-
-    /**
-     * Add presentations
-     *
-     * @param Meta\MetaBundle\Entity\Presentation $presentations
-     */
-    public function addPresentation(\Meta\MetaBundle\Entity\Presentation $presentations)
-    {
-        $this->presentations[] = $presentations;
-    }
-
-    /**
-     * Get presentations
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPresentations()
-    {
-        return $this->presentations;
     }
 
     /**
@@ -571,5 +400,204 @@ class Account implements AdvancedUserInterface {
     {
         return $this->purpose;
     }
-    
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set canonicalName
+     *
+     * @param string $canonicalName
+     */
+    public function setCanonicalName($canonicalName)
+    {
+        $this->canonicalName = $canonicalName;
+    }
+
+    /**
+     * Get canonicalName
+     *
+     * @return string 
+     */
+    public function getCanonicalName()
+    {
+        return $this->canonicalName;
+    }
+
+    /**
+     * Set description
+     *
+     * @param text $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get description
+     *
+     * @return text 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set privateCode
+     *
+     * @param string $privateCode
+     */
+    public function setPrivateCode($privateCode)
+    {
+        $this->privateCode = $privateCode;
+    }
+
+    /**
+     * Get privateCode
+     *
+     * @return string 
+     */
+    public function getPrivateCode()
+    {
+        return $this->privateCode;
+    }
+
+    /**
+     * Set private
+     *
+     * @param boolean $private
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+    }
+
+    /**
+     * Get private
+     *
+     * @return boolean 
+     */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
+
+    /**
+     * Add folders
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Folder $folders
+     */
+    public function addFolder(\SlidesLive\SlidesLiveBundle\Entity\Folder $folders)
+    {
+        $this->folders[] = $folders;
+    }
+
+    /**
+     * Get folders
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getFolders()
+    {
+        return $this->folders;
+    }
+
+    /**
+     * Set primaryFolder
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Folder $primaryFolder
+     */
+    public function setPrimaryFolder(\SlidesLive\SlidesLiveBundle\Entity\Folder $primaryFolder)
+    {
+        $this->primaryFolder = $primaryFolder;
+    }
+
+    /**
+     * Get primaryFolder
+     *
+     * @return SlidesLive\SlidesLiveBundle\Entity\Folder 
+     */
+    public function getPrimaryFolder()
+    {
+        return $this->primaryFolder;
+    }
+
+    /**
+     * Add presentations
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Presentation $presentations
+     */
+    public function addPresentation(\SlidesLive\SlidesLiveBundle\Entity\Presentation $presentations)
+    {
+        $this->presentations[] = $presentations;
+    }
+
+    /**
+     * Get presentations
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPresentations()
+    {
+        return $this->presentations;
+    }
+
+    /**
+     * Add subscribes
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Subscribe $subscribes
+     */
+    public function addSubscribe(\SlidesLive\SlidesLiveBundle\Entity\Subscribe $subscribes)
+    {
+        $this->subscribes[] = $subscribes;
+    }
+
+    /**
+     * Get subscribes
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getSubscribes()
+    {
+        return $this->subscribes;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
+    }
 }

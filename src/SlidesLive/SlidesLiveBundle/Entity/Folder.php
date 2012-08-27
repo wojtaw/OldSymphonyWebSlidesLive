@@ -1,14 +1,14 @@
 <?php
 
-namespace Meta\MetaBundle\Entity;
+namespace SlidesLive\SlidesLiveBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Meta\MetaBundle\Entity\Folder
+ * SlidesLive\SlidesLiveBundle\Entity\Folder
  *
  * @ORM\Table(name="folder")
- * @ORM\Entity(repositoryClass="Meta\MetaBundle\Repository\FolderRepository")
+ * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\FolderRepository")
  */
 class Folder
 {
@@ -41,9 +41,9 @@ class Folder
     protected $presentations;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Channel", inversedBy="folders")     
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="folders")     
      */         
-    protected $channel;
+    protected $account;
     
 // -----------------------------------------------------------------------------
 
@@ -63,6 +63,8 @@ class Folder
     }
 
 // =============================================================================
+
+    
 
     /**
      * Get id
@@ -93,46 +95,6 @@ class Folder
     {
         return $this->name;
     }
-    
-    /**
-     * Add presentations
-     *
-     * @param Meta\MetaBundle\Entity\Presentation $presentations
-     */
-    public function addPresentation(\Meta\MetaBundle\Entity\Presentation $presentations)
-    {
-        $this->presentations[] = $presentations;
-    }
-
-    /**
-     * Get presentations
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPresentations()
-    {
-        return $this->presentations;
-    }
-
-    /**
-     * Set channel
-     *
-     * @param Meta\MetaBundle\Entity\Channel $channel
-     */
-    public function setChannel(\Meta\MetaBundle\Entity\Channel $channel)
-    {
-        $this->channel = $channel;
-    }
-
-    /**
-     * Get channel
-     *
-     * @return Meta\MetaBundle\Entity\Channel 
-     */
-    public function getChannel()
-    {
-        return $this->channel;
-    }
 
     /**
      * Set canonicalName
@@ -152,5 +114,45 @@ class Folder
     public function getCanonicalName()
     {
         return $this->canonicalName;
+    }
+
+    /**
+     * Add presentations
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Presentation $presentations
+     */
+    public function addPresentation(\SlidesLive\SlidesLiveBundle\Entity\Presentation $presentations)
+    {
+        $this->presentations[] = $presentations;
+    }
+
+    /**
+     * Get presentations
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPresentations()
+    {
+        return $this->presentations;
+    }
+
+    /**
+     * Set account
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Account $account
+     */
+    public function setAccount(\SlidesLive\SlidesLiveBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+    }
+
+    /**
+     * Get account
+     *
+     * @return SlidesLive\SlidesLiveBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

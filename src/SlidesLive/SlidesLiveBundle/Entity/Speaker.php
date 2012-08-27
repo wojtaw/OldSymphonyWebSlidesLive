@@ -1,15 +1,15 @@
 <?php
 
-namespace Meta\MetaBundle\Entity;
+namespace SlidesLive\SlidesLiveBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Meta\MetaBundle\Entity\Speaker
+ * SlidesLive\SlidesLiveBundle\Entity\Speaker
  *
  * @ORM\Table(name="speaker")
- * @ORM\Entity(repositoryClass="Meta\MetaBundle\Repository\SpeakerRepository")
+ * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\SpeakerRepository")
  */
 class Speaker
 {
@@ -75,27 +75,7 @@ class Speaker
     {
         return $this->name;
     }
-
-
-    /**
-     * Add presentations
-     *
-     * @param Meta\MetaBundle\Entity\Presentation $presentations
-     */
-    public function addPresentation(\Meta\MetaBundle\Entity\Presentation $presentations)
-    {
-        $this->presentations[] = $presentations;
-    }
-
-    /**
-     * Get presentations
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPresentations()
-    {
-        return $this->presentations;
-    }
+    
 
     /**
      * Set legend
@@ -115,5 +95,25 @@ class Speaker
     public function getLegend()
     {
         return $this->legend;
+    }
+
+    /**
+     * Add presentations
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Presentation $presentations
+     */
+    public function addPresentation(\SlidesLive\SlidesLiveBundle\Entity\Presentation $presentations)
+    {
+        $this->presentations[] = $presentations;
+    }
+
+    /**
+     * Get presentations
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPresentations()
+    {
+        return $this->presentations;
     }
 }

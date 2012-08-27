@@ -1,11 +1,11 @@
 <?php
 
-namespace Meta\MetaBundle\Entity;
+namespace SlidesLive\SlidesLiveBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Meta\MetaBundle\Entity\Subscribe
+ * SlidesLive\SlidesLiveBundle\Entity\Subscribe
  *
  * @ORM\Table(name="subscribe")
  * @ORM\Entity
@@ -29,10 +29,10 @@ class Subscribe
     protected $email;
     
     /**
-     *@ORM\ManyToOne(targetEntity="Channel", inversedBy="subscribes")
-     *@ORM\JoinColumn(name="channel_id", referencedColumnName="id")
+     *@ORM\ManyToOne(targetEntity="Account", inversedBy="subscribes")
+     *@ORM\JoinColumn(name="account_id", referencedColumnName="id")
      */              
-    protected $channel;
+    protected $account;
 
 
     /**
@@ -65,23 +65,24 @@ class Subscribe
         return $this->email;
     }
 
+
     /**
-     * Set channel
+     * Set account
      *
-     * @param Meta\MetaBundle\Entity\Channel $channel
+     * @param SlidesLive\SlidesLiveBundle\Entity\Account $account
      */
-    public function setChannel(\Meta\MetaBundle\Entity\Channel $channel)
+    public function setAccount(\SlidesLive\SlidesLiveBundle\Entity\Account $account)
     {
-        $this->channel = $channel;
+        $this->account = $account;
     }
 
     /**
-     * Get channel
+     * Get account
      *
-     * @return Meta\MetaBundle\Entity\Channel 
+     * @return SlidesLive\SlidesLiveBundle\Entity\Account 
      */
-    public function getChannel()
+    public function getAccount()
     {
-        return $this->channel;
+        return $this->account;
     }
 }

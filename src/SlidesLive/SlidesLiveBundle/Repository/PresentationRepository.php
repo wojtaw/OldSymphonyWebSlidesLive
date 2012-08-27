@@ -1,9 +1,9 @@
 <?php
 
-namespace Meta\MetaBundle\Repository;
+namespace SlidesLive\SlidesLiveBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Meta\MetaBundle\Entity\Other\AccessControl;
+use \SlidesLive\SlidesLiveBundle\Entity\Folder;
 
 /**
  * PresentationRepository
@@ -14,6 +14,7 @@ use Meta\MetaBundle\Entity\Other\AccessControl;
 class PresentationRepository extends EntityRepository
 {
     // nahrazeno timeline homepage
+    /*
     public function list18NewestPresentations (AccessControl $ac = null) {
         $em = $this->getEntityManager(); 
         if (is_null($ac)) {
@@ -34,8 +35,10 @@ class PresentationRepository extends EntityRepository
         $query->setMaxResults(18);
         return $query->getResult();  
     }
+    */
     
-    public function findAuthorizedPresentationById($id, \Meta\MetaBundle\Entity\Other\AccessControl $ac = null) {
+    /*
+    public function findAuthorizedPresentationById($id, \SlidesLive\SlidesLiveBundle\Entity\Other\AccessControl $ac = null) {
         $presentation = $this->findOneById($id);
         if (is_null($presentation)) {
           return null;
@@ -48,8 +51,9 @@ class PresentationRepository extends EntityRepository
         }
         return $presentation;
     }
+    */
 
-    public function findFolderPresentationsOrdered(\Meta\MetaBundle\Entity\Folder $folder) {
+    public function findFolderPresentationsOrdered(Folder $folder) {
         $em = $this->getEntityManager();
         $query = $em->createQuery("
             SELECT p FROM MetaBundle:Presentation p

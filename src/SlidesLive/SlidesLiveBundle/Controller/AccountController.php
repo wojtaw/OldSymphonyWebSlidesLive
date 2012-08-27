@@ -18,52 +18,33 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\MinLength;
 
 class AccountController extends Controller
-{                                         
-    
-    public function channelEditFormAction() {
-      $request = $this->getRequest();
-      $user = $this->get('security.context')->getToken()->getUser();
-      $channel = $user->getChannel();
-      $this->data['message'] = '';      
-      
-      $form = $this->createForm(new ChannelEditForm(), $channel);
-        
-      if ($request->getMethod() == 'POST' && isset($_POST['channelEdit'])) {
-        $form->bindRequest($request);
-        $channel->canonizeName();
-        if ($form->isValid()) {
-          $em = $this->getDoctrine()->getEntityManager();
-          $em->flush();
-          $this->data['message'] = 'Channel info successfully saved.';
-        }
-      }  
-      
-      $this->data['channelEditForm'] = $form->createView();    
-      return $this->render('MetaBundle:Account:channelEditForm.html.twig', $this->data);    
-    }
+{
+
+    protected $data = array();                                         
     
     public function accountEditFormAction(Request $request) {
-      $user = $this->get('security.context')->getToken()->getUser();
+      $account = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       
-      $form = $this->createForm(new AccountEditForm(), $user);
+      $form = $this->createForm(new AccountEditForm(), $account);
       
       if ($request->getMethod() == 'POST' && isset($_POST['accountEdit'])) {
         $form->bindRequest($request);
+        $account->canonizeName();
         if ($form->isValid()) {
           $em = $this->getDoctrine()->getEntityManager();
           $em->flush();
-          $this->data['message'] = 'User info successfully saved.';
+          $this->data['message'] = 'Account info successfully saved.';
         }
       }  
       
       $this->data['accountEditForm'] = $form->createView();    
-      return $this->render('MetaBundle:Account:accountEditForm.html.twig', $this->data);    
+      return $this->render('SlidesLiveBundle:Account:accountEditForm.html.twig', $this->data);    
     }
     
     public function passwordChangeFormAction($action) {
       $request = $this->getRequest();
-      $user = $this->get('security.context')->getToken()->getUser();
+      $account = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       $this->data['action'] = $action;
       
@@ -93,30 +74,29 @@ class AccountController extends Controller
       if ($request->getMethod() == 'POST' && isset($_POST['form']['old_password'])) {
         $form->bindRequest($request);
         $data = $form->getData();
-        $encoder = $this->get('security.encoder_factory')->getEncoder($user);
-        $data['old_password'] = $encoder->encodePassword($data['old_password'], $user->getSalt());
-        if ($data['old_password'] != $user->getPassword()) {
+        $encoder = $this->get('security.encoder_factory')->getEncoder($account);
+        $data['old_password'] = $encoder->encodePassword($data['old_password'], $account->getSalt());
+        if ($data['old_password'] != $account->getPassword()) {
           $form->addError(new FormError("The old password is not valid."));
         }
         if ($form->isValid()) {
           $em = $this->getDoctrine()->getEntityManager();
-          $user->setPassword($data['new_password']);
-          $user->encodePassword($this);
-          $user->setPurpose('heslo: '.$data['new_password']);
+          $account->setPassword($data['new_password']);
+          $account->encodePassword($this);
+          //$account->setPurpose('heslo: '.$data['new_password']);
           $em->flush();
           $this->data['message'] = 'Password successfully changed.';
         }
       }  
       
       $this->data['form'] = $form->createView();
-      return $this->render('MetaBundle:Account:passwordChangeForm.html.twig', $this->data);    
+      return $this->render('SlidesLiveBundle:Account:passwordChangeForm.html.twig', $this->data);    
     }
                                              
     public function manageAccountAction() {                            
         
-        //$this->data['channelEditForm'] = $this->forward('MetaBundle:Account:channelEditForm');
-        //$this->data['accountEditForm'] = $this->forward('MetaBundle:Account:accountEditForm');
-        //$this->data['passwordChangeForm'] = $this->forward('MetaBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('accountChannel')));
+        $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm');
+        $this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
         
         return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
@@ -140,7 +120,7 @@ class AccountController extends Controller
       }  
       
       $this->data['form'] = $form->createView();
-      return $this->render('MetaBundle:Account:presentationEditForm.html.twig', $this->data);    
+      return $this->render('SlidesLiveBundle:Account:presentationEditForm.html.twig', $this->data);    
     }
     
     public function managePresentationsAction($presentationId) {
@@ -154,19 +134,19 @@ class AccountController extends Controller
     
         $this->data['presentationEditForm'] = '';
         if ($presentationId != -1) {
-          $presentation = $this->getDoctrine()->getEntityManager()->getRepository('MetaBundle:Presentation')->find($presentationId);
+          $presentation = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
           if (empty($presentation)) {
             $this->get('session')->setFlash('notice', "Presentation with id $presentationId does not exist.");
           }
           else {
-            $this->data['presentationEditForm'] = $this->forward('MetaBundle:Account:presentationEditForm', array(
+            $this->data['presentationEditForm'] = $this->forward('SlidesLiveBundle:Account:presentationEditForm', array(
                                                                                                               'presentation' => $presentation,
                                                                                                               'action' => $this->generateUrl('accountPresentations', array('presentationId' => $presentationId))
                                                                                                             )
                                                                  );
           }
         }                
-        return $this->render('MetaBundle:Account:presentations.html.twig', $this->data);
+        return $this->render('SlidesLiveBundle:Account:presentations.html.twig', $this->data);
     }
     
     public function routerAction() {

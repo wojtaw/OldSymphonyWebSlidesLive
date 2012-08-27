@@ -1,0 +1,37 @@
+{% form_theme accountEditForm 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
+
+{% block leftPaneBody %}
+
+{% set form = accountEditForm %}
+
+<form action="{{ path('manageAccount') }}" method='POST' {{ form_enctype(form) }}>
+  <table>
+  
+    <tr class="form_row_error">
+      <td></td>
+      <td>{{ form_errors(form) }}{{ message }}</td>
+    </tr>
+       
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.email } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.description } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.purpose } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.private } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.website } %}
+    
+    {{ form_rest(form) }}
+    
+    <tr class="form_row">
+      <td></td>
+      <td>
+         <input type='submit' value='Save changes' formnovalidate> {# formnovalidate #}
+      </td>
+    </tr>
+  
+  </table>
+</form>           
+
+<p>
+    <span class='required' title='Required field.'>*</span>Mandatory fields.  
+</p>
+
+{% endblock %}

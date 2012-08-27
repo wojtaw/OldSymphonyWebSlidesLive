@@ -1,8 +1,8 @@
 <?php
 
-namespace Meta\MetaBundle\Form;
+namespace SlidesLive\SlidesLiveBundle\Form;
 
-use Meta\MetaBundle\Form\SimpleForm;
+use SlidesLive\SlidesLiveBundle\Form\SimpleForm;
 use Symfony\Component\Form\FormBuilder;
 
 class AccountEditForm extends SimpleForm {
@@ -12,7 +12,10 @@ class AccountEditForm extends SimpleForm {
     
     /* $this->add($field_name, $field_type, $label,Boolean $required, Array $other_params); */     
     $this->add('email', 'email', 'Email:', true);
+    $this->add('description', 'textarea', 'Channel Description:', false);
     $this->add('purpose', 'textarea', 'Purpose:', true);
+    $this->add('private', 'checkbox', 'Private:', false);
+    $this->add('website', 'text', 'Your website:', false);
     
   }
   
@@ -22,7 +25,7 @@ class AccountEditForm extends SimpleForm {
   
   public function getDefaultOptions(array $options) {
     return array(
-        'data_class' => 'Meta\MetaBundle\Entity\User',
+        'data_class' => 'SlidesLive\SlidesLiveBundle\Entity\Account',
     );
   }
 

@@ -1,14 +1,12 @@
-{# src/SlidesLive/SlidesLiveBundle/Resources/views/Account/login.html.twig #}
+{# src/SlidesLive/SlidesLiveBundle/Resources/views/Account/manageAccount.html.twig #}
 {% extends 'SlidesLiveBundle::layout.html.twig' %}
 
+{% block title %}Manage your account.{% endblock %}
 
 {% block content %}
-<div class="siteContent clearfix">
+<div>
 <h2>Edit personal data:</h2>
 {{ accountEditForm.content|raw }}
-<br>
-<h2>Edit channel data:</h2>
-{{ channelEditForm.content|raw }}
 
 <br>
 <h2>Change password:</h2>

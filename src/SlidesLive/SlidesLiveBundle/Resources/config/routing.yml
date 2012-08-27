@@ -2,6 +2,6 @@
 
 manageAccount:
   pattern:  /
-  defaults: { _controller: SlidesLiveBundle:Default:manageAccount }
+  defaults: { _controller: SlidesLiveBundle:Account:manageAccount }
   
 

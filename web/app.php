@@ -6,6 +6,8 @@ require_once __DIR__.'/../app/AppKernel.php';
 
 use Symfony\Component\HttpFoundation\Request;
 
+umask(0002);
+
 $kernel = new AppKernel('prod', false);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);

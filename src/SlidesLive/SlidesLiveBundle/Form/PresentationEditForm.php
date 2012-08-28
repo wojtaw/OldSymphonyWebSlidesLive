@@ -1,8 +1,8 @@
 <?php
 
-namespace Meta\MetaBundle\Form;
+namespace SlidesLive\SlidesLiveBundle\Form;
 
-use Meta\MetaBundle\Form\SimpleForm;
+use SlidesLive\SlidesLiveBundle\Form\SimpleForm;
 use Symfony\Component\Form\FormBuilder;
 
 class PresentationEditForm extends SimpleForm {
@@ -23,7 +23,7 @@ class PresentationEditForm extends SimpleForm {
   
   public function getDefaultOptions(array $options) {
     return array(
-        'data_class' => 'Meta\MetaBundle\Entity\Presentation',
+        'data_class' => 'SlidesLive\SlidesLiveBundle\Entity\Presentation',
         'validation_groups' => array('edit'),
     );
   }

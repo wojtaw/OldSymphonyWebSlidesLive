@@ -1,0 +1,32 @@
+{% form_theme form 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
+
+{% block presentationEditForm %}
+
+<form action='{{ action }}' method='POST' {{ form_enctype(form) }}>
+
+  <table>
+  
+    <tr class="form_row_error">
+      <td></td>
+      <td>{{ form_errors(form) }}{{ message }}</td>
+    </tr>
+    
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.title } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.description } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.lang } %}
+    
+    {{ form_rest(form) }}
+    
+    <tr class='form_row'>
+      <td></td>
+      <td>
+        <input type="submit" value="Save changes" formnovalidate>
+        <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Do not make any changes</a>
+      </td>
+    </tr>
+
+  </table>
+
+</form>
+
+{% endblock presentationEditForm %}

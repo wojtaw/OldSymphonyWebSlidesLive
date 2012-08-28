@@ -6,6 +6,13 @@
   {% endblock %}
   
 	{% block content %}
+	   <div>
+	     {% if is_granted('ROLE_USER') %}
+	       Loged user: {{ app.user.name }} - 
+         <a href="{{ path('manageAccount') }}">Manage your account</a>,
+         <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Manage your presentations.</a> 
+	     {% endif %}
+	   </div>
     <div class="account_background">
       {% block accountContent %}{% endblock %}
     </div>

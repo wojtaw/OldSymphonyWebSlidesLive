@@ -146,7 +146,7 @@ class Account implements AdvancedUserInterface {
 // =============================================================================
 
     /**
-     * @ORM\OneToMany(targetEntity="Folder", mappedBy="channel")
+     * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
      */         
     protected $folders;
     
@@ -157,12 +157,12 @@ class Account implements AdvancedUserInterface {
      protected $primaryFolder;
      
      /**
-      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="channel")
+      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="account")
       */           
      protected $presentations;         
     
     /**
-     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="channel")
+     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="account")
      */         
     protected $subscribes;
     

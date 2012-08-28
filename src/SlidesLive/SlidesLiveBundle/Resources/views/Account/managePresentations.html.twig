@@ -1,0 +1,64 @@
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+
+{% block title %}Your Presentations{% endblock %}
+
+{% block accountContent %}
+
+  {% if presentationEditForm is not empty %}
+  
+    <h2>Edit Presentation</h2>
+    {{ presentationEditForm.content|raw }}
+    
+  {% endif %}
+  
+  <h2>My Presentations</h2>
+  
+  {% if presentations is null %}
+    <p>There are no presentations in your channel.</p>
+  {% else %}
+    {% for p in presentations %}
+       <div class="presentation_summary_box">
+        <h3>{{ p.title }}</h3>
+        <table>
+          <tr>
+            <td>
+              <img src="{{ asset( p.thumbnail ) }}" class="presentation_summary_thumbnail" title="" alt="" />
+              <a href="{{ path('managePresentations', { 'presentationId': p.id }) }}" class="presentation_edit_link">Edit</a>
+            </td>
+            <td>
+              <ul>
+                <li>
+                  <strong>Title:</strong> {{ p.title }}
+                </li>
+                <li>
+                  <strong>Description:</strong> {{ p.description }}
+                </li>
+                <li>
+                  <strong>Length:</strong> {{ p.length }} min.
+                </li>
+                <li>
+                  <strong>Language:</strong> {{ p.lang }}
+                </li>
+                <li>
+                  <strong>Date:</strong> {{ p.getFormatedDate }}
+                </li>
+                <li>
+                  <strong>Slides included:</strong>
+                  {% spaceless %}
+                    {% if p.slides in [1] %}
+                      Yes
+                    {% else %}
+                      No
+                    {% endif %}
+                  {% endspaceless %}
+                </li>
+                
+              <ul>
+            </td>
+          </tr>
+        </table>
+       </div>                
+    {% endfor %}
+  {% endif %}
+  
+{% endblock %}

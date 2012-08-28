@@ -124,7 +124,7 @@ class AccountController extends Controller
     }
     
     public function managePresentationsAction($presentationId) {
-        $presentations = $this->get('security.context')->getToken()->getUser()->getChannel()->getPresentations();
+        $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
         if (count($presentations) < 1) {
           $this->data['presentations'] = null;        
         }
@@ -141,23 +141,12 @@ class AccountController extends Controller
           else {
             $this->data['presentationEditForm'] = $this->forward('SlidesLiveBundle:Account:presentationEditForm', array(
                                                                                                               'presentation' => $presentation,
-                                                                                                              'action' => $this->generateUrl('accountPresentations', array('presentationId' => $presentationId))
+                                                                                                              'action' => $this->generateUrl('managePresentations', array('presentationId' => $presentationId))
                                                                                                             )
                                                                  );
           }
         }                
-        return $this->render('SlidesLiveBundle:Account:presentations.html.twig', $this->data);
-    }
-    
-    public function routerAction() {
-      $context = $this->get('security.context');
-      if ($context->isGranted('ROLE_USER')) {
-        $user = $context->getToken()->getUser();
-        return $this->redirect($this->generateUrl('channelPage', array('channelName' => $user->getChannel()->getCanonicalName())));      
-      }
-      else {
-        return $this->redirect($this->generateUrl('_welcome'));
-      }
+        return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
     }
                      
 }

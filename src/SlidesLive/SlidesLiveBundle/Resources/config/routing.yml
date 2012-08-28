@@ -4,4 +4,8 @@ manageAccount:
   pattern:  /
   defaults: { _controller: SlidesLiveBundle:Account:manageAccount }
   
+managePresentations:
+  pattern:  /managePresentations/{presentationId}
+  defaults: { _controller: SlidesLiveBundle:Account:managePresentations, presentationsId:-1 }
+  
 

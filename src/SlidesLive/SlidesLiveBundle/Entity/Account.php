@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
 /**
  * SlidesLive\SlidesLiveBundle\Entity\Account
@@ -30,7 +31,8 @@ class Account implements AdvancedUserInterface {
         $this->description = '';
         $this->privateCode = $this->generatePrivateCode();
         $this->ratig = 0;
-        $this->website = '';  
+        $this->website = '';
+        $this->privacy = Privacy::p_public();  
     }
     
     /**
@@ -63,13 +65,13 @@ class Account implements AdvancedUserInterface {
         $thumbnail = null;
 
         foreach ($imgFormats as $format) {
-            if (file_exists('./bundles/slideslive/images/channelThumbnails/' . $type . '/' . $types[$type] . '.' . $format)) {
-                $thumbnail = './bundles/slideslive/images/channelThumbnails/' . $type . '/' . $types[$type] . '.' . $format;
+            if (file_exists('./data/accounts/logos/' . $type . '/' . $types[$type] . '.' . $format)) {
+                $thumbnail = './data/accounts/logos/' . $type . '/' . $types[$type] . '.' . $format;
                 break;
             }
         }
         if (\is_null($thumbnail)) {
-            $thumbnail = './bundles/slideslive/images/channelThumbnails/noname-ch-header2.jpg';
+            $thumbnail = './data/accounts/logos/noname-ch-header2.jpg';
         }
         return $thumbnail;
     }

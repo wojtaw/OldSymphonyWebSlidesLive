@@ -3,6 +3,7 @@
 namespace SlidesLive\SlidesLiveBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
 /**
  * SlidesLive\SlidesLiveBundle\Entity\Folder
@@ -57,6 +58,7 @@ class Folder
     public function __construct()
     {
         $this->presentations = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->privacy = Privacy::p_public();
     }
     
     public function canonizeName() {

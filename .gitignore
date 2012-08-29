@@ -1,6 +1,7 @@
 /app/cache/*
 /app/logs/*
 /vendor/*
+/web/data/*
 !/app/config/parameters.ini
 
 /nbproject/*

@@ -14,7 +14,7 @@ class AccountEditForm extends SimpleForm {
     $this->add('email', 'email', 'Email:', true);
     $this->add('description', 'textarea', 'Channel Description:', false);
     $this->add('purpose', 'textarea', 'Purpose:', true);
-    $this->add('private', 'checkbox', 'Private:', false);
+    //$this->add('private', 'checkbox', 'Private:', false);
     $this->add('website', 'text', 'Your website:', false);
     
   }

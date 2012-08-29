@@ -4,6 +4,7 @@ namespace SlidesLive\SlidesLiveBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
 /**
  * SlidesLive\SlidesLiveBundle\Entity\Presentation
@@ -16,6 +17,7 @@ class Presentation
 
     public function __construct() {
         $this->speakers = new ArrayCollection();
+        $this->privacy = Privacy::p_public();
     }
     
     public function getCountOfPresentations() {
@@ -67,8 +69,8 @@ class Presentation
         );
         $thumbnail = null;
         foreach ($imgFormats as $format) {
-            if (file_exists('./bundles/slideslive/player/VideoThumbs/'.sprintf("%d",$this->id).'.'.$format)) {
-                $thumbnail = './bundles/slideslive/player/VideoThumbs/'.sprintf("%d",$this->id).'.'.$format;
+            if (file_exists('./data/PresentationThumbs/'.sprintf("%d",$this->id).'.'.$format)) {
+                $thumbnail = './data/PresentationThumbs/'.sprintf("%d",$this->id).'.'.$format;
                 break;
             }
         }

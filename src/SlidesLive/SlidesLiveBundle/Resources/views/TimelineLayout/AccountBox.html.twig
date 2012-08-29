@@ -1,0 +1,26 @@
+{#
+  Required values:
+  
+  Account item;
+#}
+
+{% extends 'SlidesLiveBundle:TimelineLayout:Box.html.twig' %}
+
+{% block boxContent %}
+  {% set account = item %}
+
+  <div class="timelineImage">
+    <a href="{{ url('account', {'accountCanName': account.canonicalName}) }}">
+      <img src="{{ asset(account.getThumbnail('timeline')) }}" width="500" height="150" class="timelineImage" />
+    </a>
+  </div>
+  <div class="timelineBoxHeader">
+    <a href="{{ url('account', {'accountCanName': account.canonicalName}) }}">
+      {{ account.name }}
+    </a>
+  </div>                                            
+  <div class="timelineBoxDetails"> 
+      <a href="{{ url('account', {'accountCanName': account.canonicalName}) }}">{{ account.name }}</a> |
+      {{ account.getCountOfPresentations }} presentations
+  </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{# 
+  Requered values:
+  
+  Persentation item;
+#}
+
+{% extends 'SlidesLiveBundle:TimelineLayout:Box.html.twig' %}
+  
+{% block boxContent %}
+  {% set presentation = item %}
+  
+  <div class="timelineImage">
+    <a href="{{ url('accountPresentation', {'accountCanName':presentation.account.canonicalName, 'presentationId':presentation.id }) }}">
+      <img src="{{ asset(presentation.getThumbnail) }}" width="500" height="150" alt="{{ presentation.title }}" class="timelineImage" />
+    </a>
+  </div>
+  <div class="timelineBoxHeader">
+    <a href="{{ url('accountPresentation', {'accountCanName':presentation.account.canonicalName, 'presentationId':presentation.id }) }}">
+      {% if presentation.showSpeaker %}
+        {{ presentation.listSpeakersNames }}  
+      {% else %}
+        {{ presentation.title }}  
+      {% endif %}
+    </a>
+  </div>     
+  <div class="timelineBoxPresentationName">
+      {% if presentation.showSpeaker %}
+        {{ presentation.title }}
+      {% else %}
+        {{ presentation.listSpeakersNames }}
+      {% endif %}
+  </div>                                        
+  <div class="timelineBoxDetails">
+    {% trans %}Uploaded by{% endtrans %} 
+      <a href="{{ url('account', {'accountCanName': presentation.account.canonicalName}) }}">{{ presentation.account.name }}</a>
+    on {{ presentation.getFormatedDate }}
+  </div>
+{% endblock %}

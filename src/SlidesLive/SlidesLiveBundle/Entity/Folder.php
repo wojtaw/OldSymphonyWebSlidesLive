@@ -36,6 +36,13 @@ class Folder
     protected $canonicalName;
     
     /**
+     * @var small privacy 
+     *      
+     * @ORM\Column(name="privacy", type="smallint")     
+     */
+     protected $privacy;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="folder")
      */         
     protected $presentations;
@@ -63,8 +70,6 @@ class Folder
     }
 
 // =============================================================================
-
-    
 
     /**
      * Get id
@@ -154,5 +159,25 @@ class Folder
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * Set privacy
+     *
+     * @param smallint $privacy
+     */
+    public function setPrivacy($privacy)
+    {
+        $this->privacy = $privacy;
+    }
+
+    /**
+     * Get privacy
+     *
+     * @return smallint 
+     */
+    public function getPrivacy()
+    {
+        return $this->privacy;
     }
 }

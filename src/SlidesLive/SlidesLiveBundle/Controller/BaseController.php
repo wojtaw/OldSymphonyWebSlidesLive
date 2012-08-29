@@ -7,11 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends Controller {                               
                                   
-    protected $data;
-    protected $mode;
-                                              
-    public function __construct () {
-      $this->data = array();          
-    }
+    protected $data = array(
+      'mode' => null
+    );
                      
 }

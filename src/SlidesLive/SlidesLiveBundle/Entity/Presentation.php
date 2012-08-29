@@ -165,6 +165,25 @@ class Presentation
     protected $video;
     
     /**
+     * @var small privacy 
+     *      
+     * @ORM\Column(name="privacy", type="smallint")     
+     */
+     protected $privacy;
+     
+     /**
+     * 0 - NOTHIG - nic se nedìje
+     * 1 - WAITING - má být sesynchronizováno, ale zatím není
+     * 2 - SYNCHRONIZING- má být synchronizováno, ale zrovna je ve frontì a pracuje se na tom 
+     * 3 - FAIL - došlo k chybì                
+     *           
+     * @var small flag           
+     *      
+     * @ORM\Column(name="flag", type="smallint")     
+     */
+     protected $flag;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Folder", inversedBy="presentations")     
      */         
     protected $folder;
@@ -184,8 +203,6 @@ class Presentation
     protected $videoSource;
 
 // =============================================================================
-
-    
 
     /**
      * Get id
@@ -475,5 +492,45 @@ class Presentation
     public function getVideoSource()
     {
         return $this->videoSource;
+    }
+
+    /**
+     * Set privacy
+     *
+     * @param smallint $privacy
+     */
+    public function setPrivacy($privacy)
+    {
+        $this->privacy = $privacy;
+    }
+
+    /**
+     * Get privacy
+     *
+     * @return smallint 
+     */
+    public function getPrivacy()
+    {
+        return $this->privacy;
+    }
+
+    /**
+     * Set flag
+     *
+     * @param smallint $flag
+     */
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+    }
+
+    /**
+     * Get flag
+     *
+     * @return smallint 
+     */
+    public function getFlag()
+    {
+        return $this->flag;
     }
 }

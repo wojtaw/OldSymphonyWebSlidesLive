@@ -30,7 +30,6 @@ class Account implements AdvancedUserInterface {
         $this->description = '';
         $this->privateCode = $this->generatePrivateCode();
         $this->ratig = 0;
-        $this->private = false;
         $this->website = '';  
     }
     
@@ -95,6 +94,16 @@ class Account implements AdvancedUserInterface {
       return count($this->presentations);
     }
     
+    /**
+     * Zakodovani hesla sifrovacim algoritmem urcenym v konfiguraci
+     *
+     * @param Controller za ktereho je metoda volana (nutne pro ziskani pristupu ke sluzbe Encoder)    
+     */                      
+    public function encodePassword($controller) {
+        $encoder = $controller->get('security.encoder_factory')->getEncoder($this);
+        $this->password = $encoder->encodePassword($this->password, $this->salt);
+    }
+    
 // -----------------------------------------------------------------------------
     public function getRoles() {
         return array($this->role);
@@ -132,43 +141,11 @@ class Account implements AdvancedUserInterface {
     public function getSalt() {
       return $this->salt;
     }
-      
-    /**
-     * Zakodovani hesla sifrovacim algoritmem urcenym v konfiguraci
-     *
-     * @param Controller za ktereho je metoda volana (nutne pro ziskani pristupu ke sluzbe Encoder)    
-     */                      
-    public function encodePassword($controller) {
-        $encoder = $controller->get('security.encoder_factory')->getEncoder($this);
-        $this->password = $encoder->encodePassword($this->password, $this->salt);
-    }
     
-// =============================================================================
-
-    /**
-     * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
-     */         
-    protected $folders;
+    //public function getUserName() { return $this->username; }
     
-    /**
-     * @ORM\OneToOne(targetEntity="Folder")
-     * @ORM\JoinColumn(name="primary_folder", referencedColumnName="id")     
-     */
-     protected $primaryFolder;
-     
-     /**
-      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="account")
-      */           
-     protected $presentations;         
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="account")
-     */         
-    protected $subscribes;
-    
-// =============================================================================
-
-    /**
+// -----------------------------------------------------------------------------    
+ /**
      * @var integer $id
      *
      * @ORM\Column(name="id", type="integer")
@@ -255,22 +232,43 @@ class Account implements AdvancedUserInterface {
      protected $privateCode;                         
      
      /**
-     * @var boolean private 
-     * 
-     * @ORM\Column(name="private", type="boolean")
+     * @var small privacy 
+     *      
+     * @ORM\Column(name="privacy", type="smallint")     
      */
-     protected $private;
+     protected $privacy;
      
      /**
       *  @var string website
       *        
       *  @ORM\Column(name="website", type="string", length="255")
       */                 
-     protected $website;
-
+     protected $website;                                  
+    
 // =============================================================================
 
+    /**
+     * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
+     */         
+    protected $folders;
     
+    /**
+     * @ORM\OneToOne(targetEntity="Folder")
+     * @ORM\JoinColumn(name="primary_folder", referencedColumnName="id")     
+     */
+     protected $primaryFolder;
+     
+     /**
+      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="account")
+      */           
+     protected $presentations;         
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="account")
+     */         
+    protected $subscribes;
+    
+// =============================================================================   
 
     /**
      * Get id
@@ -483,23 +481,43 @@ class Account implements AdvancedUserInterface {
     }
 
     /**
-     * Set private
+     * Set privacy
      *
-     * @param boolean $private
+     * @param integer $privacy
      */
-    public function setPrivate($private)
+    public function setPrivacy($privacy)
     {
-        $this->private = $private;
+        $this->privacy = $privacy;
     }
 
     /**
-     * Get private
+     * Get privacy
      *
-     * @return boolean 
+     * @return integer 
      */
-    public function getPrivate()
+    public function getPrivacy()
     {
-        return $this->private;
+        return $this->privacy;
+    }
+
+    /**
+     * Set website
+     *
+     * @param string $website
+     */
+    public function setWebsite($website)
+    {
+        $this->website = $website;
+    }
+
+    /**
+     * Get website
+     *
+     * @return string 
+     */
+    public function getWebsite()
+    {
+        return $this->website;
     }
 
     /**
@@ -580,25 +598,5 @@ class Account implements AdvancedUserInterface {
     public function getSubscribes()
     {
         return $this->subscribes;
-    }
-
-    /**
-     * Set website
-     *
-     * @param string $website
-     */
-    public function setWebsite($website)
-    {
-        $this->website = $website;
-    }
-
-    /**
-     * Get website
-     *
-     * @return string 
-     */
-    public function getWebsite()
-    {
-        return $this->website;
     }
 }

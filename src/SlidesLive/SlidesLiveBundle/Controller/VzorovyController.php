@@ -8,11 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class Controller extends Controller {
 
     protected $data = array();                                         
-    
-    public function __construct() {
-      parent::__construct();
-    }
-                                              
+                                                  
     public function Action() {
       return new Response('Controller: , Action: ');    
     }

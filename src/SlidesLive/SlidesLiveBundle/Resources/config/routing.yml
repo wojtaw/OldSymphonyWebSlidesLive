@@ -1,11 +1,101 @@
 # \src\Meta\SlidesLiveBundle\Resources\config\routing.yml
 
+# -----LOGIN/LOGOUT ROUTES------------------------------------------------------
+login:
+    pattern: /login
+    defaults: { _controller: SlidesLiveBundle:Login:login }
+    
+login_check:
+    pattern: /login_check
+    
+logout:
+    pattern: /logout
+    
+# ------REGISTRATION------------------------------------------------------------
+registration:
+    pattern: /registration
+    defaults: { _controller: SlidesLiveBundle:Registration:registration }
+    
+registration_result:
+    pattern: /registration/result
+    defaults: { _controller: SlidesLiveBundle:Registration:result }
+    
+# ------ACCOUNT MANAGEMENT------------------------------------------------------ 
 manageAccount:
-  pattern:  /
+  pattern:  /account
   defaults: { _controller: SlidesLiveBundle:Account:manageAccount }
   
 managePresentations:
-  pattern:  /managePresentations/{presentationId}
+  pattern:  /account/managePresentations/{presentationId}
   defaults: { _controller: SlidesLiveBundle:Account:managePresentations, presentationsId:-1 }
-  
 
+# -----PUBLIC PRESENTATION------------------------------------------------------      
+account:
+    pattern: /{accountCanName}
+    defaults: { _controller: SlidesLiveBundle:Default:account }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+    
+folder:
+    pattern: /{accountCanName}/{folderCanName}
+    defaults: { _controller: SlidesLiveBundle:Default:folder }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+      folderCanName: '[^wh/]|[^/][^/]+'
+      
+presentation:
+    pattern: /w/{presentationId}
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:-1, folderCanName:-1 }
+    requirements:
+      presentationId: \d+      
+        
+accountPresentation:
+    pattern: /{accountCanName}/w/{presentationId}
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, folderCanName: -1 }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+      presentationId: \d+
+                            
+accountFolderPresentation:
+    pattern: /{accountCanName}/{folderCanName}/w/{presentationId}
+    defaults: { _controller: SlidesLiveBundle:Default:presentation }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+      folderCanName: '[^wh/]|[^/][^/]+'
+      presentationId: \d+
+    
+# ------UNLISTED PRESENTATIONS--------------------------------------------------
+unlistedAccount:
+    pattern: /{accountCanName}/h/{hash}
+    defaults: { _controller: SlidesLiveBundle:Unlisted:account }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+    
+unlistedFolder:
+    pattern: /{accountCanName}/{folderCanName}/h/{hash}
+    defaults: { _controller: SlidesLiveBundle:Unlisted:folder }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+      folderCanName: '[^wh/]|[^/][^/]+'
+      
+unlistedPresentation:
+    pattern: /w/{presentationId}/h/{hash}
+    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, accountCanName:-1, folderCanName:-1 }
+    requirements:
+      presentationId: \d+      
+        
+unlistedAccountPresentation:
+    pattern: /{accountCanName}/w/{presentationId}/h/{hash}
+    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, folderCanName: -1 }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+      presentationId: \d+
+                            
+unlistedAccountFolderPresentation:
+    pattern: /{accountCanName}/{folderCanName}/w/{presentationId}/h/{hash}
+    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'                                    
+      folderCanName: '[^wh/]|[^/][^/]+'
+      presentationId: \d+
+            

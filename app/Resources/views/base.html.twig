@@ -14,8 +14,10 @@
   {% endblock %}
   
   {% block javascriptBase %}
-		<script type="text/javascript" src="{{ asset('bundles/googleAnalytics.js') }}">
+		<script type="text/javascript" src="{{ asset('bundles/jquery-1.8.0.min.js') }}">
 		</script>    
+		<script type="text/javascript" src="{{ asset('bundles/googleAnalytics.js') }}">
+		</script>    		
       {% block javascript %}{% endblock %}
   {% endblock %}  
   
@@ -48,9 +50,9 @@
                 <a href="{{ path('tour') }}" style="margin-right:30px;" class="headerMenu globalFont">Tour</a>
                 <a href="{{ path('about') }}" class="headerMenu globalFont">About</a>
           {% if is_granted('ROLE_USER') %}
-			<a href="{{ path('logout') }}" class="headerMenu globalFont slidesLiveBlue">Logout</a>
+			<a href="{{ path('logout') }}" style="display:none;" class="headerMenu globalFont slidesLiveBlue">Logout</a>
           {% else %}
-			<a href="{{ path('login') }}" class="headerMenu globalFont slidesLiveBlue">Login</a>
+			<a href="{{ path('login') }}" style="display:none;" class="headerMenu globalFont slidesLiveBlue">Login</a>
           {% endif %}  				                        
             </div>
         </div>

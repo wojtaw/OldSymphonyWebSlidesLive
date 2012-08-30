@@ -2,7 +2,75 @@
 
 {% block content %}
 
-		<p>Static Home page.</p>
+	<div class="preloader"></div>
+	<div class="websiteBackground"></div>  
+  
+	<div class="fixedHeader">
+		<div class="headerContent">
+			<div class="slidesLiveLogo"><a href="index.html"><img src="images/logo-header-beta.png" /></a>s<div class="logoBeta slidesLiveBlue">Beta</div></div>
+            <div class="headerMenuWraper">
+                <a href="" style="margin-right:30px; color:#FFF" class="headerMenu globalFont">Download Free App</a>                                
+                <a href="" style="margin-right:30px;" class="headerMenu globalFont">Home</a>            
+                <a href="tour.html" style="margin-right:30px;" class="headerMenu globalFont">Tour</a>
+                <a href="about.html" class="headerMenu globalFont">About</a>
+                <!--<a href="" class="headerMenu globalFont slidesLiveBlue">Login</a>    -->                           
+            </div>
+        </div>
+    </div>
+    <div class="websiteLightBackground firstBlockTop">
+    	<div class="blockCenterWrapper">
+            <h1 class="globalFont center">The simplest way to<br /> <span class="slidesLiveBlue"> present </span>yourself!</h1>
+                
+            <a href="javascript:void(0)" onClick="showEmbedPlayer()">
+            <div class="presentationButton">
+            <div class="embedPlayer center"><iframe src="http://edumeta.com/embed/38888926?width=950" width="950" height="412" frameborder="0" scrolling="no"></iframe></div>
+            </div></a>
+            
+			<h2 class="globalFont center">With SlidesLive, it’s your message.<br/>Leave the rest to us.</h2>
+             
+            <a href="SL_Recorder/SL_AllPlatforms.zip" id="downloadButtonLink" class="buttonLink">
+            <div class="downloadButton center">
+				<div class="downloadButtonText">Download Free App</div>       
+            </div>
+            </a>
+	            <div class="downloadText"><a href="SL_Recorder/SL_Windows.zip">For Windows (XP+)</a> | <a href="SL_Recorder/SL_MacOS.zip">For MacOS (10.6+)</a> | <a href="SL_Recorder/SL_Linux.zip">For Linux</a></div>	                                   
+            </div> 
+        </div>
+    </div>  
+    <div class="websiteLightBackground">
+    	<div class="blockCenterWrapper">
+            <h1 class="globalFont center"><span class="slidesLiveBlue">How</span> does it work?</h1>   
+            
+            <div class="howItWorksWrapper clearfix">
+            	<div class="howItWorksImage"></div>
+                <div class="howStepOne">
+                	<div class="stepsHeadline slidesLiveBlue">1. Start</div>
+                	<div class="stepsBody">Push the record button<br />and start your presentation</div>                    
+                </div>
+                <div class="howStepTwo">
+                	<div class="stepsHeadline slidesLiveBlue">2. Present</div>
+                	<div class="stepsBody">SlidesLive will record all slides - actually,<br /> all visual elements* - and automatically<br /> sync them with your talk.<br /><br /></div> 
+                	<div class="stepsBody smallNote">*PDF, PPT, PPTX, ODP, Images, Graphs, Word,<br /> Excel, Web and whole lot more</div>                                       
+                </div>
+                <div class="howStepThree">
+                	<div class="stepsHeadline slidesLiveBlue">3. Publish</div>
+                	<div class="stepsBody">After a simple edit, upload<br /> the presentation to your account.</div>                   
+                </div>  
+            </div>     
+            
+            <div class="lylesBox center">
+            	<div class="quotesText">One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.
+</div>
+            </div>
+        </div>    
+    </div>
+
+    
+ 
+	<div class="siteFooter">
+  		<div class="footerContent"><div class="footerText">Copyright 2012 SlidesLive.com. All rights reserved.</div></div>
+    </div>        
+       
     
 {% endblock %}
 

@@ -43,9 +43,7 @@ security:
             form_login:
                 check_path: /login_check
                 login_path: /login
-                #default_target_path:  /account/channel
-                #default_target_path:  /account/router
-                default_target_path:  /account/
+                default_target_path:  /account
                 
             logout:
                 path:   /logout

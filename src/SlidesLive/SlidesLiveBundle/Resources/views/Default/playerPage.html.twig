@@ -3,7 +3,7 @@
 {# 
   Required values:
     Account|null          account
-    Folder|null           folder
+    array<Folder>         folders
     Presentation|null     presentation
     array<Presentations>  folderPresentations
     String                stylesheet
@@ -36,8 +36,6 @@
 {% endblock %}
 
 {% block accountContent %}
-  Player page.<br>
-  Account: {{ account.name }}<br>
 
   {% block accountPanel %}
     <div class="channelPanel">
@@ -62,10 +60,7 @@
         </div>	
     
         <div class="presentationHeader">
-          <a href="{{ path('accountPresentation', {'accountCanName': account.canonicalName, 'presentationId': presentation.id}) }}">a</a>
-            /
-          <a href="{{ path('accountPresentation', {'accountCanName': account.canonicalName, 'presentationId': presentation.id}) }}">v</a>
-          | {{ presentation.listSpeakersNames }} | <span class="metaBlue">{{ presentation.title }}</span>
+          {{ presentation.listSpeakersNames }} | <span class="metaBlue">{{ presentation.title }}</span>
         </div>
     
         <div class="videoPlayerPanel">		
@@ -76,7 +71,7 @@
           {% if presentation.dateRecorded is not null %}  
             <div class="presentationDescInfo">
               Uploaded by
-              <a href="{{ path('accountPresentation', {'accountCanName':account.canonicalName} ) }}">{{ account.getName }}</a>
+              <a href="{{ path('account', {'accountCanName':account.canonicalName} ) }}">{{ account.getName }}</a>
               on {{ presentation.getFormatedDateTime }}
               <br>
               {{ presentation.description }}
@@ -123,7 +118,7 @@
         </div>
         <h1>{{ account.name }} folders</h1> 
         <ul class="channelFoldersList">
-          {% for folder in account.folders %}
+          {% for folder in folders %}
             <li>
               <a href="{{ path('folder', {'accountCanName':account.canonicalName, 'folderCanName': folder.canonicalName} ) }}">{{ folder.name }}</a>
             </li>

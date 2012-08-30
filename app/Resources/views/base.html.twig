@@ -5,6 +5,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="google-site-verification" content="k6rQywy6tzc20h1fL1H7XlLoS2A1vX7mdGl46rbMG24" />
+	<link href='http://fonts.googleapis.com/css?family=Ropa+Sans:400,400italic|Homenaje' rel='stylesheet' type='text/css'>  
   {% block facebookMetaTags %}{% endblock %}
     
   {% block stylesheetBase %}
@@ -37,37 +38,29 @@
 <body>
 
     {# Page header #}
-    <div class="fixedHeader">
-      <div class="headerContent">  
-        <div class="topMenuItem">
-          SlidesLive(Beta),
-          <a href="{{ path('homepage') }}">Home</a>,
-          <a href="{{ path('tour') }}">Tour</a>,
-          <a href="{{ path('about') }}">About</a>,
+	
+	<div class="fixedHeader">
+		<div class="headerContent">
+			<div class="slidesLiveLogo"><a href="index.html"><img src="images/logo-header-beta.png" /></a>s<div class="logoBeta slidesLiveBlue">Beta</div></div>
+            <div class="headerMenuWraper">
+                <a href="{{ path('homepage') }}" style="margin-right:30px; color:#FFF" class="headerMenu globalFont">Download Free App</a>    
+                <a href="{{ path('homepage') }}" style="margin-right:30px;" class="headerMenu globalFont">Home</a>            
+                <a href="{{ path('tour') }}" style="margin-right:30px;" class="headerMenu globalFont">Tour</a>
+                <a href="{{ path('about') }}" class="headerMenu globalFont">About</a>
           {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('logout') }}">Logout</a>
+			<a href="{{ path('logout') }}" class="headerMenu globalFont slidesLiveBlue">Logout</a>
           {% else %}
-            <a href="{{ path('login') }}">Login</a>
-          {% endif %}   
+			<a href="{{ path('login') }}" class="headerMenu globalFont slidesLiveBlue">Login</a>
+          {% endif %}  				                        
+            </div>
         </div>
-      </div>		
-    </div>
-    
-    <div class="centerWrapper">
-      <div class="contentWrapper clearfix">
+    </div>	
       
         {# Page content #}     
         {% block content %}{% endblock content %}
 
         {# Page footer #}        
-        <div class="footer">
-          Copyright 2012 SlidesLive.com. All rights reserved.
-          <a href="{{ path('terms') }}">Terms & Conditions</a>,
-          <a href="{{ path('policy') }}">Privacy & Policy</a>
-        </div>                                                     
-        
-      </div>
-    </div>
+
     
     {% block javascripts %}{% endblock %}
     

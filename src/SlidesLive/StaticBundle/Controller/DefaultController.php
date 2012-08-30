@@ -26,6 +26,12 @@ class DefaultController extends Controller
     
     public function policyAction() {
         return $this->render('StaticBundle:Homepage:policy.html.twig');
-    }   
+    }
+    
+// --------EXAMPLE ACCOUNT -----------------------------------------------------
+
+    public function exampleAction() {
+      return $this->render('StaticBundle:Example:example.html.twig');
+    }       
 
 }

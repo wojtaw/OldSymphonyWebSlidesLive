@@ -24,5 +24,11 @@ policy:
 
 errorPage:
     pattern:  /error_page/{message}
-    defaults: {_controller: StaticBundle:Error:errorPage} 
+    defaults: {_controller: StaticBundle:Error:errorPage }
+                                                         
+# --------EXAMPLE ACCOUNT-------------------------------------------------------
+
+example:
+    pattern: /example
+    defaults: { _controller: StaticBundle:Default:example }     
 

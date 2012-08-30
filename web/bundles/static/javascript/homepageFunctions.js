@@ -8,13 +8,13 @@ function modifyDownloadAccordingOS(){
             $('#browser').html("<b>" + $.client.browser + "</b>");
           
             if ($.client.os.toLowerCase().substring(0,3) == "win") {
-                $('#downloadButtonLink').attr("href", "SL_Recorder/SL_Windows.zip")									
+                $('#downloadButtonLink').attr("href", "http://slideslive.com/SlidesLiveData/SL_Recorder/SL_Windows.zip");												
             } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
-                $('#downloadButtonLink').attr("href", "SL_Recorder/SL_Linux.zip")																
+                $('#downloadButtonLink').attr("href", "http://slideslive.com/SlidesLiveData/SL_Recorder/SL_Linux.zip");																				
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
-                $('#downloadButtonLink').attr("href", "SL_Recorder/SlidesLive-Mac.dmg")																	
+                $('#downloadButtonLink').attr("href", "http://slideslive.com/SlidesLiveData/SL_Recorder/SlidesLive-Mac.dmg");
             } else {
-                $('#downloadButtonLink').attr("href", "SL_Recorder/SL_AllPlatforms.zip")														
+                $('#downloadButtonLink').attr("href", "http://slideslive.com/SlidesLiveData/SL_Recorder/SL_AllPlatforms.zip");
             }
 }
 

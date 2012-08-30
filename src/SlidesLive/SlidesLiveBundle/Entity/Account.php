@@ -29,7 +29,7 @@ class Account implements AdvancedUserInterface {
         $this->name = '';
         $this->canonicalName = '';
         $this->description = '';
-        $this->privateCode = $this->generatePrivateCode();
+        $this->hash = $this->generateHash();
         $this->ratig = 0;
         $this->website = '';
         $this->privacy = Privacy::p_public();  
@@ -43,9 +43,9 @@ class Account implements AdvancedUserInterface {
       return 'Account';
     }
     
-    public function generatePrivateCode() {
-        $this->privateCode = md5(microtime());
-        return $this->privateCode;    
+    public function generateHash() {
+        $this->hash = md5(microtime());
+        return $this->hash;    
     }
         
     /**
@@ -224,14 +224,7 @@ class Account implements AdvancedUserInterface {
      *
      * @ORM\Column(name="description", type="text")
      */
-    protected $description;
-    
-    /**
-     * @var string privateCode
-     * 
-     * @ORM\Column(name="private_code", type="string", length="255")
-     */
-     protected $privateCode;                         
+    protected $description;                         
      
      /**
      * @var small privacy 
@@ -239,6 +232,13 @@ class Account implements AdvancedUserInterface {
      * @ORM\Column(name="privacy", type="smallint")     
      */
      protected $privacy;
+     
+     /**
+     * @var string hash
+     * 
+     * @ORM\Column(name="hash", type="string", length="64")
+     */                   
+     protected $hash;
      
      /**
       *  @var string website
@@ -463,26 +463,6 @@ class Account implements AdvancedUserInterface {
     }
 
     /**
-     * Set privateCode
-     *
-     * @param string $privateCode
-     */
-    public function setPrivateCode($privateCode)
-    {
-        $this->privateCode = $privateCode;
-    }
-
-    /**
-     * Get privateCode
-     *
-     * @return string 
-     */
-    public function getPrivateCode()
-    {
-        return $this->privateCode;
-    }
-
-    /**
      * Set privacy
      *
      * @param integer $privacy
@@ -600,5 +580,25 @@ class Account implements AdvancedUserInterface {
     public function getSubscribes()
     {
         return $this->subscribes;
+    }
+
+    /**
+     * Set hash
+     *
+     * @param string $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
+    }
+
+    /**
+     * Get hash
+     *
+     * @return string 
+     */
+    public function getHash()
+    {
+        return $this->hash;
     }
 }

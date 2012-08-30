@@ -1,0 +1,15 @@
+{% extends 'StaticBundle::layout.html.twig' %}
+{#
+  Required values:
+    String|null message
+#}
+
+{% block content %}
+
+  <div>
+    {{ message }}
+    <br>
+    <a href="{{ path('homepage') }}">Home</a>
+  </div>
+
+{% endblock %}

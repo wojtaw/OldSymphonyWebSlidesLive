@@ -1,0 +1,30 @@
+{#
+  Required values:
+    Presentation presentation | null
+#}
+
+<div>
+  <pre>
+    Embed Player:
+    {% if presentation %}
+      title: {{ presentation.title }}
+      description: {{ presentation.description }}
+      account: {{ presentation.account.name }}
+      folder: {{ presentation.folder.name }}
+      lang: {{ presentation.lang }}
+      date recorded: {{ presentation.dateRecorded }}
+      service: {{ presentation.service }}
+      service id: {{ presentation.serviceId }}
+      video source: {{ presentation.videoSource }}
+      length: {{ presentation.length }}
+      slides: {{ presentation.slides }}
+      video: {{ presentation.video }}
+      privacy: {{ presentation.privacy }}
+      flag: {{ presentation.flag }}
+      show speaker: {{ presentation.showSpeaker }}
+      speakers: {{ presentation.listSpeakersNames }}
+    {% else %}
+      Presentation not found.    
+    {% endif %}  
+  </pre>
+</div>

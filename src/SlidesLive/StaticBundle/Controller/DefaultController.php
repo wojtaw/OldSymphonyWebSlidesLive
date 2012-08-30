@@ -26,7 +26,6 @@ class DefaultController extends Controller
     
     public function policyAction() {
         return $this->render('StaticBundle:Homepage:policy.html.twig');
-    }
-    
+    }   
 
 }

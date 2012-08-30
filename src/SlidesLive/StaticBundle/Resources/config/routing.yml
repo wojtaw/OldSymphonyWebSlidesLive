@@ -20,3 +20,9 @@ policy:
     pattern: /privacyandpolicy
     defaults: { _controller: StaticBundle:Default:policy }
     
+# -------ERRORY-----------------------------------------------------------------
+
+errorPage:
+    pattern:  /error_page/{message}
+    defaults: {_controller: StaticBundle:Error:errorPage} 
+

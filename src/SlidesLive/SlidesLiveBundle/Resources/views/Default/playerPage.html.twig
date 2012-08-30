@@ -1,0 +1,138 @@
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+
+{# 
+  Required values:
+    Account|null          account
+    Folder|null           folder
+    Presentation|null     presentation
+    array<Presentations>  folderPresentations
+    String                stylesheet
+    Privacy               privacy_mode
+#}
+
+{% block stylesheet %}
+  <link href="{{ asset(stylesheet) }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('bundles/slideslive/css/stylesRedesigned.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block title %}
+  {{ account.name }} - 
+  {% if presentation is not null %}
+    {{ presentation.title }}
+  {% else %}
+    Not found
+  {% endif %}
+{% endblock %}
+
+{% block facebookMetaTags %}
+	{% if presentation is not null %}
+		<meta property="og:image" content="http://{{ app.request.host ~ asset(presentation.getThumbnail) }}" />
+		<meta property="og:title" content="{{ presentation.title }}" />
+		<meta property="og:description" content="{{ presentation.description }}" />		
+	{% else %} 
+		<meta property="og:title" content="Account page with no presentations" />
+		<meta property="og:description" content="No presentations found on this account" />		 
+	{% endif %}
+{% endblock %}
+
+{% block accountContent %}
+  Player page.<br>
+  Account: {{ account.name }}<br>
+
+  {% block accountPanel %}
+    <div class="channelPanel">
+      <div class="channelGroup">
+        <img width="100" height="100" class="channelAvatar" src="{{ asset(account.getThumbnail('header')) }}">
+        <div class="channelInfoPanel">
+          <div class="channelName">
+            {{ account.name }}
+          </div>			
+        </div>
+      </div>
+    </div>
+  {% endblock accountPanel %}
+  
+  {% block player %}
+    <div class="presentationWrapper clearfix">
+    
+      {% if presentation is not null %}
+        <div class="gradientWrapper clearfix">
+          <div class="gradientLeftVideo"></div>
+          <div class="gradientRightVideo"></div>
+        </div>	
+    
+        <div class="presentationHeader">
+          <a href="{{ path('accountPresentation', {'accountCanName': account.canonicalName, 'presentationId': presentation.id}) }}">a</a>
+            /
+          <a href="{{ path('accountPresentation', {'accountCanName': account.canonicalName, 'presentationId': presentation.id}) }}">v</a>
+          | {{ presentation.listSpeakersNames }} | <span class="metaBlue">{{ presentation.title }}</span>
+        </div>
+    
+        <div class="videoPlayerPanel">		
+          {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation} %}
+        </div>
+    
+        <div class="presentationDetailsVideo">
+          {% if presentation.dateRecorded is not null %}  
+            <div class="presentationDescInfo">
+              Uploaded by
+              <a href="{{ path('accountPresentation', {'accountCanName':account.canonicalName} ) }}">{{ account.getName }}</a>
+              on {{ presentation.getFormatedDateTime }}
+              <br>
+              {{ presentation.description }}
+            </div>
+          {% else %}    
+            No presentation avialable {# FIX ME - musi se nahradit solidnim errorem #}
+          {% endif %}
+        </div>
+        	
+        <div class="presentationServicesVideo">
+          <div class="presentationDescInfo sharePadding">SHARE</div>
+          <a href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t=I watched {{ presentation.title }} | {{ presentation.listSpeakersNames }} at &#60META&#62" title="Share to Facebook" target="_blank"><div class="shareFB"></div></a>
+          <a href="" title="Share to Twitter"><div class="shareTwitter"></div></a>
+          <a href="" title="Share to G+"><div class="shareGoogle"></div></a>	
+          <a href="" title="Email to friend"><div class="shareMail"></div></a>
+          <a href="" title="Show EMBED code"><div class="shareEmbed"></div></a>																			
+        </div>
+    
+      {% else %}
+        There are no available presentations in this folder.
+      {% endif %}	
+    </div>	
+  {% endblock player %}
+  
+  {% block presentationList %}
+    <div class="siteContent clearfix">
+      <div class="hpVideoList">
+        {% if folderPresentations is empty %}
+          No presentations are available now.
+        {% else %}
+          {% include 'SlidesLiveBundle:TimelineLayout:Columns.html.twig' with {'boxes': folderPresentations } %}
+        {% endif %}
+      </div>                                              
+    </div>
+  {% endblock presentationList %}
+  
+  {% block sideBar %}
+    <div class="channelSidebar">
+      <div class="sidebarTop"></div> 
+      <div class="channelSidebarContent">
+        <h1>About {{ account.name }}</h1>
+        <div class="sidebarText">
+          {{ account.description }}
+        </div>
+        <h1>{{ account.name }} folders</h1> 
+        <ul class="channelFoldersList">
+          {% for folder in account.folders %}
+            <li>
+              <a href="{{ path('folder', {'accountCanName':account.canonicalName, 'folderCanName': folder.canonicalName} ) }}">{{ folder.name }}</a>
+            </li>
+          {% endfor %} 			 
+        </ul>
+        <br />
+      </div>
+      <div class="sidebarBottom"></div>
+    </div>
+  {% endblock sideBar %}
+  
+{% endblock accountContent %}    

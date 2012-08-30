@@ -42,6 +42,13 @@ class Folder
      * @ORM\Column(name="privacy", type="smallint")     
      */
      protected $privacy;
+     
+     /**
+     * @var string hash
+     * 
+     * @ORM\Column(name="hash", type="string", length="64")
+     */                   
+    protected $hash;
     
     /**
      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="folder")
@@ -59,6 +66,7 @@ class Folder
     {
         $this->presentations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->privacy = Privacy::p_public();
+        $this->hash = $this->generateHash();
     }
     
     public function canonizeName() {
@@ -69,6 +77,11 @@ class Folder
       );
       $this->canonicalName = preg_replace($patterns, array(0 => '', 1 => ''), $result);
       return $this->canonicalName;
+    }
+    
+    public function generateHash() {
+        $this->hash = md5(microtime());
+        return $this->hash;    
     }
 
 // =============================================================================
@@ -181,5 +194,25 @@ class Folder
     public function getPrivacy()
     {
         return $this->privacy;
+    }
+
+    /**
+     * Set hash
+     *
+     * @param string $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
+    }
+
+    /**
+     * Get hash
+     *
+     * @return string 
+     */
+    public function getHash()
+    {
+        return $this->hash;
     }
 }

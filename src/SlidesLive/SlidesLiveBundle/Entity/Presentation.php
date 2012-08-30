@@ -18,6 +18,7 @@ class Presentation
     public function __construct() {
         $this->speakers = new ArrayCollection();
         $this->privacy = Privacy::p_public();
+        $this->hash = $this->generateHash();
     }
     
     public function getCountOfPresentations() {
@@ -78,6 +79,11 @@ class Presentation
             $thumbnail = './bundles/slideslive/images/no-image.jpg';
         }
         return $thumbnail;
+    }
+    
+    public function generateHash() {
+        $this->hash = md5(microtime());
+        return $this->hash;    
     }
     
 // =============================================================================
@@ -203,6 +209,13 @@ class Presentation
      * @ORM\Column(name="video_source", type="string", length="255")
      */                   
     protected $videoSource;
+    
+    /**
+     * @var string hash
+     * 
+     * @ORM\Column(name="hash", type="string", length="64")
+     */                   
+    protected $hash;
 
 // =============================================================================
 
@@ -534,5 +547,25 @@ class Presentation
     public function getFlag()
     {
         return $this->flag;
+    }
+
+    /**
+     * Set hash
+     *
+     * @param string $hash
+     */
+    public function setHash($hash)
+    {
+        $this->hash = $hash;
+    }
+
+    /**
+     * Get hash
+     *
+     * @return string 
+     */
+    public function getHash()
+    {
+        return $this->hash;
     }
 }

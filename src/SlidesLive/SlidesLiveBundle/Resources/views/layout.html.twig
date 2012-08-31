@@ -3,18 +3,25 @@
 
   {% block stylesheet %}
     <link href="{{ asset('./bundles/slideslive/css/SlidesLiveStylesMain.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bundles/static/css/mainStyles.css') }}" rel="stylesheet" type="text/css"/>
   {% endblock %}
   
 	{% block layoutContent %}
-	   <div>
-	     {% if is_granted('ROLE_USER') %}
-	       Loged user: {{ app.user.name }} - 
-         <a href="{{ path('manageAccount') }}">Manage your account</a>,
-         <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Manage your presentations,</a>
-         <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">See your account.</a> 
-	     {% endif %}
-	   </div>
-    <div class="account_background">
-      {% block accountContent %}{% endblock %}
+	   <div class="websiteLightBackground firstBlockTop">
+    	<div class="blockCenterWrapper"> 
+	
+    	   <div>
+    	     {% if is_granted('ROLE_USER') %}
+    	       Loged user: {{ app.user.name }} - 
+             <a href="{{ path('manageAccount') }}">Manage your account</a>,
+             <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Manage your presentations,</a>
+             <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">See your account.</a> 
+    	     {% endif %}
+    	   </div>
+        
+        {% block content %}{% endblock %}
+        
+      </div>
     </div>
+    
   {% endblock layoutContent %}

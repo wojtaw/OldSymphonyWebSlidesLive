@@ -3,13 +3,13 @@
 
 {% block title %}Manage your account.{% endblock %}
 
-{% block accountContent %}
-<div>
-<h2>Edit personal data:</h2>
-{{ accountEditForm.content|raw }}
-
-<br>
-<h2>Change password:</h2>
-{{ passwordChangeForm.content|raw }}
-</div>
+{% block content %}
+  <div>
+    <h2>Edit personal data:</h2>
+    {{ accountEditForm.content|raw }}
+    
+    <br>
+    <h2>Change password:</h2>
+    {{ passwordChangeForm.content|raw }}
+  </div>
 {% endblock %}

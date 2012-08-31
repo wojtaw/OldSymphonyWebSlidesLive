@@ -4,16 +4,16 @@
     String|null message
 #}
 
+{# TODO pridat informaci o erroru do titlu okna #}
+
 {% block content %}
   <div class="websiteLightBackground firstBlockTop">
     	<div class="blockCenterWrapper">
-    	
-        <div>
+    	  <h2 class="globalFont">
           {{ message }}
           <br>
-          <a href="{{ path('homepage') }}">Home</a>
-        </div>
-        
+          Return to <a href="{{ path('homepage') }}">Homepage</a>
+        </h2>
     </div>
   </div>
 

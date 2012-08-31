@@ -166,6 +166,18 @@ body {
 	background-color:#CC6600;
 }
 
+.featureLeft {	
+	width: 400px;
+	margin-left:40px;
+	margin-top:40px;
+}
+
+.featureRight {	
+	width: 400px;
+	padding-left:80px;
+}
+
+
 
 /* TEAM BOXES */
 .teamBoxesWrapper{

@@ -16,4 +16,6 @@
     </script>   
   {% endblock %}  
   
-	{% block content %}{% endblock %}
+	{% block layoutContent %}
+    {% block content %}{% endblock %}
+  {% endblock layoutContent %}

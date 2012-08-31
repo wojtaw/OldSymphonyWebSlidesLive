@@ -23,7 +23,7 @@ policy:
 # -------ERRORY-----------------------------------------------------------------
 
 errorPage:
-    pattern:  /error_page/{message}
+    pattern:  /error/{message}
     defaults: {_controller: StaticBundle:Error:errorPage }
                                                          
 # --------EXAMPLE ACCOUNT-------------------------------------------------------

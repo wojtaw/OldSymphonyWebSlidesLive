@@ -153,15 +153,18 @@ body {
 }
 
 .featureColumn{
-	width:360px;
+	width:900px;
 	margin-left:80px;
-	margin-right:40px;
+	margin-right:0px;
 	margin-bottom:80px;
 }
 
+.featureImage{
+	float:right;	
+}
+
 .featureLeft {
-	float:left;	
-	margin-right:400px;
+	float:left;
 }
 
 
@@ -410,7 +413,10 @@ body {
 	font-weight:normal;
 	font-size:16px;		
 	color:#000000;
-	text-align:left;	
+	text-align:left;
+	width:300px;	
+	margin:0px;
+	display:block;
 }
 
 .smallNote{

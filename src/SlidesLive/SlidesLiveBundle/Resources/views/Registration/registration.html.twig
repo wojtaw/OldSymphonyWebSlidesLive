@@ -5,6 +5,9 @@
 {% form_theme form 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
 
 {% block content %}
+
+  <h2 class="globalFont">Registration</h2>
+
 <div>
   <form action="{{ path('registration') }}" method='POST' {{ form_enctype(form) }}>
     <table>

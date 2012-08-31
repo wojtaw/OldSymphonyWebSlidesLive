@@ -11,8 +11,8 @@
 #}
 
 {% block stylesheet %}
-  <link href="{{ asset(stylesheet) }}" rel="stylesheet" type="text/css">
-  <link href="{{ asset('bundles/slideslive/css/stylesRedesigned.css') }}" rel="stylesheet" type="text/css">
+  {{ parent() }}
+  <link href="{{ asset('bundles/slideslive/css/stylesRedesign.css') }}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {% block title %}

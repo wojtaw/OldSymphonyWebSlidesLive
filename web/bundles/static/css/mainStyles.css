@@ -152,22 +152,32 @@ body {
 	
 }
 
-.featureColumn{
-	width:360px;
-	margin-left:80px;
-	margin-right:40px;
+.featureBox{
+	width:480px;
+	padding-left:00px;
+	margin-right:0px;
 	margin-bottom:80px;
+	float:left;
+	display:block;
 }
 
-.featureLeft {
-	float:left;	
-	margin-right:400px;
+.featureWrapper {	
+	width:960px;
+	background-color:#CC6600;
+}
+
+.featureLeft {	
+	width: 400px;
+	margin-left:40px;
+	margin-top:40px;
+}
+
+.featureRight {	
+	width: 400px;
+	padding-left:80px;
 }
 
 
-.featureRight {
-	float:right;		
-}
 
 /* TEAM BOXES */
 .teamBoxesWrapper{
@@ -410,7 +420,10 @@ body {
 	font-weight:normal;
 	font-size:16px;		
 	color:#000000;
-	text-align:left;	
+	text-align:left;
+	width:300px;	
+	margin:0px;
+	display:block;
 }
 
 .smallNote{

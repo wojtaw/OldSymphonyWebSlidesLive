@@ -53,15 +53,21 @@ class PresentationRepository extends EntityRepository
     }
     */
 
-    public function findFolderPresentationsOrdered(Folder $folder) {
+    public function findFolderPresentations($folderId, $privacyLevel) {
         $em = $this->getEntityManager();
         $query = $em->createQuery("
-            SELECT p FROM MetaBundle:Presentation p
+            SELECT p FROM SlidesLiveBundle:Presentation p
             JOIN p.folder f
             WHERE f.id = :folderId
-            ORDER BY p.dateRecorded DESC
-        ");
-        $query->setParameter("folderId", $folder->getId());
+            AND
+            p.privacy <= :privacyLevel
+            ORDER BY p.dateRecorded DESC")
+        ->setParameters(array(
+          'folderId' => sprintf('%s', $folderId),
+          'privacyLevel' => $privacyLevel)
+        );
         return $query->getResult();
     }
+    
+    
 }

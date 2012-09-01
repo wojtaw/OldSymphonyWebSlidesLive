@@ -5,7 +5,7 @@ body {
 	margin:0px;
 	padding:0px;
 	top:0px;
-	background-color:#000000;	
+	background-color:#101316;	
 }
 
 .contentWrapper {
@@ -18,7 +18,7 @@ body {
 	padding-top:40px;
 	padding-bottom:40px;
 	width:100%;	
-	background-image:url(../images/bg-dark.png);
+	background-image:url(../images/dark-grey-bg.png);
 }
 
 .websiteLightBackground {
@@ -292,6 +292,8 @@ body {
 
 .contactUs{
 	background-position:0 -120px !important;	
+	margin-top:70px;
+	margin-bottom:90px;
 }
 
 .contactUs:hover{
@@ -350,7 +352,7 @@ body {
 
 .socialButtonBlog {
 	background-position:-75px 0px;
-	left:0px;
+	left:-50px;
 	top:220px;
 }
 

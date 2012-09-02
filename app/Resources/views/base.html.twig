@@ -27,7 +27,7 @@
   
   
   {% block favicon %}
-      <link href="{{ asset('bundles/favicon-sl-gif.gif') }}" rel="icon" type="image/png" />
+      <link href="{{ asset('bundles/favicon-sl-1.png') }}" rel="icon" type="image/png" />
   {% endblock %}
    
   <title>
@@ -47,7 +47,7 @@
 	
 	<div class="fixedHeader">
 		<div class="headerContent">
-			<div class="slidesLiveLogo"><a href="{{ path('homepage') }}"><img src="{{ asset('bundles/static/images/logo-header-beta.png') }}" /></a><div class="logoBeta slidesLiveBlue">Beta</div></div>
+			<div class="slidesLiveLogo"><a href="{{ path('homepage') }}"><img src="{{ asset('bundles/static/images/logo-header-beta.png') }}" border="0" /></a><div class="logoBeta slidesLiveBlue">Beta</div></div>
             <div class="headerMenuWraper">
                 <a href="http://slideslive.com/SlidesLiveData/SL_Recorder/SL_AllPlatforms.zip" id="downloadButtonLink2" style="margin-right:30px; color:#FFF" class="headerMenu globalFont">Download Free App</a>    
                 <a href="{{ path('homepage') }}" style="margin-right:30px;" class="headerMenu globalFont">Home</a>            
@@ -67,7 +67,7 @@
 
         {# Page footer #}        
 	<div class="siteFooter">
-  		<div class="footerContent"><div class="footerText">Copyright 2012 SlidesLive.com. All rights reserved.</div></div>
+  		<div class="footerContent"><div class="footerText">&#169; 2012 SlidesLive.com. All rights reserved.</div></div>
     </div>        
     
     {% block javascripts %}{% endblock %}

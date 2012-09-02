@@ -29,6 +29,35 @@ class FolderRepository extends EntityRepository {
   }
   
   /**
+   * Nacteni folder patriciho vybranemu accountu podle
+   * urovne ochrany soukromy folderu (public/unlisted).      
+   */     
+  public function findAccountFolder($accountId, $folderCanName, $privacyLevel) {
+    $em = $this->getEntityManager();
+    $query = $em->createQuery(
+      'SELECT f
+      FROM SlidesLiveBundle:Folder f
+      JOIN f.account a
+      WHERE a.id = :accountId
+      AND f.canonicalName = :folderCanName
+      AND a.privacy <= :privacyLevel
+      AND f.privacy <= :privacyLevel')
+      ->setParameters(array(
+          'accountId' => $accountId,
+          'folderCanName' => $folderCanName,
+          'privacyLevel' => $privacyLevel
+        )
+      );
+    try {
+      $result = $query->getSingleResult();
+    }  
+    catch (\Exception $e) {
+      $result = null;
+    }
+    return $result;            
+  }
+  
+  /**
    * Nacteni pole folderu (razenych abecende) patricich vybranemu accountu podle
    * urovne ochrany soukromy folderu (public/unlisted).      
    */     

@@ -33,12 +33,11 @@ class FolderRepository extends EntityRepository {
         )
       );
     try {
-      $result = $query->getSingleResult();
+      return $query->getSingleResult();
     }  
     catch (\Exception $e) {
-      $result = null;
-    }
-    return $result;            
+      return null;
+    }            
   }
   
   /**

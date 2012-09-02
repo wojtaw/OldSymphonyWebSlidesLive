@@ -45,13 +45,13 @@ folder:
       
 presentation:
     pattern: /w/{presentationId}
-    defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:-1, folderCanName:-1 }
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:null, folderCanName:null }
     requirements:
       presentationId: \d+      
         
 accountPresentation:
     pattern: /{accountCanName}/w/{presentationId}
-    defaults: { _controller: SlidesLiveBundle:Default:presentation, folderCanName: -1 }
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, folderCanName:null }
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'
       presentationId: \d+
@@ -80,13 +80,13 @@ unlistedFolder:
       
 unlistedPresentation:
     pattern: /w/{presentationId}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, accountCanName:-1, folderCanName:-1 }
+    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, accountCanName:null, folderCanName:null }
     requirements:
       presentationId: \d+      
         
 unlistedAccountPresentation:
     pattern: /{accountCanName}/w/{presentationId}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, folderCanName: -1 }
+    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, folderCanName:null }
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'
       presentationId: \d+

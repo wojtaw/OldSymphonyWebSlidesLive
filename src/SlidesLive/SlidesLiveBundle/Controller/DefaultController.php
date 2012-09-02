@@ -9,14 +9,18 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
 class DefaultController extends Controller { 
 
-  protected $data = array(
-    //'privacy_mode' => Privacy::p_public(),
-    'stylesheet' => null,       // individualni styl accountu
-    'account' => null,      
-    'presentation' => null,     // prezentace pro prehrávac
-    'folders' => array(),       // seznam folderu kanálu
-    'folderPresentations' => array(),   // prezentace aktuálního folderu
-  );
+  protected $data;
+  
+  public function __construct() {
+    $this->data = array(
+      'privacy_level' => Privacy::P_PUBLIC,
+      'stylesheet' => null,       // individualni styl accountu
+      'account' => null,      
+      'presentation' => null,     // prezentace pro prehrávac
+      'folders' => array(),       // seznam folderu kanálu
+      'folderPresentations' => array(),   // prezentace aktuálního folderu
+    );
+  }
 
   public function accountAction($accountCanName) {
     //return new Response('Controller: Default, Action: account,<br />$accountCanName: '.$accountCanName);
@@ -37,23 +41,23 @@ class DefaultController extends Controller {
       }      
     }
     else { // neprihlaseny uzivatel
-      if ($this->data['account']->getPrivacy() > Privacy::p_public()) { // uzivatel se diva na private nebo unlisted account -> je presmerovan pryc.
+      if ($this->data['account']->getPrivacy() > Privacy::P_PUBLIC) { // uzivatel se diva na private nebo unlisted account -> je presmerovan pryc.
         return $this->accountNotFound($accountCanName);      
       }
       // zjisteni public folderu
       $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
-        ->findAccountFolders($this->data['account']->getId(), Privacy::p_public());
+        ->findAccountFolders($this->data['account']->getId(), Privacy::P_PUBLIC);
       if (count($this->data['folders']) == 0) { // nenalezeny zadne public foldery -> vykresleni prazdneho accountu
         return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);  
       }
       // nacteni folderu k vypsani
       $folderToView = $this->data['account']->getPrimaryFolder();
-      if ($folderToView->getPrivacy() != Privacy::p_public()) { // primarni folder neni public -> nahrazani prvnim folderem v seznamu
+      if ($folderToView->getPrivacy() != Privacy::P_PUBLIC) { // primarni folder neni public -> nahrazani prvnim folderem v seznamu
         $folderToView = $this->data['folders'][0];
       }
       // nacteni prezentaci slozky, ktera je zobrazena
       $this->data['folderPresentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
-        ->findFolderPresentations($folderToView->getId(), Privacy::p_public());
+        ->findFolderPresentations($folderToView->getId(), Privacy::P_PUBLIC);
       if (count($this->data['folderPresentations']) == 0) {
         return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
       }
@@ -68,11 +72,10 @@ class DefaultController extends Controller {
     //return new Response("Controller: Default, Action: folderAction,<br />\$accountCanName: $accountCanName,<br />\$folderCanName: $folderCanName");
     // nacteni accountu
     $accountRepo = $this->getDoctrine()->getRepository('SlidesLiveBundle:Account');
-    $this->data['account'] = $accountRepo->findByCanonicalName($accountCanName);
+    $this->data['account'] = $accountRepo->findAccount($accountCanName);
     if (!$this->data['account']) {  // zadany account neexistuje -> presmerovani na error page
       return $this->accountNotFound($accountCanName);
     }
-    $this->data['account'] = $this->data['account'][0];
     // rozhodnuti jestli je user prihlaseny a diva se na svuj kanal
     $context = $this->get('security.context');
     if ($context->isGranted('ROLE_USER')) {
@@ -92,21 +95,21 @@ class DefaultController extends Controller {
       }      
     }
     else { // neprihlaseny uzivatel -> Privacy omezeni
-      if ($this->data['account']->getPrivacy() > Privacy::p_public()) { // uzivatel se diva na private nebo unlisted account -> je presmerovan pryc.
+      if ($this->data['account']->getPrivacy() > Privacy::P_PUBLIC) { // uzivatel se diva na private nebo unlisted account -> je presmerovan pryc.
         return $this->accountNotFound($accountCanName);      
       }
       // overeni nazvu folderu a zda ji uzivatel muze zobrazit v public modu
       $folderToView = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
-          ->findAccountFolder($this->data['account']->getId(), $folderCanName, Privacy::p_public());
+          ->findAccountFolder($this->data['account']->getId(), $folderCanName, Privacy::P_PUBLIC);
       if (!$folderToView) {
         $this->folderNotFound($folderCanName);
       }
       // zjisteni public folderu
       $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
-        ->findAccountFolders($this->data['account']->getId(), Privacy::p_public());
+        ->findAccountFolders($this->data['account']->getId(), Privacy::P_PUBLIC);
       // nacteni prezentaci slozky, ktera ma byt zobrazena
       $this->data['folderPresentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
-        ->findFolderPresentations($folderToView->getId(), Privacy::p_public());
+        ->findFolderPresentations($folderToView->getId(), Privacy::P_PUBLIC);
       if (count($this->data['folderPresentations']) == 0) {
         return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
       }

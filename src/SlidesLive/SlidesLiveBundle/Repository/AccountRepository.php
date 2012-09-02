@@ -3,6 +3,7 @@
 namespace SlidesLive\SlidesLiveBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
 /**
  * AccountRepository
@@ -12,58 +13,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class AccountRepository extends EntityRepository {
 
-    public function listAllChannels($ac = null) {
-        $em = $this->getEntityManager();
-        if (is_null($ac)) {
-            $query = $em->createQuery('SELECT ch
-                                    FROM MetaBundle:Channel ch 
-                                    WHERE ch.private = 0
-                                    ORDER BY ch.canonicalName ASC');
-        } else {
-            $query = $em->createQuery('SELECT ch
-                                    FROM MetaBundle:Channel ch 
-                                    WHERE ch.private = 0 OR ch.id = :id
-                                    ORDER BY ch.canonicalName ASC')
-                            ->setParameter('id', $ac->getEntity()->getId());
-        }
-        return $query->getResult();
+  public function findAccount($accountCanName, $privacyLevel = Privacy::P_PRIVATE) {
+    $em = $this->getEntityManager();
+    $query = $em->createQuery(
+      'SELECT a
+      FROM SlidesLiveBundle:Account a
+      WHERE a.canonicalName = :accountCanName
+      AND a.privacy <= :privacyLevel')
+    ->setParameters(array(
+      'accountCanName' => $accountCanName,
+      'privacyLevel' => $privacyLevel)
+    );
+    try {
+      return $query->getSingleResult();
     }
-
-    public function findOneChannelByCanonicalName($canonicalName,$ac = null) {
-        $channel = $this->findOneByCanonicalName($canonicalName);
-        if (empty($channel)) {
-            return null;
-        }
-        if ($channel->getPrivate()) {
-            if (!is_null($ac) && $ac->getEntity()->getId() == $channel->getId()) {
-                return $channel;
-            } else {
-                return null;
-            }
-        } else {
-            return $channel;
-        }
+    catch (\Exception $e) {
+      return null;
     }
-
-    public function getAuthorizedPresentations(\SlidesLive\SlidesLiveBundle\Entity\Channel $channel, $ac = null) {
-        $em = $this->getEntityManager();
-        $presentations = $em
-                        ->createQuery(
-                                'SELECT p
-          FROM MetaBundle:Presentation p
-          JOIN p.channel ch
-          WHERE ch.name = :name
-          ORDER BY p.dateRecorded DESC')
-                        ->setParameter('name', $channel->getName())
-                        ->getResult();
-        if (!is_null($ac)) {
-            foreach ($presentations as $p) {
-                if ($p->getPrivate()) {
-                    unset($p);
-                }
-            }
-        }
-        return $presentations;
-    }
+  }
 
 }

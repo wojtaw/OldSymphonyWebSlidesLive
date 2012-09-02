@@ -12,22 +12,6 @@ use Doctrine\ORM\EntityRepository;
  */
 class FolderRepository extends EntityRepository {
   
-  public function findPresentationsSortedByDate($folderId) {
-    $em = $this->getEntityManager();
-    $query = $em->createQuery(
-      'SELECT p
-      FROM MetaBundle:Presentation p
-      JOIN p.folder f
-      WHERE f.id = :id
-      ORDER BY p.dateRecorded DESC')
-      ->setParameter('id', $folderId)
-      ->getResult();
-    if (count($query) < 1) {
-      $query = null;
-    }
-    return $query;
-  }
-  
   /**
    * Nacteni folder patriciho vybranemu accountu podle
    * urovne ochrany soukromy folderu (public/unlisted).      

@@ -7,6 +7,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use SlidesLive\SlidesLiveBundle\Controller\BaseController;
 use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
+/*
+ TODOs
+  - rozsirit folderAction a presentationAction o zpracovani unlisted modu
+  - vyresit generovani ruznych odkazu z twigu podle toho v jakem se nachazi stranka modu
+  - radne otestovat
+  
+  -> pokud se povede prevest do jednoho kontroleru
+  -> registrovat seznam folderu jako widget - pouzivat jako sluzbu
+*/
+
 class DefaultController extends Controller { 
 
   protected $data;
@@ -28,7 +38,7 @@ class DefaultController extends Controller {
    * Zobrazeni obsahu vybraneho uctu. Zobrazi se primarni slozka accountu.
    * Pokud je uzivatel prihlasen, vidi kompletni obsah sveho uctu.      
    */     
-  public function accountAction($accountCanName) {
+  public function accountAction($accountCanName, $hash = null) {
     // nacteni accountu
     $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Account')
       ->findAccount($accountCanName);
@@ -39,6 +49,17 @@ class DefaultController extends Controller {
     if ($context->isGranted('ROLE_USER')) {
       if ($context->getToken()->getUser()->getId() == $this->data['account']->getId()) { // uzivatel je prihlasen a diva se na svuj kanal -> zobrazi se vsechno
         $this->privacyLevel = Privacy::P_PRIVATE; // muze se zobrazit vsechno
+      }      
+    }
+    // overeni zda se user nenachazi v UNLISTED modu
+    if ($hash != null && $hash == $this->data['account']->getHash()) {
+      if ($this->privacyLevel == Privacy::P_PUBLIC) {
+        $this->privacyLevel = Privacy::P_UNLISTED;
+      }
+    }
+    else {
+      if ($this->privacyLevel == Privacy::P_PUBLIC) {
+        return $this->accountNotFound($accountCanName);
       }      
     }
     // neprihlaseny uzivatel -> Privacy omezeni

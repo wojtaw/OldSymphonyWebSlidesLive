@@ -67,7 +67,7 @@ accountFolderPresentation:
 # ------UNLISTED PRESENTATIONS--------------------------------------------------
 unlistedAccount:
     pattern: /{accountCanName}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:account }
+    defaults: { _controller: SlidesLiveBundle:Default:account }
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'
     

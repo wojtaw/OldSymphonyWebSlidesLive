@@ -1,0 +1,5 @@
+# /src/SlidesLive/SlidesLiveBundle/Resources/config/routing_dev.yml
+
+linkBrowser:
+  pattern: /test/browse/{accountCanName}
+  defaults: { _controller: SlidesLiveBundle:Test:linkBrowser }

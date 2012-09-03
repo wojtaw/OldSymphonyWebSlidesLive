@@ -1,3 +1,7 @@
+SlidesLiveBundle:
+    resource: "@SlidesLiveBundle/Resources/config/routing_dev.yml"
+    prefix:   /
+
 #_welcome:
 #    pattern:  /
 #    defaults: { _controller: AcmeDemoBundle:Welcome:index }

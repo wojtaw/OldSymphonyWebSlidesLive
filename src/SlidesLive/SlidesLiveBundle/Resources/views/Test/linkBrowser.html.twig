@@ -1,0 +1,59 @@
+{# src/SlidesLive/SlidesLiveBundle/Resources/views/Test/linkBrowser.html.twig #}
+{# 
+  Required values:
+    Account|null account;
+#}
+
+<html>
+<head>
+  <title>Slides live - Link Browser</title>
+</head>
+<body>
+
+  <h1>Slides live - Link Browser</h1>
+  {% if account %}
+  
+    <h2>Account: {{ account.name }}</h2>
+    <hr/><br/>
+    <h2>Presentations:</h2>
+    <table>
+      {% for folder in account.folders %}
+        {# folder info #}
+        <tr style="background-color: lightgrey;">
+          <td><b>{{ folder.name }}</b></td>
+          <td>{{ folder.privacy }}</td>
+          <td>
+            <a href="{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName}) }}">{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName}) }}</a>
+          </td>
+          <td>
+            <a href="{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName, 'hash': folder.hash}) }}">{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName, 'hash': folder.hash}) }}</a>                
+          </td>    
+        </tr>
+        
+        {# folder presentations info #}
+        {% for presentation in folder.presentations %}
+          <tr>
+            <td>{{ presentation.title }}</td>
+            <td>{{ presentation.privacy }}</td>
+            <td>
+              <a href="{{ path('presentation', {'presentationId': presentation.id}) }}">{{ path('presentation', {'presentationId': presentation.id}) }}</a>              
+            </td>
+            <td>
+              <a href="{{ path('unlistedPresentation', {'presentationId': presentation.id, 'hash': presentation.hash}) }}">{{ path('unlistedPresentation', {'presentationId': presentation.id, 'hash': presentation.hash}) }}</a>
+            </td>
+          </tr>          
+        {% else %}
+          <tr><td>No presentations found.</td></tr>
+        {% endfor %}
+                
+      {% else %}
+        <tr><td>No folders found.</td></tr>    
+      {% endfor %}    
+    </table>
+    
+  {% else %}
+    <p>Account not found</p>    
+  {% endif %}
+
+</body>
+</html>

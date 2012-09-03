@@ -9,7 +9,7 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 
 /*
  TODOs
-  - rozsirit folderAction a presentationAction o zpracovani unlisted modu
+  - rozsirit folderAction a presentationAction o zpracovani unlisted modu - FIX
   - vyresit generovani ruznych odkazu z twigu podle toho v jakem se nachazi stranka modu
   - radne otestovat
   
@@ -52,16 +52,9 @@ class DefaultController extends Controller {
       }      
     }
     // overeni zda se user nenachazi v UNLISTED modu
-    if ($hash != null && $hash == $this->data['account']->getHash()) {
-      if ($this->privacyLevel == Privacy::P_PUBLIC) {
-        $this->privacyLevel = Privacy::P_UNLISTED;
-      }
-    }
-    else {
-      if ($this->privacyLevel == Privacy::P_PUBLIC) {
-        return $this->accountNotFound($accountCanName);
-      }      
-    }
+    if (!$this->checkUnlistedMode($hash, $this->data['account'])) {
+      return $this->accountNotFound($accountCanName);    
+    }    
     // neprihlaseny uzivatel -> Privacy omezeni
     if ($this->data['account']->getPrivacy() > $this->privacyLevel) { // uzivatel se diva na private nebo unlisted account -> je presmerovan pryc.
       return $this->accountNotFound($accountCanName);      
@@ -96,7 +89,7 @@ class DefaultController extends Controller {
    * Zobrazeni obsahu zadane slozky zadaneho uctu. Pokud se uzivatel diva na
    * vlastni ucet a je prihlasen, zobrazi se vsechny prezentace a foldery.      
    */     
-  public function folderAction($accountCanName, $folderCanName) {
+  public function folderAction($accountCanName, $folderCanName, $hash = null) {
     // nacteni accountu
     $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Account')
       ->findAccount($accountCanName);
@@ -109,7 +102,7 @@ class DefaultController extends Controller {
       if ($context->getToken()->getUser()->getId() == $this->data['account']->getId()) { // uzivatel je prihlasen a diva se na svuj kanal
         $this->privacyLevel = Privacy::P_PRIVATE; // muze se zobrazit vsechno
       }      
-    }
+    } 
     // neprihlaseny uzivatel -> Privacy omezeni
     if ($this->data['account']->getPrivacy() > $this->privacyLevel) { // uzivatel se diva na private nebo unlisted account -> je presmerovan pryc.
       return $this->accountNotFound($accountCanName);      
@@ -120,6 +113,10 @@ class DefaultController extends Controller {
         ->findAccountFolder($this->data['account']->getId(), $folderCanName, $this->privacyLevel);
     if (!$folderToView) {                                                       // ??? nebo by se mohla zprava zobrazit na playerPage, aby si user mohl hned vybrat jinou slozku
       return $this->folderNotFound($folderCanName);
+    }
+    // overeni zda se user nenachazi v UNLISTED modu
+    if (!$this->checkUnlistedMode($hash, $folderToView)) {
+      return $this->folderNotFound($folderCanName);    
     }
     // zjisteni viditelnych folderu podle privacyLevelu
     $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
@@ -140,7 +137,7 @@ class DefaultController extends Controller {
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
   
-  public function presentationAction($accountCanName, $folderCanName, $presentationId) {
+  public function presentationAction($accountCanName, $folderCanName, $presentationId, $hash = null) {
     // nacteni prezentace
     $presentation = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
     if (!$presentation) {   // prezentace nebyla podle zadaneho Id a privateLevel nalezena
@@ -150,14 +147,14 @@ class DefaultController extends Controller {
     $account = $presentation->getAccount();       
     if ($accountCanName != null) {  // kanonicke jmeno accountu bylo zadano -> overeni nalezitosti k prezentaci
       if ($accountCanName != $account->getCanonicalName()) {      // pokud se kan. jmeno zadaneho accountu nerovna kan. jmenu accountu prezentace -> redirect
-        return presentationNotFound($presentationId);
+        return $this->presentationNotFound($presentationId);
       }            
     }
     // nacteni folderu
     $folder = $presentation->getFolder();
     if ($folderCanName != null) { // kononicke jmeno folderu bylo zadano -> overeni nalezitosti k prezentaci
       if ($folderCanName != $folder->getCanonicalName()) {      // zadane kanonicke folderu neodpovida kan. jmenu folderu prezentace
-        return presentationNotFound($presentationId);      
+        return $this->presentationNotFound($presentationId);      
       }      
     }
     // zjisteni zda je uzivatel prihlasena a diva se na svuj ucet
@@ -167,11 +164,15 @@ class DefaultController extends Controller {
         $this->privacyLevel = Privacy::P_PRIVATE; // prihlaseny user se diva na svuj ucet -> muze se zobrazit vsechno      
       }
     }
+    // overeni zda se user nenachazi v UNLISTED modu
+    if (!$this->checkUnlistedMode($hash, $presentation)) {
+      return $this->presentationNotFound($presentationId);    
+    }
     // overeni zda jsou nactene entity viditelne v privacyLevelu
     if ($account->getPrivacy() > $this->privacyLevel
       || $folder->getPrivacy() > $this->privacyLevel
       || $presentation->getPrivacy() > $this->privacyLevel) {
-      return presentationNotFound($presentationId);      
+      return $this->presentationNotFound($presentationId);      
     }
     // nacteni folderu vybraneho accountu
     $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
@@ -196,7 +197,28 @@ class DefaultController extends Controller {
   }
   
   protected function presentationNotFound($presentationId) {
-    return $this->redirect($this->generateUrl('errorPage', array('message' => "We are sorry, but presentation with id $presentationId does not exist or is private.")));
+    return $this->redirect($this->generateUrl('errorPage', array('message' => "We are sorry, but presentation with id '$presentationId' does not exist or is private.")));
+  }
+  
+  /**
+   * Kontrola pokud je pristupovano pres UNLISTED link (= byl zadan hash), zda
+   * je hash a link spravny. Pokud ano, je privacyLevel nastaven na UNLISTED.   
+   * Pokud je uzivatel prihlasen a diva se na svuj kanal zustava privacyLevel
+   * na PRIVATE.
+   * @return true - pokud je link v poradku, false - pokud ne a musi se zobrazit chyba.      
+   */        
+  protected function checkUnlistedMode($hash, $entity) {
+    if ($hash != null) {        // byl zadan hash = pristup pres UNLISTED link -> kontrola hashe (samotny link musi byt spravne aby se zobrazila player page)
+      if ($hash == $entity->getHash()) {       // hash sedi
+        if ($this->privacyLevel == Privacy::P_PUBLIC) {     // pokud se prihlaseny uzivatel nediva na svuj ucet (PRIVATE mod), tak povolime UNLISTED prezentace
+          $this->privacyLevel = Privacy::P_UNLISTED;
+        }
+      }
+      else {  // hash nesedi -> spatny link
+        return false;      
+      }    
+    }
+    return true;
   }
   
   protected function includeStylesheet(Account $account) {

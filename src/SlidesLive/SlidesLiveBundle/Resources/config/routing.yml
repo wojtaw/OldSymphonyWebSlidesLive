@@ -73,27 +73,27 @@ unlistedAccount:
     
 unlistedFolder:
     pattern: /{accountCanName}/{folderCanName}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:folder }
+    defaults: { _controller: SlidesLiveBundle:Default:folder }
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'
       folderCanName: '[^wh/]|[^/][^/]+'
       
 unlistedPresentation:
     pattern: /w/{presentationId}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, accountCanName:null, folderCanName:null }
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:null, folderCanName:null }
     requirements:
       presentationId: \d+      
         
 unlistedAccountPresentation:
     pattern: /{accountCanName}/w/{presentationId}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation, folderCanName:null }
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, folderCanName:null }
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'
       presentationId: \d+
                             
 unlistedAccountFolderPresentation:
     pattern: /{accountCanName}/{folderCanName}/w/{presentationId}/h/{hash}
-    defaults: { _controller: SlidesLiveBundle:Unlisted:presentation }
+    defaults: { _controller: SlidesLiveBundle:Default:presentation }
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'                                    
       folderCanName: '[^wh/]|[^/][^/]+'

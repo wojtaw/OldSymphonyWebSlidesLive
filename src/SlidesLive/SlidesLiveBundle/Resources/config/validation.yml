@@ -1,6 +1,6 @@
 # SlidesLive\SlidesLiveBundle\Resources\config\validation.yml
 
-SlidesLive\SlidesLiveBundle\Entity\Acount:
+SlidesLive\SlidesLiveBundle\Entity\Account:
   constraints:
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: email, message: "This email already exists." }
     - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: username, message: "This username already exists." }

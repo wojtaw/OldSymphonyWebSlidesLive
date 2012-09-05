@@ -65,7 +65,7 @@ class Folder
     public function __construct()
     {
         $this->presentations = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->privacy = Privacy::p_public();
+        $this->privacy = Privacy::P_PUBLIC;
         $this->hash = $this->generateHash();
     }
     

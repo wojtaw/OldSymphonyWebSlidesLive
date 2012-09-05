@@ -32,7 +32,7 @@ class Account implements AdvancedUserInterface {
         $this->hash = $this->generateHash();
         $this->ratig = 0;
         $this->website = '';
-        $this->privacy = Privacy::p_public();  
+        $this->privacy = Privacy::P_PUBLIC;  
     }
     
     /**

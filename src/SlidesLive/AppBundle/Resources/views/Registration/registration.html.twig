@@ -8,12 +8,14 @@
 
 <body>
 
+
+
 {% form_theme form 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
 
 <h2 class="globalFont">Registration</h2>
 
 <div>
-  <form action="{{ path('app_registration') }}" method='POST' {{ form_enctype(form) }}>
+  <form action="{{ path('app_registration') }}" method='POST' {{ form_enctype(form) }} id="MyForm">
     <table>
     
       <tr class="form_row_error">
@@ -38,8 +40,16 @@
   </form>           
 
   <p>
+<a href="javascript: submitform()">SUBMIT</a>  
     <span class='required' title='Required field.'>*</span>Mandatory fields.  
   </p>
+  
+<script type="text/javascript">
+function submitform()
+{
+  document.forms["MyForm"].submit();
+}
+</script>  
 </div>
 
 </body>

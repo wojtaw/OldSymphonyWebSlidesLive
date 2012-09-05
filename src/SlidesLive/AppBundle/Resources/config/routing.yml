@@ -11,5 +11,5 @@ app_create_presentation:
 #        _method:  POST
         
 app_logout:
-    pattern: /logout
+    pattern: /logout 
 

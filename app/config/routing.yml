@@ -10,6 +10,14 @@
 app_news:
     pattern: /anews
     defaults: { _controller: AppBundle:Default:news }
+    
+app_registration:
+  pattern: /registration-app
+  defaults: { _controller: AppBundle:Registration:registration }
+  
+app_registrationResult:
+  pattern: /registration-result-app
+  defaults: { _controller: AppBundle:Registration:result }
 
 # -----BUNDLE ROUTES REGISTRATION-------------
 StaticBundle:

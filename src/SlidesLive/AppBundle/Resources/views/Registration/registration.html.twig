@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:og="http://ogp.me/ns#">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Registration</title>
+</head>
+
+<body>
+
+{% form_theme form 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
+
+<h2 class="globalFont">Registration</h2>
+
+<div>
+  <form action="{{ path('app_registration') }}" method='POST' {{ form_enctype(form) }}>
+    <table>
+    
+      <tr class="form_row_error">
+        <td></td>
+        <td>{{ form_errors(form) }}</td>
+      </tr>
+      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.email } %}         
+      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.name } %}
+      {% include 'SlidesLiveBundle:FormFields:repeatedField.html.twig'  with {'input': form.password } %}
+      {% include 'SlidesLiveBundle:FormFields:hiddenField.html.twig'    with {'input': form.canonicalName } %}
+      
+      {{ form_widget(form._token) }}
+      
+      <tr class="form_row">
+        <td></td>
+        <td>
+           <input type='submit' value='Confirm' formnovalidate> {# formnovalidate #}
+        </td>
+      </tr>
+    
+    </table>
+  </form>           
+
+  <p>
+    <span class='required' title='Required field.'>*</span>Mandatory fields.  
+  </p>
+</div>
+
+</body>
+</html>

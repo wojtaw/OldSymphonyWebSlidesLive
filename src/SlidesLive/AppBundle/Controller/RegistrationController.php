@@ -38,12 +38,13 @@ class RegistrationController extends Controller {
           $account->addFolder($folder);
           $account->setPrimaryFolder($folder);
           $account->setUserName($account->getEmail()); // username je email
-          $account->setPurpose('Tell us, why have you created the account.');
+          $account->setPurpose('Tell us, why have you created the account.');  // pole purpose nesmi byt null
           $em->persist($folder);
           $em->persist($account);
           $em->flush();
-          
-          return $this->render('AppBundle:Registration:result.html.twig', $this->data);
+
+          return $this->redirect($this->generateUrl('app_registrationResult'));          
+          //return $this->render('AppBundle:Registration:result.html.twig', $this->data);
         }
       }  
       

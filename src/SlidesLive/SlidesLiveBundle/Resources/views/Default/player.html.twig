@@ -1,6 +1,7 @@
 {#
   Required values:
-    Presentation presentation | null
+    Presentation  presentation | null
+    Boolean       isEmbed
 #}
 
 <div>
@@ -15,7 +16,8 @@
       date recorded: {{ presentation.getFormatedDateTime }}
       service: {{ presentation.service }}
       service id: {{ presentation.serviceId }}
-      video source: {{ presentation.videoSource }}
+      external service: {{ presentation.externalService }}
+      external service id: {{ presentation.externalServiceId }}      
       length: {{ presentation.length }}
       slides: {{ presentation.slides }}
       video: {{ presentation.video }}
@@ -23,6 +25,8 @@
       flag: {{ presentation.flag }}
       show speaker: {{ presentation.showSpeaker }}
       speakers: {{ presentation.listSpeakersNames }}
+      start slide: {{ presentation.startSlide }}
+      auto play: {{ presentation.autoPlay }}
     {% else %}
       Presentation not found.    
     {% endif %}  

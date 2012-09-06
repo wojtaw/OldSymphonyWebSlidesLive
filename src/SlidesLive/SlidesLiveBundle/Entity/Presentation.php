@@ -356,7 +356,7 @@ class Presentation {
      */
     public function setServiceId($serviceId)
     {
-        $this->service_id = $serviceId;
+        $this->serviceId = $serviceId;
     }
 
     /**
@@ -366,7 +366,7 @@ class Presentation {
      */
     public function getServiceId()
     {
-        return $this->service_id;
+        return $this->serviceId;
     }
 
     /**

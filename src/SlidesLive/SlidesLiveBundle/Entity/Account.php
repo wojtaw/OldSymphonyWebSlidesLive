@@ -16,6 +16,175 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
  */
 class Account implements AdvancedUserInterface {
 
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @var string $username
+     *
+     * @ORM\Column(name="username", type="string", length=255)
+     */
+    protected $username;
+
+    /**
+     * @var string $salt
+     *
+     * @ORM\Column(name="salt", type="string", length=255)
+     */
+    protected $salt;
+
+    /**
+     * @var string $password
+     *
+     * @ORM\Column(name="password", type="string", length=255)
+     */
+    protected $password;
+
+    /**
+     * @var boolean $isActive
+     *
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    protected $isActive;
+
+    /**
+     * @var string $role
+     *
+     * @ORM\Column(name="role", type="string", length=255)
+     */
+    protected $role;
+
+    /**
+     * @var string $email
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    protected $email;
+
+    /**
+     * @var text $purpose
+     *
+     * @ORM\Column(name="purpose", type="text")
+     */
+    protected $purpose;
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    protected $name;
+    
+    /**
+     * @var string $canonicalName
+     *
+     * @ORM\Column(name="canonical_name", type="string", length="255")
+     */
+    protected $canonicalName;                   
+
+    /**
+     * @var text $description
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    protected $description;                         
+     
+     /**
+     * @var small privacy 
+     *      
+     * @ORM\Column(name="privacy", type="smallint")     
+     */
+     protected $privacy;
+     
+     /**
+     * @var string hash
+     * 
+     * @ORM\Column(name="hash", type="string", length="64")
+     */                   
+     protected $hash;
+     
+     /**
+      *  @var string website
+      *        
+      *  @ORM\Column(name="website", type="string", length="255")
+      */                 
+     protected $website;
+     
+     /**
+      * @var boolean isMeta
+      * 
+      * @ORM\Column(name="is_meta", type="boolean")
+      */
+     protected $isMeta;                                                         
+
+    /**
+     * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
+     */         
+    protected $folders;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Folder")
+     * @ORM\JoinColumn(name="primary_folder", referencedColumnName="id")     
+     */
+     protected $primaryFolder;
+     
+     /**
+      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="account")
+      */           
+     protected $presentations;         
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="account")
+     */         
+    protected $subscribes;
+    
+// -----------------------------------------------------------------------------
+
+    public function getRoles() {
+        return array($this->role);
+    }
+    
+    public function equals(UserInterface $user) {
+        return $user->getUsername() === $this->username;
+    }
+    
+    public function eraseCredentials() {
+      $this->password = NULL;
+      $this->salt = NULL;
+    }
+    
+    public function isAccountNonExpired() {
+      return true;
+    }
+    
+    public function isCredentialsNonExpired() {
+      return true;
+    }
+    
+    public function isEnabled() {
+      return $this->isActive;
+    }
+    
+    public function isAccountNonLocked() {
+      return true;
+    }
+    
+    public function getPassword() {
+      return $this->password;
+    }
+    
+    public function getSalt() {
+      return $this->salt;
+    }
+    
+    //public function getUserName() { return $this->username; }
+
     public function __construct() {
         $this->username = '';
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -104,171 +273,7 @@ class Account implements AdvancedUserInterface {
     public function encodePassword($controller) {
         $encoder = $controller->get('security.encoder_factory')->getEncoder($this);
         $this->password = $encoder->encodePassword($this->password, $this->salt);
-    }
-    
-// -----------------------------------------------------------------------------
-    public function getRoles() {
-        return array($this->role);
-    }
-    
-    public function equals(UserInterface $user) {
-        return $user->getUsername() === $this->username;
-    }
-    
-    public function eraseCredentials() {
-      $this->password = NULL;
-      $this->salt = NULL;
-    }
-    
-    public function isAccountNonExpired() {
-      return true;
-    }
-    
-    public function isCredentialsNonExpired() {
-      return true;
-    }
-    
-    public function isEnabled() {
-      return $this->isActive;
-    }
-    
-    public function isAccountNonLocked() {
-      return true;
-    }
-    
-    public function getPassword() {
-      return $this->password;
-    }
-    
-    public function getSalt() {
-      return $this->salt;
-    }
-    
-    //public function getUserName() { return $this->username; }
-    
-// -----------------------------------------------------------------------------    
- /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-    
-    /**
-     * @var string $username
-     *
-     * @ORM\Column(name="username", type="string", length=255)
-     */
-    protected $username;
-
-    /**
-     * @var string $salt
-     *
-     * @ORM\Column(name="salt", type="string", length=255)
-     */
-    protected $salt;
-
-    /**
-     * @var string $password
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    protected $password;
-
-    /**
-     * @var boolean $isActive
-     *
-     * @ORM\Column(name="isActive", type="boolean")
-     */
-    protected $isActive;
-
-    /**
-     * @var string $role
-     *
-     * @ORM\Column(name="role", type="string", length=255)
-     */
-    protected $role;
-
-    /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    protected $email;
-
-    /**
-     * @var text $purpose
-     *
-     * @ORM\Column(name="purpose", type="text")
-     */
-    protected $purpose;
-
-    /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    protected $name;
-    
-    /**
-     * @var string $canonicalName
-     *
-     * @ORM\Column(name="canonicalName", type="string", length="255")
-     */
-    protected $canonicalName;                   
-
-    /**
-     * @var text $description
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    protected $description;                         
-     
-     /**
-     * @var small privacy 
-     *      
-     * @ORM\Column(name="privacy", type="smallint")     
-     */
-     protected $privacy;
-     
-     /**
-     * @var string hash
-     * 
-     * @ORM\Column(name="hash", type="string", length="64")
-     */                   
-     protected $hash;
-     
-     /**
-      *  @var string website
-      *        
-      *  @ORM\Column(name="website", type="string", length="255")
-      */                 
-     protected $website;                                  
-    
-// =============================================================================
-
-    /**
-     * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
-     */         
-    protected $folders;
-    
-    /**
-     * @ORM\OneToOne(targetEntity="Folder")
-     * @ORM\JoinColumn(name="primary_folder", referencedColumnName="id")     
-     */
-     protected $primaryFolder;
-     
-     /**
-      * @ORM\OneToMany(targetEntity="Presentation", mappedBy="account")
-      */           
-     protected $presentations;         
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="account")
-     */         
-    protected $subscribes;
+    }   
     
 // =============================================================================   
 
@@ -600,5 +605,25 @@ class Account implements AdvancedUserInterface {
     public function getHash()
     {
         return $this->hash;
+    }
+
+    /**
+     * Set isMeta
+     *
+     * @param boolean $isMeta
+     */
+    public function setIsMeta($isMeta)
+    {
+        $this->isMeta = $isMeta;
+    }
+
+    /**
+     * Get isMeta
+     *
+     * @return boolean 
+     */
+    public function getIsMeta()
+    {
+        return $this->isMeta;
     }
 }

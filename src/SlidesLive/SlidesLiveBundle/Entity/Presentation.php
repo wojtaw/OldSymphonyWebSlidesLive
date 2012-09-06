@@ -12,8 +12,159 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
  * @ORM\Table(name="presentation") 
  * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\PresentationRepository")
  */
-class Presentation
-{
+class Presentation {
+    
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string $title
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    protected $title;
+
+    /**
+     * @var string $description
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    protected $description;
+        
+    /**
+     * @var string $lang
+     * 
+     * @ORM\Column(name="lang", type="string", length=255)          
+     */         
+    protected $lang;
+
+    /**
+     * @var datetime $dateRecorded
+     *
+     * @ORM\Column(name="date_recorded", type="datetime")
+     */
+    protected $dateRecorded;
+    
+    /**
+     * @var string $service
+     * 
+     * @ORM\Column(name="service", type="string", length="255")
+     */                   
+    protected $service;
+
+    /**
+     * @var string $service
+     *
+     * @ORM\Column(name="service_id", type="string", length="255")
+     */
+    protected $serviceId;
+    
+    /**
+     * @var string $externalService
+     *
+     * @ORM\Column(name="external_service", type="string", length="255")
+     */                   
+    protected $externalService;
+    
+    /**
+     * @var string $externameServiceId
+     *
+     * @ORM\Column(name="external_service_id", type="string", length="255")
+     */
+    protected $externalServiceId;
+
+    /**
+     * @var smallint $length
+     *
+     * @ORM\Column(name="length", type="smallint")
+     */
+    protected $length;
+
+    /**
+     * @var boolean $slides
+     * 
+     * @ORM\Column(name="slides", type="boolean")          
+     */         
+    protected $slides;
+    
+    /**
+     * @var boolean $video
+     * 
+     * @ORM\Column(name="video", type="boolean")          
+     */         
+    protected $video;
+    
+    /**
+     * @var small privacy 
+     *      
+     * @ORM\Column(name="privacy", type="smallint")     
+     */
+     protected $privacy;
+     
+     /**
+     * 0 - NOTHIG - nic se nedìje
+     * 1 - WAITING - má být sesynchronizováno, ale zatím není
+     * 2 - SYNCHRONIZING- má být synchronizováno, ale zrovna je ve frontì a pracuje se na tom 
+     * 3 - FAIL - došlo k chybì                
+     *           
+     * @var small flag           
+     *      
+     * @ORM\Column(name="flag", type="smallint")     
+     */
+     protected $flag;
+    
+    /**
+     * @var boolean $showSpeaker
+     * 
+     * @ORM\Column(name="show_speaker", type="boolean")          
+     */         
+    protected $showSpeaker;
+    
+    /**
+     * @var string hash
+     * 
+     * @ORM\Column(name="hash", type="string", length="64")
+     */                   
+    protected $hash;
+    
+    /**
+     * @var smallint $startSlide
+     *
+     * @ORM\Column(name="start_slide", type="smallint")
+     */    
+    protected $startSlide = 1;
+
+    /**
+     * @var boolean $autoPlay
+     * 
+     * @ORM\Column(name="auto_play", type="boolean")          
+     */    
+    protected $autoPlay = false;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Folder", inversedBy="presentations")     
+     */         
+    protected $folder;
+    
+    /**
+     *@ORM\ManyToOne(targetEntity="Account", inversedBy="presentations")
+     */              
+    protected $account;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="presentations")
+     * @ORM\JoinTable(name="presentations_speakers")
+     *         
+     */
+    protected $speakers;
+    
+// -----------------------------------------------------------------------------
 
     public function __construct() {
         $this->speakers = new ArrayCollection();
@@ -85,137 +236,6 @@ class Presentation
         $this->hash = md5(microtime());
         return $this->hash;    
     }
-    
-// =============================================================================
-
-    /**
-     *@ORM\ManyToOne(targetEntity="Account", inversedBy="presentations")
-     */              
-    protected $account;
-    
-    /**
-     * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="presentations")
-     * @ORM\JoinTable(name="presentations_speakers")
-     *         
-     */
-    protected $speakers;
-    
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
-
-    /**
-     * @var string $title
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    protected $title;
-
-    /**
-     * @var string $description
-     *
-     * @ORM\Column(name="description", type="text")
-     */
-    protected $description;
-        
-    /**
-     * @var string $lang
-     * 
-     * @ORM\Column(name="lang", type="string", length=255)          
-     */         
-    protected $lang;
-
-    /**
-     * @var datetime $dateRecorded
-     *
-     * @ORM\Column(name="dateRecorded", type="datetime")
-     */
-    protected $dateRecorded;
-    
-    /**
-     * @var string $service
-     * 
-     * @ORM\Column(name="service", type="string", length="255")
-     */                   
-    protected $service;
-
-    /**
-     * @var string $service
-     *
-     * @ORM\Column(name="service_id", type="string", length="255")
-     */
-    protected $service_id;
-
-    /**
-     * @var smallint $length
-     *
-     * @ORM\Column(name="length", type="smallint")
-     */
-    protected $length;
-
-    /**
-     * @var boolean $slides
-     * 
-     * @ORM\Column(name="slides", type="boolean")          
-     */         
-    protected $slides;
-    
-    /**
-     * @var boolean $video
-     * 
-     * @ORM\Column(name="video", type="boolean")          
-     */         
-    protected $video;
-    
-    /**
-     * @var small privacy 
-     *      
-     * @ORM\Column(name="privacy", type="smallint")     
-     */
-     protected $privacy;
-     
-     /**
-     * 0 - NOTHIG - nic se nedìje
-     * 1 - WAITING - má být sesynchronizováno, ale zatím není
-     * 2 - SYNCHRONIZING- má být synchronizováno, ale zrovna je ve frontì a pracuje se na tom 
-     * 3 - FAIL - došlo k chybì                
-     *           
-     * @var small flag           
-     *      
-     * @ORM\Column(name="flag", type="smallint")     
-     */
-     protected $flag;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Folder", inversedBy="presentations")     
-     */         
-    protected $folder;
-    
-    /**
-     * @var boolean $showSpeaker
-     * 
-     * @ORM\Column(name="show_speaker", type="boolean")          
-     */         
-    protected $showSpeaker;
-    
-    /**
-     * @var string video_source
-     *
-     * @ORM\Column(name="video_source", type="string", length="255")
-     */                   
-    protected $videoSource;
-    
-    /**
-     * @var string hash
-     * 
-     * @ORM\Column(name="hash", type="string", length="64")
-     */                   
-    protected $hash;
 
 // =============================================================================
 
@@ -567,5 +587,85 @@ class Presentation
     public function getHash()
     {
         return $this->hash;
+    }
+
+    /**
+     * Set externalService
+     *
+     * @param string $externalService
+     */
+    public function setExternalService($externalService)
+    {
+        $this->externalService = $externalService;
+    }
+
+    /**
+     * Get externalService
+     *
+     * @return string 
+     */
+    public function getExternalService()
+    {
+        return $this->externalService;
+    }
+
+    /**
+     * Set externalServiceId
+     *
+     * @param string $externalServiceId
+     */
+    public function setExternalServiceId($externalServiceId)
+    {
+        $this->externalServiceId = $externalServiceId;
+    }
+
+    /**
+     * Get externalServiceId
+     *
+     * @return string 
+     */
+    public function getExternalServiceId()
+    {
+        return $this->externalServiceId;
+    }
+
+    /**
+     * Set startSlide
+     *
+     * @param smallint $startSlide
+     */
+    public function setStartSlide($startSlide)
+    {
+        $this->startSlide = $startSlide;
+    }
+
+    /**
+     * Get startSlide
+     *
+     * @return smallint 
+     */
+    public function getStartSlide()
+    {
+        return $this->startSlide;
+    }
+
+    /**
+     * Set autoPlay
+     *
+     * @param boolean $autoPlay
+     */
+    public function setAutoPlay($autoPlay)
+    {
+        $this->autoPlay = $autoPlay;
+    }
+
+    /**
+     * Get autoPlay
+     *
+     * @return boolean 
+     */
+    public function getAutoPlay()
+    {
+        return $this->autoPlay;
     }
 }

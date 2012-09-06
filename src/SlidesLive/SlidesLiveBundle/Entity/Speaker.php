@@ -11,12 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="speaker")
  * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\SpeakerRepository")
  */
-class Speaker
-{
-
-    public function __construct() {
-        $this->presentations = new ArrayCollection();
-    }
+class Speaker {
 
     /**
      * @var integer $id
@@ -45,6 +40,14 @@ class Speaker
      * @ORM\ManyToMany(targetEntity="Presentation", mappedBy="speakers")
      */         
     protected $presentations;
+    
+// -----------------------------------------------------------------------------
+
+    public function __construct() {
+        $this->presentations = new ArrayCollection();
+    }
+    
+// =============================================================================
 
     /**
      * Get id

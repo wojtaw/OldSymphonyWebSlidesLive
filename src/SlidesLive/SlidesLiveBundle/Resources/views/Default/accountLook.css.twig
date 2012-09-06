@@ -1,0 +1,17 @@
+{# src/SlidesLive/SlidesLiveBundle/Resources/views/Default/accountLook.css.twig #}
+{#
+  Required values:
+    Account account  
+#}
+
+{% if not account.showHeader %}
+  .fixedHeader {
+    display: none; 
+  }
+{% endif %}
+
+{% if not account.showFooter %}
+  .siteFooter {
+    display: none; 
+  }
+{% endif %}

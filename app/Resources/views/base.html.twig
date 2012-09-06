@@ -23,8 +23,11 @@
 		<script type="text/javascript" src="{{ asset('bundles/generalFunctions.js') }}">
 		</script>  		  				
       {% block javascript %}{% endblock %}
-  {% endblock %}  
-  
+  {% endblock %}
+
+  <style>
+    {% block generatedStyle %}{% endblock %}
+  </style>  
   
   {% block favicon %}
       <link href="{{ asset('bundles/favicon-sl-1.png') }}" rel="icon" type="image/png" />

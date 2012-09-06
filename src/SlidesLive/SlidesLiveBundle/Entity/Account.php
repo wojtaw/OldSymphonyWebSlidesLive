@@ -110,18 +110,32 @@ class Account implements AdvancedUserInterface {
      protected $hash;
      
      /**
-      *  @var string website
+      *  @var string $website
       *        
       *  @ORM\Column(name="website", type="string", length="255")
       */                 
      protected $website;
      
      /**
-      * @var boolean isMeta
+      * @var boolean $isMeta
       * 
       * @ORM\Column(name="is_meta", type="boolean")
       */
-     protected $isMeta;                                                         
+     protected $isMeta;
+     
+     /**
+      * @var boolean $showHeader
+      * 
+      * @ORM\Column(name="show_header", type="boolean")
+      */     
+     protected $showHeader = true;
+
+     /**
+      * @var boolean $showFooter
+      * 
+      * @ORM\Column(name="show_footer", type="boolean")
+      */
+     protected $showFooter = true;                                                         
 
     /**
      * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
@@ -625,5 +639,45 @@ class Account implements AdvancedUserInterface {
     public function getIsMeta()
     {
         return $this->isMeta;
+    }
+
+    /**
+     * Set showHeader
+     *
+     * @param boolean $showHeader
+     */
+    public function setShowHeader($showHeader)
+    {
+        $this->showHeader = $showHeader;
+    }
+
+    /**
+     * Get showHeader
+     *
+     * @return boolean 
+     */
+    public function getShowHeader()
+    {
+        return $this->showHeader;
+    }
+
+    /**
+     * Set showFooter
+     *
+     * @param boolean $showFooter
+     */
+    public function setShowFooter($showFooter)
+    {
+        $this->showFooter = $showFooter;
+    }
+
+    /**
+     * Get showFooter
+     *
+     * @return boolean 
+     */
+    public function getShowFooter()
+    {
+        return $this->showFooter;
     }
 }

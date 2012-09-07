@@ -1,6 +1,13 @@
 {# src/SlidesLive/SlidesLiveBundle/Resources/views/Account/manageAccount.html.twig #}
 {% extends 'SlidesLiveBundle::layout.html.twig' %}
 
+{#
+  Required values:
+    Template accountEditForm
+    Template passwordChangeForm
+    Template eploadBackgroundForm        
+#}
+
 {% block title %}Manage your account.{% endblock %}
 
 {% block content %}
@@ -11,5 +18,10 @@
     <br>
     <h2>Change password:</h2>
     {{ passwordChangeForm.content|raw }}
+    
+    <br>
+    <h2>Background Image:</h2>
+    {{ uploadBackground.content|raw }}
+    <img src="{{ asset(app.user.getImage('background-images', true)) }}" width="200" alt=""/>
   </div>
 {% endblock %}

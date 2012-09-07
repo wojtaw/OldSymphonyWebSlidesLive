@@ -235,26 +235,22 @@ class Account implements AdvancedUserInterface {
      * Vraci cestu, na ktere je ulozen obrazek kanalu
      *
      * @param string $type - typ obrazku, urcuje nazev obrazku kanalu     
-     * @return string     
+     * @return string or null if image was not found     
      */              
-    public function getThumbnail($type) {
-        $types = array(
-            'header' => $this->getId(),
-            'timeline' => $this->getId(),
-        );
+    public function getImage($type, $mandatory = false) {
         $imgFormats = array(
             "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif"
         );
         $thumbnail = null;
 
         foreach ($imgFormats as $format) {
-            if (file_exists('./data/accounts/logos/' . $type . '/' . $types[$type] . '.' . $format)) {
-                $thumbnail = './data/accounts/logos/' . $type . '/' . $types[$type] . '.' . $format;
+            if (file_exists( './data/accounts/' . $type . '/' . $type . '/' . $this->getId() . '.' . $format)) {
+                $thumbnail = './data/accounts/' . $type . '/' . $type . '/' . $this->getId() . '.' . $format;
                 break;
             }
         }
-        if (\is_null($thumbnail)) {
-            $thumbnail = './data/accounts/logos/noname-ch-header2.jpg';
+        if ($mandatory && !$thumbnail) {
+          $thumbnail = './bundles/slideslive/images/no-image.jpg';        
         }
         return $thumbnail;
     }

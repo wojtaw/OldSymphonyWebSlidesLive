@@ -16,6 +16,9 @@ use SlidesLive\SlidesLiveBundle\Form\PresentationEditForm;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\MinLength;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\File;
 
 class AccountController extends Controller
 {
@@ -97,6 +100,7 @@ class AccountController extends Controller
         
         $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm');
         $this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
+        $this->data['uploadBackground'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images'));
         
         return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
@@ -147,6 +151,31 @@ class AccountController extends Controller
           }
         }                
         return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
+    }
+    
+    public function uploadImageAction(Request $request, $type) {
+        $customErrors = "";
+        $constraintCollection = new Collection(array(
+          'file' => new File(array(
+            'maxSize' => 20*1024*1024,
+          ))
+        ));
+        $form = $this->createFormBuilder(null, array('validation_constraint' => $constraintCollection))
+            ->add('file', 'file')
+            ->getForm();
+    
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $file = $data['file'];
+                print_r($data);
+                $account = $this->get('security.context')->getToken()->getUser();
+                $extension = 'jpg';
+                $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
+            }
+        }
+        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView(), 'errors' => $customErrors));
     }
                      
 }

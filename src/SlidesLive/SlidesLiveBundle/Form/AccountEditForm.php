@@ -3,6 +3,7 @@
 namespace SlidesLive\SlidesLiveBundle\Form;
 
 use SlidesLive\SlidesLiveBundle\Form\SimpleForm;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 use Symfony\Component\Form\FormBuilder;
 
 class AccountEditForm extends SimpleForm {
@@ -16,6 +17,16 @@ class AccountEditForm extends SimpleForm {
     $this->add('purpose', 'textarea', 'Purpose:', true);
     //$this->add('private', 'checkbox', 'Private:', false);
     $this->add('website', 'text', 'Your website:', false);
+    $this->add('showHeader', 'checkbox', 'Show header navigation bar:', false);
+    $this->add('showFooter', 'checkbox', 'Show footer navigation bar:', false);
+    $this->add('privacy', 'choice', 'Account visibility:', false, array(
+      'choices' => array (
+        Privacy::P_PUBLIC => 'Public', 
+        Privacy::P_UNLISTED => 'Unlisted',
+        Privacy::P_PRIVATE => 'Private'
+      ),
+      'empty_value' =>false,
+    ));
     
   }
   

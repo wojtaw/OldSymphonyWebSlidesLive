@@ -17,6 +17,10 @@
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.purpose } %}
     {#{% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.private } %}#}
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.website } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.showHeader } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.showFooter } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.privacy } %}
+    
     
     {{ form_rest(form) }}
     

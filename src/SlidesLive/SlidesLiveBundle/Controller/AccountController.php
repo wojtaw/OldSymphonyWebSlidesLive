@@ -12,6 +12,10 @@ use SlidesLive\SlidesLiveBundle\Entity\Folder;
 use SlidesLive\SlidesLiveBundle\Form\ChannelEditForm;
 use SlidesLive\SlidesLiveBundle\Form\AccountEditForm;
 use SlidesLive\SlidesLiveBundle\Form\PresentationEditForm;
+use SlidesLive\SlidesLiveBundle\Form\UploadForm;
+use SlidesLive\SlidesLiveBundle\Form\BackgroundUploadForm;
+use SlidesLive\SlidesLiveBundle\Form\LogoUploadForm;
+use SlidesLive\SlidesLiveBundle\Form\AvatarUploadForm;
 
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -100,7 +104,12 @@ class AccountController extends Controller
         
         $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm');
         $this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
-        $this->data['uploadBackground'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images'));
+        //$this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images', 'formName' => 'background_image'));
+        //$this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'logos', 'formName' => 'logo'));
+        //$this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'avatars', 'formName' => 'avatar'));
+        $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage2', array('type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
+        $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage2', array('type' => 'logos', 'formClass' => new LogoUploadForm()));
+        $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage2', array('type' => 'avatars', 'formClass' => new AvatarUploadForm()));
         
         return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
@@ -153,29 +162,67 @@ class AccountController extends Controller
         return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
     }
     
-    public function uploadImageAction(Request $request, $type) {
-        $customErrors = "";
+    public function uploadImageAction(Request $request, $type, $formName) {
         $constraintCollection = new Collection(array(
-          'file' => new File(array(
-            'maxSize' => 20*1024*1024,
+          $formName => new File(array(
+            'maxSize' => '20M',
           ))
         ));
         $form = $this->createFormBuilder(null, array('validation_constraint' => $constraintCollection))
-            ->add('file', 'file')
+            ->add($formName, 'file')
             ->getForm();
     
         if ($request->getMethod() == 'POST') {
             $form->bindRequest($request);
             if ($form->isValid()) {
-                $data = $form->getData();
-                $file = $data['file'];
-                print_r($data);
-                $account = $this->get('security.context')->getToken()->getUser();
-                $extension = 'jpg';
-                $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
+              $account = $this->get('security.context')->getToken()->getUser();
+              // odstraneni puvodniho souboru
+              $oldFile = $account->getImage($type);
+              if ($oldFile) {
+                unlink($oldFile);
+              }
+              // ulozeni noveho souboru 
+              $data = $form->getData();
+              $file = $data[$formName];
+              //print_r($data);
+              $extension = $this->extractExtension($file->getClientOriginalName());
+              $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
             }
         }
-        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView(), 'errors' => $customErrors));
+        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView(), 'form_name' => $formName));
+    }
+    
+    public function uploadImage2Action(Request $request, $type, $formClass) {
+        $form = $this->createForm($formClass);
+    
+        if ($request->getMethod() == 'POST' && isset($_POST[$formClass->getName()])) {
+            $form->bindRequest($request);
+            $data = $form->getData();
+            if ($form->isValid() && $data['file']) {
+              $account = $this->get('security.context')->getToken()->getUser();
+              // odstraneni puvodniho souboru
+              $oldFile = $account->getImage($type);
+              if ($oldFile) {
+                unlink($oldFile);
+              }
+              // ulozeni noveho souboru 
+              $file = $data['file'];
+              //print_r($data);
+              $extension = $this->extractExtension($file->getClientOriginalName());
+              $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
+            }
+        }
+        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView()));
+    }
+    
+    private function extractExtension($path) {
+      $parts = explode('.', $path);
+      if (count($parts) < 1) {
+        return null;      
+      }
+      else {
+        return $parts[count($parts) - 1];      
+      }    
     }
                      
 }

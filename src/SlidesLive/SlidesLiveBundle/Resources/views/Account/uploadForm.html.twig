@@ -2,31 +2,26 @@
     Required values:
 
     Form form;
-    String formProcessLink;
-    String errors
 #}
-
+                                              
 <form class="uploadForm" action="" method="post" formnovalidate {{ form_enctype(form) }}>
 
   <table>
+    {% for item in form %}                       
+      <tr>
+        <td>
+          {{ form_widget(item) }}
+        </td>
+      </tr>
+    {% endfor %}
     <tr>
       <td>
-        {{ form_widget(form.file) }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-          {{ form_errors(form.file) }}
-      </td>
-    </tr>
-    <tr>
-      <td>
-          {{ errors }}
+          {{ form_errors(form) }}
       </td>
     </tr>
     <tr>
         <td>
-            <input type="submit" value="Nahrát" />
+            <input type="submit" value="Upload" />
         </td>
     </tr>
   </table>

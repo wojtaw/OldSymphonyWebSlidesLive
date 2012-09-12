@@ -234,7 +234,8 @@ class Account implements AdvancedUserInterface {
     /**
      * Vraci cestu, na ktere je ulozen obrazek kanalu
      *
-     * @param string $type - typ obrazku, urcuje nazev obrazku kanalu     
+     * @param string $type - typ obrazku, urcuje nazev obrazku kanalu
+     * @param boolean $mandatory - true pokud ma metoda vratit adresu obrazku (pokud obrazek nenajde vraci univerzalni no-image obrazek), jinak vraci null          
      * @return string or null if image was not found     
      */              
     public function getImage($type, $mandatory = false) {
@@ -244,8 +245,8 @@ class Account implements AdvancedUserInterface {
         $thumbnail = null;
 
         foreach ($imgFormats as $format) {
-            if (file_exists( './data/accounts/' . $type . '/' . $type . '/' . $this->getId() . '.' . $format)) {
-                $thumbnail = './data/accounts/' . $type . '/' . $type . '/' . $this->getId() . '.' . $format;
+            if (file_exists( './data/accounts/' . $type . '/' . $this->getId() . '.' . $format)) {
+                $thumbnail = './data/accounts/' . $type . '/' . $this->getId() . '.' . $format;
                 break;
             }
         }

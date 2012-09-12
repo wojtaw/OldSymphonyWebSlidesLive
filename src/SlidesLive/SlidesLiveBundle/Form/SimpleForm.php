@@ -47,13 +47,10 @@ class SimpleForm extends AbstractType {
     return 'simpleform';
   }
   
-  /*
-    public function getDefaultOptions(array $options) {
-      return array(
-          'data_class' => 'SlidesLive\SlidesLiveBundle\Entity\Account',
-      );
-    }
-  */     
+  public function getDefaultOptions(array $options) {
+    return array();
+  }
+       
 
 }
 

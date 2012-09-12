@@ -1,5 +1,11 @@
 <?php
 
+/* TODO
+  - odstranovani nahranych souboru podle id a ne podle koncovky (co kdyz tam nekdo nahraje treba .txt)
+  - osetrit validaci na typ nahravanychsouboru
+  - kontrola koncovky nahravaneho souboru podle $file->getExtension();
+*/
+
 namespace SlidesLive\SlidesLiveBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -104,12 +110,9 @@ class AccountController extends Controller
         
         $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm');
         $this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
-        //$this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images', 'formName' => 'background_image'));
-        //$this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'logos', 'formName' => 'logo'));
-        //$this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'avatars', 'formName' => 'avatar'));
-        $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage2', array('type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
-        $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage2', array('type' => 'logos', 'formClass' => new LogoUploadForm()));
-        $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage2', array('type' => 'avatars', 'formClass' => new AvatarUploadForm()));
+        $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
+        $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'logos', 'formClass' => new LogoUploadForm()));
+        $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'avatars', 'formClass' => new AvatarUploadForm()));
         
         return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
@@ -162,37 +165,7 @@ class AccountController extends Controller
         return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
     }
     
-    public function uploadImageAction(Request $request, $type, $formName) {
-        $constraintCollection = new Collection(array(
-          $formName => new File(array(
-            'maxSize' => '20M',
-          ))
-        ));
-        $form = $this->createFormBuilder(null, array('validation_constraint' => $constraintCollection))
-            ->add($formName, 'file')
-            ->getForm();
-    
-        if ($request->getMethod() == 'POST') {
-            $form->bindRequest($request);
-            if ($form->isValid()) {
-              $account = $this->get('security.context')->getToken()->getUser();
-              // odstraneni puvodniho souboru
-              $oldFile = $account->getImage($type);
-              if ($oldFile) {
-                unlink($oldFile);
-              }
-              // ulozeni noveho souboru 
-              $data = $form->getData();
-              $file = $data[$formName];
-              //print_r($data);
-              $extension = $this->extractExtension($file->getClientOriginalName());
-              $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
-            }
-        }
-        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView(), 'form_name' => $formName));
-    }
-    
-    public function uploadImage2Action(Request $request, $type, $formClass) {
+    public function uploadImageAction(Request $request, $type, $formClass) {
         $form = $this->createForm($formClass);
     
         if ($request->getMethod() == 'POST' && isset($_POST[$formClass->getName()])) {

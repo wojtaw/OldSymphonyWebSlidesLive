@@ -11,7 +11,7 @@ class RegistrationForm extends SimpleForm {
     $this->builder = $builder;
     
     /* $this->add($username, $field_type, $label,Boolean $required, Array $other_params); */     
-    $this->add('username', 'text', 'Username:', true);
+    $this->add('username', 'email', 'Email:', true);
     //$builder->add('channel', new ChannelRegistrationForm());
     $this->add('name', 'text', 'Account name:', true);
     $this->add('canonicalName', 'hidden', 'canonicalName', false);
@@ -29,9 +29,6 @@ class RegistrationForm extends SimpleForm {
       //  )
       )
     );
-    
-    $this->add('email', 'email', 'Email:', true);
-    $this->add('purpose', 'textarea', 'Purpose:', true);
     
   }
   

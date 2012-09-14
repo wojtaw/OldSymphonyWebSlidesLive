@@ -20,8 +20,6 @@
       {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.username } %}
       {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.name } %}
       {% include 'SlidesLiveBundle:FormFields:repeatedField.html.twig'  with {'input': form.password } %}
-      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.email } %}
-      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.purpose } %}
       {% include 'SlidesLiveBundle:FormFields:hiddenField.html.twig'    with {'input': form.canonicalName } %}
       
       {{ form_rest(form) }}

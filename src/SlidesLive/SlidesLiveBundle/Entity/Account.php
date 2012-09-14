@@ -25,7 +25,7 @@ class Account implements AdvancedUserInterface {
      */
     protected $id;
     
-    /**
+    /** LOGIN EMAILEM !!!
      * @var string $username
      *
      * @ORM\Column(name="username", type="string", length=255)
@@ -59,13 +59,6 @@ class Account implements AdvancedUserInterface {
      * @ORM\Column(name="role", type="string", length=255)
      */
     protected $role;
-
-    /**
-     * @var string $email
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    protected $email;
 
     /**
      * @var text $purpose
@@ -200,12 +193,12 @@ class Account implements AdvancedUserInterface {
     //public function getUserName() { return $this->username; }
 
     public function __construct() {
-        $this->username = '';
+        $this->username = '@';
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->password = '';        
         $this->isActive = true;
         $this->role = 'ROLE_USER';
-        $this->email = '@';
+        $this->isMeta = false;
         $this->purpose = '';
     
         $this->subscribes = new ArrayCollection();
@@ -376,26 +369,6 @@ class Account implements AdvancedUserInterface {
     public function getRole()
     {
         return $this->role;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**

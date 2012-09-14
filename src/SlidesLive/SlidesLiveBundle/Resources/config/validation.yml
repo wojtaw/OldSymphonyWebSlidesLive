@@ -39,11 +39,11 @@ SlidesLive\SlidesLiveBundle\Entity\Presentation:
     dateRecorded:
       - NotBlank: { message: "This value should not be blank." }
       
-    service:
-      - NotBlank: { message: "This value should not be blank." }
+#    service:
+#      - NotBlank: { message: "This value should not be blank." }
       
-    service_id:
-      - NotBlank: { message: "This value should not be blank." }
+#    service_id:
+#      - NotBlank: { message: "This value should not be blank." }
       
 #    slides:
 #      - Type:     { type: integer, message: "This value should be only 0/1." }

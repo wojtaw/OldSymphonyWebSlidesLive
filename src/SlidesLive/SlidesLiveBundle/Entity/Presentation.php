@@ -215,7 +215,11 @@ class Presentation {
       return date_format($this->dateRecorded,'j.n.Y');
     }
     
-    public function getThumbnail () {
+    /**
+     * Vraci cestu k obrazku nahledu prezentace
+     * @param $mandatory - pokud TRUE metoda musi vrati URL obrazku, pokud obrazek nenalezla vrati URL s no-imagem obrazkem, jinak vraci null
+     */                        
+    public function getThumbnail ($mandatory = false) {
         $imgFormats = array(
             "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif"
         );
@@ -226,12 +230,15 @@ class Presentation {
                 break;
             }
         }
-        if (\is_null($thumbnail)) {
+        if ($mandatory && !$thumbnail) {
             $thumbnail = './bundles/slideslive/images/no-image.jpg';
         }
         return $thumbnail;
     }
-    
+
+    /**
+     * Vygenerovani hashe pro prezentaci pro unliste pristup.
+     */             
     public function generateHash() {
         $this->hash = md5(microtime());
         return $this->hash;    

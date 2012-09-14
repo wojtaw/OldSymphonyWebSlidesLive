@@ -117,7 +117,25 @@ class AccountController extends Controller
         return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
     
-    // -------------------------------------------------------------------------------------------------    
+    // -------------------------------------------------------------------------------------------------
+    
+    public function uploadThumbnailAction(Request $request, Presentation $presentation) {
+        $form = $this->createForm(new UploadForm());
+    
+        if ($request->getMethod() == 'POST' && isset($_POST[$form->getName()])) {
+            $form->bindRequest($request);
+            $data = $form->getData();
+            if ($form->isValid() && $data['file']) {
+              // odstraneni puvodniho souboru
+              $this->deleteOldFiles('./data/PresentationThumbs', $presentation->getId().'\.*');    
+              // ulozeni noveho souboru 
+              $file = $data['file'];
+              $extension = $this->extractExtension($file->getClientOriginalName());
+              $file->move('./data/PresentationThumbs/', sprintf("%d.%s", $presentation->getId(), $extension));
+            }
+        }
+        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView()));
+    }    
     
      public function presentationEditFormAction($action, $presentation) {
       $request = $this->getRequest();
@@ -149,17 +167,21 @@ class AccountController extends Controller
         }
     
         $this->data['presentationEditForm'] = '';
+        $this->data['thumbnailUploadForm'] = '';
         if ($presentationId != -1) {
           $presentation = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
           if (empty($presentation)) {
+            $this->data['presentation'] = null;
             $this->get('session')->setFlash('notice', "Presentation with id $presentationId does not exist.");
           }
           else {
+            $this->data['presentation'] = $presentation;
             $this->data['presentationEditForm'] = $this->forward('SlidesLiveBundle:Account:presentationEditForm', array(
                                                                                                               'presentation' => $presentation,
                                                                                                               'action' => $this->generateUrl('managePresentations', array('presentationId' => $presentationId))
                                                                                                             )
                                                                  );
+            $this->data['thumbnailUploadForm'] = $this->forward('SlidesLiveBundle:Account:uploadThumbnail', array('presentation' => $presentation));
           }
         }                
         return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
@@ -167,10 +189,15 @@ class AccountController extends Controller
     
     // -------------------------------------------------------------------------
     
-    public function deleteImageAction($type) {
-       $account = $this->get('security.context')->getToken()->getUser();
-       $this->deleteOldFiles('./data/accounts/'.$type, $account->getId().'\.*');
-       return $this->redirect($this->generateUrl('manageAccount'));            
+    public function deleteAccountImageAction($type) {
+        $account = $this->get('security.context')->getToken()->getUser();
+        $this->deleteOldFiles('./data/accounts/'.$type, $account->getId().'\.*');
+        return $this->redirect($this->generateUrl('manageAccount'));            
+    }
+    
+    public function deletePresentationThumbnailAction($id) {
+        $this->deleteOldFiles('./data/PresentationThumbs', $id.'\.*');
+        return $this->redirect($this->generateUrl('managePresentations', array('presentationId' => $id)));         
     }
     
     // -------------------------------------------------------------------------

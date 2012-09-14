@@ -25,9 +25,13 @@ manageAccount:
   pattern:  /account
   defaults: { _controller: SlidesLiveBundle:Account:manageAccount }
   
-imageDelete:
-  pattern: /account/file/remove/{type}
-  defaults: { _controller: SlidesLiveBundle:Account:deleteImage }
+deleteAccountImage:
+  pattern: /account/remove/account-image/{type}
+  defaults: { _controller: SlidesLiveBundle:Account:deleteAccountImage }
+  
+deletePresentationThumbnail:
+  pattern: /account/remove/presentation-thumbnail/{id}
+  defaults: { _controller: SlidesLiveBundle:Account:deletePresentationThumbnail }  
   
 managePresentations:
   pattern:  /account/managePresentations/{presentationId}

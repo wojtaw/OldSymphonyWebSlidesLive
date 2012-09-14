@@ -1,4 +1,11 @@
 {% extends 'SlidesLiveBundle::layout.html.twig' %}
+{#
+  Required values:
+    Presentation|null           presentation
+    Array<Presentation>|null    presentations
+    Template                    presentationEditForm
+    Template                    thumbnailUploadForm                        
+#}
 
 {% block title %}Your Presentations{% endblock %}
 
@@ -7,7 +14,23 @@
   {% if presentationEditForm is not empty %}
   
     <h2>Edit Presentation</h2>
-    {{ presentationEditForm.content|raw }}
+    <table>
+      <tr>
+        <td>
+          <img src="{{ asset(presentation.getThumbnail(true)) }}" width="200" alt=""/>
+          {% if presentation.getThumbnail() %}
+            <div>
+              &nbsp;&nbsp;<a href="{{ path('deletePresentationThumbnail', {'id': presentation.id}) }}">Remove image</a> 
+            </div>
+          {% endif %}
+          {{ thumbnailUploadForm.content|raw }}        
+        </td>
+        <td>
+          {{ presentationEditForm.content|raw }}
+        </td>
+      </tr>
+    </table>
+    <hr/>
     
   {% endif %}
   
@@ -22,7 +45,7 @@
         <table>
           <tr>
             <td>
-              <img src="{{ asset( p.thumbnail ) }}" class="presentation_summary_thumbnail" title="" alt="" />
+              <img src="{{ asset( p.getThumbnail(true) ) }}" class="presentation_summary_thumbnail" title="" alt="" width="280" />
               <a href="{{ path('managePresentations', { 'presentationId': p.id }) }}" class="presentation_edit_link">Edit</a>
             </td>
             <td>

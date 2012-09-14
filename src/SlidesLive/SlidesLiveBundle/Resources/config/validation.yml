@@ -2,8 +2,8 @@
 
 SlidesLive\SlidesLiveBundle\Entity\Account:
   constraints:
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: name, message: "Channel with this name already exists." }
-    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: canonicalName, message: "The channel name, you've entered, is quite similiar to an existing one. Please change the name of your channel." }  
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: name, message: "Account with this name already exists." }
+    - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: { fields: canonicalName, message: "The account name, you've entered, is quite similiar to an existing one. Please change the name of your account." }  
 
   properties:
     name:

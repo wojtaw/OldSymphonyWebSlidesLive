@@ -23,7 +23,7 @@ class RegistrationController extends Controller {
         
       if ($request->getMethod() == 'POST') {
         $form->bindRequest($request);
-        $account->canonizeName();
+        $account->canonizeName();                         
         $canonicalNameErrors = $validator->validate($account);
         if (count($canonicalNameErrors) > 0) {
           $form->addError(new FormError("The account name, you have entered, is quite similiar to an existing one. Please change the name of your account."));          

@@ -17,8 +17,8 @@
         <td>{{ form_errors(form) }}</td>
       </tr>
          
-      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.username } %}
       {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.name } %}
+      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.username } %}
       {% include 'SlidesLiveBundle:FormFields:repeatedField.html.twig'  with {'input': form.password } %}
       {% include 'SlidesLiveBundle:FormFields:hiddenField.html.twig'    with {'input': form.canonicalName } %}
       

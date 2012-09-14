@@ -15,3 +15,10 @@
     display: none; 
   }
 {% endif %}
+
+{% set background = account.getImage('background-images') %}
+{% if background %}
+  .websiteLightBackground {
+    background-image: url('{{ asset(background) }}');
+  }
+{% endif %}

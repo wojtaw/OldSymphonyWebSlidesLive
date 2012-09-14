@@ -30,6 +30,11 @@
         </td>
         <td>
           {{ uploadBackgroundForm.content|raw }}
+          {% if app.user.getImage('background-images') %}
+            <div>
+              &nbsp;&nbsp;<a href="{{ path('imageDelete', {'type': 'background-images'}) }}">Remove image</a>
+            </div>
+          {% endif %}
         </td>
       </tr>
     </table>
@@ -43,6 +48,11 @@
         </td>
         <td>
           {{ uploadLogoForm.content|raw }}
+          {% if app.user.getImage('logos') %}
+            <div>
+              &nbsp;&nbsp;<a href="{{ path('imageDelete', {'type': 'logos'}) }}">Remove image</a>
+            </div>
+          {% endif %}
         </td>
       </tr>
     </table>
@@ -56,6 +66,11 @@
         </td>
         <td>
           {{ uploadAvatarForm.content|raw }}
+          {% if app.user.getImage('avatars') %}
+            <div>
+              &nbsp;&nbsp;<a href="{{ path('imageDelete', {'type': 'avatars'}) }}">Remove image</a>
+            </div>
+          {% endif %}
         </td>
       </tr>
     </table>

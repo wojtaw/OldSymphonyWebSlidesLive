@@ -165,6 +165,16 @@ class AccountController extends Controller
         return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
     }
     
+    // -------------------------------------------------------------------------
+    
+    public function deleteImageAction($type) {
+       $account = $this->get('security.context')->getToken()->getUser();
+       $this->deleteOldFiles('./data/accounts/'.$type, $account->getId().'\.*');
+       return $this->redirect($this->generateUrl('manageAccount'));            
+    }
+    
+    // -------------------------------------------------------------------------
+    
     public function uploadImageAction(Request $request, $type, $formClass) {
         $form = $this->createForm($formClass);
     

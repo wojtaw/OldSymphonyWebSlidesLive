@@ -2,8 +2,7 @@
 
 /* TODO
   - odstranovani nahranych souboru podle id a ne podle koncovky (co kdyz tam nekdo nahraje treba .txt)
-  - osetrit validaci na typ nahravanychsouboru
-  - kontrola koncovky nahravaneho souboru podle $file->getExtension();
+  - osetrit validaci na typ nahravanych souboru
 */
 
 namespace SlidesLive\SlidesLiveBundle\Controller;
@@ -11,6 +10,7 @@ namespace SlidesLive\SlidesLiveBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Form\FormError;
 use SlidesLive\SlidesLiveBundle\Entity\Account;
 use SlidesLive\SlidesLiveBundle\Entity\Presentation;
@@ -175,12 +175,9 @@ class AccountController extends Controller
               $account = $this->get('security.context')->getToken()->getUser();
               // odstraneni puvodniho souboru
               $oldFile = $account->getImage($type);
-              if ($oldFile) {
-                unlink($oldFile);
-              }
+              $this->deleteOldFiles('./data/accounts/background-images', $account->getId().'\.*');    
               // ulozeni noveho souboru 
               $file = $data['file'];
-              //print_r($data);
               $extension = $this->extractExtension($file->getClientOriginalName());
               $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
             }
@@ -196,6 +193,26 @@ class AccountController extends Controller
       else {
         return $parts[count($parts) - 1];      
       }    
+    }
+    
+    /**
+     * Vymazani vsech souboru nachazejicich se na zadane ceste a majicich zadane jmeno (rekurzivni prohledavani).    
+     * @param $path - relativni cesta k mistu, odkud se maji zacit hledat soubory zadaneho jmena
+     * @param $fileName - regularni vyraz popisujici jmeno(a) hledaneho souboru     
+     */         
+    private function deleteOldFiles($path, $fileName) {
+      //print_r("Deleting old files ...\n");
+      $finder = new Finder();
+      $finder ->files()
+              ->in($path)
+              ->followLinks()
+              ->Name($fileName);
+      //print_r(iterator_count($finder)." results found.\n");              
+      foreach ($finder as $file) {
+        //print_r(" - ".$file->getRealPath()."\n");
+        unlink($file->getRealPath());
+      }      
+      //print_r("All files deleted.\n");
     }
                      
 }

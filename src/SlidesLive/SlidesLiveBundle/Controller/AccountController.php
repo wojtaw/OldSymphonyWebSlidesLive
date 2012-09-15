@@ -121,20 +121,24 @@ class AccountController extends Controller
     
     public function uploadThumbnailAction(Request $request, Presentation $presentation) {
         $form = $this->createForm(new UploadForm());
+        $message = '';
     
         if ($request->getMethod() == 'POST' && isset($_POST[$form->getName()])) {
             $form->bindRequest($request);
             $data = $form->getData();
-            if ($form->isValid() && $data['file']) {
+            $file = $data['file'];
+            if ($form->isValid() && $file && $file->isValid()) {
               // odstraneni puvodniho souboru
               $this->deleteOldFiles('./data/PresentationThumbs', $presentation->getId().'\.*');    
               // ulozeni noveho souboru 
-              $file = $data['file'];
               $extension = $this->extractExtension($file->getClientOriginalName());
               $file->move('./data/PresentationThumbs/', sprintf("%d.%s", $presentation->getId(), $extension));
             }
+            else {  // soubor se nepodarilo nahrat
+              $message = 'The file upload failed.';            
+            }
         }
-        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView()));
+        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView(), 'message' => $message));
     }    
     
      public function presentationEditFormAction($action, $presentation) {

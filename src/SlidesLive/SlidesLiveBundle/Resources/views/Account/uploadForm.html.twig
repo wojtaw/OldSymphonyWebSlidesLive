@@ -1,7 +1,8 @@
 {#
     Required values:
 
-    Form form;
+    Form    form;
+    String  message
 #}
                                               
 <form class="uploadForm" action="" method="post" formnovalidate {{ form_enctype(form) }}>
@@ -15,8 +16,9 @@
       </tr>
     {% endfor %}
     <tr>
-      <td>
+      <td style="color: red;">
           {{ form_errors(form) }}
+          {{ message }}
       </td>
     </tr>
     <tr>

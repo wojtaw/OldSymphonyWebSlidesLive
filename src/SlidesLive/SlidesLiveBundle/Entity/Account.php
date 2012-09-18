@@ -61,13 +61,6 @@ class Account implements AdvancedUserInterface {
     protected $role;
 
     /**
-     * @var text $purpose
-     *
-     * @ORM\Column(name="purpose", type="text")
-     */
-    protected $purpose;
-
-    /**
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -199,7 +192,6 @@ class Account implements AdvancedUserInterface {
         $this->isActive = true;
         $this->role = 'ROLE_USER';
         $this->isMeta = false;
-        $this->purpose = '';
     
         $this->subscribes = new ArrayCollection();
         $this->name = '';
@@ -369,26 +361,6 @@ class Account implements AdvancedUserInterface {
     public function getRole()
     {
         return $this->role;
-    }
-
-    /**
-     * Set purpose
-     *
-     * @param text $purpose
-     */
-    public function setPurpose($purpose)
-    {
-        $this->purpose = $purpose;
-    }
-
-    /**
-     * Get purpose
-     *
-     * @return text 
-     */
-    public function getPurpose()
-    {
-        return $this->purpose;
     }
 
     /**

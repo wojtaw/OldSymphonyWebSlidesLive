@@ -11,7 +11,7 @@
   
   <div class="timelineImage">
     <a href="{{ url('accountPresentation', {'accountCanName':presentation.account.canonicalName, 'presentationId':presentation.id }) }}">
-      <img src="{{ asset(presentation.getThumbnail) }}" width="500" height="150" alt="{{ presentation.title }}" class="timelineImage" />
+      <img src="{{ asset(presentation.getThumbnail(true)) }}" width="500" height="150" alt="{{ presentation.title }}" class="timelineImage" />
     </a>
   </div>
   <div class="timelineBoxHeader">

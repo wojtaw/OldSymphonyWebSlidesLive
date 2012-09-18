@@ -18,9 +18,7 @@ class AccountEditForm extends SimpleForm {
     
     /* $this->add($field_name, $field_type, $label,Boolean $required, Array $other_params); */     
     $this->add('username', 'email', 'Email:', true);
-    $this->add('description', 'textarea', 'Channel Description:', false);
-    $this->add('purpose', 'textarea', 'Purpose:', true);
-    //$this->add('private', 'checkbox', 'Private:', false);
+    $this->add('description', 'textarea', 'Description of your account:', false);
     $this->add('website', 'text', 'Your website:', false);
     $this->add('showHeader', 'checkbox', 'Show header navigation bar:', false);
     $this->add('showFooter', 'checkbox', 'Show footer navigation bar:', false);

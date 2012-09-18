@@ -55,12 +55,12 @@
                 <a href="http://slideslive.com/SlidesLiveData/SL_Recorder/SL_AllPlatforms.zip" id="downloadButtonLink2" style="margin-right:30px; color:#FFF" class="headerMenu globalFont"  onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>    
                 <a href="{{ path('homepage') }}" style="margin-right:30px;" class="headerMenu globalFont">Home</a>            
                 <a href="{{ path('tour') }}" style="margin-right:30px;" class="headerMenu globalFont">Tour</a>
-                <a href="{{ path('about') }}" class="headerMenu globalFont">About</a>
-          {% if is_granted('ROLE_USER') %}
-			<a href="{{ path('logout') }}" style="display:none;" class="headerMenu globalFont slidesLiveBlue">Logout</a>
-          {% else %}
-			<a href="{{ path('login') }}" style="display:none;" class="headerMenu globalFont slidesLiveBlue">Login</a>
-          {% endif %}  				                        
+                <a href="{{ path('about') }}" style="margin-right:30px;" class="headerMenu globalFont">About</a>
+                {% if is_granted('ROLE_USER') %}
+            			<a href="{{ path('logout') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Logout</a>
+                {% else %}
+            			<a href="{{ path('login') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Login</a>
+                {% endif %}  				                        
             </div>
         </div>
     </div>	

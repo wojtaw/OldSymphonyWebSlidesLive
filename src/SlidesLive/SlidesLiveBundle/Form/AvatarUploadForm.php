@@ -34,7 +34,7 @@ class AvatarUploadForm extends SimpleForm {
     $resolver->setDefaults(array(
       'validation_constraint' => $constraintsCollection
     ));
-}
+  }
   
   
   public function getDefaultOptions(array $options) {

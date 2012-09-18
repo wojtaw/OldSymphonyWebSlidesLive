@@ -20,6 +20,8 @@
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.showHeader } %}
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.showFooter } %}
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.privacy } %}
+    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.old_password } %}
+    {% include 'SlidesLiveBundle:FormFields:repeatedField.html.twig'  with {'input': form.new_password } %}
         
     {{ form_rest(form) }}
     

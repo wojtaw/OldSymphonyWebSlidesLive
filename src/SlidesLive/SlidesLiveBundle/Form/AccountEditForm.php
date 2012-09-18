@@ -5,6 +5,11 @@ namespace SlidesLive\SlidesLiveBundle\Form;
 use SlidesLive\SlidesLiveBundle\Form\SimpleForm;
 use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Collection;
 
 class AccountEditForm extends SimpleForm {
 
@@ -27,6 +32,15 @@ class AccountEditForm extends SimpleForm {
       ),
       'empty_value' =>false,
     ));
+    $builder->add('old_password', 'password', array('property_path' => false));
+    $builder->add('new_password', 'repeated', array(
+        'type' => 'password',
+        'invalid_message' => 'The password fields must match.',
+        'first_name' => 'New Password:',
+        'second_name' => 'New Password again:',
+        'property_path' => false,
+      )
+    );
     
   }
   
@@ -38,6 +52,22 @@ class AccountEditForm extends SimpleForm {
     return array(
         'data_class' => 'SlidesLive\SlidesLiveBundle\Entity\Account',
     );
+  }
+  
+  public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    $constraintsCollection = new Collection(
+      array(
+        'old_password' => new NotBlank(array('message' => 'This value should not by blank.')), 
+        'new_password' => array(
+          new MinLength(array('limit' => 6, 'message' => 'Password must be longer then 6 characters.')),
+          new NotBlank(array('message' => 'This value should not by blank.'))
+        )
+      )
+    );
+    
+    $resolver->setDefaults(array(
+      'validation_constraint' => $constraintsCollection
+    ));
   }
 
 }

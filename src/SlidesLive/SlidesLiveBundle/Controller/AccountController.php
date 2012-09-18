@@ -43,9 +43,31 @@ class AccountController extends Controller
       
       if ($request->getMethod() == 'POST' && isset($_POST['accountEdit'])) {
         $form->bindRequest($request);
+        //$data = $form->getData();
+        $oldPassword = $form->get('old_password')->getData();
+        $newPassword = $form->get('new_password')->getData();
+        print_r('old: '.$oldPassword."\n");
+        print_r('new: '.$newPassword."\n");
+        $encoder = $this->get('security.encoder_factory')->getEncoder($account);
+        //$data['old_password'] = $encoder->encodePassword($data['old_password'], $account->getSalt());
+        $encodedOldPassword = $encoder->encodePassword($oldPassword, $account->getSalt());
+        print_r($encodedOldPassword."\n");
+        print_r($account->getPassword()."\n");
         $account->canonizeName();
+        if ($oldPassword) { 
+          if ($encodedOldPassword != $account->getPassword()) {
+            $form->get('old_password')->addError(new FormError("The old password is not valid."));
+          }
+          else if (!$newPassword) {
+            $form->get('new_password')->addError(new FormError("New password not inserted."));          
+          }            
+        }
         if ($form->isValid()) {
           $em = $this->getDoctrine()->getEntityManager();
+          if ($oldPassword && $newPassword) {
+            $account->setPassword($newPassword);
+            $account->encodePassword($this);
+          }
           $em->flush();
           $this->data['message'] = 'Account info successfully saved.';
         }
@@ -65,7 +87,7 @@ class AccountController extends Controller
         array(
           'old_password' => new NotBlank(array('message' => 'This value should not by blank.')), 
           'new_password' => array(
-              new MinLength(array('limit' => 6, 'message' => 'password must be longer then 6 characters.')),
+              new MinLength(array('limit' => 6, 'message' => 'Password must be longer then 6 characters.')),
               new NotBlank(array('message' => 'This value should not by blank.'))
             )
         )
@@ -109,7 +131,7 @@ class AccountController extends Controller
     public function manageAccountAction() {                            
         
         $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm');
-        $this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
+        //$this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
         $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
         $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'logos', 'formClass' => new LogoUploadForm()));
         $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'avatars', 'formClass' => new AvatarUploadForm()));
@@ -208,6 +230,7 @@ class AccountController extends Controller
     
     public function uploadImageAction(Request $request, $type, $formClass) {
         $form = $this->createForm($formClass);
+        $message = '';
     
         if ($request->getMethod() == 'POST' && isset($_POST[$formClass->getName()])) {
             $form->bindRequest($request);
@@ -222,8 +245,11 @@ class AccountController extends Controller
               $extension = $this->extractExtension($file->getClientOriginalName());
               $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
             }
+            else {  // soubor se nepodarilo nahrat
+              $message = 'The file upload failed.';            
+            }
         }
-        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView()));
+        return $this->render('SlidesLiveBundle:Account:uploadForm.html.twig', array('form' => $form->createView(), 'message' => $message));
     }
     
     private function extractExtension($path) {

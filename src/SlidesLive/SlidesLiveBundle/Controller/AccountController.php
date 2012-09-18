@@ -221,11 +221,6 @@ class AccountController extends Controller
         return $this->redirect($this->generateUrl('manageAccount'));            
     }
     
-    public function deletePresentationThumbnailAction($id) {
-        $this->deleteOldFiles('./data/PresentationThumbs', $id.'\.*');
-        return $this->redirect($this->generateUrl('managePresentations', array('presentationId' => $id)));         
-    }
-    
     // -------------------------------------------------------------------------
     
     public function uploadImageAction(Request $request, $type, $formClass) {
@@ -239,7 +234,7 @@ class AccountController extends Controller
               $account = $this->get('security.context')->getToken()->getUser();
               // odstraneni puvodniho souboru
               $oldFile = $account->getImage($type);
-              $this->deleteOldFiles('./data/accounts/background-images', $account->getId().'\.*');    
+              $this->deleteOldFiles('./data/accounts/'.$type, $account->getId().'\.*');    
               // ulozeni noveho souboru 
               $file = $data['file'];
               $extension = $this->extractExtension($file->getClientOriginalName());

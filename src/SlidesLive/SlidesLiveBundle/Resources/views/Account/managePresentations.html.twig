@@ -18,11 +18,6 @@
       <tr>
         <td>
           <img src="{{ asset(presentation.getThumbnail(true)) }}" width="200" alt=""/>
-          {% if presentation.getThumbnail() %}
-            <div>
-              &nbsp;&nbsp;<a href="{{ path('deletePresentationThumbnail', {'id': presentation.id}) }}">Remove image</a> 
-            </div>
-          {% endif %}
           {{ thumbnailUploadForm.content|raw }}        
         </td>
         <td>

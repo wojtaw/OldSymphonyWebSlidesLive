@@ -151,10 +151,10 @@ class AccountController extends Controller
             $file = $data['file'];
             if ($form->isValid() && $file && $file->isValid()) {
               // odstraneni puvodniho souboru
-              $this->deleteOldFiles('./data/PresentationThumbs', $presentation->getId().'\.*');    
+              $this->deleteOldFiles('/data/PresentationThumbs', $presentation->getId().'\.*');    
               // ulozeni noveho souboru 
               $extension = $this->extractExtension($file->getClientOriginalName());
-              $file->move('./data/PresentationThumbs/', sprintf("%d.%s", $presentation->getId(), $extension));
+              $file->move($_SERVER['DOCUMENT_ROOT'].'/data/PresentationThumbs/', sprintf("%d.%s", $presentation->getId(), $extension));
             }
             else {  // soubor se nepodarilo nahrat
               $message = 'The file upload failed.';            
@@ -217,7 +217,7 @@ class AccountController extends Controller
     
     public function deleteAccountImageAction($type) {
         $account = $this->get('security.context')->getToken()->getUser();
-        $this->deleteOldFiles('./data/accounts/'.$type, $account->getId().'\.*');
+        $this->deleteOldFiles('/data/accounts/'.$type, $account->getId().'\.*');
         return $this->redirect($this->generateUrl('manageAccount'));            
     }
     
@@ -234,11 +234,11 @@ class AccountController extends Controller
               $account = $this->get('security.context')->getToken()->getUser();
               // odstraneni puvodniho souboru
               $oldFile = $account->getImage($type);
-              $this->deleteOldFiles('./data/accounts/'.$type, $account->getId().'\.*');    
+              $this->deleteOldFiles('/data/accounts/'.$type, $account->getId().'\.*');    
               // ulozeni noveho souboru 
               $file = $data['file'];
               $extension = $this->extractExtension($file->getClientOriginalName());
-              $file->move('./data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
+              $file->move($_SERVER['DOCUMENT_ROOT'].'/data/accounts/'.$type.'/', sprintf("%d.%s", $account->getId(), $extension));
             }
             else {  // soubor se nepodarilo nahrat
               $message = 'The file upload failed.';            
@@ -266,7 +266,7 @@ class AccountController extends Controller
       //print_r("Deleting old files ...\n");
       $finder = new Finder();
       $finder ->files()
-              ->in($path)
+              ->in($_SERVER['DOCUMENT_ROOT'].$path)
               ->followLinks()
               ->Name($fileName);
       //print_r(iterator_count($finder)." results found.\n");              

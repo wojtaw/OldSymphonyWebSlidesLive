@@ -225,8 +225,8 @@ class Presentation {
         );
         $thumbnail = null;
         foreach ($imgFormats as $format) {
-            if (file_exists('./data/PresentationThumbs/'.sprintf("%d",$this->id).'.'.$format)) {
-                $thumbnail = './data/PresentationThumbs/'.sprintf("%d",$this->id).'.'.$format;
+            if (file_exists($_SERVER['DOCUMENT_ROOT'].'/data/PresentationThumbs/'.sprintf("%d",$this->id).'.'.$format)) {
+                $thumbnail = '/data/PresentationThumbs/'.sprintf("%d",$this->id).'.'.$format;
                 break;
             }
         }

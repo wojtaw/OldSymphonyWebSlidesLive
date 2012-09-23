@@ -4,6 +4,7 @@
   {% block stylesheet %}
     <link href="{{ asset('bundles/slideslive/css/stylesPortal.css') }}" rel="stylesheet" type="text/css"/>
   {% endblock %}
+    
   
 	{% block layoutContent %}
 	   <div class="websiteLightBackground firstBlockTop">
@@ -12,15 +13,7 @@
 		
     	<div class="blockCenterWrapper"> 
 			<div class="contentWrapper clearfix">
-	
-    	   <div class="accountServiceBar">
-    	     {% if is_granted('ROLE_USER') %}
-    	       Loged user: {{ app.user.name }} - 
-             <a href="{{ path('manageAccount') }}">Manage your account</a>,
-             <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Manage your presentations,</a>
-             <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">See your account.</a> 
-    	     {% endif %}
-    	   </div>
+
         
         {% block content %}{% endblock %}
 	      </div>        

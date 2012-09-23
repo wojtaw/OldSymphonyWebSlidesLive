@@ -66,6 +66,19 @@
             </div>
         </div>
     </div>	
+	
+    {% block accountHeader %}
+			{% if is_granted('ROLE_USER') %}
+			   <div class="accountServiceBar">
+				   Loged user: {{ app.user.name }} - 
+				 <a href="{{ path('manageAccount') }}">Manage your account</a>,
+				 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Manage your presentations,</a>
+				 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">See your account.</a> 
+				 {% endif %}
+			   </div>
+		   {% endif %}	
+	{% endblock %}	
+	
       
         {# Page content #}     
         {% block layoutContent %}{% endblock %}

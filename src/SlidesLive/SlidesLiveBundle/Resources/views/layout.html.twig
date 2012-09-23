@@ -2,14 +2,14 @@
 {% extends '::base.html.twig' %}
 
   {% block stylesheet %}
-    <link href="{{ asset('bundles/static/css/mainStyles.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('bundles/slideslive/css/stylesPortal.css') }}" rel="stylesheet" type="text/css"/>
   {% endblock %}
   
 	{% block layoutContent %}
 	   <div class="websiteLightBackground firstBlockTop">
     	<div class="blockCenterWrapper"> 
 	
-    	   <div>
+    	   <div class="accountServiceBar">
     	     {% if is_granted('ROLE_USER') %}
     	       Loged user: {{ app.user.name }} - 
              <a href="{{ path('manageAccount') }}">Manage your account</a>,

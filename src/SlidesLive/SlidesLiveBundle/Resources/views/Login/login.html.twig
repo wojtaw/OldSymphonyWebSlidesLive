@@ -2,6 +2,10 @@
 
 {% block content %}
 
+    {% if app.session.flash('registration_success') %}
+      <div>Registration successfull!</div>    
+    {% endif %}
+
 		<h2 class="globalFont">Login</h2>
 		
 		<div>

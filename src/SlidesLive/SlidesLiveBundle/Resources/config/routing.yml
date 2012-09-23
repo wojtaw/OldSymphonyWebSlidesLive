@@ -16,9 +16,9 @@ registration:
     pattern: /registration
     defaults: { _controller: SlidesLiveBundle:Registration:registration }
     
-registration_result:
-    pattern: /registration/result
-    defaults: { _controller: SlidesLiveBundle:Registration:result }
+#registration_result:
+#    pattern: /registration/result
+#    defaults: { _controller: SlidesLiveBundle:Registration:result }
     
 # ------ACCOUNT MANAGEMENT------------------------------------------------------ 
 manageAccount:

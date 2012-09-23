@@ -40,8 +40,10 @@ class RegistrationController extends Controller {
           $em->persist($folder);
           $em->persist($account);
           $em->flush();
-          
-          return $this->render('SlidesLiveBundle:Registration:result.html.twig', $this->data);
+
+          $this->get('session')->setFlash('registration_success', true);
+          return $this->redirect($this->generateUrl('login'));          
+          //return $this->render('SlidesLiveBundle:Registration:result.html.twig', $this->data);
         }
       }  
       

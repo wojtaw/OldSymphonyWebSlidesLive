@@ -1,0 +1,10 @@
+<html><body>
+
+<h1>Form Themeing</h1>
+
+  <form action="" method='POST' {{ form_enctype(form) }}>
+    {{ form_label(form.name) }} --- 
+    {{ form_widget(form.name, {'attr': {'size': '40em'} }) }}    
+  </form>
+
+</body></html>

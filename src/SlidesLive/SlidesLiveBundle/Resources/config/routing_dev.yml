@@ -7,3 +7,8 @@ linkBrowser:
 passwordChange:
   pattern: /test/password/change/{accountCanName}/{password}
   defaults: {  _controller: SlidesLiveBundle:Test:passwordChange }
+  
+formStyle:
+  pattern: /test/form/style
+  defaults: { _controller: SlidesLiveBundle:Test:formStyle }
+    

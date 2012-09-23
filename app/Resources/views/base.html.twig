@@ -57,6 +57,8 @@
                 <a href="{{ path('tour') }}" style="margin-right:30px;" class="headerMenu globalFont">Tour</a>
                 <a href="{{ path('about') }}" style="margin-right:30px;" class="headerMenu globalFont">About</a>
                 {% if is_granted('ROLE_USER') %}
+                  <a href="{{ path('manageAccount') }}" class="headerMenu globalFont slidesLiveBlue">{{ app.user.username }}</a>
+                  <span class="headerMenu globalFont slidesLiveBlue"> / </span> 
             			<a href="{{ path('logout') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Logout</a>
                 {% else %}
             			<a href="{{ path('login') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Login</a>

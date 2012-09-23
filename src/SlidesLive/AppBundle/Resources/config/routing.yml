@@ -12,13 +12,13 @@ app_create_account:
 
 app_index:
     pattern: /index
-    defaults: { _controller: AppBundle:App:index }
+    defaults: { _controller: AppBundle:Default:index }
 #    requirements:
 #        _method:  POST
 
 app_create_presentation:
     pattern: /create_presentation
-    defaults: { _controller: AppBundle:App:createPresentation }
+    defaults: { _controller: AppBundle:Default:createPresentation }
 #    requirements:
 #        _method:  POST
 

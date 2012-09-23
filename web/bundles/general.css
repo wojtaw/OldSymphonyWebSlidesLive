@@ -81,8 +81,18 @@
 
 /*-------------------ACCOUNT BAR----------------------*/
 .accountServiceBar{
+	position: fixed;
+    top:55px;
+    left:0;		
 	background-color:#993300;
-	width:50px;
+	width:100%;
+	height:50px;
+	z-index:20;		
+	visibility:hidden;
+}
+
+.accountServiceBarTopSpace{
+	margin-top:110px !important;	
 }
 
 /*-------------------SPECIAL STUFF----------------------*/

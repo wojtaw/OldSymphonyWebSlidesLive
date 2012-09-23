@@ -466,20 +466,6 @@ h2 {
 	font-weight:normal;
 }
 
-.logoBeta {
-	float:right;
-	font-family:'Ropa Sans', sans-serif;
-	font-weight:normal;
-	font-size:13px;		
-	position:relative;
-	top:-3px;
-	left: -2px;
-	color:#FFFFFF;
-	text-decoration:none;
-	line-height:16px;
-	text-align:center;
-}
-
 .downloadButtonText {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;

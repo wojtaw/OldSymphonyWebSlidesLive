@@ -95,7 +95,7 @@ body{
 	position: fixed;
     top:55px;
     left:0;		
-	background-color:#993300;
+	background-color:#999999;
 	width:100%;
 	height:50px;
 	z-index:20;		
@@ -103,6 +103,19 @@ body{
 
 .accountServiceBarTopSpace{
 	height:50px;	
+}
+
+.accountBarContent {
+	margin-left:auto;
+	margin-right:auto;
+	width:960px;	
+	height:50px;		
+}
+
+.accountBarMenu {
+	font-family:'Ropa Sans', sans-serif !important;
+	font-size:20px;
+	color:#999900;	
 }
 
 /*-------------------SPECIAL STUFF----------------------*/
@@ -137,4 +150,18 @@ body{
 	text-align:center !important;
     margin-left: auto !important;
     margin-right: auto !important;
+}
+
+.logoBeta {
+	float:right;
+	font-family:'Ropa Sans', sans-serif;
+	font-weight:normal;
+	font-size:13px;		
+	position:relative;
+	top:-3px;
+	left: -2px;
+	color:#FFFFFF;
+	text-decoration:none;
+	line-height:16px;
+	text-align:center;
 }

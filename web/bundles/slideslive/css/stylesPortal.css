@@ -558,3 +558,10 @@ ul.channelFoldersList a:hover {
 .contentWrapper {
 
 }
+
+.siteContent {
+	float:left;
+	width:650px;
+	margin-top:3px;	
+	min-height:800px;	
+}

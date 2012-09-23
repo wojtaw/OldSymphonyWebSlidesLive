@@ -14,13 +14,12 @@ use SlidesLive\SlidesLiveBundle\Entity\Account;
 use SlidesLive\SlidesLiveBundle\Entity\Folder;
 use SlidesLive\SlidesLiveBundle\Entity\Presentation;
 use SlidesLive\AppBundle\Form\Type\AccountType;
+use SlidesLive\AppBundle\Form\Type\PresentationType;
 
 class DefaultController extends Controller
 {
-    public function createAccountAction()
+    public function createAccountAction(Request $request)
     {
-        $request = $this->getRequest();
-
         $account = new Account();
 
         $form = $this->createForm(new AccountType(), $account);
@@ -72,7 +71,7 @@ class DefaultController extends Controller
     public function newsAction()
     {
         return array(
-            "version" => 1,
+            "version" => 2,
             "messageTitle" => "SlidesLive",
             "message" => "",
         );
@@ -86,83 +85,44 @@ class DefaultController extends Controller
         return array();
     }
 
-    private function returnOK($presentationId) {
-     return new Response(json_encode(array(
-           "presentation.id" => $presentationId,
-           "ftp.host" => "77.93.223.217",
-           "ftp.directory" => "/data/presentationQueue",
-           "ftp.user" => "meta",
-           "ftp.password" => "6u5tVEwKzQ",
-     )));
-   }
-
-    private function returnError($code) {
-      return new Response(json_encode(array(
-        "error" => $code
-      )));
-    }
-
     public function createPresentationAction(Request $request) {
-        $this->start();
-        $channel = $this->get('security.context')->getToken()->getUser()->getChannel();
+        $presentation = new Presentation();
 
-        if (
-          $request->getMethod() == 'POST'
-          && $request->request->has('title')
-          && $request->request->has('description')
-          && $request->request->has('lang')
-          && $request->request->has('dateRecorded')
-          && $request->request->has('service')
-          && $request->request->has('service_id')
-          && $request->request->has('length')
-          && $request->request->has('slides')
-          && $request->request->has('video')
-        ) {
+        $form = $this->createForm(new PresentationType(), $presentation);
+        $form->bindRequest($request);
 
-          $presentation = new Presentation();
+        if ($form->isValid())
+        {
+            $em = $this->getDoctrine()->getEntityManager();
+            $account = $this->get('security.context')->getToken()->getUser();
+            $folder = $account->getPrimaryFolder();
 
-          $presentation->setTitle($request->request->get('title'));
-          $presentation->setDescription($request->request->get('description'));
-          $presentation->setLang($request->request->get('lang'));
-          $presentation->setService($request->request->get('service'));
-          $presentation->setServiceId($request->request->get('service_id'));
-          $presentation->setLength($request->request->get('length'));
-          $presentation->setslides($request->request->get('slides'));
-          $presentation->setvideo($request->request->get('video'));
-          $presentation->setShowSpeaker(0);
+            $account->addPresentation($presentation);
+            $presentation->setAccount($account);
 
-          $presentation->setDateRecorded(date_timestamp_set(date_create(), $request->request->get('dateRecorded')));
-          $presentation->setChannel($channel);
-          $folder = $presentation->getChannel()->getPrimaryFolder();
-          $presentation->setFolder($folder);
-          $folder->addPresentation($presentation);
+            $folder->addPresentation($presentation);
+            $presentation->setFolder($folder);
 
-          try {
+            $em->persist($presentation);
+            $em->flush();
 
-              $errors = $this->get('validator')->validate($presentation);
-              if (count($errors) < 1) {
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($presentation);
-                $em->flush();
-                return $this->returnOK($presentation->getId());
-              }
-              else {
-                $errorMessages = '';
-                foreach ($errors as $e) {
-                  $errorMessages .= " " . $e->getPropertyPath() . " : " . $e->getMessage() . "\n<br />";
-                }
-                return $this->returnError('The presentation data are not valid.'.$errorMessages);
-              }
+            return View::create(
+                array(
+                    "presentation.id" => $presentation->getId(),
+                    "http.host" => "virtual.edumeta.com",
+                    "http.port" => 80,
+                    "http.user" => "meta",
+                    "http.password" => "6u5tVEwKzQ",
 
-          }
-          catch ( \Exception $e) {
-            throw $e;
-            return $this->returnError('Exception thrown when putting data into database.');
-          }
-
+                    "ftp.host" => "77.93.223.217",
+                    "ftp.directory" => "/data/presentationQueue",
+                    "ftp.user" => "meta",
+                    "ftp.password" => "6u5tVEwKzQ",
+                ), 201);
         }
 
-        return $this->returnError('No POST data.');
+//         return array("aaa" => new \DateTime("2012-09-09"));
+//         return ;
+        return View::create($form, 400);
     }
-
 }

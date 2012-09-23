@@ -2,7 +2,7 @@
 /app/logs/*
 /vendor/*
 /web/data/*
-!/app/config/parameters.ini
+/app/config/parameters.ini
 
 /nbproject/*
 

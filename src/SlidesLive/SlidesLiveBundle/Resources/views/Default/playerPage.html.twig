@@ -39,6 +39,18 @@
 	{% endif %}
 {% endblock %}
 
+{% block javascript %}
+  <script type="text/javascript" src="{{ asset('bundles/static/javascript/jquery.client.js') }}">
+  </script>
+  <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
+  </script>   
+  <script type="text/javascript" src="{{ asset('bundles/static/javascript/shadowbox.js') }}">
+  </script>    
+  <script type="text/javascript">
+    Shadowbox.init();
+  </script>   
+{% endblock %}
+
 {% block content %}
 
   {% block accountPanel %}

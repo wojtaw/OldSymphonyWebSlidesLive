@@ -4,6 +4,17 @@
     Boolean       isEmbed
 #}
 
+{% if not presentation %}
+  <div>Presentation not found.</div>
+{% endif %}
+<a href="javascript:void(0)" onClick="showEmbedPlayer()">
+  <div class="presentationButton">
+    <div class="embedPlayer center"><iframe src="http://edumeta.com/embed/{{presentation.id}}?width=950" width="950" height="412" frameborder="0" scrolling="no"></iframe></div>
+  </div>
+</a>
+
+
+{#
 <div>
   <pre>
     Player:
@@ -32,3 +43,4 @@
     {% endif %}  
   </pre>
 </div>
+#}

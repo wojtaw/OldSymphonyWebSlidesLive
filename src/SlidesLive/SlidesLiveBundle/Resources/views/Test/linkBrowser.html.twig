@@ -14,6 +14,9 @@
   {% if account %}
   
     <h2>Account: {{ account.name }}</h2>
+    <a href="{{ path('account', {'accountCanName': account.canonicalName}) }}">{{ path('account', {'accountCanName': account.canonicalName}) }}</a>
+      /
+    <a href="{{ path('unlistedAccount', {'accountCanName': account.canonicalName, 'hash': account.hash}) }}">{{ path('unlistedAccount', {'accountCanName': account.canonicalName, 'hash': account.hash}) }}</a>
     <hr/><br/>
     <h2>Presentations:</h2>
     <table>
@@ -26,7 +29,7 @@
             <a href="{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName}) }}">{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName}) }}</a>
           </td>
           <td>
-            <a href="{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName, 'hash': folder.hash}) }}">{{ path('folder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName, 'hash': folder.hash}) }}</a>                
+            <a href="{{ path('unlistedFolder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName, 'hash': folder.hash}) }}">{{ path('unlistedFolder', {'accountCanName': account.canonicalName, 'folderCanName': folder.canonicalName, 'hash': folder.hash}) }}</a>                
           </td>    
         </tr>
         

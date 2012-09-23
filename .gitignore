@@ -10,3 +10,5 @@
 
 !.keepdir
 *~
+
+*.kate-swp

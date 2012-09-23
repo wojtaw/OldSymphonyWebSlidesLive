@@ -38,5 +38,16 @@ class TestController extends Controller {
         print("Password saved.<br />\n");        
       }
       return new Response('');
+    }
+    
+    public function formStyleAction() {
+      $defaultData = array (
+        'name' => 'My Name',
+      );
+      $this->data['form'] = $this->createFormBuilder($defaultData)
+        ->add('name', 'text')
+        ->getForm()
+        ->createView();
+      return $this->render('SlidesLiveBundle:Test:formStyle.html.twig', $this->data);
     }                     
 }

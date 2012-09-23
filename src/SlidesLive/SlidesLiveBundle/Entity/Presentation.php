@@ -9,11 +9,11 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 /**
  * SlidesLive\SlidesLiveBundle\Entity\Presentation
  *
- * @ORM\Table(name="presentation") 
+ * @ORM\Table(name="presentation")
  * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\PresentationRepository")
  */
 class Presentation {
-    
+
     /**
      * @var integer $id
      *
@@ -33,15 +33,15 @@ class Presentation {
     /**
      * @var string $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable="true")
      */
     protected $description;
-        
+
     /**
      * @var string $lang
-     * 
-     * @ORM\Column(name="lang", type="string", length=255)          
-     */         
+     *
+     * @ORM\Column(name="lang", type="string", length=255)
+     */
     protected $lang;
 
     /**
@@ -50,32 +50,32 @@ class Presentation {
      * @ORM\Column(name="date_recorded", type="datetime")
      */
     protected $dateRecorded;
-    
+
     /**
      * @var string $service
-     * 
-     * @ORM\Column(name="service", type="string", length="255")
-     */                   
+     *
+     * @ORM\Column(name="service", type="string", length="255", nullable="true")
+     */
     protected $service;
 
     /**
      * @var string $service
      *
-     * @ORM\Column(name="service_id", type="string", length="255")
+     * @ORM\Column(name="service_id", type="string", length="255", nullable="true")
      */
     protected $serviceId;
-    
+
     /**
      * @var string $externalService
      *
-     * @ORM\Column(name="external_service", type="string", length="255")
-     */                   
+     * @ORM\Column(name="external_service", type="string", length="255", nullable="true")
+     */
     protected $externalService;
-    
+
     /**
      * @var string $externameServiceId
      *
-     * @ORM\Column(name="external_service_id", type="string", length="255")
+     * @ORM\Column(name="external_service_id", type="string", length="255", nullable="true")
      */
     protected $externalServiceId;
 
@@ -88,101 +88,101 @@ class Presentation {
 
     /**
      * @var boolean $slides
-     * 
-     * @ORM\Column(name="slides", type="boolean")          
-     */         
+     *
+     * @ORM\Column(name="slides", type="boolean")
+     */
     protected $slides;
-    
+
     /**
      * @var boolean $video
-     * 
-     * @ORM\Column(name="video", type="boolean")          
-     */         
+     *
+     * @ORM\Column(name="video", type="boolean")
+     */
     protected $video;
-    
+
     /**
-     * @var small privacy 
-     *      
-     * @ORM\Column(name="privacy", type="smallint")     
+     * @var small privacy
+     *
+     * @ORM\Column(name="privacy", type="smallint")
      */
      protected $privacy;
-     
+
      /**
      * 0 - NOTHIG - nic se nedìje
      * 1 - WAITING - má být sesynchronizováno, ale zatím není
-     * 2 - SYNCHRONIZING- má být synchronizováno, ale zrovna je ve frontì a pracuje se na tom 
-     * 3 - FAIL - došlo k chybì                
-     *           
-     * @var small flag           
-     *      
-     * @ORM\Column(name="flag", type="smallint")     
+     * 2 - SYNCHRONIZING- má být synchronizováno, ale zrovna je ve frontì a pracuje se na tom
+     * 3 - FAIL - došlo k chybì
+     *
+     * @var small flag
+     *
+     * @ORM\Column(name="flag", type="smallint")
      */
      protected $flag;
-    
+
     /**
      * @var boolean $showSpeaker
-     * 
-     * @ORM\Column(name="show_speaker", type="boolean")          
-     */         
+     *
+     * @ORM\Column(name="show_speaker", type="boolean")
+     */
     protected $showSpeaker;
-    
+
     /**
      * @var string hash
-     * 
+     *
      * @ORM\Column(name="hash", type="string", length="64")
-     */                   
+     */
     protected $hash;
-    
+
     /**
      * @var smallint $startSlide
      *
      * @ORM\Column(name="start_slide", type="smallint")
-     */    
+     */
     protected $startSlide = 1;
 
     /**
      * @var boolean $autoPlay
-     * 
-     * @ORM\Column(name="auto_play", type="boolean")          
-     */    
+     *
+     * @ORM\Column(name="auto_play", type="boolean")
+     */
     protected $autoPlay = false;
-    
+
     /**
-     * @ORM\ManyToOne(targetEntity="Folder", inversedBy="presentations")     
-     */         
+     * @ORM\ManyToOne(targetEntity="Folder", inversedBy="presentations")
+     */
     protected $folder;
-    
+
     /**
      *@ORM\ManyToOne(targetEntity="Account", inversedBy="presentations")
-     */              
+     */
     protected $account;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="presentations")
      * @ORM\JoinTable(name="presentations_speakers")
-     *         
+     *
      */
     protected $speakers;
-    
+
 // -----------------------------------------------------------------------------
 
     public function __construct() {
         $this->speakers = new ArrayCollection();
-        $this->privacy = Privacy::p_public();
+        $this->privacy = Privacy::P_PUBLIC;
         $this->hash = $this->generateHash();
     }
-    
+
     public function getCountOfPresentations() {
       return count($this->presentations);
     }
-    
+
     public function listSpeakersNames() {
       $list = '';
       $i = 1;
       foreach($this->speakers as $s) {
         if ($i == 1) {
-            $list .= $s->getName();            
-            $i = 0;                  
+            $list .= $s->getName();
+            $i = 0;
         }
         else {
           $list .= ', '.$s->getName();
@@ -190,35 +190,35 @@ class Presentation {
       }
       return $list;
     }
-    
+
     /**
      * Vraci nazev tridy bez jmen namespacu.
-     * @return string     
+     * @return string
      */
     public function getClass() {
       return 'Presentation';
     }
-    
+
     /**
      * Vraci datum a cas v lidsky citelnem formatu
-     * @return string     
-     */         
+     * @return string
+     */
     public function getFormatedDateTime () {
       return date_format($this->dateRecorded,'Y-m-d G:i:s');
     }
-    
+
     /**
      * Vraci datum v lidsky citelnem formatu
-     * @return string     
-     */         
+     * @return string
+     */
     public function getFormatedDate () {
       return date_format($this->dateRecorded,'j.n.Y');
     }
-    
+
     /**
      * Vraci cestu k obrazku nahledu prezentace
      * @param $mandatory - pokud TRUE metoda musi vrati URL obrazku, pokud obrazek nenalezla vrati URL s no-imagem obrazkem, jinak vraci null
-     */                        
+     */
     public function getThumbnail ($mandatory = false) {
         $imgFormats = array(
             "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif"
@@ -238,10 +238,10 @@ class Presentation {
 
     /**
      * Vygenerovani hashe pro prezentaci pro unliste pristup.
-     */             
+     */
     public function generateHash() {
         $this->hash = md5(microtime());
-        return $this->hash;    
+        return $this->hash;
     }
 
 // =============================================================================
@@ -249,7 +249,7 @@ class Presentation {
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -269,7 +269,7 @@ class Presentation {
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -289,7 +289,7 @@ class Presentation {
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -309,7 +309,7 @@ class Presentation {
     /**
      * Get lang
      *
-     * @return string 
+     * @return string
      */
     public function getLang()
     {
@@ -329,7 +329,7 @@ class Presentation {
     /**
      * Get dateRecorded
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getDateRecorded()
     {
@@ -349,7 +349,7 @@ class Presentation {
     /**
      * Get service
      *
-     * @return string 
+     * @return string
      */
     public function getService()
     {
@@ -369,7 +369,7 @@ class Presentation {
     /**
      * Get service_id
      *
-     * @return string 
+     * @return string
      */
     public function getServiceId()
     {
@@ -389,7 +389,7 @@ class Presentation {
     /**
      * Get length
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getLength()
     {
@@ -409,7 +409,7 @@ class Presentation {
     /**
      * Get slides
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getSlides()
     {
@@ -429,7 +429,7 @@ class Presentation {
     /**
      * Get video
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getVideo()
     {
@@ -449,7 +449,7 @@ class Presentation {
     /**
      * Get showSpeaker
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getShowSpeaker()
     {
@@ -469,7 +469,7 @@ class Presentation {
     /**
      * Get account
      *
-     * @return SlidesLive\SlidesLiveBundle\Entity\Account 
+     * @return SlidesLive\SlidesLiveBundle\Entity\Account
      */
     public function getAccount()
     {
@@ -489,7 +489,7 @@ class Presentation {
     /**
      * Get speakers
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getSpeakers()
     {
@@ -509,7 +509,7 @@ class Presentation {
     /**
      * Get folder
      *
-     * @return SlidesLive\SlidesLiveBundle\Entity\Folder 
+     * @return SlidesLive\SlidesLiveBundle\Entity\Folder
      */
     public function getFolder()
     {
@@ -529,7 +529,7 @@ class Presentation {
     /**
      * Get videoSource
      *
-     * @return string 
+     * @return string
      */
     public function getVideoSource()
     {
@@ -549,7 +549,7 @@ class Presentation {
     /**
      * Get privacy
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getPrivacy()
     {
@@ -569,7 +569,7 @@ class Presentation {
     /**
      * Get flag
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getFlag()
     {
@@ -589,7 +589,7 @@ class Presentation {
     /**
      * Get hash
      *
-     * @return string 
+     * @return string
      */
     public function getHash()
     {
@@ -609,7 +609,7 @@ class Presentation {
     /**
      * Get externalService
      *
-     * @return string 
+     * @return string
      */
     public function getExternalService()
     {
@@ -629,7 +629,7 @@ class Presentation {
     /**
      * Get externalServiceId
      *
-     * @return string 
+     * @return string
      */
     public function getExternalServiceId()
     {
@@ -649,7 +649,7 @@ class Presentation {
     /**
      * Get startSlide
      *
-     * @return smallint 
+     * @return smallint
      */
     public function getStartSlide()
     {
@@ -669,7 +669,7 @@ class Presentation {
     /**
      * Get autoPlay
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getAutoPlay()
     {

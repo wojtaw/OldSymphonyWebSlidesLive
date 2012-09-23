@@ -10,11 +10,6 @@
     Privacy               privacy_mode
 #}
 
-{% block stylesheet %}
-  {{ parent() }}
-  <link href="{{ asset('bundles/slideslive/css/stylesRedesign.css') }}" rel="stylesheet" type="text/css">
-{% endblock %}
-
 {% block generatedStyle %}
   {% include 'SlidesLiveBundle:Default:accountLook.css.twig' with {'account': account} %}
 {% endblock %}
@@ -40,8 +35,6 @@
 {% endblock %}
 
 {% block javascript %}
-  <script type="text/javascript" src="{{ asset('bundles/static/javascript/jquery.client.js') }}">
-  </script>
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script>   
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/shadowbox.js') }}">

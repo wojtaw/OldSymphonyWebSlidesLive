@@ -546,3 +546,15 @@ ul.channelFoldersList a:hover {
 .tmpFont {
 	font-size:11px;
 }
+
+
+/*-----------NEW UNSORTED STYLES------*/
+.blockCenterWrapper {
+	width:960px;	
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.contentWrapper {
+
+}

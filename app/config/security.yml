@@ -26,12 +26,16 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        app_no_authorization:
+            pattern: ^/app/(create_account|news)
+            anonymous: true
             
-        app:        
+        app_need_authorization:
             pattern: ^/app
             anonymous: false
             http_basic:
-                realm: "Meta Edu Studio API"
+                realm: "SlidesLive"
                 provider: user_db
             logout:
                 path: /app/logout
@@ -51,5 +55,6 @@ security:
 
     access_control:
         - { path: ^/account, roles: 'ROLE_USER'}#, requires_channel: https }
-        - { path: ^/app, roles: 'ROLE_USER'}
+        - { path: ^/app/(create_account|news), roles: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        - { path: ^/app, roles: 'ROLE_USER' }
         #- { path: ^/admin, roles: 'ROLE_ADMIN'}

@@ -1,4 +1,10 @@
 /* HEADER PART */
+.body{
+	margin:0px;
+	padding:0px;
+	top:0px;	
+}
+
 .fixedHeader {
 	position: fixed;
     top:0;
@@ -31,6 +37,10 @@
 .slidesLiveLogo:hover {
 	position:relative;
 	top:14px;
+}
+
+.headerTopSpace{
+	height:55px;
 }
 
 /* FOOTER PART */
@@ -88,11 +98,10 @@
 	width:100%;
 	height:50px;
 	z-index:20;		
-	visibility:hidden;
 }
 
 .accountServiceBarTopSpace{
-	margin-top:110px !important;	
+	height:50px;	
 }
 
 /*-------------------SPECIAL STUFF----------------------*/

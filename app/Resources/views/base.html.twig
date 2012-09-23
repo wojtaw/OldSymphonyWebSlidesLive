@@ -80,7 +80,15 @@
 	
       
         {# Page content #}     
-        {% block layoutContent %}{% endblock %}
+		
+		<div class="headerTopSpace"></div>
+		{% if is_granted('ROLE_USER') %}
+			<div class="accountServiceBarTopSpace"></div>
+		{% endif %}
+
+			
+        {% block layoutContent %}
+		{% endblock %}
 
         {# Page footer #}        
 	<div class="siteFooter">

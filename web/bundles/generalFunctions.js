@@ -2,6 +2,7 @@
    modifyDownloadAccordingOSGeneral();
  });
 
+
 function modifyDownloadAccordingOSGeneral(){
             $('#os').html("<b>" + $.client.os + "</b>");
             $('#browser').html("<b>" + $.client.browser + "</b>");
@@ -15,4 +16,10 @@ function modifyDownloadAccordingOSGeneral(){
             } else {
                 $('#downloadButtonLink2').attr("href", "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip");																		
             }
+}
+
+
+
+function resizePlayerContainer(playerHeight) { 
+	$('#playerPanel').css({ height: playerHeight });
 }

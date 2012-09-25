@@ -7,12 +7,26 @@
 {% if not presentation %}
   <div>Presentation not found.</div>
 {% endif %}
-<a href="javascript:void(0)" onClick="showEmbedPlayer()">
-  <div class="presentationButton">
-    <div class="embedPlayer center"><iframe src="http://edumeta.com/embed/{{presentation.id}}?width=950" width="950" height="412" frameborder="0" scrolling="no"></iframe></div>
-  </div>
-</a>
+    <script type="text/javascript">
+		var flashvars = {
+		hasVideo: "{{ presentation.video }}",
+  		hasSlides: "{{ presentation.slides }}",
+ 		presentationID: "{{ presentation.id }}",
+ 		mediaType: "{{ presentation.service }}",
+ 		mediaID: "{{ presentation.serviceId }}"
+		};
+		var params = {};
+		var attributes = {};
+		
+		params.allowscriptaccess = "always";
+	
+    	swfobject.embedSWF("{{ asset('bundles/slideslive/player/Player_5_THC.swf') }}", "myContent", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+    </script>  
 
+            <div id="myContent">
+                <h1>Alternative content</h1>
+                <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+            </div> 
 
 {#
 <div>

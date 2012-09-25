@@ -165,3 +165,11 @@ body{
 	line-height:16px;
 	text-align:center;
 }
+
+
+.playerPanel {
+	height:331px;
+	width:100%;
+	text-align:center;
+	z-index:18;	
+}

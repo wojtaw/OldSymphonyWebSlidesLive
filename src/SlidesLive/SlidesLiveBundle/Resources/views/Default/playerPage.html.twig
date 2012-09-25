@@ -72,7 +72,7 @@
           {{ presentation.listSpeakersNames }} | <span class="metaBlue">{{ presentation.title }}</span>
         </div>
     
-        <div class="videoPlayerPanel">		
+        <div class="playerPanel" id="playerPanel">		
           {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false} %}
         </div>
     

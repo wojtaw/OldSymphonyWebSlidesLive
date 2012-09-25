@@ -191,23 +191,6 @@ a.metaBlue {
 	background-color:#F00;
 }
 
-.audioPlayerPanel {
-	height:495px;
-	width:640px;
-	text-align:center;	
-	background-color:#1e1e1e;
-	float:left;	
-	z-index:18;
-}
-
-
-.videoPlayerPanel {
-	height:331px;
-	width:100%;
-	text-align:center;
-	z-index:18;	
-}
-
 .channelAvatar {
 	margin:15px;
 	float:left;

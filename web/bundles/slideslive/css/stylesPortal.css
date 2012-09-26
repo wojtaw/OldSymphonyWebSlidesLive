@@ -223,7 +223,7 @@ a.metaBlue {
 	height:0px;
 }
 
-.gradientLeftVideo{
+.gradientLeftPlayer{
 	background-image:url(../styleImages/gradient-player-left.png);
 	background-repeat:repeat-y;	
 	background-position:right;
@@ -234,7 +234,7 @@ a.metaBlue {
 	overflow:visible;	
 }
 
-.gradientRightVideo {
+.gradientRightPlayer {
 	position:relative;	
 	left:960px;
 	top:-475px;

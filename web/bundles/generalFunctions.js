@@ -22,4 +22,8 @@ function modifyDownloadAccordingOSGeneral(){
 
 function resizePlayerContainer(playerHeight) { 
 	$('#playerPanel').css({ height: playerHeight });
+	$('.gradientLeftPlayer').css({ height: (playerHeight + 144) });	
+	$('.gradientRightPlayer').css({ height: (playerHeight + 144) });		
+	$('.gradientRightPlayer').css({ top: -(playerHeight + 144) });			
+	
 }

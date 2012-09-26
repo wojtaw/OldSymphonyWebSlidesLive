@@ -47,9 +47,17 @@ package slideslive.gui
 		private var videoContainer:VideoContainer;
 		private var videoControls:VideoControls;
 		private var bigPlayButton:BigPlayButton;
+		private var videoPreloader:VideoContainerBG;	
+		private var slidePreloader:PreLoaderAnimation;		
 		private var videoSlideWrapper:MovieClip = new MovieClip();
+		private var videoStream:PlayerClip;
+		private var tmpFill:TmpWrap = new TmpWrap();
+		
 		private var slider:Slider;
 		private var embedLogo:EmbedLogo;
+		
+		private var videoContainerWidth:Number;
+		private var videoContainerHeight:Number;
 		
 		private var error:ErrorHandler;		
 		
@@ -62,7 +70,10 @@ package slideslive.gui
 		public function initGUI():void{
 			PlayerOutput.printLog("GUI is initializing");
 			
+			if(!playerValues.isDebugMode()) tmpFill.visible = false;
+			addChild(tmpFill);
 			addChild(videoSlideWrapper);
+			initVideoBgLoader();
 			initVideoContainer();
 			initSlideContainer();
 			//Controls at the top
@@ -74,6 +85,7 @@ package slideslive.gui
 			//Above all slider
 			initSlider();
 			videoSlideWrapper.y = slider.height;
+			tmpFill.y = videoSlideWrapper.y;
 			
 			//Check if there are special cases like video or audio only
 			if(playerValues.isSlideAvailable() && !playerValues.isVideoAvailable()) showSlidesOnly();
@@ -85,6 +97,13 @@ package slideslive.gui
 			
 			//Very last thing - fire evnet, that GUI is ready
 			dispatchEvent(new GeneralEvents("GUI is ready"));
+		}
+		
+		private function initVideoBgLoader():void{
+			videoPreloader = new VideoContainerBG();
+			slidePreloader = new PreLoaderAnimation();
+			videoSlideWrapper.addChild(videoPreloader);
+			videoSlideWrapper.addChild(slidePreloader);
 		}
 		
 		private function initTimerToHideControls():void {
@@ -130,17 +149,21 @@ package slideslive.gui
 			addChild(slider);
 			slider.addEventListener(GeneralEvents.SLIDERMOVE, sliderMoved);
 			slider.initSlider();
-			slider.x = playerValues.playerStageWidth - slider.width - 15;
+			slider.x = playerValues.playerStageWidth - slider.width - 5;
 			slider.y = slider.height/2;			
 		}
 		
 		private function sliderMoved(e:GeneralEvents){
 			recalculateSlidesAndVideoContainers(e.data);
 			recalculateControlsPosition();
+			centerLoaders();
 			recalculateBigPlayButton();
 			dispatchEvent(new GeneralEvents(GeneralEvents.SLIDEQUALITY, slidesContainer.width));
 			if(playerValues.isEmbedded()) recalculateEmbedParts();
-			recalculateStageDimensions();
+			recalculateStageDimensions();		
+			
+			tmpFill.width = videoSlideWrapper.width;
+			tmpFill.height = videoSlideWrapper.height;			
 		}
 	
 		
@@ -149,27 +172,44 @@ package slideslive.gui
 			playerValues.playerStageWidth = 960;
 			playerValues.playerStageHeight = videoSlideWrapper.y + videoSlideWrapper.height;
 			var isAvailable:Boolean = ExternalInterface.available;
-			PlayerOutput.printLog("Height "+playerValues.playerStageHeight);
 			ExternalInterface.call("resizePlayerContainer", playerValues.playerStageHeight);	
 		}		
 		
 		private function recalculateSlidesAndVideoContainers(size:Number){
-			videoContainer.width = size;
-			videoContainer.height = (videoContainer.width / videoRatio);
-			if(videoContainer.width < 10){
+			//videoContainer.width = size;
+			//videoContainer.height = (videoContainer.width / videoRatio);
+			videoContainerWidth = size;
+			videoContainerHeight = (size / videoRatio);
+			
+			if(videoContainerWidth < 50){
+				videoContainer.visible = false;
 				slidesContainer.width = playerValues.playerStageWidth;
 				slidesContainer.height = (slidesContainer.width / slideRatio);
 				slidesContainer.x = 0;								
-			}else{				
-				slidesContainer.width = (playerValues.playerStageWidth-videoContainer.width)- universalSpace;
+			}else{
+				videoContainer.visible = true;
+				if(videoStream != null) videoStream.getStreamModule().thcSetPlayerSize(videoContainerWidth,videoContainerHeight);				
+				slidesContainer.width = (playerValues.playerStageWidth-videoContainerWidth)- universalSpace;
 				slidesContainer.height = (slidesContainer.width / slideRatio);
-				slidesContainer.x = videoContainer.width + universalSpace;			
+				slidesContainer.x = videoContainerWidth + universalSpace;			
 			}
 		}
 		
+		
+		public function centerLoaders(){
+			if(videoContainerWidth > 200){				
+				videoPreloader.x = videoContainerWidth / 2;
+				videoPreloader.y = videoContainerHeight / 2;
+			}
+			if(slidesContainer.width < 200) slidePreloader.visible = false;
+			else slidePreloader.visible = true;
+			slidePreloader.x = slidesContainer.x + (slidesContainer.width / 2) - (slidePreloader.width / 2);
+			slidePreloader.y = (slidesContainer.height / 2) - (slidePreloader.height / 2);
+		}		
+		
 		private function recalculateControlsPosition(){
 			var controlsHeight:int = 45; //Because of tooltop, height property is inacurate
-			if(videoContainer.width < 350){
+			if(videoContainerWidth < 350){
 				videoControls.adaptToWidth(slidesContainer.width - (2*universalSpace));
 				videoControls.y = slidesContainer.height - controlsHeight - universalSpace;
 				videoControls.x = slidesContainer.x + universalSpace;	
@@ -178,11 +218,13 @@ package slideslive.gui
 				slidesControls.y = slidesContainer.height - controlsHeight - universalSpace - controlsHeight - universalSpace;				
 			} else {			
 				
-				videoControls.adaptToWidth(videoContainer.width - (2*universalSpace));
-				videoControls.y = videoContainer.height - controlsHeight - universalSpace;
+				videoControls.adaptToWidth(videoContainerWidth - (2*universalSpace));
+				videoControls.y = videoContainerHeight - controlsHeight - universalSpace;
 				videoControls.x = universalSpace;
 				slidesControls.x = ((slidesContainer.width - slidesControls.width) / 2) + slidesContainer.x;
 				slidesControls.y = slidesContainer.height - controlsHeight - universalSpace;
+				//Avoid slidescontrols to go over wrapper
+				if(slidesControls.y < 25) slidesControls.y = 25;
 			}
 			
 			
@@ -192,9 +234,9 @@ package slideslive.gui
 		}
 		
 		private function recalculateEmbedParts(){
-			if(videoContainer.width >= playerValues.playerStageWidth - 150){
+			if(videoContainerWidth >= playerValues.playerStageWidth - 150){
 				embedLogo.y = videoControls.y - 65;
-				embedLogo.x = videoContainer.width - embedLogo.width;
+				embedLogo.x = videoContainerWidth - embedLogo.width;
 			} else {
 				embedLogo.x = playerValues.playerStageWidth - embedLogo.width;
 				embedLogo.y = slidesControls.y; 
@@ -204,11 +246,11 @@ package slideslive.gui
 		
 		private function recalculateBigPlayButton(){
 			
-			if(videoContainer.width < 350){
+			if(videoContainerWidth < 350){
 				bigPlayButton.resize(slidesContainer.width,slidesContainer.height);			
 				bigPlayButton.x = slidesContainer.x;
 			} else {
-				bigPlayButton.resize(videoContainer.width,videoContainer.height);
+				bigPlayButton.resize(videoContainerWidth,videoContainerHeight);
 				bigPlayButton.x = videoContainer.x;
 			}
 		}
@@ -232,7 +274,7 @@ package slideslive.gui
 		
 		private function initSlideContainer():void {
 			slidesContainer = new SlidesContainer(error);
-			slidesContainer.x = videoContainer.width + universalSpace;
+			slidesContainer.x = videoContainerWidth + universalSpace;
 			videoSlideWrapper.addChild(slidesContainer);
 			
 		}
@@ -276,8 +318,9 @@ package slideslive.gui
 		}	
 		
 		//Some key functions served for other classes
-		public function addVideoStream(videoStream:MovieClip){
-			videoContainer.addChild(videoStream);
+		public function addVideoStream(videoStream:PlayerClip){
+			this.videoStream = videoStream;
+			videoContainer.addChild(this.videoStream);
 		}
 		
 		public function showPauseState():void {
@@ -311,6 +354,16 @@ package slideslive.gui
 			videoControls.moveSlideDot(position);
 		}
 		
+		public function colorSlideDot(redColor:Boolean):void {
+			if(redColor) videoControls.colorRedDot();
+			else videoControls.colorGreenDot();
+		}
+		
+		public function colorSyncButton(redColor:Boolean):void {
+			if(redColor) slidesControls.colorRedSync();
+			else slidesControls.colorGreenSync();
+		}		
+		
 		//In case, that something was asynchronously updated, update also GUI dimensions and send to JavaScript
 		public function recalculateGUI():void{
 			recalculateControlsPosition();
@@ -318,15 +371,19 @@ package slideslive.gui
 			dispatchEvent(new GeneralEvents(GeneralEvents.SLIDEQUALITY, slidesContainer.width));
 			if(playerValues.isEmbedded()) recalculateEmbedParts();
 			recalculateStageDimensions();
-		}		
+		}	
+		
+		public function hideVideoLoader():void {
+			videoPreloader.visible = false;
+		}
 		
 		//Getters
 		public function getVideoHeight():Number{
-			return videoContainer.height;
+			return videoContainerHeight;
 		}
 		
 		public function getVideoWidth():Number {
-			return videoContainer.width;
+			return videoContainerWidth;
 		}
 		
 		public function getSlideControls():SlidesControls {

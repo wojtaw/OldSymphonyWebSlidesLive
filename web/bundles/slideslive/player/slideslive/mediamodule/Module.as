@@ -2,13 +2,15 @@ package slideslive.mediamodule
 {
 	import flash.display.MovieClip;
 	
+	import slideslive.gui.PlayerClip;
+	
 	public class Module extends MovieClip implements VideoModuleInterface
 	{
 		public function Module()
 		{
 		}
 		
-		public function thcGetStreamClip():MovieClip{
+		public function thcGetStreamClip():PlayerClip{
 			return null;
 		}		
 		
@@ -41,6 +43,10 @@ package slideslive.mediamodule
 		}	
 		
 		public function thcSetVolume(vol:Number):Boolean {
+			return true;
+		}
+		
+		public function thcSetPlayerSize(width:Number, height:Number):Boolean{
 			return true;
 		}
 	

@@ -92,13 +92,13 @@ package slideslive.gui
 			addChild(timelineBarPlayed);
 			addChild(timelineBarSeek);
 			
-			viControlsAdaptable.addChild(slidesDot);
 			
 			addChild(viFull);
 			addChild(viPlay);
 			addChild(viControlsAdaptable);
 			addChild(viTimeBar);
 			addChild(viVolumeBar);			
+			addChild(slidesDot);
 		}
 		
 		private function createBarSeek():MovieClip
@@ -148,7 +148,7 @@ package slideslive.gui
 			viPlay.addEventListener(MouseEvent.MOUSE_OUT, playOut);
 			viPlay.addEventListener(MouseEvent.CLICK, playClicked);	
 			timelineBarSeek.addEventListener(MouseEvent.MOUSE_MOVE, moveSeekCursor);
-			timelineBarSeek.addEventListener(MouseEvent.MOUSE_OUT, moveSeekStop);
+			timelineBarSeek.addEventListener(MouseEvent.ROLL_OUT, moveSeekStop);
 			timelineBarSeek.addEventListener(MouseEvent.CLICK, seekerClick);	
 		}
 		
@@ -263,7 +263,15 @@ package slideslive.gui
 		//Recieves number 0 - 1 signalizing position on the bar 
 		public function moveSlideDot(position:Number):void
 		{
-			slidesDot.x = 10+((viControlsAdaptable.width - 20)*position);
+			slidesDot.x = viControlsAdaptable.x+10+(timelineTotalLength*position);
 		}
+		
+		public function colorRedDot():void {
+			slidesDot.redFill.visible = true;
+		}
+		
+		public function colorGreenDot():void {
+			slidesDot.redFill.visible = false;
+		}		
 	}
 }

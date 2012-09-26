@@ -16,6 +16,7 @@ package slideslive.mediamodule
 	
 	import slideslive.controller.ErrorController;
 	import slideslive.event.GeneralEvents;
+	import slideslive.gui.PlayerClip;
 	import slideslive.util.ErrorCodes;
 	import slideslive.util.PlayerOutput;
 	
@@ -46,9 +47,9 @@ package slideslive.mediamodule
 			Security.allowDomain('i.ytimg.com');
 		}
 		
-		override public function thcGetStreamClip():MovieClip{
-			var tmpMovieClipWrapper:MovieClip = new MovieClip();
-			tmpMovieClipWrapper.addChild(loaderYT);
+		override public function thcGetStreamClip():PlayerClip{
+			var tmpMovieClipWrapper:PlayerClip = new PlayerClip();
+			tmpMovieClipWrapper.setStreamClip(loaderYT, this);
 			return tmpMovieClipWrapper;
 		}
 		
@@ -152,6 +153,12 @@ package slideslive.mediamodule
 			playerYT.setVolume(100*vol);
 			return true;
 		}
+		
+		override public function thcSetPlayerSize(width:Number, height:Number):Boolean {
+			if(playerYT == null) return false;
+			else playerYT.setSize(width,height);
+			return true;
+		}		
 		
 		
 		

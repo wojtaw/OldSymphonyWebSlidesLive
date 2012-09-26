@@ -188,5 +188,16 @@ package slideslive.gui
 			toolTipWindow.x = peakPosition-(toolTipWindow.width/2)+25;
 			toolTipWindow.tooltipField.text = tooltipText;			
 		}
+		
+		public function colorRedSync():void {
+			slSync.redFill.visible = true;
+			slSync.greenFill.visible = false;
+		}
+		
+		public function colorGreenSync():void {
+			slSync.greenFill.visible = true;
+			slSync.redFill.visible = false;
+			
+		}			
 	}
 }

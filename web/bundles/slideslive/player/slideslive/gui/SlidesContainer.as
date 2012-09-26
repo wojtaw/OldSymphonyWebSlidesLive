@@ -23,6 +23,7 @@ package slideslive.gui
 		public var slideLoader4:UILoader = new UILoader();
 		public var slideLoader5:UILoader = new UILoader();
 		
+		
 		private var error:ErrorHandler;			
 		
 		
@@ -37,6 +38,7 @@ package slideslive.gui
 			square.graphics.beginFill(0x0099FF);
 			square.graphics.drawRect(0,0,408,305);
 			square.graphics.endFill();	
+			square.alpha = 0;
 			addChild(square);
 			initLoaders();
 			initListeners();			

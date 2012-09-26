@@ -91,7 +91,7 @@ package slideslive.start
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");
 				
 			}else if(PlayerValues.buildConfiguration == 2){
-				playerValues.setDebugMode(true);
+				playerValues.setDebugMode(false);
 				playerValues.setPresentationID(38889130);
 				playerValues.setPresentationModule("YOUTUBE");
 				playerValues.setPresentationParameter("37P3zrajCy0");
@@ -103,7 +103,7 @@ package slideslive.start
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");				
 				
 			}else if(PlayerValues.buildConfiguration == 3){
-				playerValues.setDebugMode(true);
+				playerValues.setDebugMode(false);
 				
 				playerValues.setPresentationID(flashVarObject["presentationID"]);
 				playerValues.setPresentationModule(flashVarObject["mediaType"]);

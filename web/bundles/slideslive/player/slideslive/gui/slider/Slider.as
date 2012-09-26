@@ -83,6 +83,7 @@ package slideslive.gui.slider
 			sliderSeeker.removeEventListener(MouseEvent.MOUSE_MOVE, onSliderMove);
 			stage.removeEventListener(MouseEvent.MOUSE_MOVE, onSliderMove);	
 			sliderSeeker.stopDrag();	
-		}		
+		}	
+		
 	}
 }

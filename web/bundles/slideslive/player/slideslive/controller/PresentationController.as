@@ -21,6 +21,7 @@ package slideslive.controller
 		private var playerGUI:PlayerGUI
 		private var error:ErrorController;
 		private var isPlaying:Boolean = false;
+		private var synchronizedSlides:Boolean = true;		
 		
 		private var presentationTimer:Timer = new Timer(100);
 		
@@ -47,6 +48,7 @@ package slideslive.controller
 		private function videoIgnited(e:GeneralEvents):Boolean{
 			PlayerOutput.printLog("VIDEO STREAM READY");
 			playerGUI.recalculateGUI();
+			playerGUI.hideVideoLoader();
 			if(!initListeners()) return PlayerOutput.printError("Listeners were not added");
 			else if(!runMainTimer()) return PlayerOutput.printError("Main presentation timer failed");
 			else if(!initSlides()) return PlayerOutput.printError("Slides addition failed");
@@ -63,14 +65,37 @@ package slideslive.controller
 		//Each timer tick do following updates
 		private function runTimerTasks(e:TimerEvent){
 			playerGUI.updateTime(videoModule.thcGetCurrTime(), videoModule.thcGetTotalTime());
-			moveSlideDot();
-		}		
+			moveAndColorSlideDot();
+			checkSlideToUpdate();
+			colorSyncButton();
+		}	
 		
-		private function moveSlideDot():void {
-			var tmpResult:Number = playerValues.getSlidesRecords()[currentSlideIndex].getSlideTime();
+		private function colorSyncButton():void
+		{
+			if(synchronizedSlides) playerGUI.colorSyncButton(false);
+			else playerGUI.colorSyncButton(true);
+		}
+		
+		
+		private function checkSlideToUpdate():Boolean {
+			if(!synchronizedSlides) return false;
+			if(currentSlideIndex < playerValues.getSlidesRecords().length-1){
+				if(videoModule.thcGetCurrTime() > playerValues.getSlidesRecords()[currentSlideIndex+1].getSlideTime()){
+					currentSlideIndex++;
+					reloadSlide("NEXT");
+				}
+			}					
+			return true;
+		}
+				
+		
+		private function moveAndColorSlideDot():void {
+			var tmpResult:Number = playerValues.getSlidesRecords()[countIndex(currentSlideIndex)].getSlideTime();
 			tmpResult = tmpResult/videoModule.thcGetTotalTime()
 			if(isNaN(tmpResult)) tmpResult = 0;
-			playerGUI.moveSlideDot(tmpResult);			
+			playerGUI.moveSlideDot(tmpResult);	
+			if(synchronizedSlides) playerGUI.colorSlideDot(false);
+			else playerGUI.colorSlideDot(true);
 		}
 		
 		private function initListeners():Boolean
@@ -82,9 +107,14 @@ package slideslive.controller
 			playerGUI.getSlideControls().addEventListener(ControlsEvents.NEXTSLIDE, nextSlideHandler);
 			playerGUI.getSlideControls().addEventListener(ControlsEvents.PREVSLIDE, prevSlideHandler);
 			playerGUI.getSlideControls().addEventListener(ControlsEvents.JUMP, jumpToTimeHandler);
+			playerGUI.getSlideControls().addEventListener(ControlsEvents.SYNCHRONIZESLIDES, synchronizeEventHandler);			
 			playerGUI.addEventListener(GeneralEvents.SLIDEQUALITY, decideSlideQuality);
 			return true;			
 		}
+		
+		private function synchronizeEventHandler(e:ControlsEvents):void{
+			synchronizeSlides();
+		}		
 		
 		protected function decideSlideQuality(e:GeneralEvents):void
 		{
@@ -102,17 +132,20 @@ package slideslive.controller
 		}
 		
 		private function nextSlideHandler(e:ControlsEvents):void {
+			synchronizedSlides = false;
 			reloadSlide("NEXT");
 		}
 		
 		private function prevSlideHandler(e:ControlsEvents):void {
+			synchronizedSlides = false;
 			reloadSlide("PREV");
 		}	
 		
 		private function jumpToTimeHandler(e:ControlsEvents):void {
-			var tmpTime:int = playerValues.getSlidesRecords()[currentSlideIndex].getSlideTime();
+			var tmpTime:int = playerValues.getSlidesRecords()[countIndex(currentSlideIndex)].getSlideTime();
 			PlayerOutput.printLog("Now rewinding video to time "+tmpTime);
 			videoModule.thcSeekTime(tmpTime);
+			synchronizedSlides = true;
 			
 			//Signalize that player will be in state of playing
 			isPlaying = false;
@@ -131,6 +164,7 @@ package slideslive.controller
 				playerGUI.showPlayState();
 				videoModule.thcPlayVideo();
 				isPlaying = true;
+				playerGUI.recalculateGUI();
 			}
 			
 		}
@@ -142,6 +176,7 @@ package slideslive.controller
 		private function videoSeekHandler(e:ControlsEvents):void{
 			PlayerOutput.printLog("Video seek");
 			videoModule.thcSeekTime(e.numberData * videoModule.thcGetTotalTime());
+			synchronizeSlides();
 			
 			//Signalize that player will be in state of playing
 			isPlaying = false;
@@ -155,7 +190,7 @@ package slideslive.controller
 				playerValues.getPresentationModule() == "audio" || 
 				playerValues.getPresentationModule() == "AUDIO"){
 				PlayerOutput.printLog("Attempting to init YouTube module");
-				//TO DO - investigate bug why video width and height do not fit by few pixels
+
 				videoModule = new ModuleYoutube(error, playerValues.getPresentationParameter(), playerGUI.getVideoHeight()+2, playerGUI.getVideoWidth()+3);
 				//TO DO - here it might fail if event would be dispatched before this row is executed
 				videoModule.addEventListener(GeneralEvents.YT_MODULE_READY, videoIgnited);
@@ -213,6 +248,7 @@ package slideslive.controller
 		}	
 		
 		private function reloadSlide(eventSource:String="RELOAD"):void {
+			if(!playerValues.isSlideAvailable()) eventSource="NONE";
 			if(eventSource == "RELOAD"){
 				reloadArray();				
 			}else if(eventSource == "NEXT"){
@@ -239,6 +275,12 @@ package slideslive.controller
 		private function getPathForIndex(indexToLook:int):String {
 			var slideName:String = playerValues.getSlidesRecords()[countIndex(indexToLook)].getSlideName();
 			var path:String;
+			//In case it is audioslideshow only
+			if(!playerValues.isVideoAvailable()){
+				slidesMode = SlideQuality.ORIGINAL;
+				return playerValues.getPathToImages()+"original/"+presentationID+"/"+slideName;
+			}
+				
 			if(slidesMode == SlideQuality.SMALL) path = playerValues.getPathToImages()+"small/"+presentationID+"/"+slideName;
 			else if(slidesMode == SlideQuality.MEDIUM) path = playerValues.getPathToImages()+"medium/"+presentationID+"/"+slideName;
 			else if(slidesMode == SlideQuality.BIG) path = playerValues.getPathToImages()+"big/"+presentationID+"/"+slideName;
@@ -255,6 +297,42 @@ package slideslive.controller
 			else if(searchedIndex < 0) valueToReturn = totalSlides + searchedIndex;
 			else valueToReturn = searchedIndex;
 			return valueToReturn;
+		}	
+		
+		
+		
+		//Slides synchronization
+		public function synchronizeSlides(timeInSeconds:int=-1):Boolean {
+			//Get current time
+			synchronizedSlides = false;
+			var searchedTime:Number;
+			if(timeInSeconds == -1){
+				searchedTime = videoModule.thcGetCurrTime();
+			} else {
+				searchedTime = timeInSeconds;
+			}
+			
+			var searchedIndex:int = 0;
+			
+			var i:int = 0;
+			while(!synchronizedSlides && i< playerValues.getSlidesRecords().length){
+				i++;
+				//When i haven't found slide with higher time and
+				//I am at the end of the array, it must be last one
+				if(i >= playerValues.getSlidesRecords().length){
+					synchronizedSlides = true;
+					searchedIndex = i-1;
+				} else if(searchedTime <= playerValues.getSlidesRecords()[i].getSlideTime()){					
+					if(i != 0) searchedIndex = i-1;
+					else searchedIndex = i;
+					PlayerOutput.printLog("I found it " + i);
+					synchronizedSlides = true;
+				}				
+			}
+			PlayerOutput.printLog("Slide synchrnization found slide: " + searchedIndex);
+			currentSlideIndex = searchedIndex;
+			reloadSlide();		
+			return true;
 		}		
 		
 	}

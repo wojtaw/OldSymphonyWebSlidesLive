@@ -138,17 +138,18 @@ package slideslive.gui
 			recalculateSlidesAndVideoContainers(e.data);
 			recalculateControlsPosition();
 			recalculateBigPlayButton();
-			recalculateStageDimensions();
 			dispatchEvent(new GeneralEvents(GeneralEvents.SLIDEQUALITY, slidesContainer.width));
 			if(playerValues.isEmbedded()) recalculateEmbedParts();
+			recalculateStageDimensions();
 		}
+	
 		
 		private function recalculateStageDimensions():void
 		{
 			playerValues.playerStageWidth = 960;
 			playerValues.playerStageHeight = videoSlideWrapper.y + videoSlideWrapper.height;
 			var isAvailable:Boolean = ExternalInterface.available;
-			PlayerOutput.printLog("External interface available: "+isAvailable);
+			PlayerOutput.printLog("Height "+playerValues.playerStageHeight);
 			ExternalInterface.call("resizePlayerContainer", playerValues.playerStageHeight);	
 		}		
 		
@@ -308,6 +309,15 @@ package slideslive.gui
 		public function moveSlideDot(position:Number):void
 		{
 			videoControls.moveSlideDot(position);
+		}
+		
+		//In case, that something was asynchronously updated, update also GUI dimensions and send to JavaScript
+		public function recalculateGUI():void{
+			recalculateControlsPosition();
+			recalculateBigPlayButton();
+			dispatchEvent(new GeneralEvents(GeneralEvents.SLIDEQUALITY, slidesContainer.width));
+			if(playerValues.isEmbedded()) recalculateEmbedParts();
+			recalculateStageDimensions();
 		}		
 		
 		//Getters

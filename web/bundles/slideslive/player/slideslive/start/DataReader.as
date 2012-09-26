@@ -97,19 +97,28 @@ package slideslive.start
 				playerValues.setPresentationParameter("37P3zrajCy0");
 				playerValues.setSlideAvailable(true);
 				playerValues.setVideoAvailable(true);
-				playerValues.setEmbed(false);
+				playerValues.setEmbed(true);
 				
 				playerValues.setPathToImages("SAMPLE_DATA/presentationImages/");
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");				
 				
 			}else if(PlayerValues.buildConfiguration == 3){
 				playerValues.setDebugMode(true);
+				
 				playerValues.setPresentationID(flashVarObject["presentationID"]);
 				playerValues.setPresentationModule(flashVarObject["mediaType"]);
 				playerValues.setPresentationParameter(flashVarObject["mediaID"]);
-				playerValues.setSlideAvailable(flashVarObject["hasSlides"]);
-				playerValues.setVideoAvailable(flashVarObject["hasVideo"]);
-				//playerValues.setEmbed(false);
+				if(flashVarObject["hasSlides"] == "true") playerValues.setSlideAvailable(true);
+				else if(flashVarObject["hasSlides"] == "false") playerValues.setSlideAvailable(false);
+				else error.handleError(ErrorCodes.WRONG_FLASH_VARS);
+				
+				if(flashVarObject["hasVideo"] == "true") playerValues.setVideoAvailable(true);
+				else if(flashVarObject["hasVideo"] == "false") playerValues.setVideoAvailable(false);
+				else error.handleError(ErrorCodes.WRONG_FLASH_VARS);
+				
+				//Embed is optional
+				if(flashVarObject["hasSlides"] == "true") playerValues.setEmbed(true);
+				else if(flashVarObject["hasSlides"] == "false") playerValues.setEmbed(false);
 				
 				playerValues.setPathToImages("http://www.slideslive.com/data/PresentationSlides/");
 				playerValues.setPathToXMLStorage("http://www.slideslive.com/data/PresentationXMLs/");				

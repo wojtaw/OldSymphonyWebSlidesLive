@@ -105,7 +105,6 @@ package slideslive.gui
 		
 		public function loadSlide(pathToFile:String,loaderNumber:int):void
 		{
-			trace("loading slide");
 			if(loaderNumber == 1){
 				slideLoader1.source = pathToFile;
 			}else if(loaderNumber == 2){

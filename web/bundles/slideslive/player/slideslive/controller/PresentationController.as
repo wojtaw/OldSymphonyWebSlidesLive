@@ -46,6 +46,7 @@ package slideslive.controller
 		
 		private function videoIgnited(e:GeneralEvents):Boolean{
 			PlayerOutput.printLog("VIDEO STREAM READY");
+			playerGUI.recalculateGUI();
 			if(!initListeners()) return PlayerOutput.printError("Listeners were not added");
 			else if(!runMainTimer()) return PlayerOutput.printError("Main presentation timer failed");
 			else if(!initSlides()) return PlayerOutput.printError("Slides addition failed");
@@ -96,7 +97,7 @@ package slideslive.controller
 			if(tmpMode != slidesMode){
 				slidesMode = tmpMode;
 				reloadSlide("RELOAD");
-				trace("changed quality to -------------------- "+slidesMode);
+				PlayerOutput.printLog("changed quality to -------------------- "+slidesMode);
 			}
 		}
 		
@@ -213,7 +214,6 @@ package slideslive.controller
 		
 		private function reloadSlide(eventSource:String="RELOAD"):void {
 			if(eventSource == "RELOAD"){
-				trace("Slide complete reload");
 				reloadArray();				
 			}else if(eventSource == "NEXT"){
 				currentSlideIndex++;

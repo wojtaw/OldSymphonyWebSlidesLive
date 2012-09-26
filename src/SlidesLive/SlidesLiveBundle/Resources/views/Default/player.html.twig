@@ -12,8 +12,13 @@
 			hasVideo: "{% if presentation.video %}true{% else %}false{% endif %}",
 			hasSlides: "{% if presentation.slides %}true{% else %}false{% endif %}",
 			presentationID: "{{ presentation.id }}",
-			mediaType: "{{ presentation.service }}",
-			mediaID: "{{ presentation.serviceId }}",
+			{% if presentation.externalService != null %}
+				mediaType: "{{ presentation.externalService }}",
+				mediaID: "{{ presentation.externalServiceId }}",						
+			{% else %}
+				mediaType: "{{ presentation.service }}",
+				mediaID: "{{ presentation.serviceId }}",			
+			{% endif %}
 			isEmbed: "true"		
 		};
 		var params = {

@@ -17,7 +17,7 @@
 
 {% set background = account.getImage('background-images') %}
 {% if background %}
-  .websiteLightBackground {
+  body {
     background-image: url('{{ asset(background) }}');
   }
 {% endif %}

@@ -1,10 +1,90 @@
-<html><body>
+<html>
+<head>
+	<style>
+		.radek {
+			width: 30em;
+			padding: 0;
+			clear: both;
+			margin-bottom: 1em;
+		}
+
+		.policko {
+			width: 20em;
+			margin-right: 0;
+			margin-left: auto;
+			padding: 0;
+			float:right;
+		}
+		.errory {
+			width: 20em;
+			float:right;
+			font-size: smaller;
+			color: red;
+			
+		}
+		.errory ul {
+			margin: 0 0 1em 0;
+			padding: 0;
+		}
+		.errory li {
+			padding-left: 2em;
+			list-style-type: none;
+		}
+	</style>
+</head>
+<body>
 
 <h1>Form Themeing</h1>
 
+
+  <form action="" method='POST' {{ form_enctype(form) }} formnovalidate>
+  	<div>
+  		
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.text) }}
+  		{{ form_widget(form.text, {'attr': {'class': 'policko'} }) }}
+  		<div class="errory">{{ form_errors(form.text) }}</div>
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.readonly) }}
+  		{{ form_widget(form.readonly, {'attr': {'class': 'policko'} }) }}
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.email) }}
+  		{{ form_widget(form.email, {'attr': {'class': 'policko'} }) }}
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.password) }}
+  		{{ form_widget(form.password, {'attr': {'class': 'policko'} }) }}
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.textarea) }}
+  		{{ form_widget(form.textarea, {'attr': {'class': 'policko'} }) }}
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.choice) }}
+  		{{ form_widget(form.choice, {'attr': {'class': 'policko'} }) }}
+  	</div>
+  	<div class="radek">
+  		{{ form_label(form.checkbox) }}
+  		{{ form_widget(form.checkbox, {'attr': {'class': 'policko'} }) }}
+  	</div>
+  	{% for item in form.repeated %}
+	  	<div class="radek">
+	  		{{ form_label(item) }}
+	  		{{ form_widget(item, {'attr': {'class': 'policko'} }) }}
+	  	</div>
+	{% endfor %}
+    {{ form_rest(form) }}
+    <input type="submit" value="Save">
+  </form>
+
+
+  </hr>	
   <form action="" method='POST' {{ form_enctype(form) }}>
-    {{ form_label(form.name) }} --- 
-    {{ form_widget(form.name, {'attr': {'size': '40em'} }) }}    
+    {{ form_widget(form) }}
+    {#{{ form_widget(form.name, {'attr': {'size': '40em'} }) }}#}    
   </form>
 
 </body></html>

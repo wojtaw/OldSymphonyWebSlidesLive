@@ -5,6 +5,7 @@ namespace SlidesLive\SlidesLiveBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\LanguageList;
 
 /**
  * SlidesLive\SlidesLiveBundle\Entity\Presentation
@@ -213,6 +214,13 @@ class Presentation {
      */
     public function getFormatedDate () {
       return date_format($this->dateRecorded,'j.n.Y');
+    }
+
+    /**
+     * Vraci nazev jazyka misto kodu.
+     */
+    public function getLanguage() {
+        return LanguageList::getLanguage($this->lang);
     }
 
     /**

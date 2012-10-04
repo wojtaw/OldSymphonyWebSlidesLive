@@ -5,6 +5,7 @@ namespace SlidesLive\SlidesLiveBundle\Form;
 use SlidesLive\SlidesLiveBundle\Form\SimpleForm;
 use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 use Symfony\Component\Form\FormBuilder;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\LanguageList;
 
 class PresentationEditForm extends SimpleForm {
 
@@ -20,7 +21,11 @@ class PresentationEditForm extends SimpleForm {
     /* $this->add($field_name, $field_type, $label,Boolean $required, Array $other_params); */     
     $this->add('title', 'text', 'Title:');
     $this->add('description', 'textarea', 'Description:');
-    $this->add('lang', 'text', 'Language:', true);
+    $this->add('lang', 'choice', 'Language:', true, array (
+        'choices' => LanguageList::getLanguages(),
+        'empty_value' => false,
+      )
+    );
     $this->add('privacy', 'choice', 'Presentation visibility:', false, array(
       'choices' => array (
         Privacy::P_PUBLIC => 'Public', 

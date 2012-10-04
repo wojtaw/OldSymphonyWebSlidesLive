@@ -39,7 +39,7 @@ class AccountController extends Controller
       $account = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       
-      $form = $this->createForm(new AccountEditForm(), $account);
+      $form = $this->createForm(new AccountEditForm($account), $account);
       
       if ($request->getMethod() == 'POST' && isset($_POST['accountEdit'])) {
         $form->bindRequest($request);
@@ -165,10 +165,11 @@ class AccountController extends Controller
     
      public function presentationEditFormAction($action, $presentation) {
       $request = $this->getRequest();
+      $account = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       $this->data['action'] = $action;
       
-      $form = $this->createForm(new PresentationEditForm(), $presentation);
+      $form = $this->createForm(new PresentationEditForm($account), $presentation);
         
       if ($request->getMethod() == 'POST' && isset($_POST['presentationEdit'])) {
         $form->bindRequest($request);

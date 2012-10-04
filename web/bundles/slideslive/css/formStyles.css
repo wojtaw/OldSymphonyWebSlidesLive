@@ -1,0 +1,56 @@
+.radek {
+	width: 30em;
+	padding: 0;
+	clear: both;
+	margin-bottom: 0.5em;
+}
+
+.policko {
+	width: 20em;
+	margin-left: auto;
+	padding: 0;
+	float:right;
+}
+
+.mandatory {
+	color: red;
+	font-size: smaller;
+}
+
+/* errory */
+.errory {
+	width: 20em;
+	font-size: smaller;
+	color: red;
+	margin-left: 16em;
+	margin-top: 0.5em;
+}
+.errory ul {
+	margin: 0;
+	padding: 0;
+}
+.errory li {
+	list-style-type: none;
+}
+
+/* Account edit form */
+.accountEditForm .accountDescription {
+	margin-right: 0;
+	width: 36em;
+	height: 10em;
+}
+
+/* Registration form */
+.registrationForm .radek {
+	width: 25em;
+}
+
+.registrationForm .errory {
+	margin-left: 10em;
+}
+
+/* Presentation edit form */
+.presentationDescription {
+	width: 36em;
+	height: 5em;
+}

@@ -1,32 +1,50 @@
-{% form_theme form 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
-
 {% block presentationEditForm %}
 
-<form action='{{ action }}' method='POST' {{ form_enctype(form) }}>
-
-  <table>
-  
-    <tr class="form_row_error">
-      <td></td>
-      <td>{{ form_errors(form) }}{{ message }}</td>
-    </tr>
+<form action='{{ action }}' method='POST' {{ form_enctype(form) }} class='presentationEditForm'>
+    <div class="errory">{{ form_errors(form) }}{{ message }}</div>
     
+      <div class="errory">{{ form_errors(form.title) }}</div>
+      <div class="radek">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.description) }}</div>
+      <div class="radek">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'policko presentationDescription'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.lang) }}</div>
+      <div class="radek">
+        {{ form_label(form.lang) }}
+        {{ form_widget(form.lang, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.privacy) }}</div>
+      <div class="radek">
+        {{ form_label(form.privacy) }}
+        {{ form_widget(form.privacy, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.folder.canonicalName) }}</div>
+      <div class="radek">
+        {{ form_label(form.folder.canonicalName) }}
+        {{ form_widget(form.folder.canonicalName, {'attr': {'class': 'policko'} }) }}
+      </div>
+  
+    
+    {#
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.title } %}
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.description } %}
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.lang } %}
     {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.privacy } %}
+    #}
     
     {{ form_rest(form) }}
     
-    <tr class='form_row'>
-      <td></td>
-      <td>
-        <input type="submit" value="Save changes" formnovalidate>
-        <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Do not make any changes</a>
-      </td>
-    </tr>
-
-  </table>
+    <input type="submit" value="Save changes" formnovalidate>
+    <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Do not make any changes</a>
 
 </form>
 

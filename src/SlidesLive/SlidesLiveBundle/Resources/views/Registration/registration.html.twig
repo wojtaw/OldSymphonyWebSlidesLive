@@ -2,40 +2,43 @@
 
 {% block title %}Registration{% endblock %}    
 
-{% form_theme form 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
-
 {% block content %}
+  {% set star = "<span class='mandatory'>*</span>" %}
 
   <h2 class="globalFont">Registration</h2>
 
-<div>
-  <form action="{{ path('registration') }}" method='POST' {{ form_enctype(form) }}>
-    <table>
-    
-      <tr class="form_row_error">
-        <td></td>
-        <td>{{ form_errors(form) }}</td>
-      </tr>
-         
-      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.name } %}
-      {% include 'SlidesLiveBundle:FormFields:textField.html.twig'      with {'input': form.username } %}
-      {% include 'SlidesLiveBundle:FormFields:repeatedField.html.twig'  with {'input': form.password } %}
-      {% include 'SlidesLiveBundle:FormFields:hiddenField.html.twig'    with {'input': form.canonicalName } %}
-      
-      {{ form_rest(form) }}
-      
-      <tr class="form_row">
-        <td></td>
-        <td>
-           <input type='submit' value='Confirm' formnovalidate> {# formnovalidate #}
-        </td>
-      </tr>
-    
-    </table>
-  </form>           
+  <div>
+    <form action="{{ path('registration') }}" method='POST' {{ form_enctype(form) }} class="registrationForm">
+         <div class="errory">{{ form_errors(form) }}</div> 
 
-  <p>
-    <span class='required' title='Required field.'>*</span>Mandatory fields.  
-  </p>
-</div>
+        <div class="errory">{{ form_errors(form.name) }}</div>
+        <div class="radek">
+          {{ form_label(form.name) }}{{ star|raw }}
+          {{ form_widget(form.name, {'attr': {'class': 'policko'} }) }}
+        </div>
+
+        <div class="errory">{{ form_errors(form.username) }}</div>
+        <div class="radek">
+          {{ form_label(form.username) }}{{ star|raw }}
+          {{ form_widget(form.username, {'attr': {'class': 'policko'} }) }}
+        </div>
+
+        <div class="errory">{{ form_errors(form.password) }}</div>
+        {% for repeated in form.password %}
+          <div class="radek">
+            {{ form_label(repeated) }}{{ star|raw }}
+            {{ form_widget(repeated, {'attr': {'class': 'policko'} }) }}
+          </div>
+        {% endfor %}
+        
+        {{ form_rest(form) }}
+        
+             <input type='submit' value='Confirm' formnovalidate> {# formnovalidate #}
+        
+    </form>           
+
+    <p class='mandatory'>
+      *Mandatory fields.
+    </p>
+  </div>
 {% endblock %}

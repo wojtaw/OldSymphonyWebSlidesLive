@@ -1,40 +1,69 @@
-{% form_theme accountEditForm 'SlidesLiveBundle:FormThemes:registration_theme1.html.twig' %}
-
 {% block leftPaneBody %}
 
 {% set form = accountEditForm %}
 
-<form action="{{ path('manageAccount') }}" method='POST' {{ form_enctype(form) }}>
-  <table>
-  
-    <tr class="form_row_error">
-      <td></td>
-      <td>{{ form_errors(form) }}{{ message }}</td>
-    </tr>
-       
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.username } %}
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.description } %}
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.website } %}
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.showHeader } %}
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.showFooter } %}
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.privacy } %}
-    {% include 'SlidesLiveBundle:FormFields:textField.html.twig'  with {'input': form.old_password } %}
-    {% include 'SlidesLiveBundle:FormFields:repeatedField.html.twig'  with {'input': form.new_password } %}
+<form action="{{ path('manageAccount') }}" method='POST' {{ form_enctype(form) }} class="accountEditForm">    
+      <div class="errory">{{ form_errors(form) }}{{ message }}</div>
+
+      <div class="errory">{{ form_errors(form.username) }}</div>
+      <div class="radek">
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.description) }}</div>
+      <div class="radek">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'policko accountDescription'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.website) }}</div>
+      <div class="radek">
+        {{ form_label(form.website) }}
+        {{ form_widget(form.website, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.primaryFolder.canonicalName) }}</div>
+      <div class="radek">
+        {{ form_label(form.primaryFolder.canonicalName) }}
+        {{ form_widget(form.primaryFolder.canonicalName, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.showHeader) }}</div>
+      <div class="radek">
+        {{ form_label(form.showHeader) }}
+        {{ form_widget(form.showHeader, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.showFooter) }}</div>
+      <div class="radek">
+        {{ form_label(form.showFooter) }}
+        {{ form_widget(form.showFooter, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.privacy) }}</div>
+      <div class="radek">
+        {{ form_label(form.privacy) }}
+        {{ form_widget(form.privacy, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.old_password) }}</div>
+      <div class="radek">
+        {{ form_label(form.old_password) }}
+        {{ form_widget(form.old_password, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.new_password) }}</div>
+      {% for repeated in form.new_password %} 
+        <div class="radek">
+          {{ form_label(repeated) }}
+          {{ form_widget(repeated, {'attr': {'class': 'policko'} }) }}
+        </div>
+      {% endfor %}
         
     {{ form_rest(form) }}
     
-    <tr class="form_row">
-      <td></td>
-      <td>
-         <input type='submit' value='Save changes' formnovalidate> {# formnovalidate #}
-      </td>
-    </tr>
-  
-  </table>
-</form>           
-
-<p>
-    <span class='required' title='Required field.'>*</span>Mandatory fields.  
-</p>
+    <input type='submit' value='Save changes' formnovalidate> {# formnovalidate #}
+    </form>           
 
 {% endblock %}

@@ -8,6 +8,12 @@ use Symfony\Component\Form\FormBuilder;
 
 class PresentationEditForm extends SimpleForm {
 
+  protected $account;
+
+  public function __construct($account) {
+    $this->account = $account;
+  }
+
   public function buildForm (FormBuilder $builder, array $options) {
     $this->builder = $builder;
     
@@ -23,7 +29,7 @@ class PresentationEditForm extends SimpleForm {
       ),
       'empty_value' =>false,
     ));
-    
+    $this->builder->add('folder', new FolderSelectionForm($this->account));
   }
   
   public function getName () {
@@ -34,6 +40,7 @@ class PresentationEditForm extends SimpleForm {
     return array(
         'data_class' => 'SlidesLive\SlidesLiveBundle\Entity\Presentation',
         'validation_groups' => array('edit'),
+        'cascade_validation' => true,
     );
   }
 

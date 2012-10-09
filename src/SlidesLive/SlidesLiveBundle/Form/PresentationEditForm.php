@@ -10,9 +10,15 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\LanguageList;
 class PresentationEditForm extends SimpleForm {
 
   protected $account;
+  protected $presentation;
+  protected $accountFolders = array();
 
-  public function __construct($account) {
+  public function __construct($account, $presentation) {
+    $this->presentation = $presentation;
     $this->account = $account;
+    foreach($account->getFolders() as $folder) {
+      $this->accountFolders[$folder->getId()] = $folder->getName();
+    }
   }
 
   public function buildForm (FormBuilder $builder, array $options) {
@@ -34,7 +40,12 @@ class PresentationEditForm extends SimpleForm {
       ),
       'empty_value' =>false,
     ));
-    $this->builder->add('folder', new FolderSelectionForm($this->account));
+    $this->add('folder', 'choice', 'Folder:', false, array(
+      'choices' => $this->accountFolders,
+      'empty_value' =>false,
+      'property_path' => false,
+      'data' => $this->presentation->getFolder()->getId(),
+    ));
   }
   
   public function getName () {

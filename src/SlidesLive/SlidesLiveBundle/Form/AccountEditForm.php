@@ -50,11 +50,12 @@ class AccountEditForm extends SimpleForm {
       )
     );
     //$builder->add('primaryFolder', new FolderSelectionForm($this->account));
-    //$this->add('primaryFolderId', 'choice', 'Folder:', false, array(
-    //  'choices' => $this->accountFolders,
-    //  'empty_value' =>false,
-    //  'property_path' => false
-    //));
+    $this->add('primaryFolderId', 'choice', 'Folder:', false, array(
+      'choices' => $this->accountFolders,
+      'empty_value' =>false,
+      'property_path' => false,
+      'data' => $this->account->getPrimaryFolder()->getId(),
+    ));
   }
   
   public function getName () {

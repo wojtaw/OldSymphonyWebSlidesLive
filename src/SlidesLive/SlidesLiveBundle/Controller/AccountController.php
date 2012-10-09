@@ -62,14 +62,14 @@ class AccountController extends Controller
           }            
         }
         // nastaveni vybraneho primary folderu podle zadaneho id
-        //$folderId = $form->get('primaryFolderId')->getData();
-        //$folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
-        //if (!$folder) {
-        //  $form->get('primaryFolderId')->addError(new FormError("Inserted folder does not exist."));          
-        //} 
-        //else {
-        //  $account->setPrimaryFolder($folder);
-        //}
+        $folderId = $form->get('primaryFolderId')->getData();
+        $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
+        if (!$folder) {
+          $form->get('primaryFolderId')->addError(new FormError("Inserted folder does not exist."));          
+        } 
+        else {
+          $account->setPrimaryFolder($folder);
+        }
         if ($form->isValid()) {
           if ($oldPassword && $newPassword) {
             $account->setPassword($newPassword);
@@ -174,15 +174,24 @@ class AccountController extends Controller
      public function presentationEditFormAction($action, $presentation) {
       $request = $this->getRequest();
       $account = $this->get('security.context')->getToken()->getUser();
+      $em = $this->getDoctrine()->getEntityManager();
       $this->data['message'] = '';      
       $this->data['action'] = $action;
       
-      $form = $this->createForm(new PresentationEditForm($account), $presentation);
-        
+      $form = $this->createForm(new PresentationEditForm($account, $presentation), $presentation);
+      
       if ($request->getMethod() == 'POST' && isset($_POST['presentationEdit'])) {
         $form->bindRequest($request);
+        // nastaveni vybraneho primary folderu podle zadaneho id
+        $folderId = $form->get('folder')->getData();
+        $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
+        if (!$folder) {
+          $form->get('folder')->addError(new FormError("Inserted folder does not exist."));          
+        } 
+        else {
+          $presentation->setFolder($folder);
+        }
         if ($form->isValid()) {
-          $em = $this->getDoctrine()->getEntityManager();
           $em->flush();
           $this->data['message'] = 'Presentation info successfully saved.';
         }

@@ -49,6 +49,12 @@ administrationEditAccount:
   requirements:
     accountId:  \d+
 
+resetPassword:
+  pattern: /admin/reset/password/{accountId}
+  defaults: { _controller: SlidesLiveBundle:Admin:resetPassword }
+  requirements:
+    accountId:  \d+
+
 # -----PUBLIC PRESENTATION------------------------------------------------------      
 account:
     pattern: /{accountCanName}

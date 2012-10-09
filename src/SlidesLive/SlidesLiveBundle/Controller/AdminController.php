@@ -28,12 +28,29 @@ class AdminController extends Controller {
     		return $this->render('SlidesLiveBundle:Admin:editAccount.html.twig', array('accountNotFound' => true));
     	}
 
+    	$this->data['account'] = $account;
     	$this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm', array('account' => $account));
         $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('account' => $account, 'type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
         $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('account' => $account, 'type' => 'logos', 'formClass' => new LogoUploadForm()));
         $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('account' => $account, 'type' => 'avatars', 'formClass' => new AvatarUploadForm()));
     	return $this->render('SlidesLiveBundle:Admin:editAccount.html.twig', $this->data);
     }
+
+    public function resetPasswordAction($accountId) {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$account = $em->getRepository('SlidesLiveBundle:Account')->find($accountId);
+    	$this->data['accountId'] = $accountId;
+    	if ($account) {
+    		$this->data['account'] = $account;
+    		$this->data['password'] = md5(microtime());
+    		$encoder = $this->get('security.encoder_factory')->getEncoder($account);
+    		$account->setPassword($encoder->encodePassword($this->data['password'], $account->getSalt()));
+    		$em->flush();
+    	}
+    	return $this->render('SlidesLiveBundle:Admin:resetPassword.html.twig', $this->data);
+    }
+
+    // -------------------------------------------------------------------------------
 
     public function initializationAction() {
     	$password = '983tjr98jnre';

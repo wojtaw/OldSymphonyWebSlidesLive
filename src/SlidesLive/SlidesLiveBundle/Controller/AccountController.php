@@ -33,9 +33,14 @@ use Symfony\Component\Validator\Constraints\File;
 class AccountController extends Controller
 {
 
-    protected $data = array();                                         
+    protected $data = array();            
+
+    protected function setFolder() {
+
+    }                             
     
     public function accountEditFormAction(Request $request) {
+      $em = $this->getDoctrine()->getEntityManager();
       $account = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       
@@ -43,16 +48,10 @@ class AccountController extends Controller
       
       if ($request->getMethod() == 'POST' && isset($_POST['accountEdit'])) {
         $form->bindRequest($request);
-        //$data = $form->getData();
         $oldPassword = $form->get('old_password')->getData();
         $newPassword = $form->get('new_password')->getData();
-        print_r('old: '.$oldPassword."\n");
-        print_r('new: '.$newPassword."\n");
         $encoder = $this->get('security.encoder_factory')->getEncoder($account);
-        //$data['old_password'] = $encoder->encodePassword($data['old_password'], $account->getSalt());
         $encodedOldPassword = $encoder->encodePassword($oldPassword, $account->getSalt());
-        print_r($encodedOldPassword."\n");
-        print_r($account->getPassword()."\n");
         $account->canonizeName();
         if ($oldPassword) { 
           if ($encodedOldPassword != $account->getPassword()) {
@@ -62,8 +61,16 @@ class AccountController extends Controller
             $form->get('new_password')->addError(new FormError("New password not inserted."));          
           }            
         }
+        // nastaveni vybraneho primary folderu podle zadaneho id
+        $folderId = $form->get('primaryFolderId')->getData();
+        $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
+        if (!$folder) {
+          $form->get('primaryFolderId')->addError(new FormError("Inserted folder does not exist."));          
+        } 
+        else {
+          $account->setPrimaryFolder($folder);
+        }
         if ($form->isValid()) {
-          $em = $this->getDoctrine()->getEntityManager();
           if ($oldPassword && $newPassword) {
             $account->setPassword($newPassword);
             $account->encodePassword($this);
@@ -72,8 +79,8 @@ class AccountController extends Controller
           $this->data['message'] = 'Account info successfully saved.';
         }
       }  
-      
       $this->data['accountEditForm'] = $form->createView();    
+      //print_r($this->data['accountEditForm']['primaryFolderId']);
       return $this->render('SlidesLiveBundle:Account:accountEditForm.html.twig', $this->data);    
     }
     

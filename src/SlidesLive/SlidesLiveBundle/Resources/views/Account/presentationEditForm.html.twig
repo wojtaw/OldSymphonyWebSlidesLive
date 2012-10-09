@@ -27,10 +27,10 @@
         {{ form_widget(form.privacy, {'attr': {'class': 'policko'} }) }}
       </div>
 
-      <div class="errory">{{ form_errors(form.folder.canonicalName) }}</div>
+      <div class="errory">{{ form_errors(form.folder.id) }}</div>
       <div class="radek">
-        {{ form_label(form.folder.canonicalName) }}
-        {{ form_widget(form.folder.canonicalName, {'attr': {'class': 'policko'} }) }}
+        {{ form_label(form.folder.id) }}
+        {{ form_widget(form.folder.id, {'attr': {'class': 'policko'} }) }}
       </div>
   
     

@@ -14,9 +14,13 @@ use Symfony\Component\Validator\Constraints\Collection;
 class AccountEditForm extends SimpleForm {
 
   protected $account;
+  protected $accountFolders = array();
 
   public function __construct($account) {
     $this->account = $account;
+    foreach($account->getFolders() as $folder) {
+      $this->accountFolders[$folder->getId()] = $folder->getName();
+    }
   }
 
   public function buildForm (FormBuilder $builder, array $options) {
@@ -45,7 +49,12 @@ class AccountEditForm extends SimpleForm {
         'property_path' => false,
       )
     );
-    $builder->add('primaryFolder', new FolderSelectionForm($this->account));
+    //$builder->add('primaryFolder', new FolderSelectionForm($this->account));
+    $this->add('primaryFolderId', 'choice', 'Folder:', false, array(
+      'choices' => $this->accountFolders,
+      'empty_value' =>false,
+      'property_path' => false
+    ));
   }
   
   public function getName () {

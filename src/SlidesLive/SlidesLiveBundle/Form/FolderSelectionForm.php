@@ -8,10 +8,12 @@ use Symfony\Component\Form\FormBuilder;
 class FolderSelectionForm extends SimpleForm {
 
   protected $accountFolders = array();
+  protected $account = null;
 
   public function __construct($account) {
+    $this->account = $account;
     foreach($account->getFolders() as $folder) {
-      $this->accountFolders[$folder->getCanonicalName()] = $folder->getName();
+      $this->accountFolders[$folder->getId()] = $folder->getName();
     }
   }
 
@@ -19,9 +21,11 @@ class FolderSelectionForm extends SimpleForm {
     $this->builder = $builder;
     
     /* $this->add($field_name, $field_type, $label,Boolean $required, Array $other_params); */     
-    $this->add('canonicalName', 'choice', 'Folder:', false, array(
+    $this->add('folderId', 'choice', 'Folder:', false, array(
       'choices' => $this->accountFolders,
       'empty_value' =>false,
+      'property_path' => false,
+      'selectedchoice' => $this->account->getPrimaryFolder();
     ));
     
   }
@@ -31,9 +35,7 @@ class FolderSelectionForm extends SimpleForm {
   }
   
   public function getDefaultOptions(array $options) {
-    return array(
-        'data_class' => 'SlidesLive\SlidesLiveBundle\Entity\Folder',
-    );
+    return array();
   }
 
 }

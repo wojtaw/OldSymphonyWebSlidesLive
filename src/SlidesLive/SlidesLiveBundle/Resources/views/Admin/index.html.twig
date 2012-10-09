@@ -1,0 +1,16 @@
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+
+{% block content %}
+
+<h2>Administrace</h2>
+
+<div>Accounts:</div>
+<ul>
+	{% for a in accounts %}
+		<li>
+			<a href="{{ path('administrationEditAccount', {'accountId': a.id}) }}">{{ a.name }}</a>
+		</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

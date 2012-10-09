@@ -39,9 +39,9 @@ class AccountController extends Controller
 
     }                             
     
-    public function accountEditFormAction(Request $request) {
+    public function accountEditFormAction(Request $request, $account) {
       $em = $this->getDoctrine()->getEntityManager();
-      $account = $this->get('security.context')->getToken()->getUser();
+      //$account = $this->get('security.context')->getToken()->getUser();
       $this->data['message'] = '';      
       
       $form = $this->createForm(new AccountEditForm($account), $account);
@@ -62,14 +62,14 @@ class AccountController extends Controller
           }            
         }
         // nastaveni vybraneho primary folderu podle zadaneho id
-        $folderId = $form->get('primaryFolderId')->getData();
-        $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
-        if (!$folder) {
-          $form->get('primaryFolderId')->addError(new FormError("Inserted folder does not exist."));          
-        } 
-        else {
-          $account->setPrimaryFolder($folder);
-        }
+        //$folderId = $form->get('primaryFolderId')->getData();
+        //$folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
+        //if (!$folder) {
+        //  $form->get('primaryFolderId')->addError(new FormError("Inserted folder does not exist."));          
+        //} 
+        //else {
+        //  $account->setPrimaryFolder($folder);
+        //}
         if ($form->isValid()) {
           if ($oldPassword && $newPassword) {
             $account->setPassword($newPassword);
@@ -135,13 +135,14 @@ class AccountController extends Controller
       return $this->render('SlidesLiveBundle:Account:passwordChangeForm.html.twig', $this->data);    
     }
                                              
-    public function manageAccountAction() {                            
+    public function manageAccountAction() {
+        $account = $this->get('security.context')->getToken()->getUser();
         
-        $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm');
+        $this->data['accountEditForm'] = $this->forward('SlidesLiveBundle:Account:accountEditForm', array('account' => $account));
         //$this->data['passwordChangeForm'] = $this->forward('SlidesLiveBundle:Account:passwordChangeForm', array( 'action' => $this->generateUrl('manageAccount')));
-        $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
-        $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'logos', 'formClass' => new LogoUploadForm()));
-        $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('type' => 'avatars', 'formClass' => new AvatarUploadForm()));
+        $this->data['uploadBackgroundForm'] = $this->forward('SlidesLiveBundle:Account:uploadImage', array('account' => $account, 'type' => 'background-images', 'formClass' => new BackgroundUploadForm()));
+        $this->data['uploadLogoForm']       = $this->forward('SlidesLiveBundle:Account:uploadImage', array('account' => $account, 'type' => 'logos', 'formClass' => new LogoUploadForm()));
+        $this->data['uploadAvatarForm']     = $this->forward('SlidesLiveBundle:Account:uploadImage', array('account' => $account, 'type' => 'avatars', 'formClass' => new AvatarUploadForm()));
         
         return $this->render('SlidesLiveBundle:Account:manageAccount.html.twig', $this->data);
     }
@@ -231,7 +232,7 @@ class AccountController extends Controller
     
     // -------------------------------------------------------------------------
     
-    public function uploadImageAction(Request $request, $type, $formClass) {
+    public function uploadImageAction(Request $request, $type, $formClass, $account) {
         $form = $this->createForm($formClass);
         $message = '';
     
@@ -239,7 +240,7 @@ class AccountController extends Controller
             $form->bindRequest($request);
             $data = $form->getData();
             if ($form->isValid() && $data['file']) {
-              $account = $this->get('security.context')->getToken()->getUser();
+              //$account = $this->get('security.context')->getToken()->getUser();
               // odstraneni puvodniho souboru
               $oldFile = $account->getImage($type);
               $this->deleteOldFiles('/data/accounts/'.$type, $account->getId().'\.*');    

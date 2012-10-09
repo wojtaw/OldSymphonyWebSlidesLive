@@ -15,10 +15,6 @@ security:
         #ROLE_META_PLUS_USER:  ROLE_USER
 
     providers:
-        #in_memory:
-        #    users:
-        #        user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-        #        admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
         user_db:
           entity: {class: SlidesLiveBundle:Account, property:username }
 
@@ -47,7 +43,8 @@ security:
             form_login:
                 check_path: /login_check
                 login_path: /login
-                default_target_path:  /account
+                #default_target_path:  /account
+                default_target_path:    /router
                 
             logout:
                 path:   /logout
@@ -57,4 +54,4 @@ security:
         - { path: ^/account, roles: 'ROLE_USER'}#, requires_channel: https }
         - { path: ^/app/(create_account|news), roles: 'IS_AUTHENTICATED_ANONYMOUSLY' }
         - { path: ^/app, roles: 'ROLE_USER' }
-        #- { path: ^/admin, roles: 'ROLE_ADMIN'}
+        - { path: ^/admin, roles: 'ROLE_ADMIN'}

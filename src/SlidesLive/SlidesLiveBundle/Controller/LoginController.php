@@ -10,7 +10,7 @@ class LoginController extends Controller {
 
     protected $data = array();
     
-        public function loginAction() {
+    public function loginAction() {
         $context = $this->get('security.context');
         if ($context->isGranted('ROLE_USER')) {
           return $this->redirect($this->generateUrl('manageAccount'));        
@@ -32,5 +32,15 @@ class LoginController extends Controller {
             'error'         => $error,
         ));
     }                                         
+
+    public function routerAction() {
+        $context = $this->get('security.context');
+        if ($context->isGranted('ROLE_ADMIN')) {
+            return $this->redirect($this->generateUrl('administration'));
+        }
+        else {
+            return $this->redirect($this->generateUrl('manageAccount'));
+        }
+    }
                      
 }

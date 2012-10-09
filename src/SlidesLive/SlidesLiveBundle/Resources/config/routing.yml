@@ -10,6 +10,10 @@ login_check:
     
 logout:
     pattern: /logout
+
+router:
+    pattern: /router
+    defaults: { _controller: SlidesLiveBundle:Login:router }
     
 # ------REGISTRATION------------------------------------------------------------
 registration:
@@ -33,6 +37,17 @@ deleteAccountImage:
 managePresentations:
   pattern:  /account/managePresentations/{presentationId}
   defaults: { _controller: SlidesLiveBundle:Account:managePresentations, presentationsId:-1 }
+
+# -----ADMINISTRATION-----------------------------------------------------------
+administration:
+  pattern:  /admin
+  defaults: { _controller: SlidesLiveBundle:Admin:index }
+
+administrationEditAccount:
+  pattern: /admin/edit/account/{accountId}
+  defaults: { _controller: SlidesLiveBundle:Admin:editAccount }
+  requirements:
+    accountId:  \d+
 
 # -----PUBLIC PRESENTATION------------------------------------------------------      
 account:

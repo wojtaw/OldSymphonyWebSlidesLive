@@ -1,0 +1,19 @@
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+
+{% block content %}
+<div class="navigace">
+	<a href="{{ path('administration') }}">Administration homepage</a>
+</div>
+
+<h2>Administrace</h2>
+
+{% if accountNotFounr is defined %}
+	<p>This account does not exist.</p>
+{% else %}
+	<div>
+	    <h2>Edit personal data:</h2>
+	    {{ accountEditForm.content|raw }}
+	</div>
+{% endif %}
+
+{% endblock %}

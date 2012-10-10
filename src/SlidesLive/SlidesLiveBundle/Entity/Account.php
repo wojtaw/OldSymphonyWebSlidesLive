@@ -247,16 +247,17 @@ class Account implements AdvancedUserInterface {
      *                
      * @return string kanonizovane jmeno kanalu 
      */                   
-    public function canonizeName() {    
-      $result = iconv("UTF-8", 'ASCII//TRANSLIT', $this->name);
-      $patterns = array(
-        0 => '/[[:space:]]+/',
-        1 => '/\'/'
-      );
-      $this->canonicalName = preg_replace($patterns, array(0 => '', 1 => ''), $result);
-      return $this->canonicalName;
+    public function canonizeName() {
+        $result = iconv("UTF-8", 'ASCII//TRANSLIT', strtolower($this->name));
+        $patterns = array(
+            0 => '/[[:space:]]+/',
+            1 => '/[^a-z\-]*/'
+        );
+
+        $this->canonicalName = preg_replace($patterns, array(0 => '-', 1 => ''), $result);
+        return $this->canonicalName;
     }
-    
+
     public function getCountOfPresentations() {
       return count($this->presentations);
     }

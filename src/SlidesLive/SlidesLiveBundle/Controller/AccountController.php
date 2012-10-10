@@ -202,29 +202,6 @@ class AccountController extends Controller
       $this->data['form'] = $form->createView();
       return $this->render('SlidesLiveBundle:Account:presentationEditForm.html.twig', $this->data);    
     }
-
-    public function folderEditFormAction(Request $request, $account, $folder = null) {
-      $em = $this->getDoctrine()->getEntityManager();
-      $this->data['message'] = '';
-      if (is_null($folder)) {
-        $folder = new Folder();
-        $folder->setAccount($account);
-      }
-      
-      $form = $this->createForm(new FolderEditForm(), $folder);
-      if ($request->getMethod() == 'POST' && isset($_POST['folderEdit'])) {
-        $form->bindRequest($request);
-        $folder->canonizeName();        
-        $form->bindRequest($request); // aby doslo k opetovne validaci, predtim chybelo kanonicke jmeno
-        if ($form->isValid()) {
-          $em->persist($folder);
-          $em->flush();
-          $this->data['message'] = 'Folder info successfully saved.';
-        }
-      }  
-      $this->data['folderEditForm'] = $form->createView();    
-      return $this->render('SlidesLiveBundle:Account:folderEditForm.html.twig', $this->data);    
-    }
     
     public function managePresentationsAction($presentationId) {
       $account = $this->get('security.context')->getToken()->getUser();
@@ -260,6 +237,29 @@ class AccountController extends Controller
     }
     
     // -------------------------------------------------------------------------
+    public function folderEditFormAction(Request $request, $account, $folder = null) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $this->data['message'] = '';
+      if (is_null($folder)) {
+        $folder = new Folder();
+        $folder->setAccount($account);
+      }
+      
+      $form = $this->createForm(new FolderEditForm(), $folder);
+      if ($request->getMethod() == 'POST' && isset($_POST['folderEdit'])) {
+        $form->bindRequest($request);
+        $folder->canonizeName();        
+        $form->bindRequest($request); // aby doslo k opetovne validaci, predtim chybelo kanonicke jmeno
+        if ($form->isValid()) {
+          $em->persist($folder);
+          $em->flush();
+          $this->data['message'] = 'Folder info successfully saved.';
+        }
+      }  
+      $this->data['folderEditForm'] = $form->createView();    
+      return $this->render('SlidesLiveBundle:Account:folderEditForm.html.twig', $this->data);    
+    }
+
 
     public function manageFoldersAction($folderId) {
       $session = $this->get('session');
@@ -268,7 +268,7 @@ class AccountController extends Controller
       $this->data['editing'] = false;
       $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')->findAccountFolders($account->getId(), Privacy::P_PRIVATE);
       if ($folderId == -1) {
-        $folder = new Folder();
+        $folder = null;
       }
       else {
         $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
@@ -290,7 +290,7 @@ class AccountController extends Controller
       if ($folder) {
         $presentationCount = count($folder->getPresentations());
         if ($presentationCount > 0) { // folder nelze smazat protoze neni prazdny
-          $session->setFlash('folderActionMessage', "Folder contains $presentationCount. Only empty folder could be deleted.");
+          $session->setFlash('folderActionMessage', "Folder contains $presentationCount presentations. Only empty folder could be deleted.");
         }
         else {  // folder je prazdny
           $account = $folder->getAccount();

@@ -17,9 +17,20 @@
         <td class = 'errory'>{{ app.session.getFlash('folderActionMessage') }}</td>
       </tr>
     {% endif %}
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><strong>Privacy</strong></td>
+    </tr>
     {% for folder in folders %}
       <tr>
         <td>{{ folder.name }}</td>
+        <td>
+          {% if folder.privacy == 1 %}        Public
+          {% elseif folder.privacy == 2 %}    Unlisted
+          {% elseif folder.privacy == 3 %}    Private
+          {% else %}                          ?
+          {% endif %}
+        </td>
         <td>
           <a href="{{ path('manageFolders', {'folderId': folder.id}) }}">Edit</a>
         </td>

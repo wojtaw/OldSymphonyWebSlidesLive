@@ -16,8 +16,13 @@
   <div>
     <h2>Edit personal data:</h2>
     {{ accountEditForm.content|raw }}
-      
     <br>
+
+    <h2>Folders:</h2>
+    <a href="{{ path('manageFolders') }}">Edit folders</a>
+    <br>
+    <br>
+
     <h2>Background Image:</h2>
     <table>
       <tr>

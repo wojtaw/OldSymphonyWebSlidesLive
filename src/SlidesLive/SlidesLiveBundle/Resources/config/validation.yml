@@ -42,3 +42,18 @@ SlidesLive\SlidesLiveBundle\Entity\Presentation:
 #      - Type:     { type: integer, message: "This value should be only 0/1." }
 #      - Min:      { limit: 0, message: "This value should be only 0/1." }
 #      - Max:      { limit: 1, message: "This value should be only 0/1." }
+
+SlidesLive\SlidesLiveBundle\Entity\Folder:
+  properties:
+    name:
+        - NotBlank:
+            message: 'Folder name should not be blank.'
+
+    canonicalName:
+        - NotBlank:
+            message: 'Folder canonical name should not be blank.'
+
+    privacy:
+      - NotBlank:
+      - Choice:
+          choices:  [1, 2, 3]

@@ -36,7 +36,20 @@ deleteAccountImage:
   
 managePresentations:
   pattern:  /account/managePresentations/{presentationId}
-  defaults: { _controller: SlidesLiveBundle:Account:managePresentations, presentationsId:-1 }
+  defaults: { _controller: SlidesLiveBundle:Account:managePresentations, presentationsId: -1 }
+
+
+manageFolders:
+  pattern: /account/manageFolders/{folderId}
+  defaults: { _controller: SlidesLiveBundle:Account:manageFolders, folderId: -1 }
+  requirements:
+    folderId: \d+
+
+deleteFolder:
+  pattern: /account/manageFolders/delete/{folderId}
+  defaults: { _controller: SlidesLiveBundle:Account:deleteFolder }
+  requirements:
+    folderId: \d+
 
 # -----ADMINISTRATION-----------------------------------------------------------
 administration:

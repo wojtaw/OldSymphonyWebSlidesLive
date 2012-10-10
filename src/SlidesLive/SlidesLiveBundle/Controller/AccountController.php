@@ -15,8 +15,10 @@ use Symfony\Component\Form\FormError;
 use SlidesLive\SlidesLiveBundle\Entity\Account;
 use SlidesLive\SlidesLiveBundle\Entity\Presentation;
 use SlidesLive\SlidesLiveBundle\Entity\Folder;
+use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 use SlidesLive\SlidesLiveBundle\Form\ChannelEditForm;
 use SlidesLive\SlidesLiveBundle\Form\AccountEditForm;
+use SlidesLive\SlidesLiveBundle\Form\FolderEditForm;
 use SlidesLive\SlidesLiveBundle\Form\PresentationEditForm;
 use SlidesLive\SlidesLiveBundle\Form\UploadForm;
 use SlidesLive\SlidesLiveBundle\Form\BackgroundUploadForm;
@@ -200,37 +202,119 @@ class AccountController extends Controller
       $this->data['form'] = $form->createView();
       return $this->render('SlidesLiveBundle:Account:presentationEditForm.html.twig', $this->data);    
     }
-    
-    public function managePresentationsAction($presentationId) {
-        $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
-        if (count($presentations) < 1) {
-          $this->data['presentations'] = null;        
+
+    public function folderEditFormAction(Request $request, $account, $folder = null) {
+      $em = $this->getDoctrine()->getEntityManager();
+      $this->data['message'] = '';
+      if (is_null($folder)) {
+        $folder = new Folder();
+        $folder->setAccount($account);
+      }
+      
+      $form = $this->createForm(new FolderEditForm(), $folder);
+      if ($request->getMethod() == 'POST' && isset($_POST['folderEdit'])) {
+        $form->bindRequest($request);
+        $folder->canonizeName();        
+        $form->bindRequest($request); // aby doslo k opetovne validaci, predtim chybelo kanonicke jmeno
+        if ($form->isValid()) {
+          $em->persist($folder);
+          $em->flush();
+          $this->data['message'] = 'Folder info successfully saved.';
         }
-        else {
-          $this->data['presentations'] = $presentations; 
-        }
-    
-        $this->data['presentationEditForm'] = '';
-        $this->data['thumbnailUploadForm'] = '';
-        if ($presentationId != -1) {
-          $presentation = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
-          if (empty($presentation)) {
-            $this->data['presentation'] = null;
-            $this->get('session')->setFlash('notice', "Presentation with id $presentationId does not exist.");
-          }
-          else {
-            $this->data['presentation'] = $presentation;
-            $this->data['presentationEditForm'] = $this->forward('SlidesLiveBundle:Account:presentationEditForm', array(
-                                                                                                              'presentation' => $presentation,
-                                                                                                              'action' => $this->generateUrl('managePresentations', array('presentationId' => $presentationId))
-                                                                                                            )
-                                                                 );
-            $this->data['thumbnailUploadForm'] = $this->forward('SlidesLiveBundle:Account:uploadThumbnail', array('presentation' => $presentation));
-          }
-        }                
-        return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
+      }  
+      $this->data['folderEditForm'] = $form->createView();    
+      return $this->render('SlidesLiveBundle:Account:folderEditForm.html.twig', $this->data);    
     }
     
+    public function managePresentationsAction($presentationId) {
+      $account = $this->get('security.context')->getToken()->getUser();
+      $this->data = array(
+          'presentations' => null,
+          'presentationEditForm' => '',
+          'thumbnailUploadForm' => '',
+          'folderEditForm' => '',
+          'folders' => $account->getFolders(),
+        );
+
+      $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
+      if (count($presentations) > 0) {
+        $this->data['presentations'] = $presentations; 
+      }
+      if ($presentationId != -1) {
+        $presentation = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
+        if (empty($presentation)) {
+          $this->data['presentation'] = null;
+          $this->get('session')->setFlash('notice', "Presentation with id $presentationId does not exist.");
+        }
+        else {
+          $this->data['presentation'] = $presentation;
+          $this->data['presentationEditForm'] = $this->forward('SlidesLiveBundle:Account:presentationEditForm', array(
+                                                                                                            'presentation' => $presentation,
+                                                                                                            'action' => $this->generateUrl('managePresentations', array('presentationId' => $presentationId))
+                                                                                                          )
+                                                               );
+          $this->data['thumbnailUploadForm'] = $this->forward('SlidesLiveBundle:Account:uploadThumbnail', array('presentation' => $presentation));
+        }
+      }
+      return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
+    }
+    
+    // -------------------------------------------------------------------------
+
+    public function manageFoldersAction($folderId) {
+      $session = $this->get('session');
+      $em = $this->getDoctrine()->getEntityManager();
+      $account = $this->get('security.context')->getToken()->getUser();
+      $this->data['editing'] = false;
+      $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')->findAccountFolders($account->getId(), Privacy::P_PRIVATE);
+      if ($folderId == -1) {
+        $folder = new Folder();
+      }
+      else {
+        $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
+        if (!$folder) {
+          $session->setFlash('folderActionMessage', "Folder $folderId not found.");
+        }
+        else {
+          $this->data['editing'] = true;
+        }
+      }
+      $this->data['folderEditForm'] = $this->forward('SlidesLiveBundle:Account:folderEditForm', array('folder' => $folder, 'account' => $account));
+      return $this->render('SlidesLiveBundle:Account:manageFolders.html.twig', $this->data);
+    }
+
+    public function deleteFolderAction($folderId) {
+      $session = $this->get('session');
+      $em = $this->getDoctrine()->getEntityManager();
+      $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
+      if ($folder) {
+        $presentationCount = count($folder->getPresentations());
+        if ($presentationCount > 0) { // folder nelze smazat protoze neni prazdny
+          $session->setFlash('folderActionMessage', "Folder contains $presentationCount. Only empty folder could be deleted.");
+        }
+        else {  // folder je prazdny
+          $account = $folder->getAccount();
+          if (count($account->getFolders()) <= 1) { // account obsahuje jen jednu slozku -> nelze smazat, musi mit alespon jednu
+            $session->setFlash('folderActionMessage', 'Account must have at least one folder.');   
+          }
+          else {  // account ma vice folderu
+            if ($account->getPrimaryFolder()->getId() == $folder->getId()) {  // mazu primary folder
+              $session->setFlash('folderActionMessage', "You are deleting primary folder of your account. Before deleting this folder you have to choose another primary folder.");
+            }
+            else {  // vse OK -> mazani
+              $em->remove($folder);
+              $em->flush();
+              $session->setFlash('folderActionMessage', 'Folder '. $folder->getName(). " successfully deleted.");
+            }
+          }
+        }
+      }
+      else {  // folder not found
+        $session->setFlash('folderActionMessage', "Folder with id $folderId not found.");
+      }
+      return $this->redirect($this->generateUrl('manageFolders'));
+    }    
+
     // -------------------------------------------------------------------------
     
     public function deleteAccountImageAction($type) {

@@ -1,0 +1,26 @@
+{# Required values:
+  Form    folderEditForm;
+#}
+
+{% set form = folderEditForm %}
+{% set action = '' %}
+
+<form action="" method='POST' {{ form_enctype(form) }} class="folderEditForm">    
+      <div class="errory">{{ form_errors(form) }}{{ message }}</div>
+
+      <div class="errory">{{ form_errors(form.name) }}</div>
+      <div class="radek">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'policko'} }) }}
+      </div>
+
+      <div class="errory">{{ form_errors(form.privacy) }}</div>
+      <div class="radek">
+        {{ form_label(form.privacy) }}
+        {{ form_widget(form.privacy, {'attr': {'class': 'policko'} }) }}
+      </div>
+        
+    {{ form_rest(form) }}
+    
+    <input type='submit' value='Save' formnovalidate> {# formnovalidate #}
+    </form>           

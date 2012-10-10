@@ -1,0 +1,45 @@
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+{# Required values:
+  Template        folderEditForm
+  array<Folder>   folders
+  boolean         editing
+#}
+
+{% block content %}
+
+  <a href="{{ path('manageAccount') }}" class='alignRight'>Back to Account settings</a>
+
+  <h2>My Folders</h2>
+
+  <table>
+    {% if app.session.hasFlash('folderActionMessage') %}
+      <tr>
+        <td class = 'errory'>{{ app.session.getFlash('folderActionMessage') }}</td>
+      </tr>
+    {% endif %}
+    {% for folder in folders %}
+      <tr>
+        <td>{{ folder.name }}</td>
+        <td>
+          <a href="{{ path('manageFolders', {'folderId': folder.id}) }}">Edit</a>
+        </td>
+        <td>
+          <a href="{{ path('deleteFolder', {'folderId': folder.id}) }}">Delete</a>
+        </td>
+      </tr>
+    {% else %}
+      <tr>
+        <td>No folders exist for this account.</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  {% if editing %}
+    <h2>Edit folder:</h2>
+  {% else %}
+    <h2>Add new folder:</h2>
+  {% endif %}
+  {{ folderEditForm.content|raw }}
+  <a href="{{ path('manageFolders') }}">Do not make any changes</a>
+
+{% endblock %}

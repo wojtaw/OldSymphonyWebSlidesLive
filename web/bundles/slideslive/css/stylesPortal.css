@@ -368,28 +368,27 @@ a.metaBlue {
 .shareFB {
 	display:block;
 	float:left;
-	padding-right:7px;
-	width:28px;
+	width:32px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
-	background-position:-3px -3px;	
+	background-position:-32px 0px;	
 }
 
 .shareFB:hover{
 	display:block;	
-	background-position:-3px -34px;
+	background-position:-32px -30px;
 }
 
 .shareTwitter {
 	display:block;
 	float:left;
-	padding-right:7px;	
-	width:28px;
+	width:32px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-38px -3px;	
+	display:none;	
 }
 
 .shareTwitter:hover{
@@ -403,9 +402,10 @@ a.metaBlue {
 	padding-right:7px;	
 	width:28px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-73px -3px;	
+	display:none;
 }
 
 .shareGoogle:hover{
@@ -419,9 +419,10 @@ a.metaBlue {
 	padding-right:7px;	
 	width:28px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-108px -3px;	
+	display:none;	
 }
 
 .shareMail:hover{
@@ -435,9 +436,10 @@ a.metaBlue {
 	padding-right:7px;	
 	width:28px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-143px -3px;	
+	display:none;	
 }
 
 .shareEmbed:hover{

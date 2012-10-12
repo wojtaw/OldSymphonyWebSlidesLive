@@ -438,12 +438,13 @@ a.metaBlue {
 	height:28px;
 	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
-	background-position:-143px -3px;		
+	background-position:-158px -0px;		
 }
 
 .shareEmbed:hover{
 	display:block;	
-	background-position:-143px -34px;
+	background-position:-158px -30px;
+	cursor:pointer;	
 }
 
 .sharePadding {
@@ -577,6 +578,7 @@ body {
 }
 #simplemodal-container .simplemodal-data {padding:8px;}
 #simplemodal-container a {color:#ddd;}
-#simplemodal-container a.modalCloseImg {background:url(../img/basic/x.png) no-repeat; width:25px; height:29px; display:inline; z-index:3200; position:absolute; top:-15px; right:-16px; cursor:pointer;}
+#simplemodal-container a.modalCloseImg {background:url(../../slideslive/styleImages/modal_close.png) no-repeat; width:40px; height:40px; display:block; z-index:3200; position:absolute; top:5px; right:-15px; cursor:pointer;}
+#simplemodal-container a.modalCloseImg:hover {background:url(../../slideslive/styleImages/modal_close_over.png) no-repeat;}
 #simplemodal-container h3 {color:#047de3;}
-#simplemodal-container code {background:#fff; border:1px solid #ccc; color:#000; display:block; font-size:12px; margin-bottom:12px; padding:4px 6px 6px;}
+#simplemodal-container code {background:#fff; border:1px solid #ccc; color:#000; display:block; font-size:12px; margin-bottom:12px; padding:20px;}

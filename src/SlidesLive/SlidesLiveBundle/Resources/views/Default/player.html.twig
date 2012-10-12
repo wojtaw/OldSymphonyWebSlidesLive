@@ -8,6 +8,19 @@
   <div>Presentation not found.</div>
 {% endif %}
     <script type="text/javascript">
+ 		var scaledWidth = 700;
+		var calculatedWidth = -1;
+		
+		{% if (presentation.video) and not (presentation.slides) %}
+			calculatedWidth = playerDimensionsAccordingScreen("VIDEO");
+		{% elseif (presentation.slides) and not (presentation.video) %}
+			calculatedWidth = playerDimensionsAccordingScreen("AUDIO");		
+		{% else %}
+			calculatedWidth = playerDimensionsAccordingScreen("AUDIOVIDEO");		
+		{% endif %}		
+		
+		if(calculatedWidth != -1) scaledWidth = calculatedWidth;
+	
 		var flashvars = {
 			hasVideo: "{% if presentation.video %}true{% else %}false{% endif %}",
 			hasSlides: "{% if presentation.slides %}true{% else %}false{% endif %}",
@@ -19,16 +32,18 @@
 				mediaType: "{{ presentation.service }}",
 				mediaID: "{{ presentation.serviceId }}",			
 			{% endif %}	
+			widthScale: scaledWidth,				
 		};
 		var params = {
 			scale: "exactfit",
-			bgcolor: "#1E1E1E"
+			bgcolor: "#1E1E1E",
+			allowscriptaccess: "always",
+			allowFullScreen: "true",			
 		};
 		var attributes = {};
 		
-		params.allowscriptaccess = "always";
 	
-    	swfobject.embedSWF("{{ asset('bundles/slideslive/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+    	swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
     </script>  
 
             <div id="flashResizableContainer">

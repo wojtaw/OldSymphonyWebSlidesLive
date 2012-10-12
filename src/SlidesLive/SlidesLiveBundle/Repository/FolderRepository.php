@@ -62,4 +62,45 @@ class FolderRepository extends EntityRepository {
     return $query->getResult();        
   }
 
+  public function findAccountFoldersByNameAndCanName($accountId, $folder) {
+    $em = $this->getEntityManager();
+    if (is_null($folder->getId())) {
+      $folderId = -1;
+    }
+    else {
+      $folderId = $folder->getId();
+    }
+    $query = $em->createQuery(
+      'SELECT f
+      FROM SlidesLiveBundle:Folder f
+      JOIN f.account a
+      WHERE a.id = :accountId
+      AND f.canonicalName = :folderCanName
+      AND f.id != :folderId'
+    )
+    ->setParameters(array(
+      'folderId'      => $folderId,
+      'folderCanName' => $folder->getCanonicalName(),
+      'accountId'     => $accountId,
+      )
+    );
+    return $query->getResult();
+  }
+
+  public function printResults($results) {
+    echo "\nID\tFOLDER NAME\tCANONICAL NAME\tACCOUNT ID\n";
+    if (count($results) < 1) {
+      echo "0 results\n";
+    }
+    else {
+      foreach ($results as $r) {
+        echo $r->getId()."\t";
+        echo $r->getName()."\t";
+        echo $r->getCanonicalName()."\t";
+        echo $r->getAccount()->getId()."\t\n";
+      }
+    }
+    echo "\n";
+  }
+
 }

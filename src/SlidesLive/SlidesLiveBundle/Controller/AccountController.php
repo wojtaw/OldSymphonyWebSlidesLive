@@ -240,46 +240,67 @@ class AccountController extends Controller
     public function folderEditFormAction(Request $request, $account, $folder = null) {
       $em = $this->getDoctrine()->getEntityManager();
       $this->data['message'] = '';
+      $folderWasNull = false;
       if (is_null($folder)) {
         $folder = new Folder();
         $folder->setAccount($account);
+        $folderWasNull = true;
       }
       
       $form = $this->createForm(new FolderEditForm(), $folder);
       if ($request->getMethod() == 'POST' && isset($_POST['folderEdit'])) {
         $form->bindRequest($request);
-        $folder->canonizeName();        
+        $folder->canonizeName();     
         $form->bindRequest($request); // aby doslo k opetovne validaci, predtim chybelo kanonicke jmeno
+        // overeni zda pro zadany account jiz neexistuje folder stejneho jmena a kanonickeho jmena
+        $results = $em->getRepository('SlidesLiveBundle:Folder')
+          ->findAccountFoldersByNameAndCanName($account->getId(), $folder);
+        if (count($results) != 0) {
+          $form->get('name')->addError(new FormError("Folder with the same or similar name already exists in this account."));
+          $em->detach($folder);
+        }
         if ($form->isValid()) {
           $em->persist($folder);
           $em->flush();
-          $this->data['message'] = 'Folder info successfully saved.';
+          if ($folderWasNull) { // po ulozeni noveho folderu vykresli opet prazdny formular
+            $form = $this->createForm(new FolderEditForm(), new Folder());
+            $this->data['message'] = 'Folder created.';
+          }
+          else {
+            $this->data['message'] = 'Folder info successfully saved.';
+          }
         }
       }  
       $this->data['folderEditForm'] = $form->createView();    
       return $this->render('SlidesLiveBundle:Account:folderEditForm.html.twig', $this->data);    
     }
 
-
+    /**
+    * Pridavani a editace folderu
+    * @param folderId - id folderu, ktery ma byt upraven.
+    */
     public function manageFoldersAction($folderId) {
       $session = $this->get('session');
       $em = $this->getDoctrine()->getEntityManager();
       $account = $this->get('security.context')->getToken()->getUser();
       $this->data['editing'] = false;
-      $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')->findAccountFolders($account->getId(), Privacy::P_PRIVATE);
-      if ($folderId == -1) {
+      // provereni zadaneho folderId
+      if ($folderId == -1) {  // id folderu nezadano -> vykresleni prazneho formulare
         $folder = null;
       }
-      else {
+      else {  // id folderu zadano
         $folder = $em->getRepository('SlidesLiveBundle:Folder')->find($folderId);
-        if (!$folder) {
+        if (!$folder) {   // folder nenalezen
           $session->setFlash('folderActionMessage', "Folder $folderId not found.");
         }
-        else {
+        else {  // folder nalezen -> nacteni formulare s daty folderu k editaci
           $this->data['editing'] = true;
         }
       }
+      // vykresleni formulare
       $this->data['folderEditForm'] = $this->forward('SlidesLiveBundle:Account:folderEditForm', array('folder' => $folder, 'account' => $account));
+      // nacteni seznamu existujicich folderu
+      $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')->findAccountFolders($account->getId(), Privacy::P_PRIVATE);
       return $this->render('SlidesLiveBundle:Account:manageFolders.html.twig', $this->data);
     }
 

@@ -37,7 +37,7 @@
 {% block javascript %}
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script> 
-  <script type="text/javascript" src="{{ asset('bundles/static/javascript/jquery.simplemodal.1.4.3.min.js') }}">
+  <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.min.js') }}">
   </script>   
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/shadowbox.js') }}">
   </script>    
@@ -100,6 +100,15 @@
   					<a href="" title="Email to friend"><div class="shareMail"></div></a>
   					<div class="shareEmbed" id="shareEmbed"></div>																		
         </div>
+		
+		<!-- embed window content -->
+		<div id="embedWindowContent">
+			<h3>Embed code</h3>
+			<p>Use following code for displaying this presentation on your website.</p>
+			<p><code>http://edumeta.com/embed/afsdgsdgsd</code></p>
+		</div>		
+		<!-- embed window end -->		
+		
     
       {% else %}
         There are no available presentations in this folder.

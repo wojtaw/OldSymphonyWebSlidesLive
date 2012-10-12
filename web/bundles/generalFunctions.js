@@ -20,7 +20,7 @@ function modifyDownloadAccordingOSGeneral(){
 }
 
 function showEmbedModalWindow(){
-	
+	$('#embedWindowContent').modal();
 }
 
 

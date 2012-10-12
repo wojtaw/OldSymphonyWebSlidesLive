@@ -1,5 +1,6 @@
  $(document).ready(function() {
    modifyDownloadAccordingOSGeneral();
+   $("#shareEmbed").click(showEmbedModalWindow); 
  });
 
 
@@ -16,6 +17,10 @@ function modifyDownloadAccordingOSGeneral(){
             } else {
                 $('#downloadButtonLink2').attr("href", "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip");																		
             }
+}
+
+function showEmbedModalWindow(){
+	
 }
 
 

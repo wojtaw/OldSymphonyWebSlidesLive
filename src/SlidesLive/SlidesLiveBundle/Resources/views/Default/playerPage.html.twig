@@ -36,6 +36,8 @@
 
 {% block javascript %}
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
+  </script> 
+  <script type="text/javascript" src="{{ asset('bundles/static/javascript/jquery.simplemodal.1.4.3.min.js') }}">
   </script>   
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/shadowbox.js') }}">
   </script>    
@@ -96,7 +98,7 @@
   					<a href="" title="Share to Twitter"><div class="shareTwitter"></div></a>
   					<a href="" title="Share to G+"><div class="shareGoogle"></div></a>	
   					<a href="" title="Email to friend"><div class="shareMail"></div></a>
-  					<a href="" title="Show EMBED code"><div class="shareEmbed"></div></a>																			
+  					<div class="shareEmbed" id="shareEmbed"></div>																		
         </div>
     
       {% else %}

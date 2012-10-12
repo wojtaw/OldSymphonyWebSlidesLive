@@ -438,8 +438,7 @@ a.metaBlue {
 	height:28px;
 	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
-	background-position:-143px -3px;	
-	display:none;	
+	background-position:-143px -3px;		
 }
 
 .shareEmbed:hover{

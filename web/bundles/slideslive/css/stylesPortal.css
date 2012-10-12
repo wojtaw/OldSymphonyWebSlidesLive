@@ -231,7 +231,7 @@ a.metaBlue {
 	width:500px;
 	position:relative;
 	left:-499px;	
-	overflow:visible;	
+	overflow:hidden;
 }
 
 .gradientRightPlayer {
@@ -239,7 +239,7 @@ a.metaBlue {
 	left:960px;
 	top:-475px;
 	height:475px;
-	overflow:visible;
+	overflow:hidden;
 	background-image:url(../styleImages/gradient-player-right.png);	
 	background-repeat:repeat-y;
 	background-position:left;	

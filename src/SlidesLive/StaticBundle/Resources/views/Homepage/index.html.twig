@@ -51,6 +51,14 @@
       <div class="lylesBox center">
         <div class="quotesText">One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.</div>
       </div>
+      <div class="presentationBoxes">
+        {% for box in presentationBoxes %}
+          {% set image = box.presentation.getThumbnail() %}
+          {% if image %}
+            <img src="{{ asset(image) }}" alt="" width="200px" />
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
   </div>
   

@@ -9,7 +9,8 @@ class DefaultController extends Controller
 {
     
     public function indexAction() {
-        return $this->render('StaticBundle:Homepage:index.html.twig');
+        $this->data['presentationBoxes'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
+        return $this->render('StaticBundle:Homepage:index.html.twig', $this->data);
     }
     
     public function tourAction() {

@@ -229,7 +229,7 @@ class Presentation {
      */
     public function getThumbnail ($mandatory = false) {
         $imgFormats = array(
-            "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif"
+            "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif", "JPG", "PNG", "BMP", "JPEG", "JPEG2000", "GIF"
         );
         $thumbnail = null;
         foreach ($imgFormats as $format) {

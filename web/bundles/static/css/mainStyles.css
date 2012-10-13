@@ -48,10 +48,40 @@ body {
 }
 
 /* SHOWCASES */
-.showCaseBar{
+.showcaseBar{
 	background-color:#990000;
 	height:300px;
 	width:100%;
+}
+
+.showcaseBox {
+	float:left;
+	overflow:hidden;
+}
+
+.size_1_1 {
+	width:100px;
+	height:100px;	
+}
+
+.size_1_2 {
+	width:100px;
+	height:200px;	
+}
+
+.size_2_2 {
+	width:200px;
+	height:200px;	
+}
+
+.size_2_1 {
+	width:200px;
+	height:100px;	
+}
+
+.showcaseBox img { 
+	position: relative;
+	height:120px; 
 }
 
 /* DOWNLOAD BUTTON */ 

@@ -47,6 +47,13 @@ body {
 	width:960px;	
 }
 
+/* SHOWCASES */
+.showCaseBar{
+	background-color:#990000;
+	height:300px;
+	width:100%;
+}
+
 /* DOWNLOAD BUTTON */ 
 .downloadButton {
 	display:block;

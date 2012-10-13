@@ -152,6 +152,11 @@ body{
     margin-right: auto !important;
 }
 
+.left{
+	display: block;
+	text-align:left !important;
+}
+
 .logoBeta {
 	float:right;
 	font-family:'Ropa Sans', sans-serif;

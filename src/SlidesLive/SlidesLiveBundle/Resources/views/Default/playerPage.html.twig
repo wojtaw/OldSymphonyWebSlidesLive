@@ -38,12 +38,7 @@
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script> 
   <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.min.js') }}">
-  </script>   
-  <script type="text/javascript" src="{{ asset('bundles/static/javascript/shadowbox.js') }}">
-  </script>    
-  <script type="text/javascript">
-    Shadowbox.init();
-  </script>   
+  </script>      
 {% endblock %}
 
 {% block content %}
@@ -117,7 +112,7 @@
   {% endblock player %}
   
   {% block presentationList %}
-    <div class="siteContent clearfix">
+    <div class="siteContent clearfix">	
       <div class="hpVideoList">
         {% if folderPresentations is empty %}
           No presentations are available now.

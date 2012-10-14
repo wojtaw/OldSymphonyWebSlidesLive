@@ -231,7 +231,7 @@ a.metaBlue {
 	width:500px;
 	position:relative;
 	left:-499px;	
-	overflow:visible;	
+	overflow:hidden;
 }
 
 .gradientRightPlayer {
@@ -239,7 +239,7 @@ a.metaBlue {
 	left:960px;
 	top:-475px;
 	height:475px;
-	overflow:visible;
+	overflow:hidden;
 	background-image:url(../styleImages/gradient-player-right.png);	
 	background-repeat:repeat-y;
 	background-position:left;	
@@ -368,28 +368,27 @@ a.metaBlue {
 .shareFB {
 	display:block;
 	float:left;
-	padding-right:7px;
-	width:28px;
+	width:32px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
-	background-position:-3px -3px;	
+	background-position:-32px 0px;	
 }
 
 .shareFB:hover{
 	display:block;	
-	background-position:-3px -34px;
+	background-position:-32px -30px;
 }
 
 .shareTwitter {
 	display:block;
 	float:left;
-	padding-right:7px;	
-	width:28px;
+	width:32px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-38px -3px;	
+	display:none;	
 }
 
 .shareTwitter:hover{
@@ -403,9 +402,10 @@ a.metaBlue {
 	padding-right:7px;	
 	width:28px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-73px -3px;	
+	display:none;
 }
 
 .shareGoogle:hover{
@@ -419,9 +419,10 @@ a.metaBlue {
 	padding-right:7px;	
 	width:28px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
 	background-position:-108px -3px;	
+	display:none;	
 }
 
 .shareMail:hover{
@@ -435,14 +436,15 @@ a.metaBlue {
 	padding-right:7px;	
 	width:28px;
 	height:28px;
-	background-image:url(../styleImages/channel-icons.png);
+	background-image:url(../styleImages/share-btn.png);
 	background-repeat:no-repeat;
-	background-position:-143px -3px;	
+	background-position:-158px -0px;		
 }
 
 .shareEmbed:hover{
 	display:block;	
-	background-position:-143px -34px;
+	background-position:-158px -30px;
+	cursor:pointer;	
 }
 
 .sharePadding {
@@ -550,9 +552,33 @@ ul.channelFoldersList a:hover {
 }
 
 body {
-	padding-top:40px;
+	padding-top:55px;
 	padding-bottom:40px;
 	width:100%;		
 	background-image:url(../../static/images/bg-light.png);	
 	background-position:center;	
 }
+
+#embedWindowContent {
+	display:none;	
+}
+
+/* Overlay */
+#simplemodal-overlay {background-color:#000; cursor:wait;}
+
+/* Container */
+#simplemodal-container {
+	height:300px;
+	width:600px;
+	color:#bbb;
+	background-color:#efefef;
+	border:4px solid #047de3;
+	padding:12px;
+	background-image:url(../../static/images/bg-light.png);	
+}
+#simplemodal-container .simplemodal-data {padding:8px;}
+#simplemodal-container a {color:#ddd;}
+#simplemodal-container a.modalCloseImg {background:url(../../slideslive/styleImages/modal_close.png) no-repeat; width:40px; height:40px; display:block; z-index:3200; position:absolute; top:5px; right:-15px; cursor:pointer;}
+#simplemodal-container a.modalCloseImg:hover {background:url(../../slideslive/styleImages/modal_close_over.png) no-repeat;}
+#simplemodal-container h3 {color:#047de3;}
+#simplemodal-container code {background:#fff; border:1px solid #ccc; color:#000; display:block; font-size:12px; margin-bottom:12px; padding:20px;}

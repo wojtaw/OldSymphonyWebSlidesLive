@@ -20,7 +20,6 @@ class HomepageBoxRepository extends EntityRepository {
 			JOIN b.presentation p
 			WHERE p.privacy = 1'
 		);
-		echo "results: ". count($query->getResult());
 		return $query->getResult();
 	}
 

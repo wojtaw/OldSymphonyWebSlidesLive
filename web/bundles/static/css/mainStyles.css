@@ -566,3 +566,23 @@ h2 {
 	display: inline-block;
 }
 
+
+.thankYouSteps {
+	width:100%;
+	background-color:#FFFFFF;
+	height:300px;
+	display:block;	
+}
+
+.thankYouTitle {
+	font-size:50px;
+	font-weight:normal;
+	color:#000000;
+}
+
+.thankYouSubheading {
+	font-size:20px;
+	font-weight:normal;
+	color:#000000;	
+}
+

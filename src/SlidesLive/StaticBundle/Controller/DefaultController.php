@@ -28,6 +28,11 @@ class DefaultController extends Controller
     public function policyAction() {
         return $this->render('StaticBundle:Homepage:policy.html.twig');
     }
+	
+    public function thankyouAction() {
+        return $this->render('StaticBundle:Homepage:thankYouDownload.html.twig');
+    }	
+	
     
 // --------EXAMPLE ACCOUNT -----------------------------------------------------
 

@@ -26,18 +26,12 @@ function showEmbedModalWindow(){
 
 
 function resizePlayerContainer(playerHeight) { 
+	//Add kind of padding
+	playerHeight += 15;
 	$('#playerPanel').css({ height: playerHeight });
 	$('.gradientLeftPlayer').css({ height: (playerHeight + 144) });	
 	$('.gradientRightPlayer').css({ height: (playerHeight + 144) });		
 	$('.gradientRightPlayer').css({ top: -(playerHeight + 144) });			
-}
-
-function resizePlayerContainer(playerHeight) { 
-	$('#playerPanel').css({ height: playerHeight });
-	$('.gradientLeftPlayer').css({ height: (playerHeight + 144) });	
-	$('.gradientRightPlayer').css({ height: (playerHeight + 144) });		
-	$('.gradientRightPlayer').css({ top: -(playerHeight + 144) });			
-	
 }
 
 function websiteOutput(outputMessage){

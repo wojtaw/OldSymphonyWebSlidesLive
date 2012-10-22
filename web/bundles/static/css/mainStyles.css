@@ -58,7 +58,9 @@ body {
 	overflow:hidden;
 }
 
-.showcaseBox img { 
+.showcaseBoxImage { 
+	background-size:cover;
+	background-position:top;
 	position: relative;
 	left: 0px;
 	height:235px; 

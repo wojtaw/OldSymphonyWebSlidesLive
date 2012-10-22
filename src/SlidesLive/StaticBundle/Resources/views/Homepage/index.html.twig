@@ -39,7 +39,7 @@
         {% for box in presentationBoxes %}
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
-            <div class="showcaseBox tile_1_1"><img src="{{ asset(image) }}" alt="" /></div>
+            <div class="showcaseBox tile_1_1"><div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});"></div></div>
           {% endif %}
         {% endfor %}							
 	  </div>

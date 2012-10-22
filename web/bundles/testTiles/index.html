@@ -5,7 +5,7 @@
 <title>Tiles test</title>
 <style>
 body {
-	background-color:#0033CC;	
+	background-color:#FFFF99;	
 }
 
 .box_1_1{
@@ -15,6 +15,11 @@ body {
 	display:block;
 	margin:5px;	
 }
+
+.boxWrapper {
+	background-color:#9999FF;
+}
+
 </style>
 <script type="text/javascript" src="../jquery-1.8.0.min.js">
 </script>
@@ -23,9 +28,14 @@ body {
 </head>
 
 <body>
-<div class="box_1_1">a</div>
-<div class="box_1_1"></div>
-<div class="box_1_1"></div>
+<div class="boxWrapper" id="boxWrapper">
+    <div class="box_1_1"></div>
+
+</div>
+
+<script type="text/javascript">
+	createElements();
+</script>
 
 </body>
 </html>

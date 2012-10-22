@@ -2,6 +2,11 @@
    modifyDownloadAccordingOSGeneral();
    $("#shareEmbed").click(showEmbedModalWindow); 
  });
+ 
+ var appDownloadWindows = "http://slideslive.com/data/SL_Recorder/SL_Windows.zip";
+ var appDownloadLinux = "http://slideslive.com/data/SL_Recorder/SL_Linux.zip";
+ var appDownloadMac = "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg";
+ var appDownloadAll = "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip";   
 
 
 function modifyDownloadAccordingOSGeneral(){
@@ -9,13 +14,13 @@ function modifyDownloadAccordingOSGeneral(){
             $('#browser').html("<b>" + $.client.browser + "</b>");
           
             if ($.client.os.toLowerCase().substring(0,3) == "win") {
-                $('#downloadButtonLink2').attr("href", "http://slideslive.com/data/SL_Recorder/SL_Windows.zip");													
+                $('#downloadButtonLink2').attr("href", appDownloadWindows);													
             } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
-                $('#downloadButtonLink2').attr("href", "http://slideslive.com/data/SL_Recorder/SL_Linux.zip");																				
+                $('#downloadButtonLink2').attr("href", appDownloadLinux);																				
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
-                $('#downloadButtonLink2').attr("href", "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg");																
+                $('#downloadButtonLink2').attr("href", appDownloadMac);																
             } else {
-                $('#downloadButtonLink2').attr("href", "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip");																		
+                $('#downloadButtonLink2').attr("href", appDownloadAll);																		
             }
 }
 
@@ -26,19 +31,19 @@ function modifyThankyouPageAccordingOS(){
 	
             if ($.client.os.toLowerCase().substring(0,3) == "win") {
                 $('#stepsWindows').css("display", "block");			
-                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SL_Windows.zip");				
+                $('#backupLink').attr("href", appDownloadWindows);				
 																	
             } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
                 $('#stepsMac').css("display", "block");
-                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SL_Linux.zip");					
+                $('#backupLink').attr("href", appDownloadLinux);					
 																								
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
                 $('#stepsWindows').css("display", "block");
-                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg");					
+                $('#backupLink').attr("href", appDownloadMac);					
 																				
             } else {
                 $('#stepsWindows').css("display", "block");	
-                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip");																									
+                $('#backupLink').attr("href", appDownloadAll);																									
             }	
 }
 

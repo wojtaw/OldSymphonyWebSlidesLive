@@ -56,7 +56,6 @@
             <div class="headerMenuWraper">
                 <a href="http://slideslive.com/SlidesLiveData/SL_Recorder/SL_AllPlatforms.zip" id="downloadButtonLink2" style="margin-right:30px; color:#FFF" class="headerMenu globalFont"  onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
                 <a href="{{ path('tour') }}" style="margin-right:30px;" class="headerMenu globalFont">How It Works</a>
-                <a href="{{ path('about') }}" style="margin-right:30px;" class="headerMenu globalFont">About</a>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
                   <a href="{{ path('manageAccount') }}" class="headerMenu globalFont slidesLiveBlue">{{ app.user.username }}</a>
                   <span class="headerMenu globalFont slidesLiveBlue"> / </span> 
@@ -76,7 +75,6 @@
 					 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">{{ app.user.name }}</a>|			   
 					 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">My Presentations</a>|
 					 <a href="{{ path('manageAccount') }}">Settings</a>
-
 				   </div>
 			   </div>
 			   </div>			   
@@ -97,6 +95,7 @@
 
         {# Page footer #}        
 	<div class="siteFooter">
+                <a href="{{ path('about') }}" style="margin-right:30px;" class="headerMenu globalFont">About</a>	
   		<div class="footerContent"><div class="footerText">&#169; 2012 SlidesLive.com. All rights reserved.</div></div>
     </div>        
     

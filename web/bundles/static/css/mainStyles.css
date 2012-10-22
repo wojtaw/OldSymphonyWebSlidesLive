@@ -126,6 +126,11 @@ body {
 	background-image:url(../images/show-case-hover.jpg);
 }
 
+.preloader{	
+	visibility:hidden;	
+	background-image:url(../images/show-case-hover.jpg);
+}
+
 /* HOW IT WORKS */
 
 .howItWorksWrapper {

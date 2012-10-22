@@ -19,6 +19,11 @@ function modifyDownloadAccordingOSGeneral(){
             }
 }
 
+function modifyThankyouPageAccordingOS(){
+	console.log("Jes");
+}
+
+
 function showEmbedModalWindow(){
 	$('#embedWindowContent').modal();
 }

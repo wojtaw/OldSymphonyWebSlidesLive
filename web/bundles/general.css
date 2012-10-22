@@ -119,10 +119,6 @@ body{
 }
 
 /*-------------------SPECIAL STUFF----------------------*/
-.preloader{	
-	visibility:hidden;	
-	background-image:url(../images/show-case-hover.jpg);
-}
 .slidesLiveBlue {
 	color:#027BF7 !important;
 }

@@ -58,6 +58,12 @@ body {
 	overflow:hidden;
 }
 
+.showcaseBox img { 
+	position: relative;
+	left: 0px;
+	height:235px; 
+}
+
 .tile_1_1{
 	background-color:#990;
 	width:150px;
@@ -67,17 +73,6 @@ body {
 	margin-bottom:6px;		
 	position: relative;
 	float:left;
-}
-
-.boxWrapper {
-	background-color:#00CC33;
-	width:80%;
-}
-
-.showcaseBox img { 
-	position: relative;
-	left: 0px;
-	height:235px; 
 }
 
 /* DOWNLOAD BUTTON */ 

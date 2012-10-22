@@ -30,7 +30,7 @@
   
   <div class="websiteLightBackground firstBlockTop">
       <h1 class="globalFont center">Who is using Slides<span class="slidesLiveBlue">Live</span></h1>   
-  	  <div class="showcaseBar">
+  	  <div class="showcaseBar clearfix">
         {% for box in presentationBoxes %}
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}

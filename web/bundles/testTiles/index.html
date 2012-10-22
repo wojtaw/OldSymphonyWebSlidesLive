@@ -13,11 +13,28 @@ body {
 	width:150px;
 	height:150px;	
 	display:block;
-	margin:5px;	
+	margin-right:6px;	
+	margin-bottom:6px;		
+	position: relative;
+	float:left;
 }
 
 .boxWrapper {
-	background-color:#9999FF;
+	background-color:#00CC33;
+	width:80%;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
 }
 
 </style>
@@ -28,7 +45,7 @@ body {
 </head>
 
 <body>
-<div class="boxWrapper" id="boxWrapper">
+<div class="boxWrapper clearfix" id="boxWrapper">
     <div class="box_1_1"></div>
 
 </div>

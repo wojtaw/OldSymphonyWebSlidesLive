@@ -26,7 +26,6 @@
   </div>
   
   <div class="websiteLightBackground firstBlockTop">
-      <h1 class="globalFont center">Who is using Slides<span class="slidesLiveBlue">Live</span></h1>   
   	  <div class="showcaseBar clearfix" id="showcaseBar">
         {% for box in presentationBoxes %}
           {% set image = box.presentation.getThumbnail() %}
@@ -41,8 +40,8 @@
 					  {% else %}
 						{{ box.presentation.title }}  
 					  {% endif %}
-					</div>	
-				  <div class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }} </div>												  
+					</div>	  
+				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>											  
 				</div>			
 			</div>
           {% endif %}

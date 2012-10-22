@@ -595,6 +595,7 @@ h2 {
 
 .thankYouCloud {
 	float:left;	
+	padding-right:60px;
 }
 
 .thankYouTopWrapper {
@@ -612,14 +613,22 @@ h2 {
 .thankStep1 {
 	background-color:#636;	
 	float:left;
-	width:250px;
-	padding:30px;
+	width:240px;
+	padding-left:30px;
 }
 
 .thankStep2 {
 	background-color:#960;
 	float:left;
-	width:250px;
+	width:240px;
+	padding-left:120px;
+}
+
+.thankStep3 {
+	background-color:#3FF;
+	float:left;
+	width:260px;
+	padding-left:20px;
 }
 
 

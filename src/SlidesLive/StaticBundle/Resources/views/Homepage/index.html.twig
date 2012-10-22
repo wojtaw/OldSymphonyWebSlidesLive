@@ -1,5 +1,10 @@
 {% extends 'StaticBundle::layout.html.twig' %}
 
+  {% block javascript %}
+    <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageTiles.js') }}">
+    </script>      
+  {% endblock %}
+
 {% block content %}
 
   <div class="preloader"></div>
@@ -30,11 +35,11 @@
   
   <div class="websiteLightBackground firstBlockTop">
       <h1 class="globalFont center">Who is using Slides<span class="slidesLiveBlue">Live</span></h1>   
-  	  <div class="showcaseBar clearfix">
+  	  <div class="showcaseBar clearfix" id="showcaseBar">
         {% for box in presentationBoxes %}
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
-            <div class="showcaseBox size_1_1"><img src="{{ asset(image) }}" alt="" /></div>
+            <div class="showcaseBox tile_1_1"><img src="{{ asset(image) }}" alt="" /></div>
           {% endif %}
         {% endfor %}							
 	  </div>

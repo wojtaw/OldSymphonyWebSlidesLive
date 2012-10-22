@@ -34,11 +34,11 @@ function modifyThankyouPageAccordingOS(){
                 $('#backupLink').attr("href", appDownloadWindows);				
 																	
             } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
-                $('#stepsMac').css("display", "block");
+                $('#stepsWindows').css("display", "block");
                 $('#backupLink').attr("href", appDownloadLinux);					
 																								
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
-                $('#stepsWindows').css("display", "block");
+                $('#stepsMac').css("display", "block");
                 $('#backupLink').attr("href", appDownloadMac);					
 																				
             } else {

@@ -632,4 +632,11 @@ h2 {
 	padding-left:50px;
 }
 
+#backupLink {
+	text-decoration:none;
+}
+
+#backupLink:hover {
+	text-decoration:underline;		
+}
 

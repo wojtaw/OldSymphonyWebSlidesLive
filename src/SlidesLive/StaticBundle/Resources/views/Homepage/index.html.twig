@@ -30,6 +30,7 @@
         {% for box in presentationBoxes %}
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
+		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
             <div class="showcaseBox tile_1_1">
 				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">
 				</div>
@@ -44,6 +45,7 @@
 				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>											  
 				</div>			
 			</div>
+			</a>			
           {% endif %}
         {% endfor %}							
 	  </div>

@@ -1,5 +1,6 @@
 $(window).resize(resizePresentations); 
 $(document).ready(resizePresentations);
+$(document).ready(addEventListeners);
 
 //Objects and variables
 var minimumTileWidth = 200;
@@ -21,4 +22,11 @@ function resizeTiles(newTileWidth){
 	$('.tile_1_1').css("margin-right", tileSpacing);		
 	$('.tile_1_1').css("margin-bottom", tileSpacing);			
 }
- 
+
+function addEventListeners(){
+	$('.tile_1_1').mouseover(mrdat);
+}
+
+function mrdat(e){
+	
+}

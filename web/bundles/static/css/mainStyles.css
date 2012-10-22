@@ -67,16 +67,30 @@ body {
 	height:100%; 
 }
 
-.showcaseBoxDescriptionBlack {
+.showcaseBoxDescription {
 	background-image:url(../../generalImages/tile_transparent_black.png);
 	background-repeat:repeat;
 	position:relative;
-	top:-70px;
-	height:70px;
+	top:-66px;
+	height:50px;
+	padding:8px;
 }
 
-.showcaseBoxDescriptionBlack:hover {
-	background-color:#000000;
+.showcaseTitle {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	color:#999999;	
+	height:34px;
+	overflow:hidden;	
+}
+
+.showcaseChannel {
+	position:absolute;
+	bottom:8px;
+	font-family:Arial, Helvetica, sans-serif;	
+	font-size:11px;
+	font-weight:normal;	
 }
 
 .tile_1_1{

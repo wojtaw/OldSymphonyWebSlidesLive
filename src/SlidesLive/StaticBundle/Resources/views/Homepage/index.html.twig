@@ -42,7 +42,16 @@
             <div class="showcaseBox tile_1_1">
 				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">
 				</div>
-				<div class="showcaseBoxDescriptionBlack">asfasfasf</div>				
+				<div class="showcaseBoxDescription">
+					<div class="showcaseTitle">
+					  {% if box.presentation.showSpeaker %}
+						{{ box.presentation.listSpeakersNames }}  
+					  {% else %}
+						{{ box.presentation.title }}  
+					  {% endif %}
+					</div>	
+				  <div class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }} </div>												  
+				</div>			
 			</div>
           {% endif %}
         {% endfor %}							

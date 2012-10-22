@@ -64,7 +64,19 @@ body {
 	background-position:top;
 	position: relative;
 	left: 0px;
-	height:235px; 
+	height:100%; 
+}
+
+.showcaseBoxDescriptionBlack {
+	background-image:url(../../generalImages/tile_transparent_black.png);
+	background-repeat:repeat;
+	position:relative;
+	top:-70px;
+	height:70px;
+}
+
+.showcaseBoxDescriptionBlack:hover {
+	background-color:#000000;
 }
 
 .tile_1_1{

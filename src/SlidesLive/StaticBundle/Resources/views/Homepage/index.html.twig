@@ -30,31 +30,14 @@
   
   <div class="websiteLightBackground firstBlockTop">
   	  <div class="showcaseBar">
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33443024.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889424.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889432.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/24727160.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888917.jpg"></div>								
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889435.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33021023.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889026.jpg"></div>	
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888954.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888971.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33443024.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889424.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889432.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/24727160.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888917.jpg"></div>								
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889435.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33021023.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889026.jpg"></div>	
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888954.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888971.jpg"></div>
-		<div class="showcaseBox size_2_2"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>								
+        {% for box in presentationBoxes %}
+          {% set image = box.presentation.getThumbnail() %}
+          {% if image %}
+            <div class="showcaseBox size_1_1"><img src="{{ asset(image) }}" alt="" /></div>
+          {% endif %}
+        {% endfor %}							
 	  </div>
+	  	  
   </div>  
   
 
@@ -82,14 +65,6 @@
   
       <div class="lylesBox center">
         <div class="quotesText">One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.</div>
-      </div>
-      <div class="presentationBoxes">
-        {% for box in presentationBoxes %}
-          {% set image = box.presentation.getThumbnail() %}
-          {% if image %}
-            <img src="{{ asset(image) }}" alt="" width="200px" />
-          {% endif %}
-        {% endfor %}
       </div>
     </div>
   </div>

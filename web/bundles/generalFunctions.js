@@ -20,7 +20,26 @@ function modifyDownloadAccordingOSGeneral(){
 }
 
 function modifyThankyouPageAccordingOS(){
-	console.log("Jes");
+			//First make them hidden all
+            $('#stepsWindows').css("display", "none");
+            $('#stepsMac').css("display", "none");		
+	
+            if ($.client.os.toLowerCase().substring(0,3) == "win") {
+                $('#stepsWindows').css("display", "block");			
+                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SL_Windows.zip");				
+																	
+            } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
+                $('#stepsMac').css("display", "block");
+                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SL_Linux.zip");					
+																								
+            } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
+                $('#stepsWindows').css("display", "block");
+                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg");					
+																				
+            } else {
+                $('#stepsWindows').css("display", "block");	
+                $('#backupLink').attr("href", "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip");																									
+            }	
 }
 
 

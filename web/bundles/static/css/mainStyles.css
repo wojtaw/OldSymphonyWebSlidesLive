@@ -60,8 +60,8 @@ body {
 }
 
 .size_1_1 {
-	width:100px;
-	height:100px;	
+	width:150px;
+	height:150px;	
 }
 
 .size_1_2 {
@@ -81,7 +81,8 @@ body {
 
 .showcaseBox img { 
 	position: relative;
-	height:200px; 
+	left: -30px;
+	height:180px; 
 }
 
 /* DOWNLOAD BUTTON */ 

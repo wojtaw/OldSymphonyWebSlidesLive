@@ -42,7 +42,7 @@ a {
 }
 
 .firstBlockTop {
-	padding-top:30px !important;
+	padding-top:50px !important;
 }
 
 .blockCenterWrapper {
@@ -56,7 +56,7 @@ a {
 	background-color:#1e1e1e;
 	width:100%;
 	padding-top:5px;
-	margin-top:30px;
+	margin-top:50px;
 }
 
 .showcaseBox {
@@ -239,6 +239,8 @@ a {
 
 .featureWrapper {	
 	width:960px;
+	position:relative;
+	left:70px;
 }
 
 .featureLeft {	

@@ -20,7 +20,9 @@ class HomepageBoxRepository extends EntityRepository {
 			JOIN b.presentation p
 			WHERE p.privacy = 1'
 		);
-		return $query->getResult();
+		$gainedPresentations = $query->getResult();
+		shuffle($gainedPresentations);
+		return $gainedPresentations;
 	}
 
 }

@@ -35,8 +35,8 @@ class DefaultController extends Controller
         return $this->render('StaticBundle:Homepage:thankYouDownload.html.twig');
     }	
 	
-	public function generateRandomPositions($numberOfTiles){
-		$numberOfCategories = 60;
+	private function generateRandomPositions($numberOfTiles){
+		$numberOfCategories = 6;
 		if($numberOfTiles < $numberOfCategories) return 0;
 		
 		$categoryPositions = array();

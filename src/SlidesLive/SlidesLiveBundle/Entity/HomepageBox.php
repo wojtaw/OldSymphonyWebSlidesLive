@@ -21,7 +21,12 @@ class HomepageBox
      */
     protected $id;
 	
-	
+    /**
+     * @var string $lang
+     *
+     * @ORM\Column(name="lang", type="string", length="2", nullable="true")
+     */
+    protected $lang;	
     
     /**
      * @ORM\OneToOne(targetEntity="Presentation")
@@ -60,4 +65,14 @@ class HomepageBox
     {
         return $this->presentation;
     }
+	
+    /**
+     * Get language
+     *
+     * @return string
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }	
 }

@@ -20,6 +20,8 @@ class HomepageBox
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+	
+	
     
     /**
      * @ORM\OneToOne(targetEntity="Presentation")

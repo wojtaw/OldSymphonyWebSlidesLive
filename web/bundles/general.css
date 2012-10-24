@@ -62,13 +62,15 @@ body{
 }
 
 .footerDark {
+	padding-top:25px;	
 	background-color:#000000;
-	height:150px;	
+	height:120px;	
 }
 
 .footerLight {
 	background-color:#09101a;
-	height:100px;
+	padding-top:40px;
+	height:60px;
 }
 
 /* TEXTS*/
@@ -91,6 +93,15 @@ body{
 .footerText a:hover{
 	color:#8896a3;	
 	text-decoration:underline;	
+}
+
+.footerMenuSpace {
+	margin-right:50px;
+}
+
+.footerMenuRight{
+	text-align:right;
+	float:right;
 }
 
 .headerMenu {

@@ -32,6 +32,20 @@
   <div class="websiteLightBackground firstBlockTop">
   	  <div class="showcaseBar clearfix" id="showcaseBar">
         {% for box in presentationBoxes %}
+		{% if loop.index % 4 == 0%}  
+        
+      <a href="#">
+        <div class="showcaseBox tile_1_1 categoryTile">
+            <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});">
+            </div>
+           	
+        </div>
+        </a>	      
+        
+        
+        
+        {% else %}      
+        
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
 		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
@@ -51,6 +65,8 @@
 			</div>
 			</a>			
           {% endif %}
+          
+         {% endif %}          
         {% endfor %}							
 	  </div>
 	  	  

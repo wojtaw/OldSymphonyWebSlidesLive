@@ -119,6 +119,14 @@ a {
 	float:left;
 }
 
+.categoryTile {
+	background-color:#027bf7;	
+}
+
+.categoryTile:hover{
+	background-color:#000000;
+}
+
 /* DOWNLOAD BUTTON */ 
 .downloadButton {
 	display:block;

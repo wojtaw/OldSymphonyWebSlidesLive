@@ -378,18 +378,19 @@ a {
 }
 
 .contactUs{
-	background-position:0 -120px !important;	
+	background-position:0 -118px !important;	
 	margin-top:70px;
 	margin-bottom:90px;
 }
 
 .contactUs:hover{
-	background-position:0 -180px !important;		
+	background-position:0 -178px !important;		
 }
 
 /* SLIDESLIVE SOCIAL */
 
 .socialBottomImage {
+	display:none;
 	background-image:url(../images/social-media-sl.png);
 	background-position:center;
 	background-repeat:no-repeat;

@@ -55,7 +55,7 @@
 		<div class="headerContent">
 			<div class="slidesLiveLogo"><a href="{{ path('homepage') }}"><img src="{{ asset('bundles/static/images/logo-header-beta.png') }}" border="0" /></a><div class="logoBeta slidesLiveBlue">Beta</div></div>
             <div class="headerMenuWraper">
-                <a href="http://slideslive.com/SlidesLiveData/SL_Recorder/SL_AllPlatforms.zip" id="downloadButtonLink2" style="margin-right:30px; color:#FFF" class="headerMenu globalFont"  onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
+                <a href="{{ path('thankyou') }}" id="downloadButtonLink2" style="margin-right:30px; color:#FFF" class="headerMenu globalFont"  onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
                 <a href="{{ path('tour') }}" style="margin-right:30px;" class="headerMenu globalFont">How It Works</a>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
                   <a href="{{ path('manageAccount') }}" class="headerMenu globalFont slidesLiveBlue">{{ app.user.username }}</a>

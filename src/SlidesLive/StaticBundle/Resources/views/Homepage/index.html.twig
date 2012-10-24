@@ -40,8 +40,22 @@
                 
                 <a href="#">
                 <div class="showcaseBox tile_1_1 categoryTile">
-                    <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});">
-                    </div>
+                    {% if currentTileIndex == categoryPositions[1] %} 
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>
+                    {% elseif currentTileIndex == categoryPositions[2] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>                    
+                    {% elseif currentTileIndex == categoryPositions[3] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>                    
+                    {% elseif currentTileIndex == categoryPositions[4] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>                                        
+                    {% elseif currentTileIndex == categoryPositions[5] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>                                        
+                    {% elseif currentTileIndex == categoryPositions[6] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>                                        
+                    {% else %}  
+                    
+                    {% endif %}                                                                                                    
+                    
                     
                 </div>
                 </a>	      

@@ -93,10 +93,13 @@ body{
 .footerText a:hover{
 	color:#027BF7;	
 	text-decoration:none;	
+	position:relative;
+	top:1px;	
 }
 
 .footerSmaller {
-	font-size:12px;	
+	font-size:13px;	
+	color:#666666;
 }
 
 .footerMenuSpace {
@@ -163,7 +166,7 @@ body{
 }
 
 .globalFont{
-	font-family:'Ropa Sans', sans-serif !important;
+	font-family:'Play', sans-serif !important;
 }
 
 .bottomFree {

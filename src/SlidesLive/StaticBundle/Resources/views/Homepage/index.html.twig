@@ -54,9 +54,7 @@
                         <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>                                        
                     {% else %}  
                     
-                    {% endif %}                                                                                                    
-                    
-                    
+                    {% endif %}                                                                                                     
                 </div>
                 </a>	      
                 
@@ -72,8 +70,7 @@
 				</div>
 				<div class="showcaseBoxDescription">
 					<div class="showcaseTitle">
-                    	{{ attribute(categoryPositions,'3') }}
-                        {{ categoryPositions[3] }}
+
                         
 					  {% if box.presentation.showSpeaker %}
 						{{ box.presentation.listSpeakersNames }}  

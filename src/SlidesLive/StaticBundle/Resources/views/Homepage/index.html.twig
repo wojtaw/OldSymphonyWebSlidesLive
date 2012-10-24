@@ -31,9 +31,11 @@
   
   <div class="websiteLightBackground firstBlockTop">
   	  <div class="showcaseBar clearfix" id="showcaseBar">
-        {% for i in 0..totalTiles %}
+        {% for box in presentationBoxes %}
         
-		{% if loop.index == categoryPositions[1] %}  
+        {% set tileIndex = loop.index %}
+        {% for position in categoryPositions %}
+		{% if tileIndex == position %}  
         
       <a href="#">
         <div class="showcaseBox tile_1_1 categoryTile">
@@ -43,10 +45,9 @@
         </div>
         </a>	      
         
-        
-        
-        {% else %}    
-        {% set box = presentationBoxes[3] %}  
+		{% endif %}
+        {% endfor %}                 
+
         
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
@@ -70,8 +71,7 @@
 			</div>
 			</a>			
           {% endif %}
-          
-         {% endif %}          
+                   
         {% endfor %}							
 	  </div>
 	  	  

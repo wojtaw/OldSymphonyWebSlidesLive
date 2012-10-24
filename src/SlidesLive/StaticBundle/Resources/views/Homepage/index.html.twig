@@ -56,7 +56,9 @@
 				</div>
 				<div class="showcaseBoxDescription">
 					<div class="showcaseTitle">
-                    	{{ categoryPositions['14'] }}
+                    	{{ attribute(categoryPositions,'3') }}
+                        {{ categoryPositions[3] }}
+                        
 					  {% if box.presentation.showSpeaker %}
 						{{ box.presentation.listSpeakersNames }}  
 					  {% else %}

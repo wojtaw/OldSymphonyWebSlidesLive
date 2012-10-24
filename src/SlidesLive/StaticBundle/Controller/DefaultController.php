@@ -9,7 +9,7 @@ class DefaultController extends Controller
 {
     
     public function indexAction() {
-        $this->data['presentationBoxes'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
+        $this->data['presentationBoxes'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();	
         return $this->render('StaticBundle:Homepage:index.html.twig', $this->data);
     }
     
@@ -30,6 +30,9 @@ class DefaultController extends Controller
     }
 	
     public function thankyouAction() {
+		echo "prdel";
+		//$this->redirect($this->generateUrl('thankyou', array('isDownloaded' => "TRUE")));
+					
         return $this->render('StaticBundle:Homepage:thankYouDownload.html.twig');
     }	
 	

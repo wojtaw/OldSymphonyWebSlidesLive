@@ -91,17 +91,47 @@ function playerDimensionsAccordingScreen(playerType){
 	}
 }
 
+function quoteContent(message,author,source){
+this.message=message;
+this.author=author;
+this.source=source;
+}
+
+var allQuotes = new Object();
+var currentQuoteIndex = 0;
+var numberOfQuotes = 3;
+allQuotes[0] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
+								"Lyle Frink<br />The DEMOCOACH",
+								"http://slideslive.com/DEMOCOACH");
+								
+allQuotes[1] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
+								"Nathan Gold<br />The DEMOCOACH",
+								"http://slideslive.com/DEMOCOACH");
+
+
+allQuotes[2] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
+								"Filip Blazek<br />DE.SIGN",
+								"http://slideslive.com/DE.SIGN");
+								
+
 
 function runQuotesTimelapse(){
-	console.log("quotes changing");	
-	setInterval(function(){changeQuote()},3000);
+	//Set at the end and run first content change
+	currentQuoteIndex=numberOfQuotes;
+	changeQuoteContent();
+	//Set periodicall changing
+	setInterval(function(){changeQuote()},7000);
 }
 
 function changeQuote(){
-	console.log("quotes changing");
-	$('#quoteBox').fadeOut(500,changeQuoteContent());	
+	$('#quoteAnimationWrapper').animate({opacity: 0},500,function() {changeQuoteContent()});	
 }
 
 function changeQuoteContent(){
-	
+	currentQuoteIndex++;
+	if(currentQuoteIndex > numberOfQuotes-1) currentQuoteIndex = 0;
+	$('.quotesText').html(allQuotes[currentQuoteIndex].message);	
+	$('.quotesAuthor').html(allQuotes[currentQuoteIndex].author);	
+	$('#quotesLink').attr("href", allQuotes[currentQuoteIndex].source);
+	$('#quoteAnimationWrapper').animate({opacity: 1},500);		
 }

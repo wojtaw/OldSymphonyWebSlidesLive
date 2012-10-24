@@ -1,5 +1,6 @@
  $(document).ready(function() {
    $("#shareEmbed").click(showEmbedModalWindow); 
+   runQuotesTimelapse();
  });
  
  var appDownloadWindows = "http://slideslive.com/data/SL_Recorder/SL_Windows.zip";
@@ -88,4 +89,19 @@ function playerDimensionsAccordingScreen(playerType){
 	} else {
 		return -1;			
 	}
+}
+
+
+function runQuotesTimelapse(){
+	console.log("quotes changing");	
+	setInterval(function(){changeQuote()},3000);
+}
+
+function changeQuote(){
+	console.log("quotes changing");
+	$('#quoteBox').fadeOut(500,changeQuoteContent());	
+}
+
+function changeQuoteContent(){
+	
 }

@@ -101,15 +101,15 @@ var allQuotes = new Object();
 var currentQuoteIndex = 0;
 var numberOfQuotes = 3;
 allQuotes[0] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
-								"Lyle Frink<br />The DEMOCOACH",
-								"http://slideslive.com/DEMOCOACH");
+								"Lyle Frink<br />",
+								"http://slideslive.com/Lylesplace");
 								
-allQuotes[1] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
+allQuotes[1] = new quoteContent("This looks very cool! Can't wait to see more.",
 								"Nathan Gold<br />The DEMOCOACH",
 								"http://slideslive.com/DEMOCOACH");
 
 
-allQuotes[2] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
+allQuotes[2] = new quoteContent("You are awesome! Thanks.",
 								"Filip Blazek<br />DE.SIGN",
 								"http://slideslive.com/DE.SIGN");
 								

@@ -33,20 +33,21 @@
   	  <div class="showcaseBar clearfix" id="showcaseBar">
         {% for box in presentationBoxes %}
         
-        {% set tileIndex = loop.index %}
-        {% for position in categoryPositions %}
-		{% if tileIndex == position %}  
-        
-      <a href="#">
-        <div class="showcaseBox tile_1_1 categoryTile">
-            <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});">
-            </div>
-           	
-        </div>
-        </a>	      
-        
-		{% endif %}
-        {% endfor %}                 
+       	    {% set currentTileIndex = loop.index %}
+            
+            {% for position in categoryPositions %}
+                {% if currentTileIndex == position %}  
+                
+                <a href="#">
+                <div class="showcaseBox tile_1_1 categoryTile">
+                    <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});">
+                    </div>
+                    
+                </div>
+                </a>	      
+                
+                {% endif %}
+            {% endfor %}                 
 
         
           {% set image = box.presentation.getThumbnail() %}

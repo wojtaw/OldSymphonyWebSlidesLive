@@ -95,8 +95,16 @@
 
         {# Page footer #}        
 	<div class="siteFooter">
-                <a href="{{ path('about') }}" style="margin-right:30px;" class="headerMenu globalFont">About</a>	
-  		<div class="footerContent"><div class="footerText">&#169; 2012 SlidesLive.com. All rights reserved.</div></div>
+    	<div class="footerLight">
+	  		<div class="footerContent">
+				<div class="footerText"><a href="{{ path('about') }}">About us</a><a href="{{ path('about') }}">Facebook</a><a href="{{ path('about') }}">Blog</a></div>	                    
+            </div>                
+        </div>            
+    	<div class="footerDark">
+	  		<div class="footerContent">
+            	<div class="footerText">&#169; 2012 SlidesLive.com. All rights reserved.</div>
+            </div>        
+        </div>
     </div>        
     
     {% block javascripts %}{% endblock %}

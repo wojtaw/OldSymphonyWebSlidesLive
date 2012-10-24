@@ -49,7 +49,6 @@ body{
 	position:relative;
 	top:-6px;
 	width:100%;
-	height:55px;
 	background-image:url(static/images/footer.png);
 	background-repeat:repeat-x;
 }
@@ -58,8 +57,18 @@ body{
 	margin-left:auto;
 	margin-right:auto;
 	padding-bottom:6px;
+	position:relative;
 	width:960px;	
-	height:40px;
+}
+
+.footerDark {
+	background-color:#000000;
+	height:150px;	
+}
+
+.footerLight {
+	background-color:#09101a;
+	height:100px;
 }
 
 /* TEXTS*/
@@ -68,10 +77,20 @@ body{
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
 	font-size:15px;
-	color:#999;
+	color:#8896a3;
 	position:relative;
-	top:19px;
 	text-decoration:none;
+	text-transform:uppercase;
+}
+
+.footerText a{
+	color:#8896a3;	
+	text-decoration:none;	
+}
+
+.footerText a:hover{
+	color:#8896a3;	
+	text-decoration:underline;	
 }
 
 .headerMenu {
@@ -147,6 +166,11 @@ body{
 	text-align:center !important;
     margin-left: auto !important;
     margin-right: auto !important;
+}
+
+.verticalCenter{
+	position:absolute;
+	top:50%;
 }
 
 .left{

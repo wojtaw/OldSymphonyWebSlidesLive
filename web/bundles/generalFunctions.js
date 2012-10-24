@@ -28,22 +28,30 @@ function modifyThankyouPageAccordingOS(){
 			//First make them hidden all
             $('#stepsWindows').css("display", "none");
             $('#stepsMac').css("display", "none");		
+			
+			console.log($('#redirectLink').attr("content"));
+			$('<meta http-equiv="refresh" id="redirectLink" content="20;url=http://www.google.com"/>').appendTo($('head'));​						
+		console.log($('#redirectLink').attr("content"));		
 	
             if ($.client.os.toLowerCase().substring(0,3) == "win") {
                 $('#stepsWindows').css("display", "block");			
-                $('#backupLink').attr("href", appDownloadWindows);				
+                $('#backupLink').attr("href", appDownloadWindows);		
+                $('#redirectLink').attr("content", "10,"+appDownloadWindows);								
 																	
             } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
                 $('#stepsWindows').css("display", "block");
-                $('#backupLink').attr("href", appDownloadLinux);					
+                $('#backupLink').attr("href", appDownloadLinux);		
+                $('#redirectLink').attr("content", "10,"+appDownloadLinux);															
 																								
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
                 $('#stepsMac').css("display", "block");
                 $('#backupLink').attr("href", appDownloadMac);					
+                $('#redirectLink').attr("content", "10,"+appDownloadMac);												
 																				
             } else {
                 $('#stepsWindows').css("display", "block");	
-                $('#backupLink').attr("href", appDownloadAll);																									
+                $('#backupLink').attr("href", appDownloadAll);		
+                $('#redirectLink').attr("content", "10,"+appDownloadAll);																																			
             }	
 }
 

@@ -29,10 +29,7 @@ class DefaultController extends Controller
         return $this->render('StaticBundle:Homepage:policy.html.twig');
     }
 	
-    public function thankyouAction() {
-		echo "prdel";
-		//$this->redirect($this->generateUrl('thankyou', array('isDownloaded' => "TRUE")));
-					
+    public function thankyouAction() {		
         return $this->render('StaticBundle:Homepage:thankYouDownload.html.twig');
     }	
 	

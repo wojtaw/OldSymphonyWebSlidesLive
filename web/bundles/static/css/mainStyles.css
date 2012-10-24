@@ -212,7 +212,7 @@ a {
 	width:320px;	
 }
 
-.lylesBox {
+.quoteBox {
 	margin-top:30px;
 	padding-top:140px;
 	background-image:url(../images/coments.png);
@@ -522,6 +522,19 @@ a {
 	font-size:30px;		
 	color:#999999;
 	text-align:center;
+}
+
+.quotesAuthor {
+	font-family:'Ropa Sans', sans-serif;
+	font-weight:normal;
+	font-style:italic;
+	font-size:15px;		
+	color:#999999;
+	float:right;
+	position:relative;
+	top:40px;
+	right:125px;
+	text-align:right;
 }
 
 

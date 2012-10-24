@@ -24,34 +24,34 @@ function modifyDownloadAccordingOSGeneral(){
             }
 }
 
+function redirectDownload(redirectUrl){
+	window.location.replace(redirectUrl);
+}
+
 function modifyThankyouPageAccordingOS(){
 			//First make them hidden all
             $('#stepsWindows').css("display", "none");
-            $('#stepsMac').css("display", "none");		
-			
-			console.log($('#redirectLink').attr("content"));
-			$('<meta http-equiv="refresh" id="redirectLink" content="20;url=http://www.google.com"/>').appendTo($('head'));​						
-		console.log($('#redirectLink').attr("content"));		
+            $('#stepsMac').css("display", "none");				
 	
             if ($.client.os.toLowerCase().substring(0,3) == "win") {
                 $('#stepsWindows').css("display", "block");			
-                $('#backupLink').attr("href", appDownloadWindows);		
-                $('#redirectLink').attr("content", "10,"+appDownloadWindows);								
+                $('#backupLink').attr("href", appDownloadWindows);	
+				setTimeout(function(){redirectDownload(appDownloadWindows);},1500);
 																	
             } else if ($.client.os.toLowerCase().substring(0,3) == "lin") {
                 $('#stepsWindows').css("display", "block");
-                $('#backupLink').attr("href", appDownloadLinux);		
-                $('#redirectLink').attr("content", "10,"+appDownloadLinux);															
+                $('#backupLink').attr("href", appDownloadLinux);	
+				setTimeout(function(){redirectDownload(appDownloadLinux);},1500);																		
 																								
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
                 $('#stepsMac').css("display", "block");
-                $('#backupLink').attr("href", appDownloadMac);					
-                $('#redirectLink').attr("content", "10,"+appDownloadMac);												
+                $('#backupLink').attr("href", appDownloadMac);	
+				setTimeout(function(){redirectDownload(appDownloadMac);},1500);																				
 																				
             } else {
                 $('#stepsWindows').css("display", "block");	
-                $('#backupLink').attr("href", appDownloadAll);		
-                $('#redirectLink').attr("content", "10,"+appDownloadAll);																																			
+                $('#backupLink').attr("href", appDownloadAll);	
+				setTimeout(function(){redirectDownload(appDownloadAll);},1500);																																							
             }	
 }
 

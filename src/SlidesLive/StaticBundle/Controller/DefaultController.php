@@ -36,7 +36,9 @@ class DefaultController extends Controller
     }	
 	
 	public function generateRandomPositions($numberOfTiles){
-		$numberOfCategories = 1;
+		$numberOfCategories = 6;
+		
+		
 		$categoryPositions = array();
 		//Create random positions, not two same
 		for ($i=1; $i<=$numberOfCategories; $i++){

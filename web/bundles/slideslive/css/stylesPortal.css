@@ -566,7 +566,7 @@ body {
 }
 
 /* Overlay */
-#simplemodal-overlay {background-color:#000; cursor:wait;}
+#simplemodal-overlay {background-color:#000; cursor:default;}
 
 /* Container */
 #simplemodal-container {

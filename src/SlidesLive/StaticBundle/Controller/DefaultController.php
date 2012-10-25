@@ -9,7 +9,9 @@ class DefaultController extends Controller
 {
     
     public function indexAction() {
-        $this->data['presentationBoxes'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
+		$selectedPresentations = $this->getDoctrine()->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
+        $this->data['presentationBoxes'] = $selectedPresentations;	
+        $this->data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations));	
         return $this->render('StaticBundle:Homepage:index.html.twig', $this->data);
     }
     
@@ -28,10 +30,32 @@ class DefaultController extends Controller
     public function policyAction() {
         return $this->render('StaticBundle:Homepage:policy.html.twig');
     }
+	
+    public function thankyouAction() {		
+        return $this->render('StaticBundle:Homepage:thankYouDownload.html.twig');
+    }	
+	
+	private function generateRandomPositions($numberOfTiles){
+		$numberOfCategories = 6;
+		if($numberOfTiles < $numberOfCategories) return 0;
+		
+		$categoryPositions = array();
+		//Create random positions, not two same
+		for ($i=1; $i<=$numberOfCategories; $i++){
+			$randomValue = rand(1, $numberOfTiles);
+			if (in_array($randomValue, $categoryPositions)){
+				$i--;
+			} else {
+				$categoryPositions[$i] = $randomValue;				
+			}
+		}	
+		return $categoryPositions;
+	}
+	
     
 // --------EXAMPLE ACCOUNT -----------------------------------------------------
 
-    public function exampleAction() {
+    public function exampleAction() {		
       return $this->render('StaticBundle:Example:example.html.twig');
     }       
 

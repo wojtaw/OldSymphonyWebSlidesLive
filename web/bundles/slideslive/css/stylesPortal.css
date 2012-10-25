@@ -228,9 +228,9 @@ a.metaBlue {
 	background-repeat:repeat-y;	
 	background-position:right;
 	height:475px;
-	width:500px;
+	width:900px;
 	position:relative;
-	left:-499px;	
+	left:-899px;	
 	overflow:hidden;
 }
 
@@ -243,7 +243,7 @@ a.metaBlue {
 	background-image:url(../styleImages/gradient-player-right.png);	
 	background-repeat:repeat-y;
 	background-position:left;	
-	width:500px;	
+	width:900px;	
 }
 
 .gradientLeftAudio{
@@ -553,7 +553,9 @@ ul.channelFoldersList a:hover {
 
 body {
 	padding-top:55px;
-	padding-bottom:40px;
+	margin-left:0px;
+	left:0px;
+	padding-left:0px;
 	width:100%;		
 	background-image:url(../../static/images/bg-light.png);	
 	background-position:center;	
@@ -564,7 +566,7 @@ body {
 }
 
 /* Overlay */
-#simplemodal-overlay {background-color:#000; cursor:wait;}
+#simplemodal-overlay {background-color:#000; cursor:default;}
 
 /* Container */
 #simplemodal-container {
@@ -573,12 +575,14 @@ body {
 	color:#bbb;
 	background-color:#efefef;
 	border:4px solid #047de3;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
 	padding:12px;
 	background-image:url(../../static/images/bg-light.png);	
 }
 #simplemodal-container .simplemodal-data {padding:8px;}
 #simplemodal-container a {color:#ddd;}
-#simplemodal-container a.modalCloseImg {background:url(../../slideslive/styleImages/modal_close.png) no-repeat; width:40px; height:40px; display:block; z-index:3200; position:absolute; top:5px; right:-15px; cursor:pointer;}
+#simplemodal-container a.modalCloseImg {background:url(../../slideslive/styleImages/modal_close.png) no-repeat; width:40px; height:40px; display:block; z-index:3200; position:absolute; top:15px; right:-5px; cursor:pointer;}
 #simplemodal-container a.modalCloseImg:hover {background:url(../../slideslive/styleImages/modal_close_over.png) no-repeat;}
 #simplemodal-container h3 {color:#047de3;}
 #simplemodal-container code {background:#fff; border:1px solid #ccc; color:#000; display:block; font-size:12px; margin-bottom:12px; padding:20px;}

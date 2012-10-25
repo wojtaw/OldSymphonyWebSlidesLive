@@ -20,6 +20,13 @@ class HomepageBox
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+	
+    /**
+     * @var string $lang
+     *
+     * @ORM\Column(name="lang", type="string", length="2", nullable="true")
+     */
+    protected $lang;	
     
     /**
      * @ORM\OneToOne(targetEntity="Presentation")
@@ -113,4 +120,5 @@ class HomepageBox
     {
         return $this->account;
     }
+    
 }

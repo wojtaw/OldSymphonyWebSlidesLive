@@ -20,6 +20,10 @@ policy:
     pattern: /privacyandpolicy
     defaults: { _controller: StaticBundle:Default:policy }
     
+thankyou:
+    pattern: /thankyou
+    defaults: { _controller: StaticBundle:Default:thankyou }	
+
 # -------ERRORY-----------------------------------------------------------------
 
 errorPage:

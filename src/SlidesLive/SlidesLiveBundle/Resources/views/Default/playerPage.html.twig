@@ -37,7 +37,7 @@
 {% block javascript %}
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script> 
-  <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.min.js') }}">
+  <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.full.js') }}">
   </script>      
 {% endblock %}
 
@@ -98,8 +98,10 @@
 		
 		<!-- embed window content -->
 		<div id="embedWindowContent">
-			<h3>Embed code</h3>
-			<p>Use following code for displaying this presentation on your website.</p>
+			<div class="globalFont">
+				<h3>Embed code</h3>
+				<p>Use following code for displaying this presentation on your website.</p>
+			</div>
 			<p><code>&#60;iframe src="http://edumeta.com/embed/{{ presentation.id }}?width=650" width="650" height="270" frameborder="0" scrolling="no"&#62;&#60;/iframe&#62;</code></p>
 		</div>		
 		<!-- embed window end -->		

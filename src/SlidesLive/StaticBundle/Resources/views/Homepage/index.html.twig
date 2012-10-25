@@ -1,5 +1,10 @@
 {% extends 'StaticBundle::layout.html.twig' %}
 
+  {% block javascript %}
+    <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageTiles.js') }}">
+    </script>      
+  {% endblock %}
+
 {% block content %}
 
   <div class="preloader"></div>
@@ -7,103 +12,95 @@
   
   <div class="websiteLightBackground firstBlockTop">
     <div class="blockCenterWrapper">
-      <h1 class="globalFont left">Helping you<br /> <span class="slidesLiveBlue"> record and spread </span><br />knowledge.</h1>
+	  <div class="leftHalf">    	
+	      <h1 class="globalFont left">Helping you<br /> <span class="slidesLiveBlue"> record and spread </span><br />knowledge.</h1>
+	 </div>
 
-      <a href="javascript:void(0)" onClick="showEmbedPlayer()">
-        <div class="presentationButton">
-          <div class="embedPlayer center"><iframe src="http://edumeta.com/embed/38888926?width=950" width="950" height="412" frameborder="0" scrolling="no"></iframe></div>
-        </div>
-      </a>
-	  
-
-      <h2 class="globalFont center">With SlidesLive, it’s your message.<br/>Leave the rest to us.</h2>
-
-      <a href="http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip" id="downloadButtonLink" class="buttonLink" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">
-        <div class="downloadButton center">
-          <div class="downloadButtonText">Download Free App</div>       
-        </div>
-      </a>
+	  <div class="rightHalf">    
+		  <a href="{{ path('thankyou') }}" id="downloadButtonLink" class="buttonLink" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">
+			<div class="downloadButton center">
+			  <div class="downloadButtonText">Download Free App</div>       
+			</div>
+		  </a>
       
-      <div class="downloadText"><a href="http://slideslive.com/data/SL_Recorder/SL_Windows.zip">For Windows (XP+)</a> | <a href="http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg">For MacOS (10.6+)</a> | <a href="http://slideslive.com/data/SL_Recorder/SL_Linux.zip">For Linux</a></div>	                                   
+
+	      <div class="downloadText"><a href="http://slideslive.com/data/SL_Recorder/SL_Windows.zip" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/subButtonWin']);">For Windows (XP+)</a> | <a href="http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/subButtonMac']);">For MacOS (10.6+)</a></div>	                                   
+	  </div>
     </div> 
   </div>
   
   <div class="websiteLightBackground firstBlockTop">
-  	  <div class="showcaseBar">
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33443024.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889424.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889432.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/24727160.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888917.jpg"></div>								
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889435.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33021023.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889026.jpg"></div>	
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888954.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888971.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33443024.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889424.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889432.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/24727160.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888917.jpg"></div>								
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889435.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/33021023.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889026.jpg"></div>	
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888954.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38888971.jpg"></div>
-		<div class="showcaseBox size_1_1"><img src="http://slideslive.com/data/PresentationThumbs/38889365.jpg"></div>								
-	  </div>
-  </div>  
-  
-
-  
-  <div class="websiteLightBackground">
-    <div class="blockCenterWrapper">
-      <h1 class="globalFont center"><span class="slidesLiveBlue">How</span> does it work?</h1>   
-  
-      <div class="howItWorksWrapper clearfix">
-        <div class="howItWorksImage"></div>
-        <div class="howStepOne">
-          <div class="stepsHeadline slidesLiveBlue">1. Start</div>
-          <div class="stepsBody">Push the record button<br />and start your presentation</div>                    
-        </div>
-        <div class="howStepTwo">
-          <div class="stepsHeadline slidesLiveBlue">2. Present</div>
-          <div class="stepsBody">SlidesLive will record all slides - actually,<br /> all visual elements* - and automatically<br /> sync them with your talk.<br /><br /></div> 
-          <div class="stepsBody smallNote">*PDF, PPT, PPTX, ODP, Images, Graphs, Word,<br /> Excel, Web and whole lot more</div>                                       
-        </div>
-        <div class="howStepThree">
-          <div class="stepsHeadline slidesLiveBlue">3. Publish</div>
-          <div class="stepsBody">After a simple edit, upload<br /> the presentation to your account.</div>                   
-        </div>  
-      </div>     
-  
-      <div class="lylesBox center">
-        <div class="quotesText">One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.</div>
-      </div>
-      <div class="presentationBoxes">
+  	  <div class="showcaseBar clearfix" id="showcaseBar">
         {% for box in presentationBoxes %}
+        
+       	    {% set currentTileIndex = loop.index %}
+            
+            {% for position in categoryPositions %}
+                {% if currentTileIndex == position %}  
+                
+                <a href="#">
+                <div class="showcaseBox tile_1_1 categoryTile">
+                    {% if currentTileIndex == categoryPositions[1] %} 
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>
+                    {% elseif currentTileIndex == categoryPositions[2] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>                    
+                    {% elseif currentTileIndex == categoryPositions[3] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>                    
+                    {% elseif currentTileIndex == categoryPositions[4] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>                                        
+                    {% elseif currentTileIndex == categoryPositions[5] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>                                        
+                    {% elseif currentTileIndex == categoryPositions[6] %}                     
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/edu.png')}});"></div>                                        
+                    {% else %}  
+                    
+                    {% endif %}                                                                                                     
+                </div>
+                </a>	      
+                
+                {% endif %}
+            {% endfor %}                 
+
+        
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
-            <img src="{{ asset(image) }}" alt="" width="200px" />
+		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
+            <div class="showcaseBox tile_1_1">
+				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">
+				</div>
+				<div class="showcaseBoxDescription">
+					<div class="showcaseTitle">
+
+                        
+					  {% if box.presentation.showSpeaker %}
+						{{ box.presentation.listSpeakersNames }}  
+					  {% else %}
+						{{ box.presentation.title }}  
+					  {% endif %}
+					</div>	  
+				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>											  
+				</div>			
+			</div>
+			</a>			
           {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  </div>
+                   
+        {% endfor %}							
+	  </div>
+	  	  
+  </div>  
+
   
   <div class="websiteDarkBackground">
     <div class="blockCenterWrapper">
-	<br /><br /><br />
-            <div class="socialBottomImage">
-            	<a href="https://www.facebook.com/SlidesLive" target="_blank"><div class="socialButtonGeneral socialButtonFacebook"></div></a>
-            	<a href="https://twitter.com/SlidesLive" target="_blank"><div class="socialButtonGeneral socialButtonTwitter"></div></a>    
-            	<a href="https://plus.google.com/104664981382832858855" target="_blank"><div class="socialButtonGeneral socialButtonGoogle"></div></a>    
-            	<a href="http://blog.slideslive.com" target="_blank"><div class="socialButtonGeneral socialButtonBlog"></div></a>                
-            </div>
-
+    
+    <a href="" target="_blank" id="quotesLink">
+      <div class="quoteBox center" id="quoteBox">
+      	<div id="quoteAnimationWrapper">
+            <div class="quotesText">One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.</div>
+            <div class="quotesAuthor">Lyle Frink<br />The DEMOCOACH</div>        
+        </div>
+      </div>
+      </a>
     </div>
   </div>  
   

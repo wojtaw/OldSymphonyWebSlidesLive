@@ -18,10 +18,11 @@ class HomepageBoxRepository extends EntityRepository {
 			'SELECT b
 			FROM SlidesLiveBundle:HomepageBox b
 			JOIN b.presentation p
-			WHERE p.privacy = 1'
-		);
-		echo "results: ". count($query->getResult());
-		return $query->getResult();
+			WHERE p.privacy = 1 and b.lang = :language'
+		)->setParameter('language', 'en');
+		$gainedPresentations = $query->getResult();
+		shuffle($gainedPresentations);
+		return $gainedPresentations;
 	}
 
 }

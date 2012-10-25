@@ -27,6 +27,21 @@ class HomepageBox
      */
     protected $presentation;
 
+    // #### ZALOHA KVULI HOMEPAGE BOXU NA EDUMATE ####
+            /**
+             * @ORM\OneToOne(targetEntity="Account")
+             * @ORM\JoinColumn(name="account_id", referencedColumnName="id")     
+             */         
+            protected $account;
+
+            /**
+             * @var string $lang
+             *
+             * @ORM\Column(name="lang", type="string", length=2)
+             */    
+            protected $lang;
+    // ###############################################
+
 // -----------------------------------------------------------------------------
 
     /**
@@ -57,5 +72,45 @@ class HomepageBox
     public function getPresentation()
     {
         return $this->presentation;
+    }
+
+    /**
+     * Set lang
+     *
+     * @param string $lang
+     */
+    public function setLang($lang)
+    {
+        $this->lang = $lang;
+    }
+
+    /**
+     * Get lang
+     *
+     * @return string 
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * Set account
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Account $account
+     */
+    public function setAccount(\SlidesLive\SlidesLiveBundle\Entity\Account $account)
+    {
+        $this->account = $account;
+    }
+
+    /**
+     * Get account
+     *
+     * @return SlidesLive\SlidesLiveBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

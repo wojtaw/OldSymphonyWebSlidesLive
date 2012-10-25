@@ -101,9 +101,10 @@ var allQuotes = new Object();
 var currentQuoteIndex = 0;
 var numberOfQuotes = 5;		
 
-allQuotes[3] = new quoteContent("This looks very cool!22222 Can't wait to see more.",
-								"Nathan Gold<br />The DEMOCOACH",
-								"http://slideslive.com/DEMOCOACH");
+allQuotes[0] = new quoteContent("Hello Pioneers!<br /><img src=\"/SlidesLive/web/bundles/static/images/logo-pioneers.png\">",
+								"Pioneers festival<br />Vienna 2012",
+								"http://slideslive.com/pioneersfestival");
+								
 allQuotes[1] = new quoteContent("This looks very cool! Can't wait to see more.",
 								"Nathan Gold<br />The DEMOCOACH",
 								"http://slideslive.com/DEMOCOACH");
@@ -112,13 +113,13 @@ allQuotes[2] = new quoteContent("You are awesome! Thanks.",
 								"Filip Blazek<br />DE.SIGN",
 								"http://slideslive.com/DE.SIGN");
 								
-allQuotes[0] = new quoteContent("<span class=\"quoteBigger\">130</span> vs. <span class=\"quoteBigger\">7000</span><br />Offline vs. online audience",
+allQuotes[3] = new quoteContent("<span class=\"quoteBigger\">130</span> vs. <span class=\"quoteBigger\">7000</span><br />Offline vs. online audience",
 								"Devel.cz<br />IT Conference",
 								"http://slideslive.com/Devel.cz");	
 								
 allQuotes[4] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
-								"Lyle Frink<br />",
-								"http://slideslive.com/Lylesplace");															
+								"Paul Winstanley<br />OpenInformatics Conference",
+								"http://slideslive.com/OpenInformatics");															
 								
 
 

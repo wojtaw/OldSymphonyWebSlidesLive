@@ -161,14 +161,20 @@ class Presentation {
     /**
      * @ORM\ManyToMany(targetEntity="Speaker", inversedBy="presentations")
      * @ORM\JoinTable(name="presentations_speakers")
-     *
      */
     protected $speakers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="presentations")
+     * @ORM\JoinTable(name="presentations_categories")
+     */
+     protected $categories;
 
 // -----------------------------------------------------------------------------
 
     public function __construct() {
         $this->speakers = new ArrayCollection();
+        $this->categories = new ArrayCollection();
         $this->privacy = Privacy::P_PUBLIC;
         $this->hash = $this->generateHash();
     }
@@ -682,5 +688,25 @@ class Presentation {
     public function getAutoPlay()
     {
         return $this->autoPlay;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param SlidesLive\SlidesLiveBundle\Entity\Category $categories
+     */
+    public function addCategory(\SlidesLive\SlidesLiveBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

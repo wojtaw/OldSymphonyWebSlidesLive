@@ -9,9 +9,11 @@ class DefaultController extends Controller
 {
     
     public function indexAction() {
-		$selectedPresentations = $this->getDoctrine()->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
+        $em = $this->getDoctrine()->getEntityManager();
+		$selectedPresentations = $em->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
         $this->data['presentationBoxes'] = $selectedPresentations;	
-        $this->data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations));	
+        $this->data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations));
+        $this->data['categories'] = $em->getRepository('SlidesLiveBundle:Category')->findAll();
         return $this->render('StaticBundle:Homepage:index.html.twig', $this->data);
     }
     

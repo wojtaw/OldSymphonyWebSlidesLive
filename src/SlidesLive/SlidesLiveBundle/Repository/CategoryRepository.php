@@ -1,6 +1,6 @@
 <?php
 
-namespace SlidesLive\SlidesLiveBundle\Entity;
+namespace SlidesLive\SlidesLiveBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

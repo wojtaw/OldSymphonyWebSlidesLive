@@ -40,13 +40,6 @@ class HomepageBox
              * @ORM\JoinColumn(name="account_id", referencedColumnName="id")     
              */         
             protected $account;
-
-            /**
-             * @var string $lang
-             *
-             * @ORM\Column(name="lang", type="string", length=2)
-             */    
-            protected $lang;
     // ###############################################
 
 // -----------------------------------------------------------------------------

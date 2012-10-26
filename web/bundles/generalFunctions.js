@@ -101,8 +101,8 @@ var allQuotes = new Object();
 var currentQuoteIndex = 0;
 var numberOfQuotes = 5;		
 
-allQuotes[0] = new quoteContent("Hello Pioneers!<br /><img src=\"/SlidesLive/web/bundles/static/images/logo-pioneers.png\">",
-								"Pioneers festival<br />Vienna 2012",
+allQuotes[0] = new quoteContent("<img src=\"/SlidesLive/web/bundles/static/images/logo-pioneers.png\" width=\"360\" height=\"90\">",
+								"SlidesLive at Pioneers festival<br />Vienna Oct 29-31, 2012",
 								"http://slideslive.com/pioneersfestival");
 								
 allQuotes[1] = new quoteContent("This looks very cool! Can't wait to see more.",
@@ -113,7 +113,7 @@ allQuotes[2] = new quoteContent("You are awesome! Thanks.",
 								"Filip Blazek<br />DE.SIGN",
 								"http://slideslive.com/DE.SIGN");
 								
-allQuotes[3] = new quoteContent("<span class=\"quoteBigger\">130</span> vs. <span class=\"quoteBigger\">7000</span><br />Offline vs. online audience",
+allQuotes[3] = new quoteContent("<img src=\"/SlidesLive/web/bundles/static/images/devel.png\" width=\"360\" height=\"109\">",
 								"Devel.cz<br />IT Conference",
 								"http://slideslive.com/Devel.cz");	
 								

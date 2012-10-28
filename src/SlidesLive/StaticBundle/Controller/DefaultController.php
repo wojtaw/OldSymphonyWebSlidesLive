@@ -24,16 +24,18 @@ class DefaultController extends Controller
         $downloadForm = $this->createForm(new SubscribeType(), $subscribe);
         if ($request->getMethod() == 'POST')
 		{
+		  $response = $this->redirect($this->generateUrl('thankyou'));
+
 		  $downloadForm->bindRequest($request);
 		  if ($downloadForm->isValid())
 		  {
 			$em->merge($subscribe);
 			$em->flush();
 
-			$response = $this->redirect($this->generateUrl('thankyou'));
 			$response->headers->setCookie(new Cookie('downloadEmail', $subscribe->getEmail()));
-			return $response;
 		  }
+
+		  return $response;
 		}
 
 		$selectedPresentations = $em->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();

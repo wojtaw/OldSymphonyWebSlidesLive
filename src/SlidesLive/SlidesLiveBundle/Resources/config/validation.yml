@@ -59,8 +59,7 @@ SlidesLive\SlidesLiveBundle\Entity\Folder:
           choices:  [1, 2, 3]
 
 SlidesLive\SlidesLiveBundle\Entity\Subscribe:
-
   properties:
     email:
       - NotBlank: { message: "Email should not be blank." }
-      - Email: { message: "Invalid email address.", checkMX: true }
+      - Email: { message: "Invalid email address.", checkMX: false }

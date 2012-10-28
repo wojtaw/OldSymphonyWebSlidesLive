@@ -101,23 +101,23 @@ var allQuotes = new Object();
 var currentQuoteIndex = 0;
 var numberOfQuotes = 5;		
 
-allQuotes[0] = new quoteContent("<img src=\"/SlidesLive/web/bundles/static/images/logo-pioneers.png\" width=\"360\" height=\"90\">",
+allQuotes[1] = new quoteContent("<img src=\"/SlidesLive/web/bundles/static/images/logo-pioneers.png\" width=\"360\" height=\"90\">",
 								"SlidesLive at Pioneers festival<br />Vienna Oct 29-31, 2012",
 								"http://slideslive.com/pioneersfestival");
 								
-allQuotes[1] = new quoteContent("This looks very cool! Can't wait to see more.",
+allQuotes[2] = new quoteContent("This looks very cool! Can't wait to see more.",
 								"Nathan Gold<br />The DEMOCOACH",
 								"http://slideslive.com/DEMOCOACH");
 
-allQuotes[2] = new quoteContent("You are awesome! Thanks.",
+allQuotes[3] = new quoteContent("LIVE Recording &amp; Automatic SYNC<br />It is so awsome! Thanks.",
 								"Filip Blazek<br />DE.SIGN",
 								"http://slideslive.com/DE.SIGN");
 								
-allQuotes[3] = new quoteContent("<img src=\"/SlidesLive/web/bundles/static/images/devel.png\" width=\"360\" height=\"109\">",
+allQuotes[4] = new quoteContent("<img src=\"/SlidesLive/web/bundles/static/images/devel.png\" width=\"360\" height=\"109\">",
 								"Devel.cz<br />IT Conference",
 								"http://slideslive.com/Devel.cz");	
 								
-allQuotes[4] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
+allQuotes[0] = new quoteContent("One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.",
 								"Paul Winstanley<br />OpenInformatics Conference",
 								"http://slideslive.com/OpenInformatics");															
 								

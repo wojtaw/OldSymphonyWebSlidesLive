@@ -149,7 +149,7 @@ a {
 	display:block;
 	width:330px;
 	height:60px;
-	margin-top:70px;
+	margin-top:60px;
 	margin-bottom:5px;
 	background-image:url(../images/dwn-btn.png);
 	background-repeat:no-repeat;
@@ -749,4 +749,16 @@ h2 {
 .leftHalf{
 	width:480px;
 	float:left;
+}
+
+.howItWorksWindow {
+	width:800px;
+	height:600px;
+	padding:10px;
+	margin-top:50px;
+	margin-bottom:50px;	
+	border:2px solid;
+	border-radius:10px;
+	-moz-border-radius:10px;	
+	background-color:#000000;
 }

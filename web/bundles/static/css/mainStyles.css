@@ -5,15 +5,15 @@ body {
 	margin:0px;
 	padding:0px;
 	top:0px;
-	background-color:#101316;	
+	background-color:#101316;
 }
 
 a {
-	text-decoration:none;			
+	text-decoration:none;
 }
 
 .contentWrapper {
-	width:960px;	
+	width:960px;
 
 }
 
@@ -21,24 +21,24 @@ a {
 .websiteDarkBackground {
 	padding-top:40px;
 	padding-bottom:40px;
-	width:100%;	
+	width:100%;
 	background-image:url(../images/dark-grey-bg.png);
 }
 
 .websiteLightBackground {
 	padding-top:40px;
 	padding-bottom:40px;
-	width:100%;		
-	background-image:url(../images/bg-light.png);	
-	background-position:center;	
+	width:100%;
+	background-image:url(../images/bg-light.png);
+	background-position:center;
 }
 
 .websiteBlurBackground {
 	position:relative;
 	padding-top:40px;
 	padding-bottom:40px;
-	width:100%;		
-	background-image:url(../images/bg-blur-abotus.jpg);			
+	width:100%;
+	background-image:url(../images/bg-blur-abotus.jpg);
 }
 
 .firstBlockTop {
@@ -48,7 +48,7 @@ a {
 .blockCenterWrapper {
 	margin-left:auto;
 	margin-right:auto;
-	width:960px;	
+	width:960px;
 }
 
 /* SHOWCASES */
@@ -64,19 +64,19 @@ a {
 	overflow:hidden;
 }
 
-.showcaseBoxImage { 
+.showcaseBoxImage {
 	background-size:cover;
 	background-position:top;
 	position: relative;
 	left: 0px;
-	height:100%; 
+	height:100%;
 }
 
 .showcaseBoxImage:hover {
 	filter:alpha(opacity=50);
 	opacity: 0.5;
 }
-	
+
 
 .showcaseBoxDescription {
 	background-image:url(../../generalImages/tile_transparent_black.png);
@@ -91,43 +91,60 @@ a {
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:14px;
 	font-weight:bold;
-	color:#999999;	
+	color:#999999;
 	height:34px;
-	overflow:hidden;	
+	overflow:hidden;
 }
 
 .showcaseChannel {
 	position:absolute;
 	bottom:8px;
-	font-family:Arial, Helvetica, sans-serif;	
+	font-family:Arial, Helvetica, sans-serif;
 	font-size:11px;
-	font-weight:normal;	
+	font-weight:normal;
 	text-decoration:none;
 }
 
 .showcaseChannel:hover {
-	text-decoration:underline;	
+	text-decoration:underline;
 }
 
 .tile_1_1{
 	width:150px;
-	height:150px;	
+	height:150px;
 	display:block;
-	margin-right:6px;	
-	margin-bottom:6px;		
+	margin-right:6px;
+	margin-bottom:6px;
 	position: relative;
 	float:left;
 }
 
 .categoryTile {
-	background-color:#027bf7;	
+	background-color:#027bf7;
 }
 
 .categoryTile:hover{
 	background-color:#000000;
 }
 
-/* DOWNLOAD BUTTON */ 
+/* DOWNLOAD BUTTON */
+.downloadForm {
+	margin-top:33px;
+}
+
+.downloadFormButton {
+	display:block;
+	width:330px;
+	height:60px;
+	padding-bottom:6px;
+	margin-bottom:5px;
+	background: transparent;
+	background-image:url(../images/dwn-btn.png);
+	background-repeat:no-repeat;
+	border:none;
+	cursor:pointer;
+}
+
 .downloadButton {
 	display:block;
 	width:330px;
@@ -141,12 +158,12 @@ a {
 }
 
 .downloadButton:hover{
-	display:block;	
+	display:block;
 	background-position:0 -60px;
 }
 
 /* FIRST BLOCK */
-.presentationButton 
+.presentationButton
 {
 	position:relative;
 	left:-49px;
@@ -162,14 +179,14 @@ a {
 	position:relative;
 	top:53px;
 	width:950px;
-	height:300px;	
+	height:300px;
 }
 
 .presentationButton:hover {
 	background-image:url(../images/show-case-hover.jpg);
 }
 
-.preloader{	
+.preloader{
 	display:none;
 	background-image:url(../images/show-case-hover.jpg);
 }
@@ -197,19 +214,19 @@ a {
 }
 
 .howStepTwo{
-	float:left;	
+	float:left;
 	position:relative;
 	top:-30px;
-	left:30px;		
-	width:320px;	
+	left:30px;
+	width:320px;
 }
 
 .howStepThree{
-	float:left;	
-	position:relative;	
+	float:left;
+	position:relative;
 	top:-40px;
-	left:30px;		
-	width:320px;	
+	left:30px;
+	width:320px;
 }
 
 .quoteBox {
@@ -224,17 +241,17 @@ a {
 
 .howVideoBox {
 	-moz-border-radius: 15px;
-	border-radius: 15px;	
+	border-radius: 15px;
 	border-style:solid;
 	border-width:10px;
-	border-color:#666666;	
-	width:853px;	
+	border-color:#666666;
+	width:853px;
 }
 
 /* FEATURE DESCRIPTION */
 .featureSetWrapper{
 	margin-top:60px;
-	
+
 }
 
 .featureBox{
@@ -245,25 +262,25 @@ a {
 	display:block;
 }
 
-.featureWrapper {	
+.featureWrapper {
 	width:960px;
 	position:relative;
 	left:70px;
 }
 
-.featureLeft {	
+.featureLeft {
 	width: 400px;
 	margin-left:40px;
 	margin-top:40px;
 }
 
-.featureRight {	
+.featureRight {
 	width: 400px;
 }
 
 .featureImageRight {
 	width:350px;
-	padding-left:30px;	
+	padding-left:30px;
 }
 
 .featureImageFormat {
@@ -275,19 +292,19 @@ a {
 
 
 .featureImageEdit {
-	position:relative;	
+	position:relative;
 	top:-30px;
 }
 
 .featureImageAccount {
-	position:relative;	
+	position:relative;
 	top:-35px;
-	left:9px;	
+	left:9px;
 }
 
 /* TEAM BOXES */
 .teamBoxesWrapper{
-	
+
 }
 
 .teamColumn{
@@ -297,7 +314,7 @@ a {
 }
 
 .teamColumnLast{
-	margin-right:0px !important;	
+	margin-right:0px !important;
 }
 
 .teamBox{
@@ -305,58 +322,58 @@ a {
 	margin-bottom:25px;
 	background-color:#FFF;
 	width:300px;
-	border-radius: 4px;		
-	box-shadow: 0px 0px 10px -2px #000000;		
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px -2px #000000;
 }
 
 .teamVojta{
 	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;	
+	border-top-right-radius: 4px;
 	background-image:url(../images/team.png);
 	background-repeat:no-repeat;
 	background-position:-17px -15px;
 	width:300px;
-	height:275px;	
+	height:275px;
 }
 
 .teamTerka{
 	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;		
+	border-top-right-radius: 4px;
 	background-image:url(../images/team.png);
 	background-repeat:no-repeat;
 	background-position:-344px -15px;
 	width:300px;
-	height:217px;	
+	height:217px;
 }
 
 .teamVojtaD	{
 	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;		
+	border-top-right-radius: 4px;
 	background-image:url(../images/team.png);
 	background-repeat:no-repeat;
 	background-position:-669px -16px;
 	width:300px;
-	height:275px;	
+	height:275px;
 }
 
 .teamPetr	{
 	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;		
+	border-top-right-radius: 4px;
 	background-image:url(../images/team.png);
 	background-repeat:no-repeat;
 	background-position:-17px -420px;
 	width:300px;
-	height:217px;	
+	height:217px;
 }
 
 .teamYou	{
 	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;		
+	border-top-right-radius: 4px;
 	background-image:url(../images/team.png);
 	background-repeat:no-repeat;
 	background-position:-344px -347px;
 	width:300px;
-	height:215px;	
+	height:215px;
 }
 
 /* TEAM BUTTONS */
@@ -373,18 +390,18 @@ a {
 }
 
 .generalButton:hover{
-	display:block;	
+	display:block;
 	background-position:0 -60px;
 }
 
 .contactUs{
-	background-position:0 -118px !important;	
+	background-position:0 -118px !important;
 	margin-top:70px;
 	margin-bottom:90px;
 }
 
 .contactUs:hover{
-	background-position:0 -178px !important;		
+	background-position:0 -178px !important;
 }
 
 /* SLIDESLIVE SOCIAL */
@@ -400,10 +417,10 @@ a {
 
 .socialButtonGeneral {
 	width:75px;
-	height:100px;	
+	height:100px;
 	background-image:url(../images/icons.png);
 	position:relative;
-	float:left;		
+	float:left;
 }
 
 .socialButtonFacebook {
@@ -428,7 +445,7 @@ a {
 }
 
 .socialButtonGoogle {
-	width:100px;	
+	width:100px;
 	background-position:-225px 0px;
 	left:520px;
 	top:-25px;
@@ -453,33 +470,33 @@ a {
 .teamHeadline {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:bold;
-	font-size:20px;		
+	font-size:20px;
 	color:#333333;
 	padding-left:15px;
 	padding-bottom:5px;
 	padding-top:5px;
-	text-align:left;	
+	text-align:left;
 }
 
 .teamBody {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
-	font-size:15px;		
+	font-size:15px;
 	color:#000000;
-	padding-left:15px;	
-	padding-right:15px;		
+	padding-left:15px;
+	padding-right:15px;
 	padding-bottom:15px;
-	text-align:left;	
+	text-align:left;
 }
 
 .teamBody a {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
-	font-size:15px;		
+	font-size:15px;
 	color:#027BF7;
 	padding-bottom:15px;
 	text-align:left;
-	text-decoration:none;		
+	text-decoration:none;
 }
 
 .teamBody a:hover {
@@ -490,7 +507,7 @@ a {
 .stepsHeadline {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:bold;
-	font-size:35px;		
+	font-size:35px;
 	color:#000000;
 	text-align:center;
 	padding-bottom:10px;
@@ -499,19 +516,19 @@ a {
 .stepsBody {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
-	font-size:16px;		
+	font-size:16px;
 	color:#000000;
-	text-align:center;	
+	text-align:center;
 }
 
 .stepsBody a{
 	text-decoration:none;
-	color:#000000;	
+	color:#000000;
 }
 
 .stepsBody a:hover{
-	text-decoration:none;	
-	color:#027BF7;	
+	text-decoration:none;
+	color:#027BF7;
 }
 
 .quotesText {
@@ -519,7 +536,7 @@ a {
 	line-height:40px;
 	font-weight:normal;
 	font-style:italic;
-	font-size:30px;		
+	font-size:30px;
 	color:#999999;
 	text-align:center;
 }
@@ -528,7 +545,7 @@ a {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
 	font-style:italic;
-	font-size:15px;		
+	font-size:15px;
 	color:#999999;
 	float:right;
 	position:relative;
@@ -538,14 +555,14 @@ a {
 }
 
 .quoteBigger {
-	font-size:70px;		
+	font-size:70px;
 }
 
 
 .featureHeadline {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:bold;
-	font-size:35px;		
+	font-size:35px;
 	color:#000000;
 	text-align:left;
 }
@@ -554,16 +571,16 @@ a {
 	padding-top:10px;
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
-	font-size:16px;		
+	font-size:16px;
 	color:#000000;
 	text-align:left;
-	width:300px;	
+	width:300px;
 	margin:0px;
 	display:block;
 }
 
 .smallNote{
-	font-size:11px !important;	
+	font-size:11px !important;
 }
 
 h1 {
@@ -572,48 +589,58 @@ h1 {
 	line-height:60px;
 	color:#000000;
 	padding-top:0px;
-	padding-bottom:20px;	
+	padding-bottom:20px;
 	margin:0px;
 }
 
 h2 {
 	font-size:18px;
 	font-style:italic;
-	color:#000000;	
+	color:#000000;
 	font-weight:normal;
+}
+
+.downloadFormButtonText {
+	font-family:'Ropa Sans', sans-serif;
+	font-weight:normal;
+	font-size:25px;
+	color:#FFFFFF;
+	text-decoration:none;
+	text-align:center;
+	text-shadow: 2px 2px #0066CC;
 }
 
 .downloadButtonText {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
 	font-size:25px;
-	padding-top:14px;		
+	padding-top:14px;
 	color:#FFFFFF;
 	text-decoration:none;
 	text-align:center;
-	text-shadow: 2px 2px #0066CC;		
+	text-shadow: 2px 2px #0066CC;
 }
 
 .generalButtonText {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
 	font-size:25px;
-	padding-top:14px;		
+	padding-top:14px;
 	color:#FFFFFF;
 	text-decoration:none;
 	text-align:center;
-	text-shadow: 2px 2px #0066CC;		
+	text-shadow: 2px 2px #0066CC;
 }
 
 .buttonLink {
-	text-decoration:none;		
+	text-decoration:none;
 }
 
 .downloadText {
 	font-family:'Ropa Sans', sans-serif;
 	font-weight:normal;
 	font-size:14px;
-	padding-top:5px;		
+	padding-top:5px;
 	color:#666666;
 	text-decoration:none;
 	line-height:16px;
@@ -621,12 +648,12 @@ h2 {
 }
 
 .downloadText a{
-	color:#666;	
+	color:#666;
 	text-decoration:none;
 }
-	
+
 .downloadText a:hover{
-	color:#027BF7;	
+	color:#027BF7;
 	text-decoration:underline;
 }
 
@@ -640,7 +667,7 @@ h2 {
 	line-height: 0;
 	height: 0;
 }
- 
+
 .clearfix {
 	display: inline-block;
 }
@@ -654,7 +681,7 @@ h2 {
 	background-repeat:no-repeat;
 	padding-top:190px;
 	padding-bottom:50px;
-	display:block;	
+	display:block;
 }
 
 .thankYouStepsWrapper {
@@ -662,30 +689,30 @@ h2 {
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
-		
+
 }
 
 .thankYouSubheading {
 	font-size:20px;
 	font-weight:normal;
-	color:#000000;	
+	color:#000000;
 }
 
 .thankYouCloud {
-	float:left;	
+	float:left;
 	padding-right:60px;
 }
 
 .thankYouTopWrapper {
 	width:100%;
 	padding-top:30px;
-	padding-bottom:50px;	
+	padding-bottom:50px;
 }
 
 .stepsFont {
 	color:#666;
 	font-size:15px;
-	
+
 }
 
 .thankStep1 {
@@ -711,7 +738,7 @@ h2 {
 }
 
 #backupLink:hover {
-	text-decoration:underline;		
+	text-decoration:underline;
 }
 
 .rightHalf {

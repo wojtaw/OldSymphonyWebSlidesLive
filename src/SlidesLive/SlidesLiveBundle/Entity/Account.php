@@ -12,7 +12,7 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
  * SlidesLive\SlidesLiveBundle\Entity\Account
  *
  * @ORM\Table(name="account")
- * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\AccountRepository")  
+ * @ORM\Entity(repositoryClass="SlidesLive\SlidesLiveBundle\Repository\AccountRepository")
  */
 class Account implements AdvancedUserInterface {
 
@@ -24,7 +24,7 @@ class Account implements AdvancedUserInterface {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /** LOGIN EMAILEM !!!
      * @var string $username
      *
@@ -66,163 +66,157 @@ class Account implements AdvancedUserInterface {
      * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
-    
+
     /**
      * @var string $canonicalName
      *
      * @ORM\Column(name="canonical_name", type="string", length="255")
      */
-    protected $canonicalName;                   
+    protected $canonicalName;
 
     /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
      */
-    protected $description;                         
-     
+    protected $description;
+
      /**
-     * @var small privacy 
-     *      
-     * @ORM\Column(name="privacy", type="smallint")     
+     * @var small privacy
+     *
+     * @ORM\Column(name="privacy", type="smallint")
      */
      protected $privacy;
-     
+
      /**
      * @var string hash
-     * 
+     *
      * @ORM\Column(name="hash", type="string", length="64")
-     */                   
+     */
      protected $hash;
-     
+
      /**
       *  @var string $website
-      *        
+      *
       *  @ORM\Column(name="website", type="string", length="255")
-      */                 
+      */
      protected $website;
-     
+
      /**
       * @var boolean $isMeta
-      * 
+      *
       * @ORM\Column(name="is_meta", type="boolean")
       */
      protected $isMeta;
-     
+
      /**
       * @var boolean $showHeader
-      * 
+      *
       * @ORM\Column(name="show_header", type="boolean")
-      */     
+      */
      protected $showHeader = true;
 
      /**
       * @var boolean $showFooter
-      * 
+      *
       * @ORM\Column(name="show_footer", type="boolean")
       */
-     protected $showFooter = true;                                                         
+     protected $showFooter = true;
 
     /**
      * @ORM\OneToMany(targetEntity="Folder", mappedBy="account")
-     */         
+     */
     protected $folders;
-    
+
     /**
      * @ORM\OneToOne(targetEntity="Folder")
-     * @ORM\JoinColumn(name="primary_folder", referencedColumnName="id")     
+     * @ORM\JoinColumn(name="primary_folder", referencedColumnName="id")
      */
      protected $primaryFolder;
-     
+
      /**
       * @ORM\OneToMany(targetEntity="Presentation", mappedBy="account")
-      */           
-     protected $presentations;         
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Subscribe", mappedBy="account")
-     */         
-    protected $subscribes;
-    
+      */
+     protected $presentations;
+
 // -----------------------------------------------------------------------------
 
     public function getRoles() {
         return array($this->role);
     }
-    
+
     public function equals(UserInterface $user) {
         return $user->getUsername() === $this->username;
     }
-    
+
     public function eraseCredentials() {
       $this->password = NULL;
       $this->salt = NULL;
     }
-    
+
     public function isAccountNonExpired() {
       return true;
     }
-    
+
     public function isCredentialsNonExpired() {
       return true;
     }
-    
+
     public function isEnabled() {
       return $this->isActive;
     }
-    
+
     public function isAccountNonLocked() {
       return true;
     }
-    
+
     public function getPassword() {
       return $this->password;
     }
-    
+
     public function getSalt() {
       return $this->salt;
     }
-    
+
     //public function getUserName() { return $this->username; }
 
     public function __construct() {
         $this->username = '@';
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        $this->password = '';        
+        $this->password = '';
         $this->isActive = true;
         $this->role = 'ROLE_USER';
         $this->isMeta = false;
-    
-        $this->subscribes = new ArrayCollection();
+
         $this->name = '';
         $this->canonicalName = '';
         $this->description = '';
         $this->hash = $this->generateHash();
         $this->ratig = 0;
         $this->website = '';
-        $this->privacy = Privacy::P_PUBLIC;  
+        $this->privacy = Privacy::P_PUBLIC;
     }
-    
+
     /**
      * Vraci nazev tridy bez jmen namespacu.
-     * @return string     
+     * @return string
      */
     public function getClass() {
       return 'Account';
     }
-    
+
     public function generateHash() {
         $this->hash = md5(microtime());
-        return $this->hash;    
+        return $this->hash;
     }
-        
+
     /**
      * Vraci cestu, na ktere je ulozen obrazek kanalu
      *
      * @param string $type - typ obrazku, urcuje nazev obrazku kanalu
-     * @param boolean $mandatory - true pokud ma metoda vratit adresu obrazku (pokud obrazek nenajde vraci univerzalni no-image obrazek), jinak vraci null          
-     * @return string or null if image was not found     
-     */              
+     * @param boolean $mandatory - true pokud ma metoda vratit adresu obrazku (pokud obrazek nenajde vraci univerzalni no-image obrazek), jinak vraci null
+     * @return string or null if image was not found
+     */
     public function getImage($type, $mandatory = false) {
         $imgFormats = array(
             "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif", "JPG", "PNG", "BMP", "JPEG", "JPEG2000", "GIF"
@@ -236,17 +230,17 @@ class Account implements AdvancedUserInterface {
             }
         }
         if ($mandatory && !$thumbnail) {
-          $thumbnail = './bundles/slideslive/images/no-image.jpg';        
+          $thumbnail = './bundles/slideslive/images/no-image.jpg';
         }
         return $thumbnail;
     }
-        
+
     /**
      * Kanonizace jmena kanalu.
      * Ze jmena kanalu odstrani bile znaky a diakritiku.
-     *                
-     * @return string kanonizovane jmeno kanalu 
-     */                   
+     *
+     * @return string kanonizovane jmeno kanalu
+     */
     public function canonizeName() {
         $result = iconv("UTF-8", 'ASCII//TRANSLIT', strtolower($this->name));
         $patterns = array(
@@ -261,23 +255,23 @@ class Account implements AdvancedUserInterface {
     public function getCountOfPresentations() {
       return count($this->presentations);
     }
-    
+
     /**
      * Zakodovani hesla sifrovacim algoritmem urcenym v konfiguraci
      *
-     * @param Controller za ktereho je metoda volana (nutne pro ziskani pristupu ke sluzbe Encoder)    
-     */                      
+     * @param Controller za ktereho je metoda volana (nutne pro ziskani pristupu ke sluzbe Encoder)
+     */
     public function encodePassword($controller) {
         $encoder = $controller->get('security.encoder_factory')->getEncoder($this);
         $this->password = $encoder->encodePassword($this->password, $this->salt);
-    }   
-    
-// =============================================================================   
+    }
+
+// =============================================================================
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -297,7 +291,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get username
      *
-     * @return string 
+     * @return string
      */
     public function getUsername()
     {
@@ -337,7 +331,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get isActive
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsActive()
     {
@@ -357,7 +351,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get role
      *
-     * @return string 
+     * @return string
      */
     public function getRole()
     {
@@ -377,7 +371,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -397,7 +391,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get canonicalName
      *
-     * @return string 
+     * @return string
      */
     public function getCanonicalName()
     {
@@ -417,7 +411,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -437,7 +431,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get privacy
      *
-     * @return integer 
+     * @return integer
      */
     public function getPrivacy()
     {
@@ -457,7 +451,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get website
      *
-     * @return string 
+     * @return string
      */
     public function getWebsite()
     {
@@ -477,7 +471,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get folders
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getFolders()
     {
@@ -497,7 +491,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get primaryFolder
      *
-     * @return SlidesLive\SlidesLiveBundle\Entity\Folder 
+     * @return SlidesLive\SlidesLiveBundle\Entity\Folder
      */
     public function getPrimaryFolder()
     {
@@ -517,31 +511,11 @@ class Account implements AdvancedUserInterface {
     /**
      * Get presentations
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getPresentations()
     {
         return $this->presentations;
-    }
-
-    /**
-     * Add subscribes
-     *
-     * @param SlidesLive\SlidesLiveBundle\Entity\Subscribe $subscribes
-     */
-    public function addSubscribe(\SlidesLive\SlidesLiveBundle\Entity\Subscribe $subscribes)
-    {
-        $this->subscribes[] = $subscribes;
-    }
-
-    /**
-     * Get subscribes
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getSubscribes()
-    {
-        return $this->subscribes;
     }
 
     /**
@@ -557,7 +531,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get hash
      *
-     * @return string 
+     * @return string
      */
     public function getHash()
     {
@@ -577,7 +551,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get isMeta
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsMeta()
     {
@@ -597,7 +571,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get showHeader
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getShowHeader()
     {
@@ -617,7 +591,7 @@ class Account implements AdvancedUserInterface {
     /**
      * Get showFooter
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getShowFooter()
     {

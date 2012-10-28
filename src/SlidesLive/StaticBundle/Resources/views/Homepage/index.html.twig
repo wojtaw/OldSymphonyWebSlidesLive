@@ -2,66 +2,82 @@
 
   {% block javascript %}
     <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageTiles.js') }}">
-    </script>      
+    </script>
   {% endblock %}
 
 {% block content %}
 
   <div class="preloader"></div>
-  <div class="websiteBackground"></div>  
-  
+  <div class="websiteBackground"></div>
+
   <div class="websiteLightBackground firstBlockTop">
     <div class="blockCenterWrapper">
-	  <div class="leftHalf">    	
+	  <div class="leftHalf">
 	      <h1 class="globalFont left">Helping you<br /> <span class="slidesLiveBlue"> record and spread </span><br />knowledge.</h1>
-	 </div>
-
-	  <div class="rightHalf">    
-		  <a href="{{ path('thankyou') }}" id="downloadButtonLink" class="buttonLink" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">
-			<div class="downloadButton center">
-			  <div class="downloadButtonText">Download Free App</div>       
-			</div>
-		  </a>
-      
-
-	      <div class="downloadText"><a href="http://slideslive.com/data/SL_Recorder/SL_Windows.zip" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/subButtonWin']);">For Windows (XP+)</a> | <a href="http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/subButtonMac']);">For MacOS (10.6+)</a></div>	                                   
 	  </div>
-    </div> 
+
+	  <div class="rightHalf">
+		{% if downloadForm is defined %}
+		<form action="{{ path('homepage') }}" method='POST'  class="downloadForm center" {{ form_enctype(downloadForm) }} onSubmit="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">
+		  <div class="errory">{{ form_errors(downloadForm) }}</div>
+
+		  <div class="radek">
+			{{ form_errors(downloadForm.email) }}
+			{{ form_label(downloadForm.email) }}
+			{{ form_widget(downloadForm.email) }}
+		  </div>
+
+		  {{ form_rest(downloadForm) }}
+
+		  <input class="downloadFormButton center downloadFormButtonText" type="submit" value="Download Free App" onClick="alert(\"ahoj\");" formnovalidate />
+		</form>
+		{% else %}
+		<a href="{{ path('thankyou') }}" id="downloadButtonLink" class="buttonLink" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">
+			<div class="downloadButton center">
+			  <div class="downloadButtonText">Download Free App</div>
+			</div>
+		</a>
+		{% endif %}
+
+
+	      <div class="downloadText"><a href="http://slideslive.com/data/SL_Recorder/SL_Windows.zip" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/subButtonWin']);">For Windows (XP+)</a> | <a href="http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/subButtonMac']);">For MacOS (10.6+)</a></div>
+	  </div>
+    </div>
   </div>
-  
+
   <div class="websiteLightBackground firstBlockTop">
   	  <div class="showcaseBar clearfix" id="showcaseBar">
         {% for box in presentationBoxes %}
-        
+
        	    {% set currentTileIndex = loop.index %}
-            
+
             {% for position in categoryPositions %}
-                {% if currentTileIndex == position %}  
-                
+                {% if currentTileIndex == position %}
+
                 <a href="#">
                 <div class="showcaseBox tile_1_1 categoryTile">
-                    {% if currentTileIndex == categoryPositions[1] %} 
+                    {% if currentTileIndex == categoryPositions[1] %}
                         <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>
-                    {% elseif currentTileIndex == categoryPositions[2] %}                     
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>                    
-                    {% elseif currentTileIndex == categoryPositions[3] %}                     
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>                    
-                    {% elseif currentTileIndex == categoryPositions[4] %}                     
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>                                        
-                    {% elseif currentTileIndex == categoryPositions[5] %}                     
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>                                        
-                    {% elseif currentTileIndex == categoryPositions[6] %}                     
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/edu.png')}});"></div>                                        
-                    {% else %}  
-                    
-                    {% endif %}                                                                                                     
-                </div>
-                </a>	      
-                
-                {% endif %}
-            {% endfor %}                 
+                    {% elseif currentTileIndex == categoryPositions[2] %}
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>
+                    {% elseif currentTileIndex == categoryPositions[3] %}
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>
+                    {% elseif currentTileIndex == categoryPositions[4] %}
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>
+                    {% elseif currentTileIndex == categoryPositions[5] %}
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>
+                    {% elseif currentTileIndex == categoryPositions[6] %}
+                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/edu.png')}});"></div>
+                    {% else %}
 
-        
+                    {% endif %}
+                </div>
+                </a>
+
+                {% endif %}
+            {% endfor %}
+
+
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
 		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
@@ -71,40 +87,40 @@
 				<div class="showcaseBoxDescription">
 					<div class="showcaseTitle">
 
-                        
-					  {% if box.presentation.showSpeaker %}
-						{{ box.presentation.listSpeakersNames }}  
-					  {% else %}
-						{{ box.presentation.title }}  
-					  {% endif %}
-					</div>	  
-				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>											  
-				</div>			
-			</div>
-			</a>			
-          {% endif %}
-                   
-        {% endfor %}							
-	  </div>
-	  	  
-  </div>  
 
-  
+					  {% if box.presentation.showSpeaker %}
+						{{ box.presentation.listSpeakersNames }}
+					  {% else %}
+						{{ box.presentation.title }}
+					  {% endif %}
+					</div>
+				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>
+				</div>
+			</div>
+			</a>
+          {% endif %}
+
+        {% endfor %}
+	  </div>
+
+  </div>
+
+
   <div class="websiteDarkBackground">
     <div class="blockCenterWrapper">
-    
+
     <a href="" target="_blank" id="quotesLink">
       <div class="quoteBox center" id="quoteBox">
       	<div id="quoteAnimationWrapper">
             <div class="quotesText">One button recording and a seriously easy editing tool.<br />Publishing a talk doesn't get any easier.</div>
-            <div class="quotesAuthor">Lyle Frink<br />The DEMOCOACH</div>        
+            <div class="quotesAuthor">Lyle Frink<br />The DEMOCOACH</div>
         </div>
       </div>
       </a>
     </div>
-  </div>  
-  
-  
+  </div>
+
+
 
 {% endblock %}
 

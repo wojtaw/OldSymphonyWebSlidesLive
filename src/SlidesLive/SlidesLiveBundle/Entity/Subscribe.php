@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscribe
 {
+    public function __construct()
+    {
+        $this->subscribedAt = new \DateTime('now');
+    }
+
     /**
      * @var integer $id
      *
@@ -19,29 +24,27 @@ class Subscribe
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string $email
      *
      * @ORM\Column(name="email", type="string", length=255)
      */
-    protected $email;
-    
-    /**
-     *@ORM\ManyToOne(targetEntity="Account", inversedBy="subscribes")
-     *@ORM\JoinColumn(name="account_id", referencedColumnName="id")
-     */              
-    protected $account;
-    
-// -----------------------------------------------------------------------------
+    private $email;
 
-// =============================================================================
+    /**
+     * @var datetime $subscribedAt
+     *
+     * @ORM\Column(name="subscribed_at", type="datetime")
+     */
+    private $subscribedAt;
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -61,31 +64,30 @@ class Subscribe
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
     }
 
-
     /**
-     * Set account
+     * Set subscribedAt
      *
-     * @param SlidesLive\SlidesLiveBundle\Entity\Account $account
+     * @param datetime $subscribedAt
      */
-    public function setAccount(\SlidesLive\SlidesLiveBundle\Entity\Account $account)
+    public function setSubscribedAt($subscribedAt)
     {
-        $this->account = $account;
+        $this->subscribedAt = $subscribedAt;
     }
 
     /**
-     * Get account
+     * Get subscribedAt
      *
-     * @return SlidesLive\SlidesLiveBundle\Entity\Account 
+     * @return datetime
      */
-    public function getAccount()
+    public function getSubscribedAt()
     {
-        return $this->account;
+        return $this->subscribedAt;
     }
 }

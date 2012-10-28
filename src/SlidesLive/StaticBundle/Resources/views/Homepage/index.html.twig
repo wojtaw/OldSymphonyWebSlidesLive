@@ -4,6 +4,11 @@
     <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageTiles.js') }}">
     </script>
   {% endblock %}
+  
+  {% block stylesheet %}
+	{{ parent() }}  
+    <link href="{{ asset('bundles/slideslive/css/formsNew.css') }}" rel="stylesheet" type="text/css"/>	
+  {% endblock %}  
 
 {% block content %}
 
@@ -20,16 +25,15 @@
 		{% if downloadForm is defined %}
 		<form action="{{ path('homepage') }}" method='POST'  class="downloadForm center" {{ form_enctype(downloadForm) }} onSubmit="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">
 		  <div class="errory">{{ form_errors(downloadForm) }}</div>
-
-		  <div class="radek">
+          
+		  <input class="downloadFormButton center downloadFormButtonText" type="submit" value="Download Free App" onClick="alert(\"ahoj\");" formnovalidate />
+		  <div class="homepageDownloadApp">
 			{{ form_errors(downloadForm.email) }}
-			{{ form_label(downloadForm.email) }}
-			{{ form_widget(downloadForm.email) }}
+			{{ form_label(downloadForm.email)  }}
+			{{ form_widget(downloadForm.email,{ 'attr' : { 'class' : 'testClass' } })}}
 		  </div>
 
 		  {{ form_rest(downloadForm) }}
-
-		  <input class="downloadFormButton center downloadFormButtonText" type="submit" value="Download Free App" onClick="alert(\"ahoj\");" formnovalidate />
 		</form>
 		{% else %}
 		<a href="{{ path('thankyou') }}" id="downloadButtonLink" class="buttonLink" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/mainButton']);">

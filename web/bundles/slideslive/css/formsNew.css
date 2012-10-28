@@ -1,0 +1,15 @@
+.homepageDownloadApp label {
+	display:none;
+}
+
+.homepageDownloadApp input {
+	width:319px;	
+	margin:0px;
+	padding:0px;
+	position:relative;
+	top:-14px;
+	height:40px;
+	background-color:#FFFFFF;
+	border:1px solid;
+	border-color:#CCCCCC;
+}

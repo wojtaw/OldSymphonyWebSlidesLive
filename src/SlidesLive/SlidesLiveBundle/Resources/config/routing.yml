@@ -1,4 +1,8 @@
 # \src\Meta\SlidesLiveBundle\Resources\config\routing.yml
+# -----SEARCH------------------------------------------------------
+search:
+    pattern: /search
+    defaults: { _controller: SlidesLiveBundle:Default:search }
 
 # -----LOGIN/LOGOUT ROUTES------------------------------------------------------
 login:

@@ -1,0 +1,27 @@
+{% extends 'SlidesLiveBundle::layout.html.twig' %}
+
+
+
+{% block javascript %}
+  <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
+  </script> 
+  <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.full.js') }}">
+  </script>   
+<script>
+  (function() {
+	var cx = '007457109666087608116:1nijinqerrm';
+	var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+	gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+		'//www.google.com/cse/cse.js?cx=' + cx;
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>     
+{% endblock %}
+
+{% block content %}
+
+
+<!-- Place this tag where you want the search results to render -->
+<gcse:searchresults-only></gcse:searchresults-only>
+  
+{% endblock content %}    

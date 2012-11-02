@@ -186,6 +186,10 @@ class DefaultController extends Controller {
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
   
+  public function searchAction() {      
+    return $this->render('SlidesLiveBundle:Default:searchResults.html.twig');
+  }  
+  
 // ----------------HELP METHODS-------------------------------------------------
 
   protected function accountNotFound($accountCanName) {

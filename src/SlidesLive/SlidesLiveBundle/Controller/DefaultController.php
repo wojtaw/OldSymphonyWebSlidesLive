@@ -27,7 +27,7 @@ class DefaultController extends Controller {
       'privacyLevel' => $this->privacyLevel,
       'stylesheet' => null,       // individualni styl accountu
       'account' => null,      
-      'presentation' => null,     // prezentace pro prehrávac
+      'presentation' => null,     // prezentace pro prehrávac  
       'folders' => array(),       // seznam folderu kanálu
       'folderPresentations' => array(),   // prezentace aktuálního folderu
     );
@@ -190,8 +190,16 @@ class DefaultController extends Controller {
     return $this->render('SlidesLiveBundle:Default:searchResults.html.twig');
   } 
   
-  public function categoryAction(){
-    return $this->render('SlidesLiveBundle:Default:categoryPage.html.twig');	  
+  public function categoryAction($categoryName){
+    $this->data['categoryName'] = $categoryName;
+	
+    $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
+      ->findPresentations($categoryName);
+    if (!$this->data['account']) {
+      //TO DO
+    }
+		 	  
+    return $this->render('SlidesLiveBundle:Default:categoryPage.html.twig', $this->data);	  
   }
   
 // ----------------HELP METHODS-------------------------------------------------

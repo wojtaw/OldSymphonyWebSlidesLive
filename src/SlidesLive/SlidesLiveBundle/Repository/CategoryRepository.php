@@ -20,5 +20,16 @@ class CategoryRepository extends EntityRepository {
 		);
 		$recievedCategories = $query->getResult();
 		return $recievedCategories;
-	}	
+	}
+	
+	public function findPresentations() {
+		$em = $this->getEntityManager();
+		$query = $em->createQuery(
+			'SELECT b
+			FROM SlidesLiveBundle:Category b'
+		);
+		$recievedCategories = $query->getResult();
+		return $recievedCategories;
+	}			
+
 }

@@ -16,11 +16,11 @@ body{
 }
 
 .searchBarWrapper {
-	background-color:#FFFF00;
-	width:300px;
+	width:350px;
 	float:left;
 	position:relative;
 	top:15px;	
+	left:30px;
 }
 .headerContent {
 	margin-left:auto;

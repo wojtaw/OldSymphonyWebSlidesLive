@@ -3,6 +3,10 @@
 search:
     pattern: /search
     defaults: { _controller: SlidesLiveBundle:Default:search }
+    
+category:
+    pattern: /category
+    defaults: { _controller: SlidesLiveBundle:Default:category }	
 
 # -----LOGIN/LOGOUT ROUTES------------------------------------------------------
 login:
@@ -91,7 +95,7 @@ presentation:
     defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:null, folderCanName:null }
     requirements:
       presentationId: \d+      
-        
+      
 accountPresentation:
     pattern: /{accountCanName}/w/{presentationId}
     defaults: { _controller: SlidesLiveBundle:Default:presentation, folderCanName:null }

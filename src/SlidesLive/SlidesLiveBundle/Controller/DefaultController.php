@@ -188,7 +188,11 @@ class DefaultController extends Controller {
   
   public function searchAction() {      
     return $this->render('SlidesLiveBundle:Default:searchResults.html.twig');
-  }  
+  } 
+  
+  public function categoryAction(){
+    return $this->render('SlidesLiveBundle:Default:categoryPage.html.twig');	  
+  }
   
 // ----------------HELP METHODS-------------------------------------------------
 

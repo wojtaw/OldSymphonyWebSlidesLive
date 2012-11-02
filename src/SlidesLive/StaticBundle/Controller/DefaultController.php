@@ -43,7 +43,6 @@ class DefaultController extends Controller
         $data['presentationBoxes'] = $selectedPresentations;
         $data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations));
         $data['categories'] = $em->getRepository('SlidesLiveBundle:Category')->listAllCategories();
-		echo(($data['categories']));
 		//$data['downloadForm'] = $downloadForm->createView();
 
         return $this->render('StaticBundle:Homepage:index.html.twig', $data);

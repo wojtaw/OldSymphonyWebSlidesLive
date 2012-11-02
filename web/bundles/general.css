@@ -15,6 +15,13 @@ body{
 	z-index:20;	
 }
 
+.searchBarWrapper {
+	background-color:#FFFF00;
+	width:300px;
+	float:left;
+	position:relative;
+	top:15px;	
+}
 .headerContent {
 	margin-left:auto;
 	margin-right:auto;

@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class CategoryRepository extends EntityRepository {
+	
 	public function listAllCategories() {
 		$em = $this->getEntityManager();
 		$query = $em->createQuery(

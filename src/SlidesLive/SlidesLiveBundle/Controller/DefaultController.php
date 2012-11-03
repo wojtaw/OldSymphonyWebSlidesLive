@@ -195,19 +195,15 @@ class DefaultController extends Controller {
 	
     $categoryId = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
       ->findCategoryIdAccordingName($categoryName);	
-
-	echo "category ID je: ".$categoryId->getId()."<br />";
 	
-	/*
+
     $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
-      ->findPresentations($categoryId);
+      ->findPresentations($categoryId->getId());
     if (!$this->data['presentations']) {
       //TO DO
-	  echo "ouuuch";
     } else {
-	  echo "good";		
+		
 	}
-	*/
 		 	  
     return $this->render('SlidesLiveBundle:Default:categoryPage.html.twig', $this->data);	  
   }

@@ -193,11 +193,14 @@ class DefaultController extends Controller {
   public function categoryAction($categoryName){
     $this->data['categoryName'] = $categoryName;
 	
-    $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
+    $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
       ->findPresentations($categoryName);
-    if (!$this->data['account']) {
+    if (!$this->data['presentations']) {
       //TO DO
-    }
+	  echo "prdel";
+    } else {
+	  echo "good";		
+	}
 		 	  
     return $this->render('SlidesLiveBundle:Default:categoryPage.html.twig', $this->data);	  
   }

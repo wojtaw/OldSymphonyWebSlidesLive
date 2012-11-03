@@ -22,15 +22,17 @@ class CategoryRepository extends EntityRepository {
 		return $recievedCategories;
 	}
 	
-	public function findPresentations($categoryName) {
+	public function findPresentations($categoryId) {
+		echo $categoryId;
+		
         $em = $this->getEntityManager();
         $query = $em->createQuery("
             SELECT p FROM SlidesLiveBundle:Presentation p
             JOIN p.categories c
-            WHERE c.id = :categoryName
+            WHERE c.id = :categoryId
             ORDER BY p.dateRecorded DESC")
         ->setParameters(array(
-          'categoryName' => sprintf('%s', $categoryName))
+          'categoryId' => sprintf('%s', $categoryId))
         );
 
 		$recievedPresentations = $query->getResult();

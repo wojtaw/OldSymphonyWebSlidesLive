@@ -22,6 +22,26 @@ class CategoryRepository extends EntityRepository {
 		return $recievedCategories;
 	}
 	
+	public function findCategoryIdAccordingName($categoryName) {
+		$em = $this->getEntityManager();
+		$query = $em->createQuery(
+		  'SELECT c
+		  FROM SlidesLiveBundle:Category c
+		  WHERE c.name = :categoryName
+		  ')
+		  ->setParameters(array(
+			  'categoryName' => $categoryName
+			)
+		  );
+		try {
+		  return $query->getSingleResult();
+		}  
+		catch (\Exception $e) {
+			echo "je konec";
+		  return null;
+		}  		
+	}
+	
 	public function findPresentations($categoryId) {
 		echo $categoryId;
 		

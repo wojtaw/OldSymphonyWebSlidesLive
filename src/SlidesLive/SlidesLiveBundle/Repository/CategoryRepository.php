@@ -26,7 +26,7 @@ class CategoryRepository extends EntityRepository {
         $em = $this->getEntityManager();
         $query = $em->createQuery("
             SELECT p FROM SlidesLiveBundle:Presentation p
-            JOIN p.category c
+            JOIN p.categories c
             WHERE c.id = :categoryName
             ORDER BY p.dateRecorded DESC")
         ->setParameters(array(

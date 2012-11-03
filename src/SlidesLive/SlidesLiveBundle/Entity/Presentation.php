@@ -168,7 +168,7 @@ class Presentation {
      * @ORM\ManyToMany(targetEntity="Category", inversedBy="presentations")
      * @ORM\JoinTable(name="presentations_categories")
      */
-     protected $categories;
+    protected $categories;
 
 // -----------------------------------------------------------------------------
 

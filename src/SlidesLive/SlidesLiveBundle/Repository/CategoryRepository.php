@@ -23,11 +23,16 @@ class CategoryRepository extends EntityRepository {
 	}
 	
 	public function findPresentations($categoryName) {
-		$em = $this->getEntityManager();
-		$query = $em->createQuery(
-			'SELECT b
-			FROM SlidesLiveBundle:Category b'
-		);
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("
+            SELECT p FROM SlidesLiveBundle:Presentation p
+            JOIN p.category c
+            WHERE c.id = :categoryName
+            ORDER BY p.dateRecorded DESC")
+        ->setParameters(array(
+          'categoryName' => sprintf('%s', $categoryName))
+        );
+
 		$recievedPresentations = $query->getResult();
 		return $recievedPresentations;
 	}			

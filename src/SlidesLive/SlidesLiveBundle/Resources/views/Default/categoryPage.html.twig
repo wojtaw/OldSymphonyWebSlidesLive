@@ -14,7 +14,9 @@
 HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
 <img src="http://www.hetemeel.com/archive/haha%20Im%20creating%20dynamic%20IMAGES!!1!.jpg" width="500" />
 {% for presentation in presentations %} 
-	<p>HAHA GUY - {{ presentation.title }} - {{ presentation.account.name }}</p>
+    {% set image = presentation.getThumbnail() %}
+	<p>HAHA GUY - {{ presentation.title }} - {{ presentation.account.name }} - <img src="{{ asset(image) }}" width="150" /></p>
 {% endfor %} 
+
   
 {% endblock content %}    

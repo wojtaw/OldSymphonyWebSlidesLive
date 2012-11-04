@@ -50,12 +50,7 @@
     </div>
   </div>
 
-  <div class="websiteLightBackground firstBlockTop">
-  
-      
-{% for category in categories %} 
-	<p>HAHA GUY - {{ category.name}}</p>
-{% endfor %}   
+  <div class="websiteLightBackground firstBlockTop"> 
   
   	  <div class="presentationTileBar clearfix" id="presentationTileBar">
       
@@ -65,24 +60,13 @@
 
             {% for position in categoryPositions %}
                 {% if currentTileIndex == position %}
+                
+       	   		{% set currentCategoryIndex = loop.index -1 %}                
 
-                <a href="#">
+                <a href="category/{{ categories[currentCategoryIndex].name }}">
                 <div class="presentationTile tile_1_1 categoryTile">
-                    {% if currentTileIndex == categoryPositions[1] %}
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/category/1.png')}});"></div>
-                    {% elseif currentTileIndex == categoryPositions[2] %}
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>
-                    {% elseif currentTileIndex == categoryPositions[3] %}
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>
-                    {% elseif currentTileIndex == categoryPositions[4] %}
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>
-                    {% elseif currentTileIndex == categoryPositions[5] %}
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>
-                    {% elseif currentTileIndex == categoryPositions[6] %}
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/edu.png')}});"></div>
-                    {% else %}
-
-                    {% endif %}
+       	   		{% set currentCategoryIndex = loop.index -1 %}                        
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/category/'~ currentCategoryIndex ~'.png')}});"></div>
                 </div>
                 </a>
 

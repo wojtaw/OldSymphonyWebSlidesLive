@@ -91,4 +91,22 @@ class Category
     {
         return $this->presentations;
     }
+	
+    public function getImage() {
+        $imgFormats = array(
+            "jpg", "png", "bmp", "jpeg", "jpeg2000", "gif", "JPG", "PNG", "BMP", "JPEG", "JPEG2000", "GIF"
+        );
+        $thumbnail = null;
+
+        foreach ($imgFormats as $format) {
+            if (file_exists( $_SERVER['DOCUMENT_ROOT'].'/bundles/static/images/category/' . $this->getId() . '.' . $format)) {
+                $thumbnail = '/bundles/static/images/category/' . $this->getId() . '.' . $format;
+                break;
+            }
+        }
+        if (!$thumbnail) {
+          $thumbnail = 'bundles/slideslive/images/no-image.jpg';
+        }
+        return $thumbnail;
+    }	
 }

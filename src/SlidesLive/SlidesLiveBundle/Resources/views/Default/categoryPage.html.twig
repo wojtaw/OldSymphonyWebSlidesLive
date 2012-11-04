@@ -13,10 +13,34 @@
 
 HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
 <img src="http://www.hetemeel.com/archive/haha%20Im%20creating%20dynamic%20IMAGES!!1!.jpg" width="500" />
-{% for presentation in presentations %} 
-    {% set image = presentation.getThumbnail() %}
-	<p>HAHA GUY - {{ presentation.title }} - {{ presentation.account.name }} - <img src="{{ asset(image) }}" width="150" /></p>
-{% endfor %} 
 
+  	  <div class="showcaseBar clearfix" id="showcaseBar">
+      
+        {% for tile in presentations %}
+
+          {% set image = tile.getThumbnail(true) %}
+          {% if image %}
+		  <a href="{{ url('accountPresentation', {'accountCanName':tile.account.canonicalName, 'presentationId':tile.id }) }}">
+            <div class="showcaseBox tile_1_1">
+				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">
+				</div>
+				<div class="showcaseBoxDescription">
+					<div class="showcaseTitle">
+
+
+					  {% if tile.showSpeaker %}
+						{{ tile.listSpeakersNames }}
+					  {% else %}
+						{{ tile.title }}
+					  {% endif %}
+					</div>
+				  <a href="{{ url('account', {'accountCanName': tile.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ tile.account.name }}</a>
+				</div>
+			</div>
+			</a>
+          {% endif %}
+
+        {% endfor %}
+	  </div>
   
 {% endblock content %}    

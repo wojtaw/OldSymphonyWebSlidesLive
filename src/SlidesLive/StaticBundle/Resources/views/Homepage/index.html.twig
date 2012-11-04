@@ -91,6 +91,7 @@
 
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}
+		<p> HAHA {{ asset(image) }}</p>          
 		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
             <div class="showcaseBox tile_1_1">
 				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">

@@ -143,3 +143,9 @@ function changeQuoteContent(){
 	$('#quotesLink').attr("href", allQuotes[currentQuoteIndex].source);
 	$('#quoteAnimationWrapper').animate({opacity: 1},500);		
 }
+
+
+function incorrectLoginAction(){
+	console.log("jeee");
+	$('#username').css("border-color", "#FF3300");		
+}

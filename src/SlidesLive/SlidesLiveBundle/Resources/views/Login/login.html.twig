@@ -14,7 +14,10 @@
                 
                 <div>
                 {% if error %}
-                    <div>{{ error.message }}</div>
+                    <div class="loginError">{{ error.message }}</div>
+                    <script type="text/javascript">
+						incorrectLoginAction();
+					</script>
                 {% endif %}
                 
                 <form action="{{ path('login_check') }}" method="post">
@@ -39,7 +42,6 @@
           </p>  
           </div>
           <div class="loginRight">
-	          <div class="loginImage center"></div>
             <a href="{{ path('registration') }}">Create an Account</a> if you haven't yet!          
           </div>  
 

@@ -6,12 +6,18 @@ body{
 }
 
 a{
-	text-decoration:none;	
+	text-decoration:none;
+	color:#000000;	
 }
 
 a:hover {
 	color:#027BF7;
 	text-decoration:none;		
+}
+
+a:visited {
+	color:#027BF7;
+	text-decoration:none;			
 }
 
 .fixedHeader {

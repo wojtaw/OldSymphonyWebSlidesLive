@@ -80,24 +80,33 @@
 	border-color:#027BF7;
 }
 
+.loginError {
+	color:#FF3300;
+	margin-bottom:10px;
+}
+
 .loginButton{
 	background-color:transparent;
 	color:#FFFFFF;
 	font-size:16px;
 	display:block;
-	width:252px;
-	height:55px;
+	width:100px;;
+	height:40px;
 	margin-top:10px;
 	margin-bottom:40px;
-	background-image:url(../../static/images/btn-all.png);
+	margin-left:0px;
+	background-color:#0084ff;
 	background-repeat:no-repeat;
-	border:none;
+	border:1px solid #0476e0;
 	cursor:pointer;
+	float:left;
+	position:relative;
+	left:206px;		
 }
 
 .loginButton:hover{
 	display:block;
-	background-position:0 -60px;
+	background-color:#009cff;
 }
 
 .editButton {

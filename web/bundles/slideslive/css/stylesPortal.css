@@ -558,6 +558,19 @@ ul.channelFoldersList a:hover {
 	color:#FFFFFF;	
 }
 
+.loginText a{
+	color:#027BF7;
+}
+
+.loginText a:hover{
+	color:#027BF7;
+	text-decoration:underline;
+}
+
+.loginText a:visited{
+	color:#027BF7;
+}
+
 .loginImage {
 	width:200px;
 	height:200px;

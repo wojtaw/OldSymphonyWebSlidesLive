@@ -13,7 +13,7 @@
 {% block layoutContent %}
   <div class="websiteDarkBackground clearfix cancelPadding">
     <div class="blockCenterWrapper globalFont administrationPane">
-		<div class="administrationFormTitle globalFont">Account information</div>
+		<div class="administrationFormTitle globalFont">My Presentations</div>
 
   {% if presentationEditForm is not empty %}
   
@@ -33,60 +33,33 @@
     
   {% endif %}  
   
-  <h2>My Presentations</h2>
-  
   {% if presentations is null %}
     <p>There are no presentations in your channel.</p>
   {% else %}
     {% for p in presentations %}
-    <div class="separatorLine"></div>
-    <div class="presentationEditWrapper">
-    	<div class="presentationEditImage"></div>
-        <div class="presentationEditInfo"></div>
-        <div class="presentationEditButtons"></div>
+    <div class="presentationEditWrapper clearfix">
+    	<div class="presentationEditImage" style="background-image:url({{ asset( p.getThumbnail(true) ) }})"></div>
+        <div class="presentationEditInfo">
+        	<div class="presentationEditTitle">{{ p.title }}</div>
+        	<div class="presentationEditText">{{ p.getFormatedDate }} | {{ (p.length / 60)|number_format(0, '.', ',') }} minutes | {{ p.lang }}</div>
+            <div class="syncState">
+                    {% if p.video and (p.flag == 4) %}
+						Video + Slides
+                    {% elseif (p.flag == 3)%}
+                      	Video + Slides - Synchronization failed :(
+                    {% elseif (p.flag == 2)%}      
+                    	Video + Slides - Right now processing
+                    {% else %}      
+                    	Audioslideshow
+                    {% endif %}            
+            </div>
+        </div>
+        <div class="presentationEditButtons">
+        	<a href="{{ path('managePresentations', { 'presentationId': p.id }) }}" class="editButton">Edit</a>
+        </div>
     </div>
-    
-       <div class="presentation_summary_box">
-        <h3>{{ p.title }}</h3>
-        <table>
-          <tr>
-            <td>
-              <img src="{{ asset( p.getThumbnail(true) ) }}" class="presentation_summary_thumbnail" title="" alt="" width="280" />
-              <a href="{{ path('managePresentations', { 'presentationId': p.id }) }}" class="presentation_edit_link">Edit</a>
-            </td>
-            <td>
-              <ul>
-                <li>
-                  <strong>Title:</strong> {{ p.title }}
-                </li>
-                <li>
-                  <strong>Description:</strong> {{ p.description }}
-                </li>
-                <li>
-                  <strong>Length:</strong> {{ p.length }} min.
-                </li>
-                <li>
-                  <strong>Language:</strong> {{ p.language }}
-                </li>
-                <li>
-                  <strong>Date:</strong> {{ p.getFormatedDate }}
-                </li>
-                <li>
-                  <strong>Slides included:</strong>
-                  {% spaceless %}
-                    {% if p.slides in [1] %}
-                      Yes
-                    {% else %}
-                      No
-                    {% endif %}
-                  {% endspaceless %}
-                </li>
-                
-              </ul>
-            </td>
-          </tr>
-        </table>
-       </div>                
+    <div class="separatorLine"></div>    
+         
     {% endfor %}
   {% endif %}
   

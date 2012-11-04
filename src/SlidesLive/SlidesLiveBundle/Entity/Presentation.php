@@ -249,6 +249,11 @@ class Presentation {
         }
         return $thumbnail;
     }
+	
+	public function getExternalMedia() {
+		return $this->externalServiceId;	
+	}
+
 
     /**
      * Vygenerovani hashe pro prezentaci pro unliste pristup.

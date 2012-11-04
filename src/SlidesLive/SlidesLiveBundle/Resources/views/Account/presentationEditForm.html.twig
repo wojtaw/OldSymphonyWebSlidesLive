@@ -32,6 +32,12 @@
         {{ form_label(form.folder) }}
         {{ form_widget(form.folder, {'attr': {'class': 'policko'} }) }}
       </div>
+      
+       <div class="errory">{{ form_errors(form.externalMedia) }}</div>
+      <div class="radek">
+        {{ form_label(form.externalMedia) }}
+        {{ form_widget(form.externalMedia, {'attr': {'class': 'policko'} }) }}
+      </div>     
   
     
     {#
@@ -44,7 +50,7 @@
     {{ form_rest(form) }}
     
     <input type="submit" value="Save changes" formnovalidate>
-    <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Do not make any changes</a>
+    <a href="{{ path('managePresentations', {'presentationId':-1}) }}">Cancel changes</a>
 
 </form>
 

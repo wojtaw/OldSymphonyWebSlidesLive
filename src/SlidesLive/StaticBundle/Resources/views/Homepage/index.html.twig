@@ -66,7 +66,7 @@
                 <a href="category/{{ categories[currentCategoryIndex].name }}">
                 <div class="presentationTile tile_1_1 categoryTile">
        	   		{% set currentCategoryIndex = loop.index -1 %}                        
-                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/category/'~ currentCategoryIndex ~'.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset(categories[currentCategoryIndex].getImage())}});"></div>
                 </div>
                 </a>
 

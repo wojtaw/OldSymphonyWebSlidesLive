@@ -99,13 +99,13 @@ class Category
         $thumbnail = null;
 
         foreach ($imgFormats as $format) {
-            if (file_exists( $_SERVER['DOCUMENT_ROOT'].'/bundles/static/images/category/' . $this->getId() . '.' . $format)) {
+            if (file_exists( '/bundles/static/images/category/' . $this->getId() . '.' . $format)) {
                 $thumbnail = '/bundles/static/images/category/' . $this->getId() . '.' . $format;
                 break;
             }
         }
         if (!$thumbnail) {
-          $thumbnail = 'bundles/slideslive/images/no-image.jpg';
+          $thumbnail = '/bundles/slideslive/images/no-image.jpg';
         }
         return $thumbnail;
     }	

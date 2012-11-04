@@ -572,6 +572,10 @@ ul.channelFoldersList a:hover {
 	padding:15px;	
 }
 
+.cancelPadding {
+	padding:0px !important;	
+}
+
 .administrationFormTitle {
 	text-align:left;
 	width:100%;

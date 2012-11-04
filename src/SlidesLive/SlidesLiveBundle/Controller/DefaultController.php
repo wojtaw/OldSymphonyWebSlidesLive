@@ -197,14 +197,13 @@ class DefaultController extends Controller {
       ->findCategoryIdAccordingName($categoryCanonicalName);
 	  
     if (!$selectedCategory) {
-		return $this->showError(1001);
+		return $this->showError(1001, $categoryCanonicalName);
 	}	  	
 	
 	$this->data['categoryName'] = $selectedCategory->getName();	
 
     $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
       ->findPublicPresentationsInCategory($selectedCategory->getId());
-	 echo count($this->data['presentations']);
     if (!$this->data['presentations']) {
       //TO DO
     } else {
@@ -215,8 +214,8 @@ class DefaultController extends Controller {
   }
 
 //Error method
-	protected function showError($errorCode) {
-	    return $this->redirect($this->generateUrl('newErrorPage', array('errorCode' => $errorCode)));		
+	protected function showError($errorCode, $errorSourceTitle) {
+	    return $this->redirect($this->generateUrl('newErrorPage', array('errorCode' => $errorCode, 'errorSourceTitle' => $errorSourceTitle)));		
 	}
   
 // ----------------HELP METHODS-------------------------------------------------

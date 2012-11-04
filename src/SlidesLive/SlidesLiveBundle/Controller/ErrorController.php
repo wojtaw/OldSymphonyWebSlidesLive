@@ -20,14 +20,15 @@ class ErrorController extends Controller {
   
 	public function __construct() {
 		$this->errorCodes = array(
-			"1001" => "Jeej this category does not exists!",
+			"1001" => "Jeej category ERROR_SOURCE_TITLE does not exists!",
 			"1002" => "",
 		);					
 	}                                      
                                                   
-    public function newErrorPageAction($errorCode) {
-      $this->data['errorTitle'] = $this->errorCodes[$errorCode];  
-	  
-      return $this->render('SlidesLiveBundle:Error:newErrorPage.html.twig', $this->data);    
+    public function newErrorPageAction($errorCode,$errorSourceTitle) {
+		$errorTitle = $this->errorCodes[$errorCode];  
+		$errorTitle = str_replace("ERROR_SOURCE_TITLE",$errorSourceTitle,$errorTitle);
+		$this->data['errorTitle'] = $errorTitle;
+		return $this->render('SlidesLiveBundle:Error:newErrorPage.html.twig', $this->data);    
     }             
 }

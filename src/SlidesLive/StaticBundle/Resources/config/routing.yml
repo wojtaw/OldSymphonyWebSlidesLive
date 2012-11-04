@@ -31,8 +31,10 @@ errorPage:
     defaults: {_controller: StaticBundle:Error:errorPage }
     
 newErrorPage:
-    pattern:  /whoops/{errorCode}
-    defaults: {_controller: SlidesLiveBundle:Error:newErrorPage }	
+    pattern:  /whoops/{errorCode}/{errorSourceTitle}
+    defaults: {_controller: SlidesLiveBundle:Error:newErrorPage }
+    requirements:
+      errorCode: \d+	
                                                     
 # --------EXAMPLE ACCOUNT-------------------------------------------------------
 

@@ -99,3 +99,16 @@
 	display:block;
 	background-position:0 -60px;
 }
+
+.editButton {
+	display:block;
+	float:left;
+	padding:5px 40px 5px 40px;
+	background-color:#141414;
+	color:#FFFFFF;
+	font-size:15px;
+}
+
+.editButton:hover{
+	background-color:#333333;
+}

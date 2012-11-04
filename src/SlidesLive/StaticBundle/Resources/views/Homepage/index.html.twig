@@ -1,7 +1,7 @@
 {% extends 'StaticBundle::layout.html.twig' %}
 
   {% block javascript %}
-    <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageTiles.js') }}">
+    <script type="text/javascript" src="{{ asset('bundles/javascript/presentationTiles.js') }}">
     </script>
   {% endblock %}
   
@@ -52,11 +52,12 @@
 
   <div class="websiteLightBackground firstBlockTop">
   
-  	  <div class="showcaseBar clearfix" id="showcaseBar">
       
 {% for category in categories %} 
 	<p>HAHA GUY - {{ category.name}}</p>
-{% endfor %} 
+{% endfor %}   
+  
+  	  <div class="presentationTileBar clearfix" id="presentationTileBar">
       
         {% for box in presentationBoxes %}
 
@@ -66,19 +67,19 @@
                 {% if currentTileIndex == position %}
 
                 <a href="#">
-                <div class="showcaseBox tile_1_1 categoryTile">
+                <div class="presentationTile tile_1_1 categoryTile">
                     {% if currentTileIndex == categoryPositions[1] %}
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/business.png')}});"></div>
                     {% elseif currentTileIndex == categoryPositions[2] %}
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/design.png')}});"></div>
                     {% elseif currentTileIndex == categoryPositions[3] %}
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/science.png')}});"></div>
                     {% elseif currentTileIndex == categoryPositions[4] %}
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/global-issues.png')}});"></div>
                     {% elseif currentTileIndex == categoryPositions[5] %}
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/technology.png')}});"></div>
                     {% elseif currentTileIndex == categoryPositions[6] %}
-                        <div class="showcaseBoxImage" style="background-image:url({{ asset('bundles/static/images/edu.png')}});"></div>
+                        <div class="presentationTileImage" style="background-image:url({{ asset('bundles/static/images/edu.png')}});"></div>
                     {% else %}
 
                     {% endif %}
@@ -90,14 +91,13 @@
 
 
           {% set image = box.presentation.getThumbnail() %}
-          {% if image %}
-		<p> HAHA {{ asset(image) }}</p>          
+          {% if image %}     
 		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
-            <div class="showcaseBox tile_1_1">
-				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">
+            <div class="presentationTile tile_1_1">
+				<div class="presentationTileImage" style="background-image:url({{ asset(image) }});">
 				</div>
-				<div class="showcaseBoxDescription">
-					<div class="showcaseTitle">
+				<div class="presentationTileDescription">
+					<div class="presentationTileTitle">
 
 
 					  {% if box.presentation.showSpeaker %}
@@ -106,7 +106,7 @@
 						{{ box.presentation.title }}
 					  {% endif %}
 					</div>
-				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>
+				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="presentationTileChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>
 				</div>
 			</div>
 			</a>

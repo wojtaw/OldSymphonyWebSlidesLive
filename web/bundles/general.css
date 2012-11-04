@@ -224,3 +224,79 @@ body{
 	text-align:center;
 	z-index:18;	
 }
+
+/* TILES */
+.presentationTileBar{
+	background-color:#1e1e1e;
+	width:100%;
+	padding-top:5px;
+	margin-top:50px;
+}
+
+.presentationTile {
+	float:left;
+	overflow:hidden;
+}
+
+.presentationTileImage {
+	background-size:cover;
+	background-position:top;
+	position: relative;
+	left: 0px;
+	height:100%;
+}
+
+.presentationTileImage:hover {
+	filter:alpha(opacity=50);
+	opacity: 0.5;
+}
+
+
+.presentationTileDescription {
+	background-image:url(generalImages/tile_transparent_black.png);
+	background-repeat:repeat;
+	position:relative;
+	top:-66px;
+	height:50px;
+	padding:8px;
+}
+
+.presentationTileTitle {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	color:#999999;
+	height:34px;
+	overflow:hidden;
+}
+
+.presentationTileChannel {
+	position:absolute;
+	bottom:8px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight:normal;
+	text-decoration:none;
+}
+
+.presentationTileChannel:hover {
+	text-decoration:underline;
+}
+
+.tile_1_1{
+	width:150px;
+	height:150px;
+	display:block;
+	margin-right:6px;
+	margin-bottom:6px;
+	position: relative;
+	float:left;
+}
+
+.categoryTile {
+	background-color:#027bf7;
+}
+
+.categoryTile:hover{
+	background-color:#000000;
+}

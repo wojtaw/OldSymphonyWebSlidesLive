@@ -8,7 +8,7 @@ var tileSpacing = 6;
 
 //functions
 function resizePresentations(){
-		var containerWidth = $('#showcaseBar').width()-1;
+		var containerWidth = $('#presentationTileBar').width()-1;
 		var numberOfPresentations = Math.floor(containerWidth / (tileSpacing + minimumTileWidth));
 		var newTileWidth = Math.floor(containerWidth / numberOfPresentations - tileSpacing);
 		console.log(newTileWidth);

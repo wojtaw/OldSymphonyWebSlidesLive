@@ -29,7 +29,11 @@ thankyou:
 errorPage:
     pattern:  /error/{message}
     defaults: {_controller: StaticBundle:Error:errorPage }
-                                                         
+    
+newErrorPage:
+    pattern:  /whoops/{errorCode}
+    defaults: {_controller: SlidesLiveBundle:Error:newErrorPage }	
+                                                    
 # --------EXAMPLE ACCOUNT-------------------------------------------------------
 
 example:

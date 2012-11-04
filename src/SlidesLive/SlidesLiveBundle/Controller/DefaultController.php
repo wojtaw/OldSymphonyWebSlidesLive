@@ -197,7 +197,7 @@ class DefaultController extends Controller {
       ->findCategoryIdAccordingName($categoryCanonicalName);
 	  
     if (!$selectedCategory) {
-		echo("prdel");
+		return $this->showError(1001);
 	}	  	
 	
 	$this->data['categoryName'] = $selectedCategory->getName();	
@@ -213,6 +213,11 @@ class DefaultController extends Controller {
 		 	  
     return $this->render('SlidesLiveBundle:Default:categoryPage.html.twig', $this->data);	  
   }
+
+//Error method
+	protected function showError($errorCode) {
+	    return $this->redirect($this->generateUrl('newErrorPage', array('errorCode' => $errorCode)));		
+	}
   
 // ----------------HELP METHODS-------------------------------------------------
 

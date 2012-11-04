@@ -3,14 +3,14 @@
 {% block layoutContent %}
 
 
-  <div class="websiteDarkBackground">
-    <div class="blockCenterWrapper">
-    
+  <div class="websiteDarkBackground clearfix">
+    <div class="blockCenterWrapper loginText globalFont">
+    	<div class="loginLeft">
             {% if app.session.flash('registration_success') %}
               <div>Registration successfull!</div>    
             {% endif %}
         
-                <h2 class="globalFont">Login</h2>
+                <div class="">Login<br /><br /></div>
                 
                 <div>
                 {% if error %}
@@ -18,28 +18,30 @@
                 {% endif %}
                 
                 <form action="{{ path('login_check') }}" method="post">
-                  <div>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
-                  </div>
-                  
-                  <div>
-                    <label for="password">Password:</label>
+                  <div class="loginMain">
+                    <label for="username">Username:<br /></label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" /><br />
+
+                    <label for="password">Password:<br /></label>
                     <input type="password" id="password" name="_password" />
                   </div>
                   
                    {#<input type="hidden" name="_target_path" value="app_send_secret" />#}
                      
                   <div>  
-                    <input type="submit" name="login" value="Login" />
-                  </div>
+                    <input type="submit" name="login" value="Login" class="loginButton globalFont"/>
+                  </div>          
                     
                 </form>
                 </div>
             
             <p>
-            <a href="{{ path('registration') }}">Create an Account</a> if you haven't yet!
-          </p>    
+          </p>  
+          </div>
+          <div class="loginRight">
+	          <div class="loginImage center"></div>
+            <a href="{{ path('registration') }}">Create an Account</a> if you haven't yet!          
+          </div>  
 
 
     </div>

@@ -13,7 +13,7 @@
 {% block title %}Manage your account.{% endblock %}
 
 {% block layoutContent %}
-  <div class="websiteDarkBackground clearfix">
+  <div class="websiteDarkBackground clearfix cancelPadding">
     <div class="blockCenterWrapper globalFont administrationPane">
 		<div class="administrationFormTitle globalFont">Account information</div>
           <div>
@@ -25,6 +25,8 @@
             <br>
             <br>
         
+        
+		<div class="administrationFormTitle globalFont">Account design</div>        
             <h2>Background Image:</h2>
             <table>
               <tr>
@@ -38,19 +40,6 @@
                       &nbsp;&nbsp;<a href="{{ path('deleteAccountImage', {'type': 'background-images'}) }}">Remove image</a>
                     </div>
                   {% endif %}
-                </td>
-              </tr>
-            </table>
-            
-		<div class="administrationFormTitle globalFont">Account design</div>
-            <h2>Account Logo:</h2>
-            <table>
-              <tr>
-                <td>
-                  <img src="{{ asset(app.user.getImage('logos', true)) }}" width="200" alt=""/>
-                </td>
-                <td>
-                  {{ uploadLogoForm.content|raw }}
                 </td>
               </tr>
             </table>

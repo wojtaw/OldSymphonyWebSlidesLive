@@ -30,22 +30,8 @@ class PresentationRepository extends EntityRepository
         return $query->getResult();
     }
 	
-	/*
-    $query = $em->createQuery(
-      'SELECT f
-      FROM SlidesLiveBundle:Folder f
-      JOIN f.account a
-      WHERE a.id = :accountId
-      AND a.privacy <= :privacyLevel
-      AND f.privacy <= :privacyLevel
-      ORDER BY f.name ASC')
-      ->setParameters(array(
-          'accountId' => $accountId,
-          'privacyLevel' => $privacyLevel
-        )
-      );	
-	  */
 	
+	// DANGER! There is one special constrain AND a.id != 112 for internalRelease, might be dangerous in the FUTURE (if id's changed!!!
 	public function findPublicPresentationsInCategory($categoryId) {
 		$privacyLevel = 1;
         $em = $this->getEntityManager();
@@ -55,7 +41,8 @@ class PresentationRepository extends EntityRepository
 			LEFT JOIN  p.account a			
             WHERE c.id = :categoryId
 			AND p.privacy <= :privacyLevel
-			AND a.privacy <= :privacyLevel			
+			AND a.privacy <= :privacyLevel
+			AND a.id != 112					
             ORDER BY p.dateRecorded DESC")
         ->setParameters(array(
           'categoryId' => sprintf('%s', $categoryId),

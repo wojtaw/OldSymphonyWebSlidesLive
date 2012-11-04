@@ -12,7 +12,20 @@ use \SlidesLive\SlidesLiveBundle\Entity\Folder;
  * repository methods below.
  */
 class PresentationRepository extends EntityRepository
-{    
+{  
+    public function findAccountPresentations($accountId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("
+            SELECT p FROM SlidesLiveBundle:Presentation p
+            JOIN p.account a
+            WHERE a.id = :accountId
+            ORDER BY p.dateRecorded DESC")
+        ->setParameters(array(
+          'accountId' => sprintf('%s', $accountId)
+		  )
+        );
+        return $query->getResult();
+    }  
 
     public function findFolderPresentations($folderId, $privacyLevel) {
         $em = $this->getEntityManager();

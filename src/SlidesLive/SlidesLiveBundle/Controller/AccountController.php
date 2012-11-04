@@ -214,11 +214,6 @@ class AccountController extends Controller
         );
 
       $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
-//	  uksort(, 'dateRecorded'); 
-	  /*
-	  arsort()	value	yes	high to low	asort()
-	krsort()
-*/
 	  
       if (count($presentations) > 0) {
         $this->data['presentations'] = $presentations; 

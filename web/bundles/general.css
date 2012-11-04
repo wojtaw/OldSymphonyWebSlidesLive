@@ -5,6 +5,15 @@ body{
 	top:0px;	
 }
 
+a{
+	text-decoration:none;	
+}
+
+a:hover {
+	color:#027BF7;
+	text-decoration:none;		
+}
+
 .fixedHeader {
 	position: fixed;
     top:0;
@@ -140,7 +149,7 @@ body{
 	position: fixed;
     top:55px;
     left:0;		
-	background-color:#999999;
+	background-color:#CCCCCC;
 	width:100%;
 	height:50px;
 	z-index:20;		
@@ -153,14 +162,32 @@ body{
 .accountBarContent {
 	margin-left:auto;
 	margin-right:auto;
+	margin-top:15px;
 	width:960px;	
 	height:50px;		
 }
 
-.accountBarMenu {
-	font-family:'Ropa Sans', sans-serif !important;
-	font-size:20px;
-	color:#999900;	
+.accountBarMenu, .accountBarMenu a {
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:normal;
+	text-transform:uppercase;
+	font-size:15px;
+	color:#000;
+	display:inline;
+	text-decoration:none;
+}
+
+.accountBarMenu a:hover {
+	color:#027BF7;
+	text-transform:uppercase;
+	text-decoration:none;
+}
+
+
+.accountBarMenuSeparator {
+	display:inline;
+	margin-right:15px;
+	margin-left:15px;		
 }
 
 /*-------------------SPECIAL STUFF----------------------*/
@@ -172,15 +199,7 @@ body{
 	color:#027BF7 !important;
 }
 
-.globalFont{
-	font-family:'Ropa Sans', sans-serif !important;
-}
-
-.globalFont a{
-	font-family:'Ropa Sans', sans-serif !important;
-}
-
-.globalFont a:hover{
+.globalFont, .globalFont a, .globalFont a:hover{
 	font-family:'Ropa Sans', sans-serif !important;
 }
 
@@ -209,6 +228,11 @@ body{
 .left{
 	display: block;
 	text-align:left !important;
+}
+
+.floatRight {
+	text-align:right;
+	float:right;		
 }
 
 .logoBeta {

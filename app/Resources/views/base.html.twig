@@ -84,13 +84,15 @@
 			{% if is_granted('ROLE_USER') %}
 			   <div class="accountServiceBar">
 			   <div class="accountBarContent">
-				   <div class="accountBarMenu">
-					 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">{{ app.user.name }}</a>|			   
-					 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">My Presentations</a>|
-					 <a href="{{ path('manageAccount') }}">Settings</a>
-                     
-                  <a href="{{ path('manageAccount') }}" class="headerMenu globalFont slidesLiveBlue">{{ app.user.username }}</a>               
+				   <div class="accountBarMenu globalFont">
+					 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">{{ app.user.name }}</a><span class="accountBarMenuSeparator">|</span>			   
+					 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">My Presentations</a><span class="accountBarMenuSeparator">|</span>	
+					 <a href="{{ path('manageAccount') }}">Settings</a>              
 				   </div>
+                   
+				   <div class="accountBarMenu globalFont">
+	                 <a href="{{ path('manageAccount') }}" class="floatRight">{{ app.user.username }}</a>             
+				   </div>                                      
 			   </div>
 			   </div>			   
 		   {% endif %}	

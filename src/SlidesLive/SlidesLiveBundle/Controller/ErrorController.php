@@ -21,7 +21,9 @@ class ErrorController extends Controller {
 	public function __construct() {
 		$this->errorCodes = array(
 			"1001" => "Jeej category ERROR_SOURCE_TITLE does not exists!",
-			"1002" => "",
+			"1002" => "Ouch... account ERROR_SOURCE_TITLE does not exists!",
+			"1003" => "Whoops... folder ERROR_SOURCE_TITLE does not exists!",			
+			"1004" => "jejejejej... presentation ERROR_SOURCE_TITLE is missing!",						
 		);					
 	}                                      
                                                   

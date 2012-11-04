@@ -14,18 +14,18 @@
 HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
 <img src="http://www.hetemeel.com/archive/haha%20Im%20creating%20dynamic%20IMAGES!!1!.jpg" width="500" />
 
-  	  <div class="showcaseBar clearfix" id="showcaseBar">
+  	  <div class="presentationTileBar clearfix" id="presentationTileBar">
       
         {% for tile in presentations %}
-
-          {% set image = tile.getThumbnail(true) %}
-          {% if image %}
+        
+          {% set image = tile.getThumbnail() %}
+          {% if image %}     
 		  <a href="{{ url('accountPresentation', {'accountCanName':tile.account.canonicalName, 'presentationId':tile.id }) }}">
-            <div class="showcaseBox tile_1_1">
-				<div class="showcaseBoxImage" style="background-image:url({{ asset(image) }});">
+            <div class="presentationTile tile_1_1">
+				<div class="presentationTileImage" style="background-image:url({{ asset(image) }});">
 				</div>
-				<div class="showcaseBoxDescription">
-					<div class="showcaseTitle">
+				<div class="presentationTileDescription">
+					<div class="presentationTileTitle">
 
 
 					  {% if tile.showSpeaker %}
@@ -34,7 +34,7 @@ HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
 						{{ tile.title }}
 					  {% endif %}
 					</div>
-				  <a href="{{ url('account', {'accountCanName': tile.account.canonicalName}) }}" class="showcaseChannel slidesLiveBlue">{{ tile.account.name }}</a>
+				  <a href="{{ url('account', {'accountCanName': tile.account.canonicalName}) }}" class="presentationTileChannel slidesLiveBlue">{{ tile.account.name }}</a>
 				</div>
 			</div>
 			</a>

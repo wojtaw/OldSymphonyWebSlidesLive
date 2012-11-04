@@ -603,8 +603,20 @@ ul.channelFoldersList a:hover {
 	width:200px;
 	height: 150px;
 	background-color:#9900CC;	
+	float:left;
 }
 
+.presentationEditTitle {
+	color:#000000;
+	font-weight:bold;
+	font-size:18px;
+}
+
+.presentationEditText {
+	color:#CCCCCC;
+	font-weight:bold;
+	font-size:14px;	
+}
 
 .presentationEditInfo {
 	background-color:#FFCC00;	

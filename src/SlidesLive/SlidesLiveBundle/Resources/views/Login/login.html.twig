@@ -13,12 +13,6 @@
                 <div class="">Login<br /><br /></div>
                 
                 <div>
-                {% if error %}
-                    <div class="loginError">{{ error.message }}</div>
-                    <script type="text/javascript">
-						incorrectLoginAction();
-					</script>
-                {% endif %}
                 
                 <form action="{{ path('login_check') }}" method="post">
                   <div class="loginMain">
@@ -31,6 +25,13 @@
                   
                    {#<input type="hidden" name="_target_path" value="app_send_secret" />#}
                      
+                {% if error %}
+                    <div class="loginError">{{ error.message }}</div>
+                    <script type="text/javascript">
+						incorrectLoginAction();
+					</script>
+                {% endif %}
+                                     
                   <div>  
                     <input type="submit" name="login" value="Login" class="loginButton globalFont"/>
                   </div>          

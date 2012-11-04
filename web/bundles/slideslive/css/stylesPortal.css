@@ -1,6 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 /* Nektera pravidla byla vymazana, aby nedoslo k prepsani pravidel obsazenych v general.css */
+
   
 .siteSidebar {
 	float:right;	
@@ -90,6 +91,16 @@ h1 {
 	font-weight:bold;
 	font-size:18px;	
 	color:#000000;	
+}
+
+h2 {
+	font-size:45px;
+	font-weight:normal;
+	line-height:45px;
+	color:#000000;
+	padding-top:0px;
+	padding-bottom:20px;
+	margin:0px;
 }
 
 .sidebarText {
@@ -534,6 +545,11 @@ ul.channelFoldersList a:hover {
 
 
 /*-----------NEW UNSORTED STYLES------*/
+.categoryTitleBlock {
+	margin-top:30px;
+	margin-left:30px;	
+}
+
 .blockCenterWrapper {
 	width:960px;	
 	margin-left:auto;

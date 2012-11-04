@@ -18,11 +18,24 @@ class HomepageBoxRepository extends EntityRepository {
 			'SELECT b
 			FROM SlidesLiveBundle:HomepageBox b
 			JOIN b.presentation p
+			WHERE p.privacy = 1'
+		);
+		$gainedPresentations = $query->getResult();
+		shuffle($gainedPresentations);
+		return $gainedPresentations;
+	}
+	
+	public function findPublicPresentationBoxesEnglish() {
+		$em = $this->getEntityManager();
+		$query = $em->createQuery(
+			'SELECT b
+			FROM SlidesLiveBundle:HomepageBox b
+			JOIN b.presentation p
 			WHERE p.privacy = 1 and b.lang = :language'
 		)->setParameter('language', 'en');
 		$gainedPresentations = $query->getResult();
 		shuffle($gainedPresentations);
 		return $gainedPresentations;
-	}
+	}	
 
 }

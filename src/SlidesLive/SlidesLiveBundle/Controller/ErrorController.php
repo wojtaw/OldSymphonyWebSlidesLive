@@ -15,19 +15,19 @@ Error codes
 class ErrorController extends Controller {
 
     protected $data = array();  
-    protected $errorCodes = array();  	
+    protected $errorCodes;  	
 		 
   
 	public function __construct() {
-		$errorCodes['1001'] = "Jeej this category does not exists!";
-		$errorCodes['1002'] = "";
-		$errorCodes['1003'] = "";
-		$errorCodes['1004'] = "";						
+		$this->errorCodes = array(
+			"1001" => "Jeej this category does not exists!",
+			"1002" => "",
+		);					
 	}                                      
                                                   
     public function newErrorPageAction($errorCode) {
-      echo $errorCode;
-      $this->data['errorTitle'] = array_search('1001', $errorCodes);  
+      $this->data['errorTitle'] = $this->errorCodes[$errorCode];  
+	  
       return $this->render('SlidesLiveBundle:Error:newErrorPage.html.twig', $this->data);    
     }             
 }

@@ -118,7 +118,7 @@ body{
 	float:right;
 }
 
-.headerMenu {
+.headerMenu a{
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight:normal;
 	text-transform:uppercase;
@@ -130,7 +130,7 @@ body{
 }
 
 
-.headerMenu:hover{
+.headerMenu a:hover{
 	top:20px;
 	color:#027BF7 !important;
 }
@@ -173,6 +173,14 @@ body{
 }
 
 .globalFont{
+	font-family:'Ropa Sans', sans-serif !important;
+}
+
+.globalFont a{
+	font-family:'Ropa Sans', sans-serif !important;
+}
+
+.globalFont a:hover{
 	font-family:'Ropa Sans', sans-serif !important;
 }
 

@@ -68,13 +68,13 @@
 			<div class="searchBarWrapper" style="display:block">
                  <gcse:searchbox-only></gcse:searchbox-only>
             </div>
-            <div class="headerMenuWraper clearfix">
-                <a href="{{ path('thankyou') }}" id="downloadButtonLink2" style="margin-right:15px; color:#FFF" class="headerMenu globalFont"  onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
-                <a href="{{ path('tour') }}" style="margin-right:15px;" class="headerMenu globalFont">How It Works</a>
+            <div class="headerMenuWraper clearfix headerMenu globalFont">
+                <a href="{{ path('thankyou') }}" id="downloadButtonLink2" style="margin-right:15px; color:#FFF" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
+                <a href="{{ path('tour') }}" style="margin-right:15px;" >How It Works</a>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-            			<a href="{{ path('logout') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Logout</a>
+            			<a href="{{ path('logout') }}" style="display:inline;">Logout</a>
                 {% else %}
-            			<a href="{{ path('login') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Login</a>
+            			<a href="{{ path('login') }}" style="display:inline;" class="slidesLiveBlue">Login</a>
                 {% endif %}  				                        
             </div>
         </div>

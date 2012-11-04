@@ -265,6 +265,14 @@ a:hover {
 	text-align:center;
 	z-index:18;	
 }
+/* ERRORS */
+h2.error{
+	font-size:18px;
+	font-style:italic;
+	color:#000000;
+	font-weight:normal;
+}
+
 
 /* TILES */
 .presentationTitlesHomepage {

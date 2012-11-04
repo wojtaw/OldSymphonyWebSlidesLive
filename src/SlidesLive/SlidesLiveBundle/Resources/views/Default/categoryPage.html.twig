@@ -16,6 +16,10 @@
 
 <h2 class="globalFont slidesLiveBlue categoryTitleBlock">{{ categoryName }}</h2>
 
+{% if presentations|length <= 0 %}
+	<h2 class="error globalFont categoryTitleBlock">Jej... this category is empty :( </h2>
+{% endif %}
+
   	  <div class="presentationTileBar clearfix" id="presentationTileBar">
       
         {% for tile in presentations %}

@@ -10,7 +10,10 @@
 
 {% block title %}Your Presentations{% endblock %}
 
-{% block content %}
+{% block layoutContent %}
+  <div class="websiteDarkBackground clearfix cancelPadding">
+    <div class="blockCenterWrapper globalFont administrationPane">
+		<div class="administrationFormTitle globalFont">Account information</div>
 
   {% if presentationEditForm is not empty %}
   
@@ -36,6 +39,13 @@
     <p>There are no presentations in your channel.</p>
   {% else %}
     {% for p in presentations %}
+    <div class="separatorLine"></div>
+    <div class="presentationWrapper">
+    	<div class="presentationImage"></div>
+        <div class="presentationInfo"></div>
+        <div class="presentationButtons">
+    </div>
+    
        <div class="presentation_summary_box">
         <h3>{{ p.title }}</h3>
         <table>
@@ -72,12 +82,15 @@
                   {% endspaceless %}
                 </li>
                 
-              <ul>
+              </ul>
             </td>
           </tr>
         </table>
        </div>                
     {% endfor %}
   {% endif %}
+  
+  </div>
+  </div>
   
 {% endblock %}

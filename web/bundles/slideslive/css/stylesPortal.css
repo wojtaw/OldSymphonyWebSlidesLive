@@ -584,6 +584,38 @@ ul.channelFoldersList a:hover {
 	margin-top:30px;	
 }
 
+.separatorLine{
+	height:2px;
+	display:block;
+	width:100%;
+	border-bottom:2px solid #CCCCCC;
+	margin-bottom:15px;
+	margin-top:30px;	
+}
+
+/* Managing presentations */
+.presentationWrapper {
+	width:100%;
+	background-color:#993300;	
+}
+
+.presentationImage {
+	width:200px;
+	height: 150px;
+	background-color:#9900CC;	
+}
+
+
+.presentationInfo {
+	background-color:#FFCC00;	
+}
+
+
+.presentationButtons {
+	background-color:#66FF00;	
+}
+
+
 /*-----------NEW UNSORTED STYLES------*/
 .categoryTitleBlock {
 	margin-top:30px;

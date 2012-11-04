@@ -5,10 +5,10 @@ search:
     defaults: { _controller: SlidesLiveBundle:Default:search }
     
 category:
-    pattern: /category/{categoryName}
+    pattern: /category/{categoryCanonicalName}
     defaults: { _controller: SlidesLiveBundle:Default:category }
     requirements:
-     categoryName: '[^wh/]|[^/][^/]+'		
+     categoryCanonicalName: '[^wh/]|[^/][^/]+'		
 
 # -----LOGIN/LOGOUT ROUTES------------------------------------------------------
 login:

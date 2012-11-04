@@ -190,15 +190,16 @@ class DefaultController extends Controller {
     return $this->render('SlidesLiveBundle:Default:searchResults.html.twig');
   } 
   
-  public function categoryAction($categoryName){
-    $this->data['categoryName'] = $categoryName;
+  public function categoryAction($categoryCanonicalName){
+    $this->data['categoryCanonicalName'] = $categoryCanonicalName;
 	
-    $categoryId = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
-      ->findCategoryIdAccordingName($categoryName);	
+    $selectedCategory = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
+      ->findCategoryIdAccordingName($categoryCanonicalName);	
 	
+	$this->data['categoryName'] = $selectedCategory->getName();	
 
     $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
-      ->findPublicPresentationsInCategory($categoryId->getId());
+      ->findPublicPresentationsInCategory($selectedCategory->getId());
 	 echo count($this->data['presentations']);
     if (!$this->data['presentations']) {
       //TO DO

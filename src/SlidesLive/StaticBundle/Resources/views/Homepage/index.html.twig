@@ -63,7 +63,7 @@
                 
        	   		{% set currentCategoryIndex = loop.index -1 %}                
 
-                <a href="{{ url('category', {'categoryName':categories[currentCategoryIndex].name }) }}">
+                <a href="{{ url('category', {'categoryName':categories[currentCategoryIndex].canonicalName }) }}">
                 <div class="presentationTile tile_1_1 categoryTile">
        	   		{% set currentCategoryIndex = loop.index -1 %}                        
                         <div class="presentationTileImage" style="background-image:url({{ asset(categories[currentCategoryIndex].getImage())}});"></div>

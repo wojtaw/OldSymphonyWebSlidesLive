@@ -22,15 +22,15 @@ class CategoryRepository extends EntityRepository {
 		return $recievedCategories;
 	}
 	
-	public function findCategoryIdAccordingName($categoryName) {
+	public function findCategoryIdAccordingName($categoryCanonicalName) {
 		$em = $this->getEntityManager();
 		$query = $em->createQuery(
 		  'SELECT c
 		  FROM SlidesLiveBundle:Category c
-		  WHERE c.name = :categoryName
+		  WHERE c.canonicalName = :categoryName
 		  ')
 		  ->setParameters(array(
-			  'categoryName' => $categoryName
+			  'categoryName' => $categoryCanonicalName
 			)
 		  );
 		try {

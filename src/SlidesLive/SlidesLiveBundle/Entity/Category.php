@@ -28,6 +28,13 @@ class Category
      * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
+	
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="canonical_name", type="string", length=255)
+     */
+    protected $canonicalName;	
 
     /**
      * @ORM\ManyToMany(targetEntity="Presentation", mappedBy="categories")
@@ -71,6 +78,26 @@ class Category
     {
         return $this->name;
     }
+	
+    /**
+     * Set canonical name
+     *
+     * @param string $canonicalName
+     */
+    public function setCanonicalName($canonicalName)
+    {
+        $this->canonicalName = $canonicalName;
+    }
+
+    /**
+     * Get canonical name
+     *
+     * @return string 
+     */
+    public function getCanonicalName()
+    {
+        return $this->canonicalName;
+    }	
 
     /**
      * Add presentations

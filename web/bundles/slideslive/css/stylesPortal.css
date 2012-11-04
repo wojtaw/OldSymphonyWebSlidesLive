@@ -566,6 +566,20 @@ ul.channelFoldersList a:hover {
 	background-image:url(../../generalImages/loginImage.png);
 }
 
+.administrationPane {
+	background-color:#E5E5E5;
+	width:930px !important;
+	padding:15px;	
+}
+
+.administrationFormTitle {
+	text-align:left;
+	width:100%;
+	border-bottom:2px solid #CCCCCC;
+	margin-bottom:15px;
+	margin-top:30px;	
+}
+
 /*-----------NEW UNSORTED STYLES------*/
 .categoryTitleBlock {
 	margin-top:30px;

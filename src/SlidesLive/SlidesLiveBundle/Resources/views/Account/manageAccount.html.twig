@@ -12,59 +12,63 @@
 
 {% block title %}Manage your account.{% endblock %}
 
-{% block content %}
-  <div>
-    <h2>Edit personal data:</h2>
-    {{ accountEditForm.content|raw }}
-    <br>
-
-    <h2>Folders:</h2>
-    <a href="{{ path('manageFolders') }}">Edit folders</a>
-    <br>
-    <br>
-
-    <h2>Background Image:</h2>
-    <table>
-      <tr>
-        <td>
-          <img src="{{ asset(app.user.getImage('background-images', true)) }}" width="200" alt=""/>
-        </td>
-        <td>
-          {{ uploadBackgroundForm.content|raw }}
-          {% if app.user.getImage('background-images') %}
-            <div>
-              &nbsp;&nbsp;<a href="{{ path('deleteAccountImage', {'type': 'background-images'}) }}">Remove image</a>
-            </div>
-          {% endif %}
-        </td>
-      </tr>
-    </table>
-    
-    <br>
-    <h2>Account Logo:</h2>
-    <table>
-      <tr>
-        <td>
-          <img src="{{ asset(app.user.getImage('logos', true)) }}" width="200" alt=""/>
-        </td>
-        <td>
-          {{ uploadLogoForm.content|raw }}
-        </td>
-      </tr>
-    </table>
-    
-    <br>
-    <h2>Account Avatar:</h2>
-    <table>
-      <tr>
-        <td>
-          <img src="{{ asset(app.user.getImage('avatars', true)) }}" width="200" alt=""/>
-        </td>
-        <td>
-          {{ uploadAvatarForm.content|raw }}
-        </td>
-      </tr>
-    </table>
+{% block layoutContent %}
+  <div class="websiteDarkBackground clearfix">
+    <div class="blockCenterWrapper globalFont administrationPane">
+		<div class="administrationFormTitle globalFont">Account information</div>
+          <div>
+            {{ accountEditForm.content|raw }}
+            <br>
         
-  </div>
+            <h2>Folders:</h2>
+            <a href="{{ path('manageFolders') }}">Edit folders</a>
+            <br>
+            <br>
+        
+            <h2>Background Image:</h2>
+            <table>
+              <tr>
+                <td>
+                  <img src="{{ asset(app.user.getImage('background-images', true)) }}" width="200" alt=""/>
+                </td>
+                <td>
+                  {{ uploadBackgroundForm.content|raw }}
+                  {% if app.user.getImage('background-images') %}
+                    <div>
+                      &nbsp;&nbsp;<a href="{{ path('deleteAccountImage', {'type': 'background-images'}) }}">Remove image</a>
+                    </div>
+                  {% endif %}
+                </td>
+              </tr>
+            </table>
+            
+		<div class="administrationFormTitle globalFont">Account design</div>
+            <h2>Account Logo:</h2>
+            <table>
+              <tr>
+                <td>
+                  <img src="{{ asset(app.user.getImage('logos', true)) }}" width="200" alt=""/>
+                </td>
+                <td>
+                  {{ uploadLogoForm.content|raw }}
+                </td>
+              </tr>
+            </table>
+            
+            <br>
+            <h2>Account Avatar:</h2>
+            <table>
+              <tr>
+                <td>
+                  <img src="{{ asset(app.user.getImage('avatars', true)) }}" width="200" alt=""/>
+                </td>
+                <td>
+                  {{ uploadAvatarForm.content|raw }}
+                </td>
+              </tr>
+            </table>
+                
+          </div>
+    </div>
+</div>    
 {% endblock %}

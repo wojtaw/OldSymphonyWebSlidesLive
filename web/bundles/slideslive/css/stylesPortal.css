@@ -543,6 +543,28 @@ ul.channelFoldersList a:hover {
 	font-size:11px;
 }
 
+/*----------Login------*/
+.loginLeft {
+	float:left;
+	width:480px;
+}
+
+.loginRight {
+	float:right;
+	width:480px;	
+}
+
+.loginText {
+	color:#FFFFFF;	
+}
+
+.loginImage {
+	width:200px;
+	height:200px;
+	background-color:#999933;
+	display:block;	
+	background-image:url(../../generalImages/loginImage.png);
+}
 
 /*-----------NEW UNSORTED STYLES------*/
 .categoryTitleBlock {

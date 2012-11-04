@@ -6,13 +6,15 @@
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script> 
   <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.full.js') }}">
-  </script>        
+  </script>    
+  <script type="text/javascript" src="{{ asset('bundles/javascript/presentationTiles.js') }}">
+  </script>
+      
 {% endblock %}
 
-{% block content %}
+{% block layoutContent %}
 
 HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
-<img src="http://www.hetemeel.com/archive/haha%20Im%20creating%20dynamic%20IMAGES!!1!.jpg" width="500" />
 
   	  <div class="presentationTileBar clearfix" id="presentationTileBar">
       
@@ -43,4 +45,4 @@ HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
         {% endfor %}
 	  </div>
   
-{% endblock content %}    
+{% endblock layoutContent %}    

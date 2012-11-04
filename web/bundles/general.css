@@ -16,7 +16,7 @@ body{
 }
 
 .searchBarWrapper {
-	width:350px;
+	width:300px;
 	float:left;
 	position:relative;
 	top:15px;	
@@ -122,6 +122,7 @@ body{
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight:normal;
 	text-transform:uppercase;
+	letter-spacing:-1px;
 	font-size:15px;
 	color:#999;
 	position:relative;
@@ -299,4 +300,8 @@ body{
 
 .categoryTile:hover{
 	background-color:#000000;
+}
+
+a {
+	text-decoration:none;
 }

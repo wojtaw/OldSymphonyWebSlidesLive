@@ -40,23 +40,6 @@ class CategoryRepository extends EntityRepository {
 			echo "je konec";
 		  return null;
 		}  		
-	}
-	
-	public function findPresentations($categoryId) {
-		echo $categoryId;
-		
-        $em = $this->getEntityManager();
-        $query = $em->createQuery("
-            SELECT p FROM SlidesLiveBundle:Presentation p
-            JOIN p.categories c
-            WHERE c.id = :categoryId
-            ORDER BY p.dateRecorded DESC")
-        ->setParameters(array(
-          'categoryId' => sprintf('%s', $categoryId))
-        );
-
-		$recievedPresentations = $query->getResult();
-		return $recievedPresentations;
 	}			
 
 }

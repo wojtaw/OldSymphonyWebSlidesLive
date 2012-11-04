@@ -197,8 +197,8 @@ class DefaultController extends Controller {
       ->findCategoryIdAccordingName($categoryName);	
 	
 
-    $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
-      ->findPresentations($categoryId->getId());
+    $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
+      ->findPresentationsInCategory($categoryId->getId());
     if (!$this->data['presentations']) {
       //TO DO
     } else {

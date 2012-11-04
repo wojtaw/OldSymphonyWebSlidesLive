@@ -194,7 +194,11 @@ class DefaultController extends Controller {
     $this->data['categoryCanonicalName'] = $categoryCanonicalName;
 	
     $selectedCategory = $this->getDoctrine()->getRepository('SlidesLiveBundle:Category')
-      ->findCategoryIdAccordingName($categoryCanonicalName);	
+      ->findCategoryIdAccordingName($categoryCanonicalName);
+	  
+    if (!$selectedCategory) {
+		echo("prdel");
+	}	  	
 	
 	$this->data['categoryName'] = $selectedCategory->getName();	
 

@@ -213,7 +213,9 @@ class AccountController extends Controller
           'folders' => $account->getFolders(),
         );
 
-      $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
+//      $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
+		$accountSafeId = $this->get('security.context')->getToken()->getUser()->getId();
+      $presentations = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Presentation')->findAccountPresentations($accountSafeId);
 	  
       if (count($presentations) > 0) {
         $this->data['presentations'] = $presentations; 

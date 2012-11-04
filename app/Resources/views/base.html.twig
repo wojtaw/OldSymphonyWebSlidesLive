@@ -72,8 +72,6 @@
                 <a href="{{ path('thankyou') }}" id="downloadButtonLink2" style="margin-right:15px; color:#FFF" class="headerMenu globalFont"  onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
                 <a href="{{ path('tour') }}" style="margin-right:15px;" class="headerMenu globalFont">How It Works</a>
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-                  <a href="{{ path('manageAccount') }}" class="headerMenu globalFont slidesLiveBlue">{{ app.user.username }}</a>
-                  <span class="headerMenu globalFont slidesLiveBlue"> / </span> 
             			<a href="{{ path('logout') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Logout</a>
                 {% else %}
             			<a href="{{ path('login') }}" style="display:inline;" class="headerMenu globalFont slidesLiveBlue">Login</a>
@@ -90,6 +88,8 @@
 					 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">{{ app.user.name }}</a>|			   
 					 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">My Presentations</a>|
 					 <a href="{{ path('manageAccount') }}">Settings</a>
+                     
+                  <a href="{{ path('manageAccount') }}" class="headerMenu globalFont slidesLiveBlue">{{ app.user.username }}</a>               
 				   </div>
 			   </div>
 			   </div>			   

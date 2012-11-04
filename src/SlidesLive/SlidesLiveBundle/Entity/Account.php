@@ -230,7 +230,7 @@ class Account implements AdvancedUserInterface {
             }
         }
         if ($mandatory && !$thumbnail) {
-          $thumbnail = './bundles/slideslive/images/no-image.jpg';
+          $thumbnail = 'bundles/slideslive/images/no-image.jpg';
         }
         return $thumbnail;
     }

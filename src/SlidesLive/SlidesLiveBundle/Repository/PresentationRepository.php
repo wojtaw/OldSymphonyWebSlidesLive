@@ -30,16 +30,36 @@ class PresentationRepository extends EntityRepository
         return $query->getResult();
     }
 	
-	public function findPresentationsInCategory($categoryId) {
-		
+	/*
+    $query = $em->createQuery(
+      'SELECT f
+      FROM SlidesLiveBundle:Folder f
+      JOIN f.account a
+      WHERE a.id = :accountId
+      AND a.privacy <= :privacyLevel
+      AND f.privacy <= :privacyLevel
+      ORDER BY f.name ASC')
+      ->setParameters(array(
+          'accountId' => $accountId,
+          'privacyLevel' => $privacyLevel
+        )
+      );	
+	  */
+	
+	public function findPublicPresentationsInCategory($categoryId) {
+		$privacyLevel = 1;
         $em = $this->getEntityManager();
         $query = $em->createQuery("
             SELECT p FROM SlidesLiveBundle:Presentation p
-            JOIN p.categories c
+            INNER JOIN  p.categories c
+			LEFT JOIN  p.account a			
             WHERE c.id = :categoryId
+			AND p.privacy <= :privacyLevel
+			AND a.privacy <= :privacyLevel			
             ORDER BY p.dateRecorded DESC")
         ->setParameters(array(
-          'categoryId' => sprintf('%s', $categoryId))
+          'categoryId' => sprintf('%s', $categoryId),
+		  'privacyLevel' => $privacyLevel)
         );
 
 		$recievedPresentations = $query->getResult();

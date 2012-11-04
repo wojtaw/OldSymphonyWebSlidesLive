@@ -198,7 +198,7 @@ class DefaultController extends Controller {
 	
 
     $this->data['presentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
-      ->findPresentationsInCategory($categoryId->getId());
+      ->findPublicPresentationsInCategory($categoryId->getId());
 	 echo count($this->data['presentations']);
     if (!$this->data['presentations']) {
       //TO DO

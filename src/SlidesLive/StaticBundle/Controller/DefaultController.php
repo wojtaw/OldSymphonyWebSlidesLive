@@ -41,8 +41,8 @@ class DefaultController extends Controller
 		$selectedPresentations = $em->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
 
         $data['presentationBoxes'] = $selectedPresentations;
-        $data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations));
-        $data['categories'] = $em->getRepository('SlidesLiveBundle:Category')->listAllCategories();
+        $data['categories'] = $em->getRepository('SlidesLiveBundle:Category')->listAllCategories();		
+        $data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations),count($data['categories']));
 		//$data['downloadForm'] = $downloadForm->createView();
 
         return $this->render('StaticBundle:Homepage:index.html.twig', $data);
@@ -68,8 +68,7 @@ class DefaultController extends Controller
         return $this->render('StaticBundle:Homepage:thankYouDownload.html.twig');
     }
 
-	private function generateRandomPositions($numberOfTiles){
-		$numberOfCategories = 6;
+	private function generateRandomPositions($numberOfTiles,$numberOfCategories){
 		if($numberOfTiles < $numberOfCategories) return 0;
 
 		$categoryPositions = array();

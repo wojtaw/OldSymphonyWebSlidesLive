@@ -31,7 +31,6 @@ class PresentationRepository extends EntityRepository
     }
 	
 	public function findPresentationsInCategory($categoryId) {
-		echo $categoryId;
 		
         $em = $this->getEntityManager();
         $query = $em->createQuery("

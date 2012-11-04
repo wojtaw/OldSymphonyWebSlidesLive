@@ -20,7 +20,7 @@ HAHAHAHAHAHAHAHAHA Jméno kategorie je: {{ categoryName }}<br />
       
         {% for tile in presentations %}
         
-          {% set image = tile.getThumbnail() %}
+          {% set image = tile.getThumbnail(true) %}
           {% if image %}     
 		  <a href="{{ url('accountPresentation', {'accountCanName':tile.account.canonicalName, 'presentationId':tile.id }) }}">
             <div class="presentationTile tile_1_1">

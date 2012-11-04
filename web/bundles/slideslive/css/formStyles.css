@@ -76,7 +76,7 @@
 .loginMain input:focus{
 	background-color:#FFFFFF;	
 	border-style:solid;
-	border-width:1px;
+	border-width:2px;
 	border-color:#027BF7;
 }
 

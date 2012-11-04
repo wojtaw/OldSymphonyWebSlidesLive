@@ -595,8 +595,7 @@ ul.channelFoldersList a:hover {
 
 /* Managing presentations */
 .presentationEditWrapper {
-	width:100%;
-	background-color:#993300;	
+	width:100%;	
 }
 
 .presentationEditImage {
@@ -606,6 +605,8 @@ ul.channelFoldersList a:hover {
 	float:left;
 	margin-right:15px;
 	display:block;
+	background-size:cover;
+	background-position:top;
 }
 
 .presentationEditTitle {
@@ -623,14 +624,12 @@ ul.channelFoldersList a:hover {
 }
 
 .presentationEditInfo {
-	background-color:#FFCC00;
 	width:600px;
 	float:left;	
 }
 
 
 .presentationEditButtons {
-	background-color:#66FF00;
 	width:600px;
 	float:left;		
 	padding-top:15px;	

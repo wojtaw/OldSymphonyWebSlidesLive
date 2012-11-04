@@ -14,12 +14,7 @@ body {
 }
 
 /* BLOCKS PART */
-.websiteDarkBackground {
-	padding-top:40px;
-	padding-bottom:40px;
-	width:100%;
-	background-image:url(../images/dark-grey-bg.png);
-}
+
 
 .websiteLightBackground {
 	padding-top:40px;

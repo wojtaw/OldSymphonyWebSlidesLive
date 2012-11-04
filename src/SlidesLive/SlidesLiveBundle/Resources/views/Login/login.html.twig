@@ -1,41 +1,51 @@
 {% extends 'SlidesLiveBundle::layout.html.twig' %}
 
-{% block content %}
+{% block layoutContent %}
 
-    {% if app.session.flash('registration_success') %}
-      <div>Registration successfull!</div>    
-    {% endif %}
 
-		<h2 class="globalFont">Login</h2>
-		
-		<div>
-		{% if error %}
-			<div>{{ error.message }}</div>
-		{% endif %}
-		
-		<form action="{{ path('login_check') }}" method="post">
-		  <div>
-			<label for="username">Username:</label>
-			<input type="text" id="username" name="_username" value="{{ last_username }}" />
-		  </div>
-		  
-		  <div>
-			<label for="password">Password:</label>
-			<input type="password" id="password" name="_password" />
-		  </div>
-		  
-		   {#<input type="hidden" name="_target_path" value="app_send_secret" />#}
-			 
-		  <div>  
-			<input type="submit" name="login" value="Login" />
-		  </div>
-			
-		</form>
-	</div>
-	
-	<p>
-    <a href="{{ path('registration') }}">Create an Account</a> if you haven't yet!
-  </p>
+  <div class="websiteDarkBackground">
+    <div class="blockCenterWrapper">
+    
+            {% if app.session.flash('registration_success') %}
+              <div>Registration successfull!</div>    
+            {% endif %}
+        
+                <h2 class="globalFont">Login</h2>
+                
+                <div>
+                {% if error %}
+                    <div>{{ error.message }}</div>
+                {% endif %}
+                
+                <form action="{{ path('login_check') }}" method="post">
+                  <div>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                  </div>
+                  
+                  <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" />
+                  </div>
+                  
+                   {#<input type="hidden" name="_target_path" value="app_send_secret" />#}
+                     
+                  <div>  
+                    <input type="submit" name="login" value="Login" />
+                  </div>
+                    
+                </form>
+                </div>
+            
+            <p>
+            <a href="{{ path('registration') }}">Create an Account</a> if you haven't yet!
+          </p>    
+
+
+    </div>
+  </div>
+  
+ 
     
 {% endblock %}
 

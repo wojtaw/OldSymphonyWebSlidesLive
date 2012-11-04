@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="google-site-verification" content="k6rQywy6tzc20h1fL1H7XlLoS2A1vX7mdGl46rbMG24" />
+	<link href='http://fonts.googleapis.com/css?family=Ropa+Sans:400,400italic|Homenaje' rel='stylesheet' type='text/css'>  
+	<link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>    
+  {% block facebookMetaTags %}{% endblock %}
+  {% block metaTags %}{% endblock %}  
+    
+  {% block stylesheetBase %}
+      <link href="{{ asset('bundles/general.css') }}" rel="stylesheet" type="text/css">
+      {% block stylesheet %}{% endblock %}
+  {% endblock %}
+  
+  {% block javascriptBase %}
+		<script type="text/javascript" src="{{ asset('bundles/jquery-1.8.0.min.js') }}">
+		</script>    
+		<script type="text/javascript" src="{{ asset('bundles/googleAnalytics.js') }}">
+		</script>  
+		<script type="text/javascript" src="{{ asset('bundles/jquery.client.js') }}">
+		</script>  		  		
+		<script type="text/javascript" src="{{ asset('bundles/generalFunctions.js') }}">
+		</script> 
+		<script type="text/javascript" src="{{ asset('bundles/swfobject.js') }}">
+		</script>  
+		<script>
+          (function() {
+            var cx = '007457109666087608116:1nijinqerrm';
+            var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+          })();
+        </script>
+        			 		  				
+      {% block javascript %}{% endblock %}
+  {% endblock %}
+
+  <style>
+    {% block generatedStyle %}{% endblock %}
+  </style>  
+  
+  {% block favicon %}
+      <link href="{{ asset('bundles/favicon-sl-1.png') }}" rel="icon" type="image/png" />
+  {% endblock %}
+   
+  <title>
+      {% block titleBase %}
+        SlidesLive - Helping you record and spread knowledge
+          {% block title %}
+            {# Online education platform #}
+          {% endblock %}
+      {% endblock %}
+  </title>
+
+</head>
+
+<body>
+
+    {# Page header #}
+	
+	<div class="fixedHeader">
+		<div class="headerContent">
+			<div class="slidesLiveLogo"><a href="{{ path('homepage') }}"><img src="{{ asset('bundles/static/images/logo-header-beta.png') }}" border="0" /></a><div class="logoBeta slidesLiveBlue">Beta</div></div>
+			<div class="searchBarWrapper" style="display:block">
+                 <gcse:searchbox-only></gcse:searchbox-only>
+            </div>
+            <div class="headerMenuWraper clearfix headerMenu globalFont">
+                <a href="{{ path('thankyou') }}" id="downloadButtonLink2" style="margin-right:15px; color:#FFF" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
+                <a href="{{ path('tour') }}" style="margin-right:15px;" >How It Works</a>
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+            			<a href="{{ path('logout') }}" style="display:inline;">Logout</a>
+                {% else %}
+            			<a href="{{ path('login') }}" style="display:inline;" class="slidesLiveBlue">Login</a>
+                {% endif %}  				                        
+            </div>
+        </div>
+    </div>	
+	
+    {% block accountHeader %}
+			{% if is_granted('ROLE_USER') %}
+			   <div class="accountServiceBar">
+			   <div class="accountBarContent">  
+                   <img src="{{ asset(app.user.getImage('avatars', true)) }}" class="accountBarThumbnail" />                            
+				   <div class="accountBarMenu globalFont">
+					 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">{{ app.user.name }}</a><span class="accountBarMenuSeparator">|</span>			   
+					 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">My Presentations</a><span class="accountBarMenuSeparator">|</span>	
+					 <a href="{{ path('manageAccount') }}">Settings</a>              
+				   </div>
+                   
+				   <div class="accountBarMenu globalFont">
+	                 <a href="{{ path('manageAccount') }}" class="floatRight">{{ app.user.username }}</a>             
+				   </div>                                      
+			   </div>
+			   </div>			   
+		   {% endif %}	
+	{% endblock %}	
+	
+		{% if is_granted('ROLE_USER') %}
+			<div class="accountServiceBarTopSpace"></div>
+		{% endif %}
+
+			
+	<h1>Oops! An Error Occurred</h1>
+    <h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+
+
+
+        {# Page footer #}        
+	<div class="siteFooter">
+    	<div class="footerLight">
+	  		<div class="footerContent">
+				<div class="footerText"><a href="{{ path('about') }}" class="footerMenuSpace">About us</a><a href="https://www.facebook.com/SlidesLive" target="_blank" class="footerMenuSpace">Facebook</a><a href="http://blog.slideslive.com/" target="_blank" class="footerMenuSpace">Blog</a><a href="mailto:team@edumeta.com" class="footerMenuRight">Questions &amp; feedback?</a></div>	                    
+            </div>                
+        </div>            
+    	<div class="footerDark">
+	  		<div class="footerContent">
+            	<div class="footerText footerSmaller">&#169; 2012 SlidesLive. All rights reserved.<span class="footerMenuRight">Made with love in Prague.</span></div>
+            </div>        
+        </div>
+    </div>        
+    
+    {% block javascripts %}{% endblock %}
+    
+</body>
+</html>

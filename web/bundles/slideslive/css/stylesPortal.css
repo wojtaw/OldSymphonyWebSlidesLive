@@ -594,24 +594,24 @@ ul.channelFoldersList a:hover {
 }
 
 /* Managing presentations */
-.presentationWrapper {
+.presentationEditWrapper {
 	width:100%;
 	background-color:#993300;	
 }
 
-.presentationImage {
+.presentationEditImage {
 	width:200px;
 	height: 150px;
 	background-color:#9900CC;	
 }
 
 
-.presentationInfo {
+.presentationEditInfo {
 	background-color:#FFCC00;	
 }
 
 
-.presentationButtons {
+.presentationEditButtons {
 	background-color:#66FF00;	
 }
 

@@ -214,7 +214,6 @@ class AccountController extends Controller
         );
 
       $presentations = $this->get('security.context')->getToken()->getUser()->getPresentations();
-	var_dump($presentations);
 //	  uksort(, 'dateRecorded'); 
 	  /*
 	  arsort()	value	yes	high to low	asort()

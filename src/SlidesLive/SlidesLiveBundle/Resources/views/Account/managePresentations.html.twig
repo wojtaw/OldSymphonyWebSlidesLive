@@ -20,9 +20,17 @@
     <h2>Edit Presentation</h2>
     
     
-        <div class="playerPanel" id="playerPanel">		
-          {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false, 'forcedWidth':700} %}
-        </div>
+        {% if not presentation.video %}
+        <div class="panelEditSynchronization"></div>
+            <div class="playerPanelEditAudio" id="playerPanel">		
+              {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false, 'forcedWidth':500} %}
+            </div>
+        {% else %}      
+            <div class="playerPanelEditVideo" id="playerPanel">		
+              {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false} %}
+            </div>
+        {% endif %}     
+
             
     <table>
       <tr>

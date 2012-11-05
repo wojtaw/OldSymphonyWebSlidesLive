@@ -18,6 +18,27 @@
 	position:relative;
 	left:-3px;
 }
+/* Presentation edit */
+.panelEditSynchronization {
+	background-color:#CCCCFF;
+	width:400px;
+	height:375px;
+	display:block;
+	float:left;
+}
+.playerPanelEditAudio {
+	height:375px;
+	width:500px;
+	text-align:center;
+	z-index:18;	
+}
+
+.playerPanelEditVideo {
+	width:960px;
+	position:relative;
+	left:-15px;
+}
+
 
 /*-----TIMELINE------------*/
 .timelineTableTwoCols {

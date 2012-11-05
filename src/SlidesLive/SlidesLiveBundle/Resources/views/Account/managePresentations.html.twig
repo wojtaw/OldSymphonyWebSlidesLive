@@ -18,6 +18,12 @@
   {% if presentationEditForm is not empty %}
   
     <h2>Edit Presentation</h2>
+    
+    
+        <div class="playerPanel" id="playerPanel">		
+          {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false, 'forcedWidth':700} %}
+        </div>
+            
     <table>
       <tr>
         <td>

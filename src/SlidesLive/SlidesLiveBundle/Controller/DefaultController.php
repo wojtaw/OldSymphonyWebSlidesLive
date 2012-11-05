@@ -79,9 +79,15 @@ class DefaultController extends Controller {
       return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
     }
     // nacteni prezentace do prehravace
-    $this->data['presentation'] = $this->data['folderPresentations'][0];       
+    $this->data['presentation'] = $this->data['folderPresentations'][0];  
+	
+	isYoutubeVideoReady();     
 
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
+  }
+  
+  private function isYoutubeVideoReady(){
+	  
   }
   
   /**

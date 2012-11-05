@@ -38,7 +38,7 @@ class DefaultController extends Controller {
    * Zobrazeni obsahu vybraneho uctu. Zobrazi se primarni slozka accountu.
    * Pokud je uzivatel prihlasen, vidi kompletni obsah sveho uctu.      
    */     
-  public function accountAction($accountCanName, $hash = null) {
+  public function accountAction($accountCanName, $hash = null) {	  
     // nacteni accountu
     $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Account')
       ->findAccount($accountCanName);
@@ -81,13 +81,9 @@ class DefaultController extends Controller {
     // nacteni prezentace do prehravace
     $this->data['presentation'] = $this->data['folderPresentations'][0];  
 	
-	isYoutubeVideoReady();     
+	$this->isYoutubeVideoReady($this->data['presentation']);   
 
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
-  }
-  
-  private function isYoutubeVideoReady(){
-	  
   }
   
   /**
@@ -245,6 +241,22 @@ class DefaultController extends Controller {
     }
     return true;
   }
+  
+  //Returns 0 if it is not youtube service, returns 1 if youtube ready video, 2 in case video youtube is not ready
+  protected function isYoutubeVideoReady($presentation){
+	//Is there external source?
+	if($presentation->getExternalServiceId() == null ){
+		//is it youtube?
+		if($presentation->getExternalService() != "YOUTUBE")
+		//is it ready
+	} else {
+		
+	}
+	echo $presentation->getService();
+	echo $presentation->getServiceId();
+	echo $presentation->getExternalService();
+	echo $presentation->getExternalServiceId();			
+  }  
   
   protected function includeStylesheet(Account $account) {
       

@@ -81,7 +81,7 @@ class DefaultController extends Controller {
     // nacteni prezentace do prehravace
     $this->data['presentation'] = $this->data['folderPresentations'][0];  
 	
-	$this->isYoutubeVideoReady($this->data['presentation']);   
+	$this->isPresentationReady($this->data['presentation']);   
 
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
@@ -243,20 +243,26 @@ class DefaultController extends Controller {
   }
   
   //Returns 0 if it is not youtube service, returns 1 if youtube ready video, 2 in case video youtube is not ready
-  protected function isYoutubeVideoReady($presentation){
+  protected function isPresentationReady($presentation){
 	//Is there external source?
 	if($presentation->getExternalServiceId() == null ){
-		//is it youtube?
-		if($presentation->getExternalService() != "YOUTUBE")
-		//is it ready
+		//is it youtube? And is it ready?
+		if($presentation->getExternalService() != "YOUTUBE") return 0;
+		else {
+			return $this->isYoutubeVideoReady($presentation->getExternalServiceId());
+		}
 	} else {
-		
-	}
-	echo $presentation->getService();
-	echo $presentation->getServiceId();
-	echo $presentation->getExternalService();
-	echo $presentation->getExternalServiceId();			
-  }  
+		if($presentation->getService() != "YOUTUBE" || $presentation->getExternalService() != "AUDIO") return 0;
+		else {
+			return $this->isYoutubeVideoReady($presentation->getServiceId());
+		}
+	}		
+  }
+  
+  protected function isYoutubeVideoReady($videoId){
+	  echo "checking youtube id".$videoId;
+	  return 1;
+  }
   
   protected function includeStylesheet(Account $account) {
       

@@ -246,21 +246,28 @@ class DefaultController extends Controller {
   protected function isPresentationReady($presentation){
 	//Is there external source?
 	if($presentation->getExternalServiceId() == null ){
+		if($presentation->getService() != "YOUTUBE" && $presentation->getExternalService() != "AUDIO") return 0;
+		else {
+			return $this->isYoutubeVideoReady($presentation->getServiceId());
+		}		
+	} else {
 		//is it youtube? And is it ready?
 		if($presentation->getExternalService() != "YOUTUBE") return 0;
 		else {
 			return $this->isYoutubeVideoReady($presentation->getExternalServiceId());
-		}
-	} else {
-		if($presentation->getService() != "YOUTUBE" || $presentation->getExternalService() != "AUDIO") return 0;
-		else {
-			return $this->isYoutubeVideoReady($presentation->getServiceId());
-		}
+		}		
 	}		
   }
   
   protected function isYoutubeVideoReady($videoId){
-	  echo "checking youtube id".$videoId;
+	  /*
+		$xmlData = new DOMDocument();
+		$xmlData->load( "http://gdata.youtube.com/feeds/api/videos/".$videoId );	  
+		
+		*/
+		$entry = simplexml_load_file("http://gdata.youtube.com/feeds/api/videos/".$videoId);		
+		echo $entry->updated;
+	
 	  return 1;
   }
   

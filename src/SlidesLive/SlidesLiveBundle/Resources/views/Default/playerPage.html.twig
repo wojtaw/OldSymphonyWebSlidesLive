@@ -72,7 +72,7 @@
         <div class="playerPanel" id="playerPanel">		
   
     {% if isPresentationReady is defined and isPresentationReady == 2%}	    
-			<img src="/web/bundles/generalImages/waiting-for-preze.gif" width="960" height="280"/>
+			<img src="{{ asset('bundles/generalImages/waiting-for-preze.gif') }}" width="960" height="280"/>
     {% else %}	        
           {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false} %}
     {% endif %}	                  

@@ -2,8 +2,12 @@
 body{
 	margin:0px; !important;
 	padding:0px;
-	top:0px;
-	height: 100% !important;		
+	top:0px;		
+}
+
+html,
+body {
+  height:100%;
 }
 
 a{
@@ -367,11 +371,6 @@ h2.error{
 .categoryTile:hover{
 	background-color:#000000;
 }
-
-a {
-	text-decoration:none;
-}
-
 .entireSiteWrapper {
 	min-height: 100%;
 	height: auto !important;

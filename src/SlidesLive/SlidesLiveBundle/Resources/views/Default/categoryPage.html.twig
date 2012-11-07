@@ -14,7 +14,7 @@
 
 {% block layoutContent %}
 
-<h2 class="globalFont categoryTitleBlock"><a href="{{ path('homepage') }}">Home</a>&raquo;<a href="{{ path('homepage') }}">{{ categoryName }}</a></h2>
+<h2 class="globalFont categoryTitleBlock"><a href="{{ path('homepage') }}">Home</a>&raquo;<a href="{{ path('homepage') }}"><span class="slidesLiveBlue">{{ categoryName }}</span></a></h2>
 
 {% if presentations|length <= 0 %}
 	<h2 class="error globalFont categoryTitleBlock">Jej... this category is empty :( </h2>

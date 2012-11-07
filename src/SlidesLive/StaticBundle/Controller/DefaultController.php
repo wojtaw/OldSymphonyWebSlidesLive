@@ -12,7 +12,6 @@ class DefaultController extends Controller
 {
 
     public function indexAction() {
-		$this->runABTest();
 		$request = $this->getRequest();
 		$cookies = $request->cookies;
         $em = $this->getDoctrine()->getEntityManager();
@@ -40,10 +39,13 @@ class DefaultController extends Controller
 		}
 
 		$selectedPresentations = $em->getRepository('SlidesLiveBundle:HomepageBox')->findPublicPresentationBoxes();
+		
+			
 
         $data['presentationBoxes'] = $selectedPresentations;
         $data['categories'] = $em->getRepository('SlidesLiveBundle:Category')->listAllCategories();		
         $data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations),count($data['categories']));
+        $data['siteVersion'] = $this->runABTest();		
 		//$data['downloadForm'] = $downloadForm->createView();
 
         return $this->render('StaticBundle:Homepage:index.html.twig', $data);
@@ -86,10 +88,33 @@ class DefaultController extends Controller
 	}
 	
 	protected function runABTest(){
+		//Calculating sum of IP address and deciding type of user
 			$ipAddress = $_SERVER['REMOTE_ADDR'];
-			echo "jeeeeeeeeee";
-			echo "Remote addr: " . $_SERVER['REMOTE_ADDR']."<br/>";
+			$this->testPrint("IP Address: ".$ipAddress."\n");			
+			$ipAddressArray = explode(".", $ipAddress);
+			//Diversion
+			if((array_sum($ipAddressArray) % 2) == 0) {
+				$this->displayVersion("A");
+				return "A";
+			} else {
+				displayVersion("B");
+				return "B";				
+			}
 	
+	}
+	
+	protected function displayVersion($version){
+			if($version == "A"){
+				$this->testPrint("Running version A");
+			}else if($version == "B"){
+				$this->testPrint("Version B");								
+			}else{
+				$this->testPrint("Undefined version");				
+			}
+	}
+	
+	protected function testPrint($message){
+		echo $message;
 	}
 
 

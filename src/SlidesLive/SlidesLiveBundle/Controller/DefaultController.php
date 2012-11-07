@@ -81,7 +81,8 @@ class DefaultController extends Controller {
     // nacteni prezentace do prehravace
     $this->data['presentation'] = $this->data['folderPresentations'][0];  
 	
-	$this->isPresentationReady($this->data['presentation']);   
+	$isPresentationReady = $this->isPresentationReady($this->data['presentation']);   
+	$this->data['isPresentationReady'] = $isPresentationReady;
 
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
@@ -134,7 +135,10 @@ class DefaultController extends Controller {
       return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
     }
     // nacteni prezentace do prehravace
-    $this->data['presentation'] = $this->data['folderPresentations'][0];       
+    $this->data['presentation'] = $this->data['folderPresentations'][0];  
+	
+	$isPresentationReady = $this->isPresentationReady($this->data['presentation']);   
+	$this->data['isPresentationReady'] = $isPresentationReady;     
           
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
@@ -184,7 +188,11 @@ class DefaultController extends Controller {
       ->findFolderPresentations($folder->getId(), $this->privacyLevel);
     
     $this->data['presentation'] = $presentation;
-    $this->data['account'] = $account;          
+    $this->data['account'] = $account;      
+	
+	$isPresentationReady = $this->isPresentationReady($this->data['presentation']);   
+	$this->data['isPresentationReady'] = $isPresentationReady;
+		    
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
   
@@ -259,21 +267,21 @@ class DefaultController extends Controller {
 	}		
   }
   
+  //Parse youtube feed api xml V2 and find if there is app:state node which tells if video is ready
   protected function isYoutubeVideoReady($videoId){
-
-		
-		$xmlData = file_get_contents("http://gdata.youtube.com/feeds/api/videos/".$videoId); 
-		//$xmlData = str_replace('yt:', 'yt', $xmlData); 		
-
 		$entry = simplexml_load_file("http://gdata.youtube.com/feeds/api/videos/".$videoId);	
-		echo $entry->author->name;
 		
-		$ggg = $entry->children( 'http://schemas.google.com/g/2005' );
-		echo $ggg->comments->feedLink->attributes()->countHint;		
+		$namespaces = $entry->getNameSpaces( true );
+		if(!array_key_exists('app',$namespaces)) return 1;						
+		$appNamespace = $entry->children( $namespaces['app'] );
 		
-
-	
-	  return 1;
+		$namespaces = $appNamespace->getNameSpaces( true );
+		if(!array_key_exists('yt',$namespaces)) return 1;				
+		$youtubeNamespace = $appNamespace->control->children( $namespaces['yt'] );		
+		if(!isset($youtubeNamespace)) return 1;
+			
+		if($youtubeNamespace->state->attributes()->name == "processing") return 2;
+		else return 1;
   }
   
   protected function includeStylesheet(Account $account) {

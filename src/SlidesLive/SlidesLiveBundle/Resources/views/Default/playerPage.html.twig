@@ -58,7 +58,7 @@
   
   {% block player %}
     <div class="presentationWrapper clearfix">
-    
+
       {% if presentation is not null %}
         <div class="gradientWrapper clearfix">
           <div class="gradientLeftPlayer"></div>
@@ -112,6 +112,15 @@
       {% endif %}	
     </div>	
   {% endblock player %}
+  
+    {% if isPresentationReady is defined %}	    
+        HAHAAAAA {{ isPresentationReady }};
+        {% if isPresentationReady == 2 %}	    
+			  {% block player %}            
+              		JEJDAAAA
+			  {% endblock player %}            
+        {% endif %}	        
+    {% endif %}	  
   
   {% block presentationList %}
     <div class="siteContent clearfix">	

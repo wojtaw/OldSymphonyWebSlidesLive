@@ -260,13 +260,18 @@ class DefaultController extends Controller {
   }
   
   protected function isYoutubeVideoReady($videoId){
-	  /*
-		$xmlData = new DOMDocument();
-		$xmlData->load( "http://gdata.youtube.com/feeds/api/videos/".$videoId );	  
+
 		
-		*/
-		$entry = simplexml_load_file("http://gdata.youtube.com/feeds/api/videos/".$videoId);		
-		echo $entry->updated;
+		$xmlData = file_get_contents("http://gdata.youtube.com/feeds/api/videos/".$videoId); 
+		//$xmlData = str_replace('yt:', 'yt', $xmlData); 		
+
+		$entry = simplexml_load_file("http://gdata.youtube.com/feeds/api/videos/".$videoId);	
+		echo $entry->author->name;
+		
+		$ggg = $entry->children( 'http://schemas.google.com/g/2005' );
+		echo $ggg->comments->feedLink->attributes()->countHint;		
+		
+
 	
 	  return 1;
   }

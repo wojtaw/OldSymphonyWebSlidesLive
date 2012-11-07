@@ -12,6 +12,7 @@ class DefaultController extends Controller
 {
 
     public function indexAction() {
+		$this->runABTest();
 		$request = $this->getRequest();
 		$cookies = $request->cookies;
         $em = $this->getDoctrine()->getEntityManager();
@@ -82,6 +83,13 @@ class DefaultController extends Controller
 			}
 		}
 		return $categoryPositions;
+	}
+	
+	protected function runABTest(){
+			$ipAddress = $_SERVER['REMOTE_ADDR'];
+			echo "jeeeeeeeeee";
+			echo "Remote addr: " . $_SERVER['REMOTE_ADDR']."<br/>";
+	
 	}
 
 

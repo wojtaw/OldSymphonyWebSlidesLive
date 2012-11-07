@@ -250,11 +250,15 @@ class DefaultController extends Controller {
     return true;
   }
   
-  //Returns 0 if it is not youtube service, returns 1 if youtube ready video, 2 in case video youtube is not ready
+  //Returns 0 if it is not youtube service, returns 1 if youtube ready video, 2 in case presentation is processing
   protected function isPresentationReady($presentation){
+	//Is there already video in database? If not return processing
+	if(($presentation->getExternalServiceId() == null) && ($presentation->getServiceId() == null)) return 2;
+
+	  
 	//Is there external source?
 	if($presentation->getExternalServiceId() == null ){
-		if($presentation->getService() != "YOUTUBE" && $presentation->getExternalService() != "AUDIO") return 0;
+		if($presentation->getService() != "YOUTUBE" && $presentation->getService() != "AUDIO") return 0;
 		else {
 			return $this->isYoutubeVideoReady($presentation->getServiceId());
 		}		

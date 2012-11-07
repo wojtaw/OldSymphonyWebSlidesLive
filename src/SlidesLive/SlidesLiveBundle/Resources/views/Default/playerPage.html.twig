@@ -70,7 +70,12 @@
         </div>
     
         <div class="playerPanel" id="playerPanel">		
+  
+    {% if isPresentationReady is defined and isPresentationReady == 2%}	    
+			<img src="/web/bundles/generalImages/waiting-for-preze.gif" width="960" height="280"/>
+    {% else %}	        
           {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false} %}
+    {% endif %}	                  
         </div>
     
         <div class="presentationDetailsVideo">
@@ -113,14 +118,6 @@
     </div>	
   {% endblock player %}
   
-    {% if isPresentationReady is defined %}	    
-        HAHAAAAA {{ isPresentationReady }};
-        {% if isPresentationReady == 2 %}	    
-			  {% block player %}            
-              		JEJDAAAA
-			  {% endblock player %}            
-        {% endif %}	        
-    {% endif %}	  
   
   {% block presentationList %}
     <div class="siteContent clearfix">	

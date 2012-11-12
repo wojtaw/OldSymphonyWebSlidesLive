@@ -45,7 +45,7 @@ class DefaultController extends Controller
         $data['presentationBoxes'] = $selectedPresentations;
         $data['categories'] = $em->getRepository('SlidesLiveBundle:Category')->listAllCategories();		
         $data['categoryPositions'] = $this->generateRandomPositions(count($selectedPresentations),count($data['categories']));
-        $data['siteVersion'] = $this->runABTest();		
+        //$data['siteVersion'] = $this->runABTest();		
 		//$data['downloadForm'] = $downloadForm->createView();
 
         return $this->render('StaticBundle:Homepage:index.html.twig', $data);
@@ -97,7 +97,7 @@ class DefaultController extends Controller
 				$this->displayVersion("A");
 				return "A";
 			} else {
-				displayVersion("B");
+				$this->displayVersion("B");
 				return "B";				
 			}
 	

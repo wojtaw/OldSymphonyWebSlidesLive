@@ -129,6 +129,10 @@ h2 a {
 	color:#000 !important;
 }
 
+h2 a:hover {
+	color:#027BF7 !important;
+}
+
 .sidebarText {
 	font-family:Arial, Helvetica, sans-serif;
 	font-weight:normal;
@@ -678,7 +682,7 @@ ul.channelFoldersList a:hover {
 
 /*-----------NEW UNSORTED STYLES------*/
 .categoryTitleBlock {
-	margin-top:30px;
+	margin-top:22px;
 	margin-left:30px;	
 }
 

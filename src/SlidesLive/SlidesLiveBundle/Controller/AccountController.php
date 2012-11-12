@@ -183,7 +183,7 @@ class AccountController extends Controller
       
       $form = $this->createForm(new PresentationEditForm($account, $presentation), $presentation);
       
-      if ($request->getMethod() == 'POST' && isset($_POST['presentationEdit'])) {
+      if ($request->getMethod() == 'POST' && isset($_POST['presentationEdit'])) {		  
         $form->bindRequest($request);
         // nastaveni vybraneho primary folderu podle zadaneho id
         $folderId = $form->get('folder')->getData();

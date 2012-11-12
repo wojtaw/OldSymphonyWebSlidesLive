@@ -152,6 +152,7 @@ class AccountController extends Controller
     // -------------------------------------------------------------------------------------------------
     
     public function uploadThumbnailAction(Request $request, Presentation $presentation) {
+	
         $form = $this->createForm(new UploadForm());
         $message = '';
     
@@ -350,6 +351,7 @@ class AccountController extends Controller
     // -------------------------------------------------------------------------
     
     public function uploadImageAction(Request $request, $type, $formClass, $account) {
+			echo "OKTEEEEEST 3";			
         $form = $this->createForm($formClass);
         $message = '';
     

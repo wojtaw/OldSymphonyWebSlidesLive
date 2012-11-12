@@ -15,7 +15,7 @@ class AvatarUploadForm extends SimpleForm {
   public function buildForm (FormBuilder $builder, array $options) {
     $this->builder = $builder;    
     /* $this->add($field_name, $field_type, $label[, Boolean $required[, Array $other_params]]); */     
-    $this->add('file22', 'file', 'Select file:', false, array('property_path' => null));    
+    $this->add('file', 'file', 'Select file:', false, array('property_path' => null));    
   }
   
   public function getName () {

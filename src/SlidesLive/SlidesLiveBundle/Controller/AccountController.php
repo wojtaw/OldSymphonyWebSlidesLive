@@ -350,8 +350,7 @@ class AccountController extends Controller
     
     // -------------------------------------------------------------------------
     
-    public function uploadImageAction(Request $request, $type, $formClass, $account) {
-			echo "OKTEEEEEST 3";			
+    public function uploadImageAction(Request $request, $type, $formClass, $account) {			
         $form = $this->createForm($formClass);
         $message = '';
     

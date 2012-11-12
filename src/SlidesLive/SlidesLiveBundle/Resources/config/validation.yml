@@ -20,9 +20,6 @@ SlidesLive\SlidesLiveBundle\Entity\Presentation:
     title:
         - NotBlank: { groups: [edit], message: "This value should not be blank." }
 
-    description:
-        - NotBlank: { groups: [edit], message: "This value should not be blank." }
-
     lang:
       - NotBlank: { groups: [edit], message: "This value should not be blank." }
 

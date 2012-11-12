@@ -46,7 +46,7 @@ class PresentationEditForm extends SimpleForm {
       'property_path' => false,
       'data' => $this->presentation->getFolder()->getId(),
     ));
-    $this->add('externalMedia', 'text', 'Youtube link:');	
+    $this->add('externalMedia', 'text', 'Youtube link:');
   }
   
   public function getName () {

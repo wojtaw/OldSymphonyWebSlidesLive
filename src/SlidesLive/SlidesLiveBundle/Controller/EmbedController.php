@@ -9,7 +9,7 @@ class EmbedController extends Controller {
 
     protected $data = array();                                         
                                               
-    public function embedAction() {
+    public function embedAction($presentationId) {
 		
 
         $repository = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation');

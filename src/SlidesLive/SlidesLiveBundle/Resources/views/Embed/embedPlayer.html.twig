@@ -5,28 +5,31 @@
 #}
 <html>
 
+<head>
+    <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
+    </script>
+	<script type="text/javascript" src="{{ asset('bundles/jquery-1.8.0.min.js') }}">
+    </script>    
+    <script type="text/javascript" src="{{ asset('bundles/googleAnalytics.js') }}">
+    </script>   		  		
+    <script type="text/javascript" src="{{ asset('bundles/generalFunctions.js') }}">
+    </script> 
+    <script type="text/javascript" src="{{ asset('bundles/swfobject.js') }}">
+    </script>
+    <style type="text/css">
+	body {
+		margin:0px;	
+	}
+	</style>  
+         
+</head>
 <body>
 
 {% if not presentation %}
   <div>Presentation not found.</div>
 {% endif %}
     <script type="text/javascript">
- 		var scaledWidth = 700;
-		var calculatedWidth = -1;
-		
-		{% if (presentation.video) and not (presentation.slides) %}
-			calculatedWidth = playerDimensionsAccordingScreen("VIDEO");
-		{% elseif (presentation.slides) and not (presentation.video) %}
-			calculatedWidth = playerDimensionsAccordingScreen("AUDIO");		
-		{% else %}
-			calculatedWidth = playerDimensionsAccordingScreen("AUDIOVIDEO");		
-		{% endif %}		
-		
-		if(calculatedWidth != -1) scaledWidth = calculatedWidth;
-		
-		{% if forcedWidth is defined %}	    
-			scaledWidth = {{ forcedWidth }};
-		{% endif %}		
+ 		var scaledWidth = {{ width }};
 	
 		var flashvars = {
 			hasVideo: "{% if presentation.video %}true{% else %}false{% endif %}",
@@ -39,7 +42,8 @@
 				mediaType: "{{ presentation.service }}",
 				mediaID: "{{ presentation.serviceId }}",			
 			{% endif %}	
-			widthScale: scaledWidth,				
+			widthScale: scaledWidth,
+			isEmbed: true,				
 		};
 		var params = {
 			scale: "exactfit",

@@ -80,10 +80,11 @@ resetPassword:
 
 # -----PUBLIC PRESENTATION------------------------------------------------------ 
 embed:
-    pattern: /embed/{presentationId}
-    defaults: { _controller: SlidesLiveBundle:Embed:embed} 
+    pattern: /embed/{presentationId}/{customWidth}
+    defaults: { _controller: SlidesLiveBundle:Embed:embed, customWidth:null} 
     requirements:
-      presentationId: \d+	
+      presentationId: \d+
+      customWidth: \d+	  	
          
 account:
     pattern: /{accountCanName}

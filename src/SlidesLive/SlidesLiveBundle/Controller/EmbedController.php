@@ -10,6 +10,9 @@ class EmbedController extends Controller {
     protected $data = array();                                         
                                               
     public function embedAction() {
+		echo "jeduuuuuuuuu";
+		
+		/*
         $repository = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation');
         $this->data = array (
           'presentation' => null,
@@ -36,6 +39,8 @@ class EmbedController extends Controller {
         else {
           $this->data['player'] = "audio";        
         }
+		
+		*/
         
         return $this->render('SlidesLiveBundle:Embed:embedPlayer.html.twig', $this->data);    
     }

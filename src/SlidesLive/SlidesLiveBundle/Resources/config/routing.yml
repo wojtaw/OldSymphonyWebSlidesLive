@@ -99,10 +99,8 @@ presentation:
       presentationId: \d+    
       
 embed:
-    pattern: /embed/{presentationId}
-    defaults: { _controller: SlidesLiveBundle:Embed:embed }
-    requirements:
-      presentationId: \d+   
+    pattern: /embed/{presentationId2}
+    defaults: { _controller: SlidesLiveBundle:Default:presentation } 
       
 accountPresentation:
     pattern: /{accountCanName}/w/{presentationId}

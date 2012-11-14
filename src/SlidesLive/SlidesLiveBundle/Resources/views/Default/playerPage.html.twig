@@ -15,11 +15,10 @@
 {% endblock %}
 
 {% block title %}
-  {{ account.name }} - 
-  {% if presentation is not null %}
-    {{ presentation.title }}
+  {% if presentation is null %}
+  	  {{ account.name }}
   {% else %}
-    Not found
+    {{ presentation.title }}
   {% endif %}
 {% endblock %}
 

@@ -13,6 +13,14 @@
     Shadowbox.init();
     </script>   
   {% endblock %}  
+  
+  {% block titleBase %}
+    SlidesLive - Helping you record and spread knowledge
+      {% block title %}
+
+      {% endblock %}
+  {% endblock %}  
+  
 	{% block layoutContent %}
 	  		<div class="headerTopSpace"></div>
     {% block content %}{% endblock %}

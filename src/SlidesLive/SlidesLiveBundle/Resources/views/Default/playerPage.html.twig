@@ -38,6 +38,16 @@
 	{% endif %}
 {% endblock %}
 
+{% block metaTags %}
+	{% if presentation.description is not null %}
+		<meta name="description" content="{{ presentation.description }}" />    	
+	{% else %} 
+		<meta name="description" content="{{ presentation.title }}" />    
+	{% endif %}
+{% endblock %}
+
+
+
 {% block javascript %}
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script> 

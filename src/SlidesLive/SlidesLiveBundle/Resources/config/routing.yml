@@ -96,7 +96,13 @@ presentation:
     pattern: /w/{presentationId}
     defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:null, folderCanName:null }
     requirements:
-      presentationId: \d+      
+      presentationId: \d+    
+      
+embed:
+    pattern: /embed/{presentationId}
+    defaults: { _controller: SlidesLiveBundle:Embed:embed }
+    requirements:
+      presentationId: \d+   
       
 accountPresentation:
     pattern: /{accountCanName}/w/{presentationId}

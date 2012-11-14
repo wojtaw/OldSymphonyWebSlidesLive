@@ -80,7 +80,7 @@
         </div>	
     
         <div class="presentationHeader">
-          {{ presentation.listSpeakersNames }} | <span class="metaBlue">{{ presentation.title }}</span>
+          {{ presentation.listSpeakersNames }} | <span class="metaBlue" itemprop="name">{{ presentation.title }}</span>
         </div>
     
         <div class="playerPanel" id="playerPanel">		
@@ -94,7 +94,7 @@
     
         <div class="presentationDetailsVideo">
           {% if presentation.dateRecorded is not null %}  
-            <div class="presentationDescInfo">
+            <div class="presentationDescInfo" itemprop="description">
               Uploaded by
               <a href="{{ path('account', {'accountCanName':account.canonicalName} ) }}">{{ account.getName }}</a>
               on {{ presentation.getFormatedDateTime }}

@@ -40,6 +40,9 @@ class DefaultController extends Controller {
    */     
   public function accountAction($accountCanName, $hash = null) {	  
     // nacteni accountu
+	//This indicates, we are displaying pure account page, not specific presentation
+	$this->data['accountPageOnly'] = true;
+	
     $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Account')
       ->findAccount($accountCanName);
     if (!$this->data['account']) {  // zadany account neexistuje -> presmerovani na error page
@@ -93,6 +96,7 @@ class DefaultController extends Controller {
    * vlastni ucet a je prihlasen, zobrazi se vsechny prezentace a foldery.      
    */     
   public function folderAction($accountCanName, $folderCanName, $hash = null) {
+	$this->data['accountPageOnly'] = true;	  
     // nacteni accountu
     $this->data['account'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Account')
       ->findAccount($accountCanName);
@@ -144,6 +148,7 @@ class DefaultController extends Controller {
   }
   
   public function presentationAction($accountCanName, $folderCanName, $presentationId, $hash = null) {
+	$this->data['accountPageOnly'] = false;	  
     // nacteni prezentace
     $presentation = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
     if (!$presentation) {   // prezentace nebyla podle zadaneho Id a privateLevel nalezena

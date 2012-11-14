@@ -15,9 +15,14 @@
 {% endblock %}
 
 {% block title %}
-  {% if presentation is null %}
-  	  {{ account.name }}
-  {% else %}
+  {% if accountPageOnly %}
+    	{% if account is not null %}
+			{{ account.name }}
+		{% endif %}       
+  {% elseif presentation is not null %}
+    {% if presentation.listSpeakersNames != '' %}
+        {{ presentation.listSpeakersNames }} | 
+    {% endif %} 
     {{ presentation.title }}
   {% endif %}
 {% endblock %}

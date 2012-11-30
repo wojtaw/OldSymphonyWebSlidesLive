@@ -5,6 +5,7 @@
 /app/config/parameters.ini
 
 /nbproject/*
+/.idea/*
 
 /app/bootstrap.php.cache
 

@@ -70,6 +70,8 @@ class DefaultController extends Controller
      */
     public function newsAction()
     {
+        $logger = $this->get('logger');
+        $logger->notice('APP CONECTED.');
         return array(
             "version" => 2,
             "messageTitle" => "SlidesLive",
@@ -87,14 +89,13 @@ class DefaultController extends Controller
 
     public function createPresentationAction(Request $request) {
         $presentation = new Presentation();
+
         $em = $this->getDoctrine()->getEntityManager();
         $account = $this->get('security.context')->getToken()->getUser();
         $folder = $account->getPrimaryFolder();
 
-        // otevreni logu
-        $log = fopen('./account-log.txt', 'a');
-        fwrite($log, date("- H:i:s - d.m.Y:\n"));
-        fwrite($log, "\tSTART:                account: " . $account->getUsername() . ", password: " . $account->getPassword() . "\n");
+        $logger = $this->get('logger');
+        $logger->crit("\tPRESENTATION UPLOAD: START:                account: " . $account->getUsername() . ", password: " . $account->getPassword());
 
         $form = $this->createForm(new PresentationType(), $presentation);
         $form->bindRequest($request);
@@ -106,13 +107,12 @@ class DefaultController extends Controller
 
             $folder->addPresentation($presentation);
             $presentation->setFolder($folder);
+            $logger->crit("\tPRESENTATION UPLOAD: PRESENTATION ADDED:   account: " . $account->getUsername() . ", password: " . $account->getPassword());
 
-            fwrite($log, "\tPRESENTATION ADDED:   account: " . $account->getUsername() . ", password: " . $account->getPassword() . "\n");
             $em->persist($presentation);
             $em->flush();
-            fwrite($log, "\tPERSISTED:            account: " . $account->getUsername() . ", password: " . $account->getPassword() . "\n");
+            $logger->crit("\tPRESENTATION UPLOAD: PERSISTED:            account: " . $account->getUsername() . ", password: " . $account->getPassword());
 
-            fclose($log);
             return View::create(
                 array(
                     "presentation.id" => $presentation->getId(),
@@ -128,12 +128,11 @@ class DefaultController extends Controller
                 ), 201);
         }
         else {
-            fwrite($log, "\tINVALID FORM DATA!\n");
+            $logger->crit("\tPRESENTATION UPLOAD: INVALID FORM DATA!");
         }
 
 //         return array("aaa" => new \DateTime("2012-09-09"));
 //         return ;
-        fclose($log);
         return View::create($form, 400);
     }
 

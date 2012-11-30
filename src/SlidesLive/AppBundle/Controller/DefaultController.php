@@ -87,25 +87,32 @@ class DefaultController extends Controller
 
     public function createPresentationAction(Request $request) {
         $presentation = new Presentation();
+        $em = $this->getDoctrine()->getEntityManager();
+        $account = $this->get('security.context')->getToken()->getUser();
+        $folder = $account->getPrimaryFolder();
+
+        // otevreni logu
+        $log = fopen('./account-log.txt', 'a');
+        fwrite($log, date("- H:i:s - d.m.Y:\n"));
+        fwrite($log, "\tSTART:                account: " . $account->getUsername() . ", password: " . $account->getPassword() . "\n");
 
         $form = $this->createForm(new PresentationType(), $presentation);
         $form->bindRequest($request);
 
         if ($form->isValid())
         {
-            $em = $this->getDoctrine()->getEntityManager();
-            $account = $this->get('security.context')->getToken()->getUser();
-            $folder = $account->getPrimaryFolder();
-
             $account->addPresentation($presentation);
             $presentation->setAccount($account);
 
             $folder->addPresentation($presentation);
             $presentation->setFolder($folder);
 
+            fwrite($log, "\tPRESENTATION ADDED:   account: " . $account->getUsername() . ", password: " . $account->getPassword() . "\n");
             $em->persist($presentation);
             $em->flush();
+            fwrite($log, "\tPERSISTED:            account: " . $account->getUsername() . ", password: " . $account->getPassword() . "\n");
 
+            fclose($log);
             return View::create(
                 array(
                     "presentation.id" => $presentation->getId(),
@@ -120,9 +127,14 @@ class DefaultController extends Controller
                     "ftp.password" => "6u5tVEwKzQ",
                 ), 201);
         }
+        else {
+            fwrite($log, "\tINVALID FORM DATA!\n");
+        }
 
 //         return array("aaa" => new \DateTime("2012-09-09"));
 //         return ;
+        fclose($log);
         return View::create($form, 400);
     }
+
 }

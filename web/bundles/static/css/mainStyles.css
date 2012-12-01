@@ -720,6 +720,30 @@ h2 {
 	font-size:20px;
 }
 
+.priceBox {
+	background-color:#990000;
+	width:200px;
+	float:left;	
+}
+
+.planDescription {
+	background-color:#993333;
+	width:600px;
+	float:left;	
+}
+
+.pricingDollarSign {
+	font-size:12px;
+}
+
+.pricingCents {
+	font-size:16px;	
+}
+
 .homepageSpecialSpace {
 	margin-top:90px;
+}
+
+.whiteBody, .whiteBody h1 {
+	color:#FFFFFF;	
 }

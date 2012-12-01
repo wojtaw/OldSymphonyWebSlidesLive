@@ -65,9 +65,10 @@
 			<div class="searchBarWrapper" style="display:block">
                  <gcse:searchbox-only></gcse:searchbox-only>
             </div>
-            <div class="headerMenuWraper clearfix headerMenu globalFont">
+            <div class="headerMenuWraper clearfix headerMenu globalFont">                           
                 <a href="{{ path('thankyou') }}" id="downloadButtonLink2" style="margin-right:15px; color:#FFF" onClick="javascript: _gaq.push(['_trackPageview', '/appDownload/topMenu']);">Download Free App</a>               
                 <a href="{{ path('tour') }}" style="margin-right:15px;" >How It Works</a>
+				<a href="{{ path('pricing') }}"style="margin-right:15px;">Pricing</a>                
                 {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
             			<a href="{{ path('logout') }}" style="display:inline;">Logout</a>
                 {% else %}
@@ -119,7 +120,7 @@
         </div>            
     	<div class="footerDark">
 	  		<div class="footerContent">
-            	<div class="footerText footerSmaller">&#169; 2012 SlidesLive. All rights reserved.<span class="footerMenuRight">Made with love in Prague.</span></div>
+            	<div class="footerText footerSmaller">&#169; 2012 SlidesLive. All rights reserved.<span class="footerMenuRight"><a href="{{ path('terms') }}">Terms of service</a> Made with love in Prague.</span></div>
             </div>        
         </div>
     </div>        

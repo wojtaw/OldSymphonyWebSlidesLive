@@ -63,6 +63,10 @@ class DefaultController extends Controller
         return $this->render('StaticBundle:Homepage:terms.html.twig');
     }
 
+    public function pricingAction() {
+        return $this->render('StaticBundle:Homepage:pricing.html.twig');
+    }	
+
     public function policyAction() {
         return $this->render('StaticBundle:Homepage:policy.html.twig');
     }

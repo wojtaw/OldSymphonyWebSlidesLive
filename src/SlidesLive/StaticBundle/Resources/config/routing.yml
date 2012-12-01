@@ -12,8 +12,12 @@ about:
     pattern: /about
     defaults: { _controller: StaticBundle:Default:about }
     
+pricing:
+    pattern: /pricing
+    defaults: { _controller: StaticBundle:Default:pricing }
+    
 terms:
-    pattern: /termsandconditions
+    pattern: /tos
     defaults: { _controller: StaticBundle:Default:terms }
     
 policy:

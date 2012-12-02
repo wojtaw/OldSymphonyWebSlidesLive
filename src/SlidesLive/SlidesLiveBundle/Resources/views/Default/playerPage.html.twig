@@ -60,7 +60,7 @@
   {% block accountPanel %}
     <div class="channelPanel">
       <div class="channelGroup">
-        <img width="100" height="100" class="channelAvatar" src="{{ asset(account.getImage('avatars', true)) }}">
+        <img width="100" height="100" class="channelAvatar" alt="Channel Avatar" src="{{ asset(account.getImage('avatars', true)) }}">
         <div class="channelInfoPanel">
           <div class="channelName">
             {{ account.name }}
@@ -107,8 +107,8 @@
         </div>
         	
         <div class="presentationServicesVideo">
-          <div class="presentationDescInfo sharePadding">SHARE</div>
-					<a href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&t=I watched {{ presentation.title }} | {{ presentation.listSpeakersNames }} at &#60META&#62" title="Share to Facebook" target="_blank"><div class="shareFB"></div></a>
+          <div class="presentationDescInfo sharePadding">SHARE</div>                
+					<a href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&amp;t=I watched {{ presentation.title|e('html') }} | {{ presentation.listSpeakersNames|e('html') }} at SlidesLive" title="Share to Facebook" target="_blank"><div class="shareFB"></div></a>
   					<a href="" title="Share to Twitter"><div class="shareTwitter"></div></a>
   					<a href="" title="Share to G+"><div class="shareGoogle"></div></a>	
   					<a href="" title="Email to friend"><div class="shareMail"></div></a>

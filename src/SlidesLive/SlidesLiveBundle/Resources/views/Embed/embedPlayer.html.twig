@@ -6,6 +6,13 @@
 <html>
 
 <head>
+    <meta itemprop="thumbnailUrl" content="http://{{ app.request.host ~ asset(presentation.getThumbnail) }}" />    
+    <meta itemprop="contentURL" content="http://www.example.com/video123.flv" />
+    <meta itemprop="embedURL" content="http://www.example.com/videoplayer.swf?video=123" />
+    <meta itemprop="uploadDate" content="{{ presentation.getFormatedDateTime }}" />
+    <meta itemprop="height" content="960" />
+    <meta itemprop="width" content="300" /> 
+                
     <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
     </script>
 	<script type="text/javascript" src="{{ asset('bundles/jquery-1.8.0.min.js') }}">
@@ -57,14 +64,7 @@
     	swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
     </script>  
 
-            <div id="flashResizableContainer" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
-                <meta itemprop="thumbnailUrl" content="http://{{ app.request.host ~ asset(presentation.getThumbnail) }}" />
-                
-                <meta itemprop="contentURL" content="http://www.example.com/video123.flv" />
-                <meta itemprop="embedURL" content="http://www.example.com/videoplayer.swf?video=123" />
-                <meta itemprop="uploadDate" content="{{ presentation.getFormatedDateTime }}" />
-                <meta itemprop="height" content="960" />
-                <meta itemprop="width" content="300" />            
+            <div id="flashResizableContainer" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">           
                 <h1>Ouch :( Flash player did not load properly. Do you have latest version installed?</h1>
                 <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
             </div> 

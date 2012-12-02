@@ -722,43 +722,49 @@ h2 {
 
 .pricingPlanWrapper {
 	width:960px;
-	background-color:#00FF33;	
 }
 
 .priceBox {
-	background-color:#990000;
 	width:200px;
 	float:left;	
+	height:150px;	
 }
 
 .planDescription {
-	background-color:#993333;
-	width:600px;
-	height:100%;
+	height:150px;
 	display:block;
+	position:relative;
+	float:left;
 }
 
 .pricingDollarSign {
-	font-size:40px;
+	font-size:50px;
 	float:left;
 	position:relative;
 	padding-top:20px;
 }
 
 .pricingMainPrice {
-	font-size:110px;	
+	font-size:130px;	
 	float:left;	
 }
 
 .pricingCents {
-	font-size:50px;	
+	font-size:60px;	
 	float:left;	
 	position:relative;
 	padding-top:15px;	
 }
 
 .planText{
-	
+	font-size:24px;
+	position:relative;
+	top:30%;
+}
+
+.planTextLessImportant {
+	color:#666666;
+	font-size:20px;
 }
 
 .homepageSpecialSpace {

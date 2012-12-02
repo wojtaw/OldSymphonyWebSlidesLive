@@ -75,36 +75,38 @@
 
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}     
-		  <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
             <div class="presentationTile tile_1_1">            
-				<div class="presentationTileImage" style="background-image:url({{ asset(image) }});">
-                {% if siteVersion is defined and siteVersion == 'A' %}
-            		<div class="priceTagTest">
-                    	<div class="priceTagValue globalFont">99 &#36;</div>
-                    </div>                 
-                {% endif %}     
-				</div>                
+	            <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
+                    <div class="presentationTileImage" style="background-image:url({{ asset(image) }});">
+                    {% if siteVersion is defined and siteVersion == 'A' %}
+                        <div class="priceTagTest">
+                            <div class="priceTagValue globalFont">99 &#36;</div>
+                        </div>                 
+                    {% endif %}     
+                    </div>                
+				</a>                    
 				<div class="presentationTileDescription">
-					<div class="presentationTileTitle">
-
-
-					  {% if box.presentation.showSpeaker %}
-						{{ box.presentation.listSpeakersNames }}
-					  {% else %}
-						{{ box.presentation.title }}
-					  {% endif %}
-					</div>
+		            <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">                
+                        <div class="presentationTileTitle">
+    
+    
+                          {% if box.presentation.showSpeaker %}
+                            {{ box.presentation.listSpeakersNames }}
+                          {% else %}
+                            {{ box.presentation.title }}
+                          {% endif %}
+                        </div>
+					</a>                           
 				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="presentationTileChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>
 				</div>              
 			</div>
-			</a>
           {% endif %}
 
         {% endfor %}
 	  </div>
       
         <div class="howItWorksWindow center homepageSpecialSpace">
-			<iframe src="http://edumeta.com/embed/38889556?width=800" width="800" height="600" frameborder="0" scrolling="no"></iframe>        
+			<iframe src="http://edumeta.com/embed/38889556?width=800" class="homepageEmbed"></iframe>        
         </div>            
       
 

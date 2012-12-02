@@ -146,7 +146,6 @@ function changeQuoteContent(){
 
 
 function incorrectLoginAction(){
-	console.log("jeee");
 	$('#username').css("border-color", "#FF3300");	
 	$('#password').css("border-color", "#FF3300");				
 }

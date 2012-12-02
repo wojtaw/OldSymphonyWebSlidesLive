@@ -485,6 +485,11 @@ body {
 	margin:0px;
 }
 
+.termsText a{
+	text-decoration:underline;
+	color:#027BF7;
+}
+
 .featureBody {
 	padding-top:10px;
 	font-family:'Ropa Sans', sans-serif;
@@ -757,7 +762,7 @@ h2 {
 }
 
 .planText{
-	font-size:24px;
+	font-size:20px;
 	position:relative;
 	top:30%;
 }
@@ -765,6 +770,7 @@ h2 {
 .planTextLessImportant {
 	color:#666666;
 	font-size:20px;
+	font-style:italic;
 }
 
 .homepageSpecialSpace {
@@ -773,6 +779,10 @@ h2 {
 
 .whiteBody, .whiteBody h1, .whiteBody h2 {
 	color:#FFFFFF;	
+}
+
+.whiteBody h2 a{
+	color:#027BF7;	
 }
 
 .homepageEmbed {

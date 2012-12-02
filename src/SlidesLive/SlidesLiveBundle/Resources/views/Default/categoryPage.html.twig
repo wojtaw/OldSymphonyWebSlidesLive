@@ -26,11 +26,13 @@
         
           {% set image = tile.getThumbnail(true) %}
           {% if image %}     
-		  <a href="{{ url('accountPresentation', {'accountCanName':tile.account.canonicalName, 'presentationId':tile.id }) }}">
             <div class="presentationTile tile_1_1">
+			  <a href="{{ url('accountPresentation', {'accountCanName':tile.account.canonicalName, 'presentationId':tile.id }) }}">            
 				<div class="presentationTileImage" style="background-image:url({{ asset(image) }});">
 				</div>
+			  </a>
 				<div class="presentationTileDescription">
+				  <a href="{{ url('accountPresentation', {'accountCanName':tile.account.canonicalName, 'presentationId':tile.id }) }}">                            
 					<div class="presentationTileTitle">
 
 
@@ -40,10 +42,10 @@
 						{{ tile.title }}
 					  {% endif %}
 					</div>
+				  </a>
 				  <a href="{{ url('account', {'accountCanName': tile.account.canonicalName}) }}" class="presentationTileChannel slidesLiveBlue">{{ tile.account.name }}</a>
 				</div>
 			</div>
-			</a>
           {% endif %}
 
         {% endfor %}

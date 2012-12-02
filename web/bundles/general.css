@@ -161,6 +161,14 @@ a:visited {
 	color:#027BF7 !important;
 }
 
+.topMenuSpace {
+	margin-right:15px;	
+}
+
+.topMenuDownloadSpecial {
+	color:#FFFFFF !important;
+}
+
 /*-------------------ACCOUNT BAR----------------------*/
 .accountServiceBar{
 	position: fixed;

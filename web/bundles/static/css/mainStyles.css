@@ -781,3 +781,18 @@ h2 {
 	height:600px;
 	overflow:hidden;
 }
+
+.tosSmile {
+	font-size:250px;
+	width:200px;
+	position:relative;
+	left:65%;
+	-webkit-transform: rotate(80deg); 
+	-moz-transform: rotate(80deg);
+	-ms-transform: rotate(80deg);
+	-o-transform: rotate(80deg);			
+}
+
+.tosWrapper {
+	width:600px;	
+}

@@ -20,6 +20,7 @@ class DefaultController extends Controller
 {
     public function createAccountAction(Request $request)
     {
+        $this->setLogger();
         $account = new Account();
 
         $form = $this->createForm(new AccountType(), $account);
@@ -70,6 +71,7 @@ class DefaultController extends Controller
      */
     public function newsAction()
     {
+        $this->setLogger();
         $logger = $this->get('logger');
         $logger->notice('APP CONECTED.');
         return array(
@@ -84,10 +86,12 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $this->setLogger();
         return array();
     }
 
     public function createPresentationAction(Request $request) {
+        $this->setLogger();
         $presentation = new Presentation();
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -134,6 +138,10 @@ class DefaultController extends Controller
 //         return array("aaa" => new \DateTime("2012-09-09"));
 //         return ;
         return View::create($form, 400);
+    }
+
+    private function setLogger() {
+        $GLOBALS['logger'] = $this->get('logger');
     }
 
 }

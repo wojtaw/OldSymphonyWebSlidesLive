@@ -9,7 +9,7 @@ use SlidesLive\SlidesLiveBundle\DependencyInjection\Privacy;
 class BaseController extends Controller {                               
                                   
     protected $data = array(
-      'privacy_mode' => Privacy::p_public(),
+      'privacy_mode' => Privacy::P_PUBLIC,
     );
                      
 }

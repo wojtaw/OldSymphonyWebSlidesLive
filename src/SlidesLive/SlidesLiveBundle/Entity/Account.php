@@ -153,10 +153,8 @@ class Account implements AdvancedUserInterface {
       $this->password = NULL;
       $this->salt = NULL;
 
-      if (!isset($GLOBALS['logger'])) {
-          $GLOBALS['logger']->crit('ACCOUNT::eraseCredentials() CALLED');
-          $GLOBALS['logger']->crit(debug_print_backtrace());
-      }
+      //$GLOBALS['logger']->crit('ACCOUNT::eraseCredentials() CALLED');
+      //$GLOBALS['logger']->crit(debug_print_backtrace());
     }
 
     public function isAccountNonExpired() {

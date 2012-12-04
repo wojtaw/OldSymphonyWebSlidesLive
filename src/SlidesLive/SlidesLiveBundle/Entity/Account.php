@@ -152,6 +152,11 @@ class Account implements AdvancedUserInterface {
     public function eraseCredentials() {
       $this->password = NULL;
       $this->salt = NULL;
+
+      if (!isset($GLOBALS['logger'])) {
+          $GLOBALS['logger']->crit('ACCOUNT::eraseCredentials() CALLED');
+          $GLOBALS['logger']->crit(debug_print_backtrace());
+      }
     }
 
     public function isAccountNonExpired() {
@@ -180,7 +185,7 @@ class Account implements AdvancedUserInterface {
 
     //public function getUserName() { return $this->username; }
 
-    public function __construct() {
+    public function __construct($logger = null) {
         $this->username = '@';
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->password = '';

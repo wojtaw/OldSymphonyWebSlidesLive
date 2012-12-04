@@ -42,7 +42,8 @@ class AdminController extends Controller {
     	$this->data['accountId'] = $accountId;
     	if ($account) {
     		$this->data['account'] = $account;
-    		$this->data['password'] = md5(microtime());
+    		$this->data['password'] = substr(md5(microtime()), 0, 12);
+            $account->setSalt(md5(rand()));
     		$encoder = $this->get('security.encoder_factory')->getEncoder($account);
     		$account->setPassword($encoder->encodePassword($this->data['password'], $account->getSalt()));
     		$em->flush();

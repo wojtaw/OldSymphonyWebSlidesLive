@@ -1,0 +1,11 @@
+04.12.2012 / 05:29:42 - ACCOUNT::eraseCredentials() CALLED
+04.12.2012 / 05:31:40 - ACCOUNT::eraseCredentials() CALLED
+04.12.2012 / 05:34:17 - ACCOUNT::eraseCredentials() CALLED
+
+04.12.2012 / 05:35:36 - ACCOUNT::eraseCredentials() CALLED
+
+04.12.2012 / 05:37:33 - ACCOUNT::eraseCredentials() CALLED
+trace: 
+04.12.2012 / 05:40:02 - ACCOUNT::eraseCredentials() CALLED
+04.12.2012 / 05:50:04 - ACCOUNT::eraseCredentials() CALLED
+04.12.2012 / 05:53:47 - ACCOUNT::eraseCredentials() CALLED (public@gmail.com)

@@ -91,7 +91,9 @@ class DefaultController extends Controller
         $presentation = new Presentation();
 
         $em = $this->getDoctrine()->getEntityManager();
-        $account = $this->get('security.context')->getToken()->getUser();
+        $accountId = $this->get('security.context')->getToken()->getUser()->getId();
+        $account = $em->getRepository('SlidesLiveBundle:Account')->find($accountId);
+
         $folder = $account->getPrimaryFolder();
 
         $logger = $this->get('logger');
@@ -99,6 +101,9 @@ class DefaultController extends Controller
 
         $form = $this->createForm(new PresentationType(), $presentation);
         $form->bindRequest($request);
+        if (!$account) {
+            return View::create($form, 400);
+        }
 
         if ($form->isValid())
         {

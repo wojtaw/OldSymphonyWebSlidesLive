@@ -165,7 +165,10 @@ class AccountController extends Controller
               $this->deleteOldFiles('/data/PresentationThumbs', $presentation->getId().'\.*');    
               // ulozeni noveho souboru 
               $extension = $this->extractExtension($file->getClientOriginalName());
-              $file->move($_SERVER['DOCUMENT_ROOT'].'/data/PresentationThumbs/', sprintf("%d.%s", $presentation->getId(), $extension));
+              $imageName = sprintf("%d.%s", $presentation->getId(), $extension);
+              $imagePath = $_SERVER['DOCUMENT_ROOT'].'/data/PresentationThumbs/';
+              $file->move($imagePath, $imageName);
+              $this->resizeImage($imagePath.$imageName);
             }
             else {  // soubor se nepodarilo nahrat
               $message = 'The file upload failed.';            
@@ -358,9 +361,7 @@ class AccountController extends Controller
             $form->bindRequest($request);
             $data = $form->getData();
             if ($form->isValid() && $data['file']) {
-              //$account = $this->get('security.context')->getToken()->getUser();
               // odstraneni puvodniho souboru
-              $oldFile = $account->getImage($type);
               $this->deleteOldFiles('/data/accounts/'.$type, $account->getId().'\.*');    
               // ulozeni noveho souboru 
               $file = $data['file'];
@@ -402,6 +403,21 @@ class AccountController extends Controller
         unlink($file->getRealPath());
       }      
       //print_r("All files deleted.\n");
+    }
+
+    private function resizeImage($imageName, $width = 0, $height = 0) {
+        list($width_orig, $height_orig) = getimagesize($imageName);
+        $width = $width_orig * 0.5;
+        $height = $height_orig * 0.5;
+
+        $original = imagecreatefromjpeg($imageName);
+        $resampled = imagecreatetruecolor($width, $height);
+
+        imagecopyresampled($resampled, $original, 0, 0, 0, 0, $width, $height, $width_orig,  $height_orig);
+        imagejpeg($resampled, $imageName, 100);
+
+        imagedestroy($original);
+        imagedestroy($resampled);
     }
                      
 }

@@ -55,7 +55,7 @@
     	<div class="presentationEditImage" style="background-image:url({{ asset( p.getThumbnail(true) ) }})"></div>
         <div class="presentationEditInfo">
         	<div class="presentationEditTitle">{{ p.title }}</div>
-        	<div class="presentationEditText">{{ p.getFormatedDate }} | {{ (p.length / 60)|number_format(0, '.', ',') }} minutes | {{ p.lang }}</div>
+        	<div class="presentationEditText">{{ p.getFormatedDate }} | {{ (p.length / 60) }} minutes | {{ p.lang }}</div>
             <div class="syncState">
                     {% if p.video and (p.flag == 4) %}
 						Video + Slides

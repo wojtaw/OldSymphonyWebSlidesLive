@@ -15,6 +15,9 @@ body {
 
 /* BLOCKS PART */
 
+.noBottom {
+	padding-bottom:0px !important;	
+}
 
 .websiteLightBackground {
 	padding-top:40px;

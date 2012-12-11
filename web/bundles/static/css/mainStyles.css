@@ -771,6 +771,7 @@ h2 {
 }
 
 .planTextLessImportant {
+	text-decoration:line-through;
 	color:#666666;
 	font-size:20px;
 	font-style:italic;

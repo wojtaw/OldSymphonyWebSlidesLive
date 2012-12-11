@@ -121,7 +121,11 @@
 				<h3>Embed code</h3>
 				<p>Use following code for displaying this presentation on your website.</p>
 			</div>
-			<p><code>&#60;iframe src="http://edumeta.com/embed/{{ presentation.id }}?width=650" width="650" height="270" frameborder="0" scrolling="no"&#62;&#60;/iframe&#62;</code></p>
+			{% if presentation.video %}	                
+				<p><code>&#60;iframe src="http://slideslive.com/embed/{{ presentation.id }}/700" width="700" height="225" frameborder="0" scrolling="no"&#62;&#60;/iframe&#62;</code></p>
+            {% else %}    
+				<p><code>&#60;iframe src="http://slideslive.com/embed/{{ presentation.id }}/600" width="600" height="480" frameborder="0" scrolling="no"&#62;&#60;/iframe&#62;</code></p>
+            {% endif %}            
 		</div>		
 		<!-- embed window end -->		
 		
@@ -166,5 +170,4 @@
       <div class="sidebarBottom"></div>
     </div>
   {% endblock sideBar %}
-  
 {% endblock content %}    

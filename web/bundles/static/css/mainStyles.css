@@ -15,6 +15,9 @@ body {
 
 /* BLOCKS PART */
 
+.noBottom {
+	padding-bottom:0px !important;	
+}
 
 .websiteLightBackground {
 	padding-top:40px;
@@ -768,6 +771,7 @@ h2 {
 }
 
 .planTextLessImportant {
+	text-decoration:line-through;
 	color:#666666;
 	font-size:20px;
 	font-style:italic;

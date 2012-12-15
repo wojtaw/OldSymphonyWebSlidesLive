@@ -91,5 +91,9 @@ class AdminController extends Controller {
     	echo "\n===Initialization complete===\n";
     	return new Response('');
     }
+
+    public function phpInfoAction() {
+        return $this->render('SlidesLiveBundle:Admin:phpInfo.html.php');
+    }
                      
 }

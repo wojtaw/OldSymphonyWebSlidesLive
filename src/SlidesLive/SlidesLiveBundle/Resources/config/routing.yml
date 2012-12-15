@@ -78,6 +78,10 @@ resetPassword:
   requirements:
     accountId:  \d+
 
+phpInfo:
+  pattern: /admin/phpinfo
+  defaults: { _controller:SlidesLiveBundle:Admin:phpInfo }
+
 # -----PUBLIC PRESENTATION------------------------------------------------------ 
 embed:
     pattern: /embed/{presentationId}/{customWidth}

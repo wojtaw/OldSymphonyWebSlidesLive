@@ -1,5 +1,10 @@
 {% extends 'StaticBundle::layout.html.twig' %}
 
+{% block stylesheet %}
+	{{ parent() }}
+      <link href="{{ asset('bundles/static/css/tosPrint.css') }}" rel="stylesheet" type="text/css" media="print" />    
+{% endblock %}
+
 {% block content %}
 
     <div class="websiteLightBackground">

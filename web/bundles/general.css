@@ -317,6 +317,9 @@ h2.error{
 	margin-top:50px;	
 }
 .presentationTileBar{
+	list-style-type:none;
+	margin:0px;
+	padding:0px;
 	background-color:#1e1e1e;
 	width:100%;
 	padding-top:5px;

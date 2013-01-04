@@ -51,7 +51,7 @@
 
   <div class="websiteLightBackground firstBlockTop noBottom"> 
   
-  	  <div class="presentationTileBar presentationTitlesHomepage clearfix" id="presentationTileBar">
+  	  <ul class="presentationTileBar presentationTitlesHomepage clearfix" id="presentationTileBar">
       
         {% for box in presentationBoxes %}
 
@@ -63,10 +63,10 @@
        	   		{% set currentCategoryIndex = loop.index -1 %}                
 
                 <a href="{{ url('category', {'categoryCanonicalName':categories[currentCategoryIndex].canonicalName }) }}">
-                <div class="presentationTile tile_1_1 categoryTile">
+                <li class="presentationTile tile_1_1 categoryTile">
        	   		{% set currentCategoryIndex = loop.index -1 %}                        
                         <div class="presentationTileImage" style="background-image:url({{ asset(categories[currentCategoryIndex].getImage())}});"></div>
-                </div>
+                </li>
                 </a>
 
                 {% endif %}
@@ -75,7 +75,7 @@
 
           {% set image = box.presentation.getThumbnail() %}
           {% if image %}     
-            <div class="presentationTile tile_1_1">            
+            <li class="presentationTile tile_1_1">            
 	            <a href="{{ url('accountPresentation', {'accountCanName':box.presentation.account.canonicalName, 'presentationId':box.presentation.id }) }}">
                     <div class="presentationTileImage" style="background-image:url({{ asset(image) }});">
                     {% if siteVersion is defined and siteVersion == 'A' %}
@@ -99,11 +99,11 @@
 					</a>                           
 				  <a href="{{ url('account', {'accountCanName': box.presentation.account.canonicalName}) }}" class="presentationTileChannel slidesLiveBlue">{{ box.presentation.account.name }}</a>
 				</div>              
-			</div>
+			</li>
           {% endif %}
 
         {% endfor %}
-	  </div>
+	  </ul>
      
       
 

@@ -799,12 +799,11 @@ h2 {
 .tosSmile {
 	font-size:250px;
 	width:200px;
-	position:relative;
-	left:65%;
-	-webkit-transform: rotate(80deg); 
-	-moz-transform: rotate(80deg);
-	-ms-transform: rotate(80deg);
-	-o-transform: rotate(80deg);			
+	-webkit-transform: rotate(80deg) translate(30px,-400px); 
+	-moz-transform: rotate(80deg) translate(30px,-400px);
+	-ms-transform: rotate(80deg) translate(30px,-400px);
+	-o-transform: rotate(80deg) translate(30px,-400px);
+		
 }
 
 .tosWrapper {

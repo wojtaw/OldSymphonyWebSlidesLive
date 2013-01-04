@@ -1,8 +1,12 @@
 {% extends 'SlidesLiveBundle::layout.html.twig' %}
 
+{% block javascript %}
+	{{ parent() }}
+	<script type="text/javascript" src="{{ asset('bundles/javascript/formsCheck.js') }}">
+    </script>     
+{% endblock %}
+
 {% block layoutContent %}
-
-
   <div class="websiteDarkBackground clearfix">
     <div class="blockCenterWrapper loginText globalFont">
     	<div class="loginLeft">
@@ -49,7 +53,9 @@
 
     </div>
   </div>
-  
+                    <script type="text/javascript">
+						initLoginFormCheck();
+					</script>  
  
     
 {% endblock %}

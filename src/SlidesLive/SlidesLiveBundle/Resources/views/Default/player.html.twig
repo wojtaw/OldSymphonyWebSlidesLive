@@ -48,7 +48,7 @@
 		var attributes = {};
 		{% if html5Version %}
 				console.log("Loading HTML5 player");			
-				loadPlayer5_thc("flashResizableContainer","38889609","YOUTUBE","hrrPsnGc9Rg");					
+				loadPlayer5_thc("flashResizableContainer","{{ presentation.id }}","{{ presentation.service }}","{{ presentation.serviceId }}");					
 		{% else %}
 			if (swfobject.hasFlashPlayerVersion("9.0.18")) {
 				console.log("Has flash");

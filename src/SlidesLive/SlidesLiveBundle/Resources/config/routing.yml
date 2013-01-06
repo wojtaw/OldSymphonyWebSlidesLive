@@ -121,6 +121,13 @@ accountPresentation:
     requirements:
       accountCanName: '[^wh/]|[^/][^/]+'
       presentationId: \d+
+      
+accountPresentationHtml5:
+    pattern: /{accountCanName}/w/{presentationId}/html5
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, folderCanName:null, html5Player:true }
+    requirements:
+      accountCanName: '[^wh/]|[^/][^/]+'
+      presentationId: \d+
                             
 accountFolderPresentation:
     pattern: /{accountCanName}/{folderCanName}/w/{presentationId}

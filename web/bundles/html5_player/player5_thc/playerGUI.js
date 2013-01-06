@@ -2,6 +2,7 @@ var videoRatio = (16/9);
 var slideRatio = (4/3);
 var videoSlideRatio = (4/3);
 var stageWidth = 960;
+var stageHeight = 300;
 var universalSpace = 15;
 
 function initGUI(stageWidth){
@@ -34,8 +35,9 @@ function recalculateGUI(event, ui){
 	videoWidth = ((ui.value / 100) * stageWidth);
 	recalculateSlidesAndVideoContainers(videoWidth);
 	decideSlideQuality($('#player5_slideContainer').width());	
-
 	recalculateControlsPosition();
+	//External method for adapting the website
+	resizePlayerContainer(stageHeight+65);
 }
 
 function recalculateControlsPosition(){
@@ -74,6 +76,7 @@ function recalculateSlidesAndVideoContainers(videoWidth){
 		$('#player5_slideContainer').width(Math.round(tmpSlidesWidth));
 		$('#player5_slideContainer').height(Math.round(tmpSlidesHeight));				
 	}
+	stageHeight = Math.max(tmpSlidesHeight,videoContainerHeight);	
 }
 	
 	

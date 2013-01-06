@@ -6,6 +6,7 @@ var slideQuality = "medium";
 function initPresentationController(){
 	console.log("Igniting player");	
 	window.setInterval(runTimerTasks,200);
+	reloadSlide();
 }
 
 function runTimerTasks(){

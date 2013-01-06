@@ -1,8 +1,8 @@
-//Config values
-//var pathToXMLStorage = "http://www.slideslive.com/data/PresentationXMLs/";
-var pathToXMLStorage = "http://localhost/data/PresentationXMLs/";
-var pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
-
+//Config values	
+var pathToXMLStorage;
+var pathToSlides;
+var pathToPlayerFiles;	
+var buildConfig = 1;	 //1 - local testing, 2 - production WA1
 //variables
 var playerElementID;
 var presentationID;
@@ -16,7 +16,22 @@ function loadPlayer5_thc(playerElementID,presentationID,externalService,external
 	this.playerWidth = typeof playerWidth !== 'undefined' ? playerWidth : 960;
 	this.presentationID = presentationID;
 	this.externalServiceID = externalServiceID;
+	initVariables();
 	bootstrap();
+}
+
+function initVariables(){
+	if(buildConfig == 1){
+		pathToXMLStorage = "http://localhost/data/PresentationXMLs/";
+		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
+		pathToPlayerFiles = "/SlidesLive/web/bundles/html5_player/player5_thc/";			
+	}else if(buildConfig == 2){
+		pathToXMLStorage = "http://www.slideslive.com/data/PresentationXMLs/";
+		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
+		pathToPlayerFiles = "/SlidesLive_WA1/web/bundles/html5_player/player5_thc/";			
+	}else{
+		
+	}
 }
 
 function bootstrap(){
@@ -25,11 +40,11 @@ function bootstrap(){
 	var scriptFiles = new Array("youtubeModule.js","slideContainer.js","presentationController.js","playerGUI.js","jquery-ui.js");
 	
 	for (var i=0;i<scriptFiles.length-1;i++){ 
-		$.getScript("/SlidesLive/web/bundles/html5_player/player5_thc/"+scriptFiles[i], function(data, textStatus, jqxhr) {
+		$.getScript(pathToPlayerFiles+scriptFiles[i], function(data, textStatus, jqxhr) {
 		   console.log('Load was performed.'+jqxhr.status);
 		});
 	}		
-	$.getScript("/SlidesLive/web/bundles/html5_player/player5_thc/"+scriptFiles[scriptFiles.length-1], createDOMPlayer);	
+	$.getScript(pathToPlayerFiles+scriptFiles[scriptFiles.length-1], createDOMPlayer);	
 }
 
 
@@ -59,7 +74,6 @@ function createDOMPlayer(){
 
 function videoModuleReady(){
 	initPresentationController();
-	loadSlide("http://www.slideslive.com/data/PresentationSlides/medium/38889609/0-0018.png");	
 }
 
 function loadPresentationXML() {	
@@ -83,7 +97,6 @@ function xmlRequestReady(responseXml){
 		counter++;
 	});
 	
-	testPrint();
 	initGUI(playerWidth);
 	createYoutubePlayer(externalServiceID);	
 }

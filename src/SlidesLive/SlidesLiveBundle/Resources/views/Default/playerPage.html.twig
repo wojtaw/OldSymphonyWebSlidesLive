@@ -95,6 +95,10 @@
     
         <div class="playerPanel" id="playerPanel">		
   
+	{% if html5Player is not defined %}  
+    	{% set html5Player = false %}
+    {% endif %}
+  
     {% if isPresentationReady is defined and isPresentationReady == 2%}	    
 			<img src="{{ asset('bundles/generalImages/waiting-for-preze.gif') }}" width="960" height="280"/>
     {% else %}	   

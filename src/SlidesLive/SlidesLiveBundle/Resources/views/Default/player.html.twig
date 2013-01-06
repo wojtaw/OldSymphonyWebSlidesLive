@@ -12,6 +12,15 @@
  		var scaledWidth = 700;
 		var calculatedWidth = -1;
 		
+		{% if presentation.externalService != null %}
+			var serviceType = "{{ presentation.externalService }}";
+			var serviceID = "{{ presentation.externalServiceId }}";						
+		{% else %}
+			var serviceType = "{{ presentation.service }}";
+			var serviceID = "{{ presentation.serviceId }}";			
+		{% endif %}			
+		 
+		
 		{% if (presentation.video) and not (presentation.slides) %}
 			calculatedWidth = playerDimensionsAccordingScreen("VIDEO");
 		{% elseif (presentation.slides) and not (presentation.video) %}
@@ -30,13 +39,8 @@
 			hasVideo: "{% if presentation.video %}true{% else %}false{% endif %}",
 			hasSlides: "{% if presentation.slides %}true{% else %}false{% endif %}",
 			presentationID: "{{ presentation.id }}",
-			{% if presentation.externalService != null %}
-				mediaType: "{{ presentation.externalService }}",
-				mediaID: "{{ presentation.externalServiceId }}",						
-			{% else %}
-				mediaType: "{{ presentation.service }}",
-				mediaID: "{{ presentation.serviceId }}",			
-			{% endif %}	
+			mediaType: serviceType,
+			mediaID: serviceID,						
 			widthScale: scaledWidth,				
 		};
 		var params = {
@@ -48,14 +52,14 @@
 		var attributes = {};
 		{% if html5Version %}
 				console.log("Loading HTML5 player");			
-				loadPlayer5_thc("flashResizableContainer","{{ presentation.id }}","{{ presentation.service }}","{{ presentation.serviceId }}");					
+				loadPlayer5_thc("flashResizableContainer","{{ presentation.id }}",serviceType,serviceID);					
 		{% else %}
 			if (swfobject.hasFlashPlayerVersion("9.0.18")) {
 				console.log("Has flash");
 				swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
 			} else {
 				console.log("Flash disabled");			
-				loadPlayer5_thc("flashResizableContainer","38889609","YOUTUBE","hrrPsnGc9Rg");			
+				loadPlayer5_thc("flashResizableContainer","{{ presentation.id }}",serviceType,serviceID);							
 			}
 		{% endif %}
     	

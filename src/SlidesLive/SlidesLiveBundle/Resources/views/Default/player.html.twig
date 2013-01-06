@@ -47,8 +47,13 @@
 		};
 		var attributes = {};
 		
-	
-    	swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+		if (swfobject.hasFlashPlayerVersion("9.0.18")) {
+			console.log("Has flash");
+			swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+		} else {
+			console.log("Flash disabled");
+		}
+    	
     </script>  
             <div id="flashResizableContainer" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">       
             <meta itemprop="thumbnailUrl" content="http://{{ app.request.host ~ asset(presentation.getThumbnail) }}" />

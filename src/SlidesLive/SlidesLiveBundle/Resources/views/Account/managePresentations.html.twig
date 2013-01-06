@@ -23,11 +23,11 @@
         {% if not presentation.video %}
         <div class="panelEditSynchronization"></div>
             <div class="playerPanelEditAudio" id="playerPanel">		
-              {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false, 'forcedWidth':500} %}
+              {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false, 'forcedWidth':500, 'html5Version': true} %}
             </div>
         {% else %}      
             <div class="playerPanelEditVideo" id="playerPanel">		
-              {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false} %}
+              {% include 'SlidesLiveBundle:Default:player.html.twig' with {'presentation': presentation, 'isEmbed': false, 'html5Version': true} %}
             </div>
         {% endif %}     
 

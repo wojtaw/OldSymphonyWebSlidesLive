@@ -108,6 +108,12 @@ presentation:
     defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:null, folderCanName:null }
     requirements:
       presentationId: \d+    
+
+presentationHtml5:
+    pattern: /w/{presentationId}/html5
+    defaults: { _controller: SlidesLiveBundle:Default:presentation, accountCanName:null, folderCanName:null, html5Player:true }
+    requirements:
+      presentationId: \d+  
       
 accountPresentation:
     pattern: /{accountCanName}/w/{presentationId}

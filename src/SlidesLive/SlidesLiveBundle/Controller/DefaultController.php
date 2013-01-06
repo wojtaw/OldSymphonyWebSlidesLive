@@ -147,9 +147,12 @@ class DefaultController extends Controller {
     return $this->render('SlidesLiveBundle:Default:playerPage.html.twig', $this->data);
   }
 
-  public function presentationAction($accountCanName, $folderCanName, $presentationId, $hash = null) {
+  public function presentationAction($accountCanName, $folderCanName, $presentationId, $hash = null, $html5Player = null) {
 	$this->data['accountPageOnly'] = false;
     // nacteni prezentace
+	if($html5Player) $this->data['html5Player'] = true;
+	else $this->data['html5Player'] = false;
+
     $presentation = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
     if (!$presentation) {   // prezentace nebyla podle zadaneho Id a privateLevel nalezena
 		return $this->showError(1004, $presentationId);

@@ -46,13 +46,18 @@
 			allowFullScreen: "true",			
 		};
 		var attributes = {};
-		
-		if (swfobject.hasFlashPlayerVersion("9.0.18")) {
-			console.log("Has flash");
-			swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
-		} else {
-			console.log("Flash disabled");
-		}
+		{% if html5Version %}
+				console.log("Loading HTML5 player");			
+				loadPlayer5_thc("flashResizableContainer","38889609","YOUTUBE","hrrPsnGc9Rg");					
+		{% else %}
+			if (swfobject.hasFlashPlayerVersion("9.0.18")) {
+				console.log("Has flash");
+				swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+			} else {
+				console.log("Flash disabled");			
+				loadPlayer5_thc("flashResizableContainer","38889609","YOUTUBE","hrrPsnGc9Rg");			
+			}
+		{% endif %}
     	
     </script>  
             <div id="flashResizableContainer" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">       

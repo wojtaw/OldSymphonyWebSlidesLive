@@ -46,13 +46,23 @@
 	{% endif %}        
 {% endblock %}
 
-
+{% block stylesheet %}
+	{{ parent() }}
+      <link href="{{ asset('bundles/html5_player/player5_thc/styles/playerStyles.css') }}" rel="stylesheet" type="text/css" />
+      <link href="{{ asset('bundles/html5_player/player5_thc/styles/jquery-ui.css') }}" rel="stylesheet" type="text/css" />          
+{% endblock %}
 
 {% block javascript %}
   <script type="text/javascript" src="{{ asset('bundles/static/javascript/homepageFunctions.js') }}">
   </script> 
   <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.full.js') }}">
-  </script>      
+  </script>    
+  <script type="text/javascript" src="{{ asset('bundles/html5_player/player5_thc/player5_thc.js') }}">
+  </script>    
+  <script type="text/javascript" src="{{ asset('bundles/html5_player/player5_thc/jquery-1.8.3.min.js') }}">
+  </script>        
+  
+    
 {% endblock %}
 
 {% block content %}

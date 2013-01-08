@@ -62,12 +62,12 @@
                 
        	   		{% set currentCategoryIndex = loop.index -1 %}                
 
-                <a href="{{ url('category', {'categoryCanonicalName':categories[currentCategoryIndex].canonicalName }) }}">
                 <li class="presentationTile tile_1_1 categoryTile">
+                <a href="{{ url('category', {'categoryCanonicalName':categories[currentCategoryIndex].canonicalName }) }}">                
        	   		{% set currentCategoryIndex = loop.index -1 %}                        
                         <div class="presentationTileImage" style="background-image:url({{ asset(categories[currentCategoryIndex].getImage())}});"></div>
+                </a>                        
                 </li>
-                </a>
 
                 {% endif %}
             {% endfor %}

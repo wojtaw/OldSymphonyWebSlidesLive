@@ -20,15 +20,19 @@ class RegistrationForm extends SimpleForm {
       'type' => 'password',
       //'required' => true,
       'invalid_message' => 'The password fields must match.',
-      //'label' => 'Password:',
-      'first_name' => 'Password:',
-      'second_name' => 'Password again:'
+      'label' => 'Heslo:',
+      'first_name' => 'password',
+      'second_name' => 'password_again'
       //'options' => array (
         //'label' => 'Password:',
         //'required' => true
       //  )
       )
     );
+	
+	
+	
+	
     
   }
   

@@ -2,7 +2,7 @@
 var pathToXMLStorage;
 var pathToSlides;
 var pathToPlayerFiles;	
-var buildConfig = 1;	 //1 - local testing, 2 - production WA1
+var buildConfig = 3;	 //1 - local dev, 2 - local testing, 3 - production
 //variables
 var playerElementID;
 var presentationID;
@@ -24,11 +24,15 @@ function initVariables(){
 	if(buildConfig == 1){
 		pathToXMLStorage = "http://localhost/data/PresentationXMLs/";
 		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
-		pathToPlayerFiles = "/SlidesLive/web/bundles/html5_player/player5_thc/";			
+		pathToPlayerFiles = "/player5_thc/html5_player/player5_thc/";			
 	}else if(buildConfig == 2){
+		pathToXMLStorage = "http://localhost/data/PresentationXMLs/";
+		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
+		pathToPlayerFiles = "/SlidesLive/web/bundles/html5_player/player5_thc/";					
+	}else if(buildConfig == 3){
 		pathToXMLStorage = "http://www.slideslive.com/data/PresentationXMLs/";
 		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
-		pathToPlayerFiles = "/SlidesLive_WA1/web/bundles/html5_player/player5_thc/";			
+		pathToPlayerFiles = "/SlidesLive_dev/web/bundles/html5_player/player5_thc/";			
 	}else{
 		
 	}
@@ -58,14 +62,18 @@ function createDOMPlayer(){
 "	<div class=\"clearfix\" id=\"player5_slideContainer\">"+
 "		<div id=\"player5_slideLoader\">"+
 "			<div id=\"player5_slideControls\" class=\"clearfix\">"+
-"				<div id=\"player5_syncSlide\">pusinka</div>"+     
-"				<div id=\"player5_prevSlide\">&lt;</div>"+        
-"				<div id=\"player5_syncVideo\">[]</div>"+                    
-"				<div id=\"player5_nextSlide\">&gt;</div>"+ 
-"				<div id=\"player5_bigSlide\">big</div>"+                        
+"				<div id=\"player5_syncSlide\" class=\"slideButton playerButtonsSpace\"></div>"+     
+"				<div id=\"player5_prevSlide\" class=\"slideButton playerButtonsSpace\"></div>"+        
+"				<div id=\"player5_syncVideo\" class=\"slideButton playerButtonsSpace\"></div>"+                    
+"				<div id=\"player5_nextSlide\" class=\"slideButton playerButtonsSpace\"></div>"+ 
+"				<div id=\"player5_bigSlide\" class=\"slideButton\"></div>"+                        
 "			</div>"+
 "		</div>"+
 "	</div>"+
+"	<div id=\"player5_preloader1\" class=\"player5_preloader\"></div>"+
+"	<div id=\"player5_preloader2\" class=\"player5_preloader\"></div>"+
+"	<div id=\"player5_preloader3\" class=\"player5_preloader\"></div>"+
+"	<div id=\"player5_preloader4\" class=\"player5_preloader\"></div>"+
 "</div>";
 	$("#"+playerElementID).html(playerString);
 

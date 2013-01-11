@@ -38,8 +38,18 @@ function reloadSlide(reloadType){
 	}else{
 		return;
 	}
+	cacheSlides();
 	var tmpPath = pathToSlides +slideQuality+"/"+ presentationID +"/"+ slideArray[currentSlideIndex].slideName;
 	loadSlide(tmpPath);			
+}
+
+function cacheSlides(){
+	console.log("caching slides");
+	var tmpPath = "url("+pathToSlides +slideQuality+"/"+ presentationID +"/"+ slideArray[countIndex(currentSlideIndex+1)].slideName+")";	
+	$('#player5_preloader1').css("background-image", tmpPath);	
+	tmpPath = "url("+pathToSlides +slideQuality+"/"+ presentationID +"/"+ slideArray[countIndex(currentSlideIndex-1)].slideName+")";	
+	$('#player5_preloader2').css("background-image", tmpPath);		
+			
 }
 
 function videoSeekHandler(){

@@ -49,6 +49,7 @@ function showEmbedModalWindow(){
 function resizePlayerContainer(playerHeight) { 
 	//Add kind of padding
 	playerHeight += 0;
+	console.log("setting height -------------------------------------------------------------------------");
 	$('#playerPanel').css({ height: playerHeight });
 	$('.gradientLeftPlayer').css({ height: (playerHeight + 144) });	
 	$('.gradientRightPlayer').css({ height: (playerHeight + 144) });		

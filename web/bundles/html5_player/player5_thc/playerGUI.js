@@ -37,7 +37,9 @@ function recalculateGUI(event, ui){
 	decideSlideQuality($('#player5_slideContainer').width());	
 	recalculateControlsPosition();
 	//External method for adapting the website
-	resizePlayerContainer(stageHeight+65);
+	if(buildConfig != 1){
+		resizePlayerContainer(stageHeight+65);			
+	}	
 }
 
 function recalculateControlsPosition(){

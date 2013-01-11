@@ -407,8 +407,13 @@ class AccountController extends Controller
 
     private function resizeImage($imageName, $width = 0, $height = 0) {
         list($width_orig, $height_orig) = getimagesize($imageName);
-        $width = $width_orig * 0.5;
-        $height = $height_orig * 0.5;
+		if($width_orig > 500){
+			$width = 500;
+			$height = ($height_orig * $width) / $width_orig;
+		} else {
+			$width = $width_orig;
+			$height = $height_orig;			
+		}
 
         $original = imagecreatefromjpeg($imageName);
         $resampled = imagecreatetruecolor($width, $height);

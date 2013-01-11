@@ -5,7 +5,7 @@
 #}
 
 {% set form = accountEditForm %}
-{% set action = '' %}
+{% set action = '#' %}
 
 <form action="{{ action }}" method='POST' {{ form_enctype(form) }} class="accountEditForm">    
       <div class="errory">{{ form_errors(form) }}{{ message }}</div>

@@ -39,11 +39,13 @@
 {% endblock %}
 
 {% block metaTags %}
-	{% if presentation.description is not null %}
-		<meta name="description" content="{{ presentation.description }}" />    	
-	{% else %} 
-		<meta name="description" content="{{ presentation.title }}" />    
-	{% endif %}        
+	{% if presentation.description is defined %}
+        {% if presentation.description is not null %}
+            <meta name="description" content="{{ presentation.description }}" />    	
+        {% else %} 
+            <meta name="description" content="{{ presentation.title }}" />    
+        {% endif %}  
+    {% endif %}
 {% endblock %}
 
 {% block stylesheet %}
@@ -126,7 +128,7 @@
         	
         <div class="presentationServicesVideo">
           <div class="presentationDescInfo sharePadding">SHARE</div>                
-					<a href="http://www.facebook.com/sharer.php?u={{ app.request.uri }}&amp;t=I watched {{ presentation.title|e('html') }} | {{ presentation.listSpeakersNames|e('html') }} at SlidesLive" title="Share to Facebook" target="_blank"><div class="shareFB"></div></a>
+					<a href="http://www.facebook.com/" title="Share to Facebook" target="_blank"><div class="shareFB"></div></a>
   					<a href="" title="Share to Twitter"><div class="shareTwitter"></div></a>
   					<a href="" title="Share to G+"><div class="shareGoogle"></div></a>	
   					<a href="" title="Email to friend"><div class="shareMail"></div></a>

@@ -30,7 +30,7 @@ function initVariables(){
 		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
 		pathToPlayerFiles = "/SlidesLive/web/bundles/html5_player/player5_thc/";					
 	}else if(buildConfig == 3){
-		pathToXMLStorage = "http://www.slideslive.com/data/PresentationXMLs/";
+		pathToXMLStorage = "http://slideslive.com/data/PresentationXMLs/";
 		pathToSlides = "http://www.slideslive.com/data/PresentationSlides/";
 		pathToPlayerFiles = "/SlidesLive_dev/web/bundles/html5_player/player5_thc/";			
 	}else{
@@ -61,6 +61,7 @@ function createDOMPlayer(){
 "	<div id=\"player5_videoContainer\">You do not have flash player or Javascript enabled. I am unable to play anything :(</div>"+
 "	<div class=\"clearfix\" id=\"player5_slideContainer\">"+
 "		<div id=\"player5_slideLoader\">"+
+"			<div id=\"player5_slideNumbers\"></div>"+
 "			<div id=\"player5_slideControls\" class=\"clearfix\">"+
 "				<div id=\"player5_syncSlide\" class=\"slideButton playerButtonsSpace\"></div>"+     
 "				<div id=\"player5_prevSlide\" class=\"slideButton playerButtonsSpace\"></div>"+        
@@ -89,6 +90,7 @@ function loadPresentationXML() {
 		var request = $.ajax({
             url:xmlPath,
             type:'GET',
+			crossDomain: true,
             dataType:"xml",
 			success: xmlRequestReady
         });

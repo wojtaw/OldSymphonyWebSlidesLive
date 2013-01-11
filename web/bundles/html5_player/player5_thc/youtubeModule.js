@@ -13,6 +13,16 @@ function createYoutubePlayer(externalServiceID){
 
 function onYouTubeIframeAPIReady(){
 	playerYT = new YT.Player('player5_videoContainer', {
+	  playerVars: {
+	  	enablejsapi: 1,
+     	modestbranding: 1,
+		controls: 2,
+		disablekb: 1,
+		autohide: 1,
+		iv_load_policy: 3,
+		showinfo: 0,
+		autoplay: 0
+	  },		
 	  height: '300',
 	  width: '544',
 	  videoId: this.externalServiceID,

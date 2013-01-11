@@ -38,6 +38,7 @@ function recalculateGUI(event, ui){
 	recalculateControlsPosition();
 	//External method for adapting the website
 	if(buildConfig != 1){
+		console.log("resizing player to"+stageHeight);
 		resizePlayerContainer(stageHeight+65);			
 	}	
 }

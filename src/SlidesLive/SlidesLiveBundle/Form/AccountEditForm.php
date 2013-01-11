@@ -44,8 +44,8 @@ class AccountEditForm extends SimpleForm {
     $builder->add('new_password', 'repeated', array(
         'type' => 'password',
         'invalid_message' => 'The password fields must match.',
-        'first_name' => 'New Password:',
-        'second_name' => 'New Password again:',
+        'first_name' => 'New_Password:',
+        'second_name' => 'New_Password_again:',
         'property_path' => false,
       )
     );

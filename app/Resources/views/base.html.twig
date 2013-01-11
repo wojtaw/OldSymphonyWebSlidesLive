@@ -79,7 +79,7 @@
 			{% if is_granted('ROLE_USER') %}
 			   <div class="accountServiceBar">
 			   <div class="accountBarContent">  
-                   <img src="{{ asset(app.user.getImage('avatars', true)) }}" class="accountBarThumbnail" />                            
+                   <img src="{{ asset(app.user.getImage('avatars', true)) }}" alt="Account thumbnail" class="accountBarThumbnail" />                            
 				   <div class="accountBarMenu globalFont">
 					 <a href="{{ path('account', {'accountCanName': app.user.canonicalName}) }}">{{ app.user.name }}</a><span class="accountBarMenuSeparator">|</span>			   
 					 <a href="{{ path('managePresentations', {'presentationId':-1}) }}">My Presentations</a><span class="accountBarMenuSeparator">|</span>	

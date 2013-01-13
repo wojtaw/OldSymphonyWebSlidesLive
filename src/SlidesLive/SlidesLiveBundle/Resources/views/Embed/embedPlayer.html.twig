@@ -44,7 +44,8 @@
 				mediaID: "{{ presentation.serviceId }}",			
 			{% endif %}	
 			widthScale: scaledWidth,
-			isEmbed: true,				
+			isEmbed: true,	
+			isPaid: "{% if presentation.isPaid %}true{% else %}false{% endif %}",				
 		};
 		var params = {
 			scale: "exactfit",

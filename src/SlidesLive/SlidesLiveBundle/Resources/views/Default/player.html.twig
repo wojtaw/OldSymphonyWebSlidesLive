@@ -42,7 +42,7 @@
 			mediaType: serviceType,
 			mediaID: serviceID,						
 			widthScale: scaledWidth,
-			isPaid: true,				
+			isPaid: "{% if presentation.isPaid %}true{% else %}false{% endif %}",				
 		};
 		var params = {
 			scale: "exactfit",

@@ -126,7 +126,14 @@ class Presentation {
      * @ORM\Column(name="show_speaker", type="boolean")
      */
     protected $showSpeaker;
-
+	
+    /**
+     * @var boolean $isPaid
+     *
+     * @ORM\Column(name="is_paid", type="boolean")
+     */
+    protected $isPaid;	
+	
     /**
      * @var string hash
      *
@@ -463,7 +470,7 @@ class Presentation {
     public function setShowSpeaker($showSpeaker)
     {
         $this->showSpeaker = $showSpeaker;
-    }
+    }	
 
     /**
      * Get showSpeaker
@@ -474,6 +481,26 @@ class Presentation {
     {
         return $this->showSpeaker;
     }
+	
+    /**
+     * Set isPaid
+     *
+     * @param boolean $isPaid
+     */
+    public function setIsPaid($isPaid)
+    {
+        $this->isPaid = $isPaid;
+    }	
+	
+    /**
+     * Get isPaid
+     *
+     * @return boolean
+     */
+    public function getIsPaid()
+    {
+        return $this->isPaid;
+    }	
 
     /**
      * Set account

@@ -1,5 +1,7 @@
 ﻿package slideslive.gui
 {
+	import com.google.analytics.AnalyticsTracker;
+	import com.google.analytics.GATracker;
 	import com.greensock.*;
 	
 	import flash.display.*;
@@ -48,6 +50,7 @@
 		private var videoSlideWrapper:MovieClip = new MovieClip();
 		private var videoStream:PlayerClip;
 		private var tmpFill:TmpWrap = new TmpWrap();
+		private var buyDialog:BuyDialog;
 		
 		private var slider:Slider;
 		private var embedLogo:EmbedLogo;
@@ -56,6 +59,7 @@
 		private var videoContainerHeight:Number;
 		
 		private var error:ErrorHandler;		
+		private var gaTracker:AnalyticsTracker;
 		
 		public function PlayerGUI(playerValues:PlayerValues, error:ErrorHandler)
 		{
@@ -66,6 +70,7 @@
 		public function initGUI():void{
 			PlayerOutput.printLog("GUI is initializing");
 			
+			initGoogleAnalytics();
 			if(!playerValues.isDebugMode()) tmpFill.visible = false;
 			addChild(tmpFill);
 			addChild(videoSlideWrapper);
@@ -100,6 +105,14 @@
 			scalePlayer();
 			//Very last thing - fire evnet, that GUI is ready
 			dispatchEvent(new GeneralEvents("GUI is ready"));
+		}
+		
+		private function initGoogleAnalytics():void {
+			gaTracker = new GATracker(this, "UA-33478098-1", "AS3",false);
+		}		
+		
+		public function getTracker():AnalyticsTracker {
+			return gaTracker;		
 		}
 		
 		//Tmp scaling function
@@ -441,5 +454,20 @@
 			videoControls.showNormalState();
 			
 		}
+		
+		public function showBuyDialog(presentationID:int):void {
+			buyDialog = new BuyDialog(gaTracker, presentationID);
+			buyDialog.x = (playerValues.playerStageWidth - buyDialog.width) / 2;
+			buyDialog.y = (playerValues.playerStageHeight - buyDialog.height) / 2;
+			addChild(buyDialog);
+		}
+		
+		public function disablePlayer():void {
+			videoSlideWrapper.alpha = 0.2;
+		}
+		
+		public function enablePlayer():void {
+			videoSlideWrapper.alpha = 1;
+		}		
 	}
 }

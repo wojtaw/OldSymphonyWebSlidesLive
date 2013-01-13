@@ -414,7 +414,7 @@ class AccountController extends Controller
 			$width = $width_orig;
 			$height = $height_orig;			
 		}
-
+/*
         $original = imagecreatefromjpeg($imageName);
         $resampled = imagecreatetruecolor($width, $height);
 
@@ -423,6 +423,7 @@ class AccountController extends Controller
 
         imagedestroy($original);
         imagedestroy($resampled);
+		*/
     }
                      
 }

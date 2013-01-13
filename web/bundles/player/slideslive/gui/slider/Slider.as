@@ -53,7 +53,7 @@ package slideslive.gui.slider
 			addChild(sliderBar);
 			addChild(sliderSeeker);
 			addChild(sliderBalance);
-			addChild(zoomText);
+			//addChild(zoomText);
 
 			//Init variables
 			trackWidth = sliderBar.width;

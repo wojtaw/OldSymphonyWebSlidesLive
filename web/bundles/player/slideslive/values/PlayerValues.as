@@ -3,7 +3,7 @@
 	public class PlayerValues
 	{
 		//Configuration
-		public static const buildConfiguration:int = 3; //1 - local HDD testing, 2 - local HDD anything, 3 - localhost, 4 - production
+		public static const buildConfiguration:int = 3; //1 - local HDD testing, 2 - local HDD anything, 3 - localhost and production
 		private var isDebug:Boolean = false;
 		
 		//Paths
@@ -25,6 +25,7 @@
 		private var presentationModule:String;
 		private var presentationParameter:String;
 		private var isEmbed:Boolean=false;
+		private var isLecturePaid:Boolean=false;
 		public var scaleToWidth:Number = -1;
 		
 		//GUI values
@@ -69,7 +70,17 @@
 		public function isEmbedded():Boolean
 		{
 			return isEmbed;
-		}		
+		}
+		
+		public function setPaid(value:Boolean):void
+		{
+			isLecturePaid = value;
+		}			
+		
+		public function isPaid():Boolean
+		{
+			return isLecturePaid;
+		}			
 		
 		public function setSlideAvailable(value:Boolean):void
 		{

@@ -86,6 +86,7 @@ package slideslive.start
 				playerValues.setSlideAvailable(true);
 				playerValues.setVideoAvailable(true);
 				playerValues.setEmbed(true);
+				playerValues.setPaid(false);
 				
 				playerValues.setPathToImages("SAMPLE_DATA/presentationImages/");
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");
@@ -95,10 +96,12 @@ package slideslive.start
 				playerValues.setDebugMode(false);
 				playerValues.setPresentationID(38889365);
 				playerValues.setPresentationModule("YOUTUBE");
-				playerValues.setPresentationParameter("srLqSEWiess");
+				//playerValues.setPresentationParameter("54191131");
+				playerValues.setPresentationParameter("HdRPBs7IfAE");
 				playerValues.setSlideAvailable(true);
 				playerValues.setVideoAvailable(true);
 				playerValues.setEmbed(false);
+				playerValues.setPaid(false);
 				//playerValues.scaleToWidth = 700;
 				
 				playerValues.setPathToImages("SAMPLE_DATA/presentationImages/");
@@ -122,6 +125,10 @@ package slideslive.start
 				//Embed is optional
 				if(flashVarObject["isEmbed"] == "true") playerValues.setEmbed(true);
 				else if(flashVarObject["isEmbed"] == "false") playerValues.setEmbed(false);
+				
+				//paid is optional
+				if(flashVarObject["isPaid"] == "true") playerValues.setPaid(true);
+				else if(flashVarObject["isPaid"] == "false") playerValues.setPaid(false);				
 				
 				//Scaling
 				if(flashVarObject["widthScale"] == null) playerValues.scaleToWidth = -1;

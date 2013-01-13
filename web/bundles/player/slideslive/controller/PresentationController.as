@@ -1,5 +1,5 @@
 package slideslive.controller
-{
+{	
 	import flash.display.Stage;
 	import flash.display.StageAlign;
 	import flash.display.StageDisplayState;
@@ -35,6 +35,7 @@ package slideslive.controller
 		private var previousSyncState:Boolean = false;
 		
 		private var presentationTimer:Timer = new Timer(100);
+		private var buyCountdown:Timer;
 		
 		private var slideLoadersArray:Array; //Array of loaders id, for slides caching
 		private var currentSlideIndex:int = 0;
@@ -58,6 +59,8 @@ package slideslive.controller
 			if(!igniteVideo()) return PlayerOutput.printError("VIDEO Ignition failed");
 			else return true;
 		}
+		
+		
 		
 		private function videoIgnited(e:GeneralEvents):Boolean{
 			PlayerOutput.printLog("VIDEO STREAM READY");
@@ -127,12 +130,22 @@ package slideslive.controller
 			playerGUI.addEventListener(GeneralEvents.SLIDEQUALITY, decideSlideQuality);
 			playerGUI.addEventListener(ControlsEvents.VOLUME,changeVolume);
 			playerGUI.addEventListener(ControlsEvents.SLIDESLIVELOGO,openPresentationOnSlidesLive);
+			playerGUI.addEventListener(GeneralEvents.BUYDONE, buyFinished);
 			
 			//Keyboard events
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboardInteraction);
-			stage.addEventListener(Event.FULLSCREEN, fullScreenEventFired);
+			enableKeyboardListeners();
 			
 			return true;			
+		}
+		
+		private function enableKeyboardListeners(){
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboardInteraction);
+			stage.addEventListener(Event.FULLSCREEN, fullScreenEventFired);
+		}
+		
+		private function disableKeyboardListeners(){
+			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyboardInteraction);
+			stage.removeEventListener(Event.FULLSCREEN, fullScreenEventFired);			
 		}
 		
 		private function openBigSldieHandler(e:ControlsEvents):void {
@@ -210,6 +223,8 @@ package slideslive.controller
 		
 		private function playHandler(e:ControlsEvents):void{
 			PlayerOutput.printLog("PLAY FIRED");
+			//If it's firsttime play, rund timer for buy dialog
+			if(buyCountdown == null) runBuyContdown();
 			if(isPlaying){
 				playerGUI.showPauseState();
 				videoModule.thcPauseVideo();
@@ -221,6 +236,36 @@ package slideslive.controller
 				playerGUI.recalculateGUI();
 			}
 			
+		}
+		
+		private function runBuyContdown():void {
+			
+			buyCountdown = new Timer(900,1);
+			if(playerValues.isPaid()) {
+				buyCountdown.addEventListener(TimerEvent.TIMER_COMPLETE, showBuyDialog);
+				buyCountdown.start();
+			} else {
+				//No listening, just do the timer and do not show anything
+			}
+		}
+		
+		private function showBuyDialog(e:TimerEvent):void {
+			disableKeyboardListeners();
+			playerGUI.showPauseState();
+			videoModule.thcPauseVideo();
+			isPlaying = false;
+			playerGUI.disablePlayer();
+			PlayerOutput.printLog("Showing buy dialog");
+			playerGUI.showBuyDialog(presentationID);
+		}
+		
+		private function buyFinished(e:GeneralEvents){
+			enableKeyboardListeners();
+			playerGUI.enablePlayer();
+			playerGUI.showPlayState();
+			videoModule.thcPlayVideo();
+			isPlaying = true;
+			playerGUI.recalculateGUI();			
 		}
 		
 		private function fullScreenHandler(e:Event):void{
@@ -278,7 +323,11 @@ package slideslive.controller
 
 				videoModule = new ModuleYoutube(error, playerValues.getPresentationParameter(), playerGUI.getVideoHeight()+2, playerGUI.getVideoWidth()+3);
 				//TO DO - here it might fail if event would be dispatched before this row is executed
-				videoModule.addEventListener(GeneralEvents.YT_MODULE_READY, videoIgnited);
+				videoModule.addEventListener(GeneralEvents.VIDEO_MODULE_READY, videoIgnited);
+			} else if(playerValues.getPresentationModule() == "VIMEO"){
+				videoModule = new ModuleVimeo(error, playerValues.getPresentationParameter(), playerGUI.getVideoHeight()+2, playerGUI.getVideoWidth()+3);
+				//TO DO - here it might fail if event would be dispatched before this row is executed
+				videoModule.addEventListener(GeneralEvents.VIDEO_MODULE_READY, videoIgnited);
 			} else {
 				PlayerOutput.printError("Incorrect or no module selected");
 				return false;

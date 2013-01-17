@@ -340,6 +340,10 @@ a.metaBlue {
 	padding-top:13px;
 }
 
+.secondSidebar {
+	padding-top:0px;	
+}
+
 .channelSidebarContent {
 	background-image:url(../styleImages/white-box-middle-310.png);
 	background-repeat:repeat-y;

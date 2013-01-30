@@ -188,12 +188,21 @@ class DefaultController extends Controller {
       || $presentation->getPrivacy() > $this->privacyLevel) {
 		return $this->showError(1004, $presentationId);
     }
-    // nacteni folderu vybraneho accountu
-    $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
-      ->findAccountFolders($account->getId(), $this->privacyLevel);
-    // nacteni prezentaci slozky, ktera ma byt zobrazena
-    $this->data['folderPresentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
-      ->findFolderPresentations($folder->getId(), $this->privacyLevel);
+    
+    if ($hash == null)
+    {
+        // nacteni folderu vybraneho accountu
+        $this->data['folders'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Folder')
+        ->findAccountFolders($account->getId(), $this->privacyLevel);
+        // nacteni prezentaci slozky, ktera ma byt zobrazena
+        $this->data['folderPresentations'] = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation')
+        ->findFolderPresentations($folder->getId(), $this->privacyLevel);
+    }
+    else
+    {
+        $this->data['folders'] = array();
+        $this->data['folderPresentations'] = array();
+    }
 
     $this->data['presentation'] = $presentation;
     $this->data['account'] = $account;

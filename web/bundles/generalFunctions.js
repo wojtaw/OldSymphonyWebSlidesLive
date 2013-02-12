@@ -18,7 +18,10 @@ function modifyThankyouPageAccordingOS(){
             $('#stepsMac').css("display", "none");				
 	
             if ($.client.os.toLowerCase().substring(0,3) == "win") {
-                $('#stepsWindows').css("display", "block");			
+                $('#stepsWindows').css("display", "block");		
+				modifiedUrl = "url(../bundles/static/images/steps-win.jpg)";
+                $('#thankYouSteps').css("background-image", modifiedUrl);
+                $('#thankYouSteps').css("padding-top", "190px");				
                 $('#backupLink').attr("href", appDownloadWindows);
 				setTimeout(function(){redirectDownload(appDownloadWindows);},1500);
 																	
@@ -29,6 +32,9 @@ function modifyThankyouPageAccordingOS(){
 																								
             } else if ($.client.os.toLowerCase().substring(0,3) == "mac") {
                 $('#stepsMac').css("display", "block");
+				modifiedUrl = "url(../bundles/static/images/steps-mac.jpg)";
+                $('#thankYouSteps').css("background-image", modifiedUrl);
+                $('#thankYouSteps').css("padding-top", "210px");											
                 $('#backupLink').attr("href", appDownloadMac);	
 				setTimeout(function(){redirectDownload(appDownloadMac);},1500);																				
 																				

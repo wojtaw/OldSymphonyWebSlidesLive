@@ -42,5 +42,48 @@ class EmbedController extends Controller {
         
         return $this->render('SlidesLiveBundle:Embed:embedPlayer.html.twig', $this->data);    
     }
+	
+    public function embedJSAction($presentationId) {
+		
+
+        $repository = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation');
+        $this->data = array (
+          'presentation' => null,
+          'width' => null,
+          'player' => null
+        );
+
+
+        $this->data['presentation'] = $repository->find($presentationId);
+
+        if ($this->data['presentation'] == null) {
+			return new Response('',204);                                                                                      
+        }
+		
+		if($this->data['presentation']->getExternalService()){
+			$service = $this->data['presentation']->getExternalService();			
+			$serviceID = $this->data['presentation']->getExternalMedia();
+		} else {
+			$service = $this->data['presentation']->getService();			
+			$serviceID = $this->data['presentation']->getServiceId();
+		}
+		
+		$jsonData = json_encode(array(
+			array(
+					'hasVideo' => $this->data['presentation']->getVideo(),
+					'hasSlides' => $this->data['presentation']->getSlides(),
+					'mediaType' => $service,
+					'mediaID' => $serviceID,
+					'isPaid' => $this->data['presentation']->getIsPaid()					
+			),
+		));
+		
+		$headers = array(
+			'Content-Type' => 'application/json'
+		);
+		
+		$response = new Response($jsonData, 200, $headers);
+		return $response;  
+    }	
                      
 }

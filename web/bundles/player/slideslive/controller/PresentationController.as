@@ -33,6 +33,7 @@ package slideslive.controller
 		private var isFullscreen:Boolean = false;
 		private var synchronizedSlides:Boolean = true;
 		private var previousSyncState:Boolean = false;
+		private var firstPlay = true;
 		
 		private var presentationTimer:Timer = new Timer(100);
 		private var buyCountdown:Timer;
@@ -225,6 +226,10 @@ package slideslive.controller
 			PlayerOutput.printLog("PLAY FIRED");
 			//If it's firsttime play, rund timer for buy dialog
 			if(buyCountdown == null) runBuyContdown();
+			if(firstPlay){
+				firstPlay = false;
+				checkStartSlide();
+			}
 			if(isPlaying){
 				playerGUI.showPauseState();
 				videoModule.thcPauseVideo();
@@ -238,9 +243,20 @@ package slideslive.controller
 			
 		}
 		
+		private function checkStartSlide():void
+		{
+			if(playerValues.getStartSlide() != 1){
+				currentSlideIndex = playerValues.getStartSlide()+1;
+				checkCurrentIndex();
+				reloadSlide("RELOAD");
+				jumpToTimeHandler(null);
+				playHandler(null);
+			}
+		}
+		
 		private function runBuyContdown():void {
 			
-			buyCountdown = new Timer(900,1);
+			buyCountdown = new Timer(90000,1);
 			if(playerValues.isPaid()) {
 				buyCountdown.addEventListener(TimerEvent.TIMER_COMPLETE, showBuyDialog);
 				buyCountdown.start();

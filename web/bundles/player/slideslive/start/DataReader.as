@@ -100,9 +100,12 @@ package slideslive.start
 				playerValues.setPresentationParameter("HdRPBs7IfAE");
 				playerValues.setSlideAvailable(true);
 				playerValues.setVideoAvailable(true);
-				playerValues.setEmbed(false);
+				playerValues.setEmbed(true);
 				playerValues.setPaid(false);
-				//playerValues.scaleToWidth = 700;
+				//playerValues.scaleToWidth = 1400;
+				playerValues.setVideoSlideRatio(-1);
+				playerValues.setZooming(true);
+				playerValues.setStartSlide(1);
 				
 				playerValues.setPathToImages("SAMPLE_DATA/presentationImages/");
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");
@@ -132,7 +135,19 @@ package slideslive.start
 				
 				//Scaling
 				if(flashVarObject["widthScale"] == null) playerValues.scaleToWidth = -1;
-				else playerValues.scaleToWidth = flashVarObject["widthScale"];				
+				else playerValues.scaleToWidth = flashVarObject["widthScale"];	
+				
+				//zooming is optional
+				if(flashVarObject["zoomingOn"] == "true") playerValues.setZooming(true);
+				else if(flashVarObject["zoomingOn"] == "false") playerValues.setZooming(false);	
+				
+				//VideoSlide ratio
+				if(flashVarObject["videoSlideRatio"] == null) playerValues.setVideoSlideRatio(-1);
+				else playerValues.setVideoSlideRatio(flashVarObject["videoSlideRatio"]);	
+				
+				//StartSlide
+				if(flashVarObject["startSlide"] == null) playerValues.setStartSlide(1);
+				else playerValues.setStartSlide(flashVarObject["startSlide"]);					
 				
 				playerValues.setPathToImages("http://www.slideslive.com/data/PresentationSlides/");
 				playerValues.setPathToXMLStorage("http://www.slideslive.com/data/PresentationXMLs/");	

@@ -26,6 +26,10 @@
 		private var presentationParameter:String;
 		private var isEmbed:Boolean=false;
 		private var isLecturePaid:Boolean=false;
+		private var videoSlideRatio:int=-1;
+		private var zoomingOn:Boolean=false;
+		private var startSlide:int=1;
+		
 		public var scaleToWidth:Number = -1;
 		
 		//GUI values
@@ -72,6 +76,15 @@
 			return isEmbed;
 		}
 		
+		public function isZoomingOn():Boolean
+		{
+			return zoomingOn;
+		}
+		
+		public function setZooming(value:Boolean):void
+		{
+			zoomingOn = value;
+		}			
 		public function setPaid(value:Boolean):void
 		{
 			isLecturePaid = value;
@@ -95,7 +108,27 @@
 		public function setPresentationID(value:int):void
 		{
 			presentationID = value;
-		}			
+		}
+		
+		public function getStartSlide():int
+		{
+			return startSlide;
+		}
+		
+		public function setStartSlide(value:int):void
+		{
+			startSlide = value;
+		}
+		
+		public function getVideoSlideRatio():int
+		{
+			return videoSlideRatio;
+		}
+		
+		public function setVideoSlideRatio(value:int):void
+		{
+			videoSlideRatio = value;
+		}		
 		
 		public function getPresentationModule():String
 		{

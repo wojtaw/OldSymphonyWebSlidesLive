@@ -85,18 +85,20 @@
 			if(playerValues.isEmbedded()) displayEmbedComponents();
 			//Above all slider
 			initSlider();
-			//Tmp solution for embeds TODO
-			if(playerValues.isEmbedded()){
+
+			if(!playerValues.isZoomingOn()){
 				videoSlideWrapper.y = 0;
 				slider.visible = false;
 			} else {
-				videoSlideWrapper.y = slider.height;
+				videoSlideWrapper.y = slider.height;				
 			}
+			
 			tmpFill.y = videoSlideWrapper.y;
 			
-			//Check if there are special cases like video or audio only
+			//Check if there are special cases like video or audio only, or different ratio
 			if(playerValues.isSlideAvailable() && !playerValues.isVideoAvailable()) showSlidesOnly();
 			if(!playerValues.isSlideAvailable() && playerValues.isVideoAvailable()) showVideoOnly();
+			if(playerValues.getVideoSlideRatio() != -1) changeVideoSlideDefaultRatio(playerValues.getVideoSlideRatio());
 			
 			//Timers and listeners
 			initTimerToHideControls();
@@ -121,6 +123,10 @@
 			if(playerValues.scaleToWidth != -1){
 				trace("SCALING PLAYER TO "+scaleWidth / 960);
 				var tmpScale:Number = scaleWidth / 960;
+				slider.scaleX = tmpScale;
+				slider.scaleY = tmpScale;
+				trace(slider.width);
+				slider.x = scaleWidth - slider.width - 30; 
 				videoSlideWrapper.scaleX = tmpScale;
 				videoSlideWrapper.scaleY = tmpScale;
 			}
@@ -202,7 +208,8 @@
 			playerValues.playerStageWidth = 960;
 			playerValues.playerStageHeight = videoSlideWrapper.y + videoSlideWrapper.height;
 			var isAvailable:Boolean = ExternalInterface.available;
-			ExternalInterface.call("resizePlayerContainer", playerValues.playerStageHeight);	
+			if(playerValues.isEmbedded()) ExternalInterface.call("resizeEmbedBridge", playerValues.playerStageHeight);
+			else ExternalInterface.call("resizePlayerContainer", playerValues.playerStageHeight);
 		}		
 		
 		private function recalculateSlidesAndVideoContainers(size:Number){
@@ -343,6 +350,12 @@
 			videoSlideWrapper.y = 0;
 			//Fire fictional event to simulate slides only slider position
 			sliderMoved(new GeneralEvents("SliderMoved",0));
+		}
+		
+		private function changeVideoSlideDefaultRatio(newRatio:int){
+			//Recalculate 0-100 to appropriate value
+			var calculatedWidth = (newRatio / 100) * playerValues.playerStageWidth;
+			sliderMoved(new GeneralEvents("SliderMoved",calculatedWidth));
 		}
 		
 		private function embedOver(e:MouseEvent){

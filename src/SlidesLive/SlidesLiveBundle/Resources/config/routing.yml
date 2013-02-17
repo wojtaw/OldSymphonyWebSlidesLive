@@ -90,6 +90,12 @@ embed:
       presentationId: \d+
       customWidth: \d+	  	
          
+embedJS:
+    pattern: /embedjsonapi/{presentationId}
+    defaults: { _controller: SlidesLiveBundle:Embed:embedJS} 
+    requirements:
+      presentationId: \d+	 
+        
 account:
     pattern: /{accountCanName}
     defaults: { _controller: SlidesLiveBundle:Default:account }

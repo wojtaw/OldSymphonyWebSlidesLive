@@ -55,6 +55,10 @@
 		};
 		var attributes = {};
 		
+		function resizeEmbedBridge(newHeight) {
+			//Check if slideslive var is defined - this embed is new JavaScript, not old iframe only
+			if(typeof(parent.slidesLive)!=='undefined')	parent.slidesLive.resizePlayerContainer(newHeight);
+		}	
 	
     	swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
     </script>  

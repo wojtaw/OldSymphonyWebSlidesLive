@@ -4,6 +4,7 @@ namespace SlidesLive\SlidesLiveBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class PlayerController extends Controller {
 
@@ -19,8 +20,20 @@ class PlayerController extends Controller {
 		}
     }
 	
-	public function addNoteAction($presentationId) {
-		//Check if user is logged, and find what user it is
+	public function addNoteAction(Request $request) {
+		$presentationID = $request->request->get('presentationID');
+		$noteContent = $request->request->get('noteContent');
+		if($presentationID == null)	return new Response('Presentation ID or note content is not included',412);
+		if($noteContent == null) return new Response('Presentation ID or note content is not included',412);
+
+		//Check if user is logged, and find what user it is or return 401 CODE
+		$securityContext = $this->container->get('security.context');
+		if( !$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+			return new Response('NOT LOGGED IN',401);				
+		}
+				
+		$user = $this->get('security.context')->getToken()->getUser();
+		echo "User".$user->getId();
 		
 		//Find the presentation
 		
@@ -56,7 +69,8 @@ class PlayerController extends Controller {
 		*/
 
         
-        //return $this->render('SlidesLiveBundle:Embed:embedPlayer.html.twig', $this->data);    		
+        //return $this->render('SlidesLiveBundle:Embed:embedPlayer.html.twig', $this->data);   
+			return new Response('TEST',200);  		 		
 	}
                      
 }

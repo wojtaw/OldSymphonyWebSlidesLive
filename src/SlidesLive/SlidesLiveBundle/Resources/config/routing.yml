@@ -84,8 +84,14 @@ phpInfo:
 
 # -----PUBLIC PRESENTATION------------------------------------------------------
 playerUser:
-    pattern: /player_thc_api/user_auth
-    defaults: { _controller: SlidesLiveBundle:Player:userAuth}  
+    pattern: /player_api/user_auth
+    defaults: { _controller: SlidesLiveBundle:Player:userAuth} 
+     
+playerAddNote:
+    pattern: /player_api/add_note
+    defaults: { _controller: SlidesLiveBundle:Player:addNote} 	 
+    requirements:
+      _method: POST	
       
 # -----PUBLIC PRESENTATION------------------------------------------------------ 
 embed:

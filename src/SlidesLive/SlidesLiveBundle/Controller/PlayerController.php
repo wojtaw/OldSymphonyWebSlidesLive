@@ -38,59 +38,29 @@ class PlayerController extends Controller {
 			return new Response('NOT LOGGED IN',401);				
 		}
 		
-		//Find account and presentation
+		//Find account and presentation and validate them
 		$em = $this->getDoctrine()->getEntityManager();	
 		
 		$accountId = $this->get('security.context')->getToken()->getUser()->getId();
 		
 		$account = $em->getRepository('SlidesLiveBundle:Account')->find($accountId);
+		$presentation = $em->getRepository('SlidesLiveBundle:Presentation')->find($presentationID);
 		
-		echo $account->getUsername();
+		if($presentation == null) return new Response('Presentation does not exists',404);	
+		if($account == null) return new Response('Account does not exists',404);			
+		
 		//Create new note with content
 		$note = new Note();
 		$note->setTimecode($timecode);
 		$note->setTextContent($noteContent);	
-		
+		$note->setAccount($account);
+		$note->setPresentation($presentation);					
 		
 		//Save stuff to database
+		$em->persist($note);
+		$em->flush();		
 		
-		
-		//Find the presentation
-		
-		//Add note connecting presentation and user
-		
-
-		/*
-        $repository = $this->getDoctrine()->getRepository('SlidesLiveBundle:Presentation');
-        $this->data = array (
-          'presentation' => null,
-          'width' => null,
-          'player' => null
-        );
-
-        
-        $this->data['presentation'] = $repository->find($presentationId);
-        if ($this->data['presentation'] == null) {
-          return $this->render('SlidesLiveBundle:Embed:embedPlayer.html.twig', $this->data);                                                                                        
-        }
-		
-		if($customWidth == null) $this->data['width'] = 960;
-		else $this->data['width'] = $customWidth;	
-        
-         
-        if ($this->data['presentation']->getVideo()) {
-          if (isset($_GET['player']) && ($_GET['player'] == "audio" || $_GET['player'] == "video")) {
-            $this->data['player'] = $_GET['player'];        
-          }        
-        }
-        else {
-          $this->data['player'] = "audio";        
-        }
-		*/
-
-        
-        //return $this->render('SlidesLiveBundle:Embed:embedPlayer.html.twig', $this->data);   
-			return new Response('TEST',200);  		 		
+		return new Response('TEST',200);  		 		
 	}
                      
 }

@@ -770,6 +770,16 @@ h2 {
 	top:30%;
 }
 
+.planTitle{
+	font-size:30px;
+	position:relative;
+}
+
+.planText2{
+	font-size:20px;
+	position:relative;
+}
+
 .planTextLessImportant {
 	text-decoration:line-through;
 	color:#666666;

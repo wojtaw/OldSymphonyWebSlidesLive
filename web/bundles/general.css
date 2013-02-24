@@ -398,3 +398,7 @@ h2.error{
 	height: auto !important;
 	height: 100%;	
 }
+
+.turnBlockOff {
+	display:none !important;	
+}

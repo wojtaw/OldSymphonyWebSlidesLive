@@ -27,7 +27,7 @@
 		private var isEmbed:Boolean=false;
 		private var isLecturePaid:Boolean=false;
 		private var videoSlideRatio:int=-1;
-		private var zoomingOn:Boolean=false;
+		private var zoomingOn:Boolean=true;
 		private var startSlide:int=1;
 		
 		public var scaleToWidth:Number = -1;

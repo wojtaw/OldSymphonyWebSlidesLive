@@ -208,7 +208,7 @@
 			playerValues.playerStageWidth = 960;
 			playerValues.playerStageHeight = videoSlideWrapper.y + videoSlideWrapper.height;
 			var isAvailable:Boolean = ExternalInterface.available;
-			if(playerValues.isEmbedded()) ExternalInterface.call("resizeEmbedBridge", playerValues.playerStageHeight);
+			if(playerValues.isEmbedded()) ExternalInterface.call("resizeEmbedBridge", playerValues.playerStageHeight, playerValues.getPresentationID());
 			else ExternalInterface.call("resizePlayerContainer", playerValues.playerStageHeight);
 		}		
 		

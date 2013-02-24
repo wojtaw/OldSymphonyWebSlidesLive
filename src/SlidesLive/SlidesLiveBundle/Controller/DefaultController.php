@@ -209,7 +209,7 @@ class DefaultController extends Controller {
 	if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
 		$accountId = $this->get('security.context')->getToken()->getUser()->getId();
 		$notes = $this->getDoctrine()->getRepository('SlidesLiveBundle:Note')->findUsersPresentationNotes($presentationId, $accountId);		
-		echo count($notes);
+    	$this->data['notes'] = $notes;
 	}
 
     $this->data['presentation'] = $presentation;

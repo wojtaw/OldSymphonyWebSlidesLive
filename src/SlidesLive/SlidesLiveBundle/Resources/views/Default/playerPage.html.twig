@@ -111,6 +111,16 @@
         </div>
     
         <div class="presentationDetailsVideo">
+        {% if notes is defined %}
+        	<ul>
+          {% for note in notes %}
+            <li>
+              Note at: {{ note.timecode }} - {{ note.textContent }} 
+            </li>
+          {% endfor %} 
+          </ul>
+        {% endif %}
+            
           {% if presentation.dateRecorded is not null %}  
             <div class="presentationDescInfo" itemprop="description">
               Uploaded by

@@ -60,7 +60,7 @@ class PlayerController extends Controller {
 		$em->persist($note);
 		$em->flush();		
 		
-		return new Response('TEST',200);  		 		
+		return new Response('NOTE ADDED',200);  		 		
 	}
                      
 }

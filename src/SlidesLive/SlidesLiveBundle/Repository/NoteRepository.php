@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class NoteRepository extends EntityRepository
 {
+    public function findUsersPresentationNotes($presentationId, $accountId) {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery("
+            SELECT n FROM SlidesLiveBundle:Note n
+            INNER JOIN n.presentation p
+			LEFT JOIN n.account a
+            WHERE p.id = :presentationId
+			AND a.id = :accountId
+            ORDER BY n.timecode DESC")
+        ->setParameters(array(
+          'presentationId' => sprintf('%s', $presentationId),
+		  'accountId' => sprintf('%s', $accountId))
+        );
+        return $query->getResult();
+    }
+	
 }

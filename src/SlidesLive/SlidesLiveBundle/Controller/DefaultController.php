@@ -203,6 +203,14 @@ class DefaultController extends Controller {
         $this->data['folders'] = array();
         $this->data['folderPresentations'] = array();
     }
+	
+	//If user is logged, find notes and add them
+	$securityContext = $this->container->get('security.context');
+	if( $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+		$accountId = $this->get('security.context')->getToken()->getUser()->getId();
+		$notes = $this->getDoctrine()->getRepository('SlidesLiveBundle:Note')->findUsersPresentationNotes($presentationId, $accountId);		
+		echo count($notes);
+	}
 
     $this->data['presentation'] = $presentation;
     $this->data['account'] = $account;

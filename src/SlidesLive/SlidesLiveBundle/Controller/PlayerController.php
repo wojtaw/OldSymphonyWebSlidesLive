@@ -62,5 +62,4 @@ class PlayerController extends Controller {
 		
 		return new Response('NOTE ADDED',200);  		 		
 	}
-                     
 }

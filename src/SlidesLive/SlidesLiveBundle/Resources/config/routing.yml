@@ -82,7 +82,11 @@ phpInfo:
   pattern: /admin/phpinfo
   defaults: { _controller:SlidesLiveBundle:Admin:phpInfo }
 
-# -----PUBLIC PRESENTATION------------------------------------------------------ 
+# -----PUBLIC PRESENTATION------------------------------------------------------
+playerUser:
+    pattern: /player_thc_api/user_auth
+    defaults: { _controller: SlidesLiveBundle:Player:userAuth}  
+      
 # -----PUBLIC PRESENTATION------------------------------------------------------ 
 embed:
     pattern: /embed/{presentationId}/{customWidth}

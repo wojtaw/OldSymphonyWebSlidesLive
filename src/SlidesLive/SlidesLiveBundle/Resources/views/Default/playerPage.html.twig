@@ -210,7 +210,9 @@
     </div>         
   {% endblock sideBar %}
   
-  <script type="text/javascript">
-    startPresentationNotesRefresh();
-  </script>    
+    {% if is_granted('ROLE_USER') %}
+	  <script type="text/javascript">
+        startPresentationNotesRefresh({{ presentation.id }});
+      </script>    
+    {% endif %}  
 {% endblock content %}    

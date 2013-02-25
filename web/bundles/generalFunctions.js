@@ -7,6 +7,8 @@
  var appDownloadLinux = "http://slideslive.com/data/SL_Recorder/SL_Linux.zip";
  var appDownloadMac = "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg";
  var appDownloadAll = "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip";
+ var playerRetrieveNotesURL = "http://localhost/SlidesLive/web/app_dev.php/player_api/get_notes";
+ var presentationID;
  
  var notesInterval;
 
@@ -159,12 +161,30 @@ function incorrectLoginAction(){
 	$('#password').css("border-color", "#FF3300");				
 }
 
-function startPresentationNotesRefresh(){
+function startPresentationNotesRefresh(presentationID){
+	if(typeof(presentationID)!=='undefined') this.presentationID = presentationID;
 	notesInterval = setTimeout(refreshNotes,1000);    
 }
 
 function refreshNotes(){
-	console.log("Notess jeje");
+	console.log("Sending ajax with pres. id"+presentationID);
+	var request = $.ajax({
+        url: playerRetrieveNotesURL,
+        type: "post",
+        data: "presentationID="+presentationID,
+		dataType: "json",
+		success: notesResponse,
+		error: function(e) {
+			if(e.status == 401) console.log("User is not logged, no notes available");
+			if(e.status == 412) console.log("Presentation ID not provided");			
+		}
+    });
+}
+
+function notesResponse(dataCheck, statusCode, thing){
+	console.log("Recieved response"+dataCheck);
+	console.log("code"+statusCode);
+	console.log("last thing"+thing);	
 }
 
 

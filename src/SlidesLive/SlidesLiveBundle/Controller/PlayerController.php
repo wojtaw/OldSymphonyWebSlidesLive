@@ -86,16 +86,17 @@ class PlayerController extends Controller {
 			//Check if not to append	
 			$timecode = $note->getTimecode();
 			$noteText = $note->getTextContent();
-			if(isset($exportedNotes[$timecode])){
-				$exportedNotes[$timecode] = $exportedNotes[$timecode]."\r\n".$noteText;
-			} else {
-				$exportedNotes[$timecode] = $noteText;
-			}
+			$tmpNote = array(
+				"timecode" => $timecode,
+				"noteText" => $noteText				
+			);
+			
+			array_push($exportedNotes, $tmpNote);
 		}  		
 		$jsonData = json_encode(array($exportedNotes));
 		
 		$headers = array(
-			'Content-Type' => 'application/json'
+			'Content-Type' => 'application/json; charset=utf-8'
 		);
 		
 		$response = new Response($jsonData, 200, $headers);

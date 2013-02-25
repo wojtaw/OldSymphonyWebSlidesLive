@@ -177,14 +177,13 @@ function refreshNotes(){
 		error: function(e) {
 			if(e.status == 401) console.log("User is not logged, no notes available");
 			if(e.status == 412) console.log("Presentation ID not provided");			
-		}
+		},
+		complete: startPresentationNotesRefresh
     });
 }
 
-function notesResponse(dataCheck, statusCode, thing){
-	console.log("Recieved response"+dataCheck);
-	console.log("code"+statusCode);
-	console.log("last thing"+thing);	
+function notesResponse(responseText){
+	console.log("Recieved response"+responseText[0][2].timecode);
 }
 
 

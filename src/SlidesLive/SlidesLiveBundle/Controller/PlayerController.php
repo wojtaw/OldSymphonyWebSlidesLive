@@ -93,7 +93,7 @@ class PlayerController extends Controller {
 			
 			array_push($exportedNotes, $tmpNote);
 		}  		
-		$jsonData = json_encode(array($exportedNotes));
+		$jsonData = json_encode($exportedNotes);
 		
 		$headers = array(
 			'Content-Type' => 'application/json; charset=utf-8'

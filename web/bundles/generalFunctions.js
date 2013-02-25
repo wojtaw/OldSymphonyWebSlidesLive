@@ -11,6 +11,7 @@
  var presentationID;
  
  var notesInterval;
+ var notesList = new Array();
 
 function redirectDownload(redirectUrl){
 	window.location.replace(redirectUrl);
@@ -167,7 +168,6 @@ function startPresentationNotesRefresh(presentationID){
 }
 
 function refreshNotes(){
-	console.log("Sending ajax with pres. id"+presentationID);
 	var request = $.ajax({
         url: playerRetrieveNotesURL,
         type: "post",
@@ -183,7 +183,10 @@ function refreshNotes(){
 }
 
 function notesResponse(responseText){
-	console.log("Recieved response"+responseText[0][2].timecode);
+	if(notesList.length != responseText.length){
+		notesList = responseText;
+		console.log("updating list");
+	}
 }
 
 

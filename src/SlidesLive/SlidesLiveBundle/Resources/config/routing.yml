@@ -34,6 +34,23 @@ registration:
 #    pattern: /registration/result
 #    defaults: { _controller: SlidesLiveBundle:Registration:result }
     
+# -----PLAYER API------------------------------------------------------
+playerUser:
+    pattern: /player_api/user_auth
+    defaults: { _controller: SlidesLiveBundle:Player:userAuth} 
+     
+playerAddNote:
+    pattern: /player_api/add_note
+    defaults: { _controller: SlidesLiveBundle:Player:addNote} 	 
+    requirements:
+      _method: POST	
+      
+playerGetNote:
+    pattern: /player_api/get_notes
+    defaults: { _controller: SlidesLiveBundle:Player:retrieveNotes} 	 
+    requirements:
+      _method: POST	
+      
 # ------ACCOUNT MANAGEMENT------------------------------------------------------ 
 manageAccount:
   pattern:  /account
@@ -81,24 +98,7 @@ resetPassword:
 phpInfo:
   pattern: /admin/phpinfo
   defaults: { _controller:SlidesLiveBundle:Admin:phpInfo }
-
-# -----PUBLIC PRESENTATION------------------------------------------------------
-playerUser:
-    pattern: /player_api/user_auth
-    defaults: { _controller: SlidesLiveBundle:Player:userAuth} 
-     
-playerAddNote:
-    pattern: /player_api/add_note
-    defaults: { _controller: SlidesLiveBundle:Player:addNote} 	 
-    requirements:
-      _method: POST	
-      
-playerAddNote:
-    pattern: /player_api/get_notes
-    defaults: { _controller: SlidesLiveBundle:Player:retrieveNotes} 	 
-    requirements:
-      _method: POST	
-      
+           
 # -----PUBLIC PRESENTATION------------------------------------------------------ 
 embed:
     pattern: /embed/{presentationId}/{customWidth}

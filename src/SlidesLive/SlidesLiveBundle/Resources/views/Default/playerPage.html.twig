@@ -60,7 +60,9 @@
   <script type="text/javascript" src="{{ asset('bundles/jquery.simplemodal.1.4.3.full.js') }}">
   </script>    
   <script type="text/javascript" src="{{ asset('bundles/html5_player/player5_thc/player5_thc.js') }}">
-  </script>          
+  </script> 
+  <script type="text/javascript" src="{{ asset('bundles/html5_player/player5_thc/player5_thc.js') }}">
+  </script>  
   
     
 {% endblock %}
@@ -207,4 +209,8 @@
       <div class="sidebarBottom"></div>
     </div>         
   {% endblock sideBar %}
+  
+  <script type="text/javascript">
+    startPresentationNotesRefresh();
+  </script>    
 {% endblock content %}    

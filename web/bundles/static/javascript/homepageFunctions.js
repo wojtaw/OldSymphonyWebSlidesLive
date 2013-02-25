@@ -21,6 +21,5 @@ function modifyDownloadAccordingOS(){
 function showEmbedPlayer(){
 	console.log("Hello world");
 	$('.embedPlayer').css("visibility", "visible");	
-	
 }
 

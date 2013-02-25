@@ -6,7 +6,9 @@
  var appDownloadWindows = "http://slideslive.com/data/SL_Recorder/SL_Windows.zip";
  var appDownloadLinux = "http://slideslive.com/data/SL_Recorder/SL_Linux.zip";
  var appDownloadMac = "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg";
- var appDownloadAll = "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip";   
+ var appDownloadAll = "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip";
+ 
+ var notesInterval;
 
 function redirectDownload(redirectUrl){
 	window.location.replace(redirectUrl);
@@ -156,3 +158,15 @@ function incorrectLoginAction(){
 	$('#username').css("border-color", "#FF3300");	
 	$('#password').css("border-color", "#FF3300");				
 }
+
+function startPresentationNotesRefresh(){
+	notesInterval = setTimeout(refreshNotes,1000);    
+}
+
+function refreshNotes(){
+	console.log("Notess jeje");
+}
+
+
+
+

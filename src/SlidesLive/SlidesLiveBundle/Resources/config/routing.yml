@@ -93,6 +93,12 @@ playerAddNote:
     requirements:
       _method: POST	
       
+playerAddNote:
+    pattern: /player_api/get_notes
+    defaults: { _controller: SlidesLiveBundle:Player:retrieveNotes} 	 
+    requirements:
+      _method: POST	
+      
 # -----PUBLIC PRESENTATION------------------------------------------------------ 
 embed:
     pattern: /embed/{presentationId}/{customWidth}

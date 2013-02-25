@@ -62,4 +62,50 @@ class PlayerController extends Controller {
 		
 		return new Response('NOTE ADDED',200);  		 		
 	}
+	
+	public function retrieveNotesAction(Request $request) {
+		$presentationID = $request->request->get('presentationID');	
+		if($presentationID == null)	return new Response('Presentation ID is not included',412);		
+		
+		//Check if user is logged, and find what user it is or return 401 CODE
+		$securityContext = $this->container->get('security.context');
+		if( !$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+			return new Response('NOT LOGGED IN',401);				
+		}
+		
+		//Find account and presentation and validate them
+		$em = $this->getDoctrine()->getEntityManager();	
+		
+		$accountId = $this->get('security.context')->getToken()->getUser()->getId();		
+		
+		//Create new note with content
+		$notes = $this->getDoctrine()->getRepository('SlidesLiveBundle:Note')->findUsersPresentationNotes($presentationID,$accountId);				
+		
+		$exportedNotes=array(); 
+		foreach ($notes as $note) {
+			//Check if not to append	
+			$timecode = $note->getTimecode();
+			$noteText = $note->getTextContent();
+			if($exportedNotes[$timecode] === null) echo "prdel";
+			
+			/*
+			 $exportedNotes[$timecode] = $noteText;
+			else $exportedNotes[$timecode] = $exportedNotes[$timecode].$noteText;
+			*/
+			
+		}  		
+		
+		print_r($exportedNotes);
+		
+		$jsonData = json_encode(array($exportedNotes));
+		
+		$headers = array(
+			'Content-Type' => 'application/json'
+		);
+		
+		$response = new Response($jsonData, 200, $headers);
+		return $response; 		
+		
+		//return new Response('NOTE ADDED',200);  	 			
+	}
 }

@@ -12,12 +12,16 @@ package slideslive.event
 		public static const VIMEO_SPECIFIC_READY:String = "VimeoMoogaReady";
 		public static const SLIDEQUALITY:String = "Slide quality";
 		public static const BUYDONE:String = "Buy Dialog finished";
+		public static const NOTETAKING:String = "User is writing note";
+		public static const ADDNOTE:String = "Send request for note add in database";	
 		public var data:Number;
+		public var data2:String;
 		
-		public function GeneralEvents(videoEventString:String, data:Number=-1)
+		public function GeneralEvents(videoEventString:String, data:Number=-1, data2:String="")
 		{
 			super(videoEventString, true, false);			
 			this.data = data;
+			this.data2 = data2;
 		}
 	}	
 }

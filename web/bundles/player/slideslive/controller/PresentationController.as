@@ -5,13 +5,20 @@ package slideslive.controller
 	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
+	import flash.events.HTTPStatusEvent;
+	import flash.events.IOErrorEvent;
 	import flash.events.KeyboardEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
 	import flash.geom.Rectangle;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 	import flash.net.navigateToURL;
 	import flash.ui.Keyboard;
 	import flash.utils.Timer;
+	import flash.external.ExternalInterface;	
 	
 	import slideslive.event.ControlsEvents;
 	import slideslive.event.GeneralEvents;
@@ -132,6 +139,8 @@ package slideslive.controller
 			playerGUI.addEventListener(ControlsEvents.VOLUME,changeVolume);
 			playerGUI.addEventListener(ControlsEvents.SLIDESLIVELOGO,openPresentationOnSlidesLive);
 			playerGUI.addEventListener(GeneralEvents.BUYDONE, buyFinished);
+			playerGUI.addEventListener(GeneralEvents.NOTETAKING, disableKeyboardListeners);
+			playerGUI.addEventListener(GeneralEvents.ADDNOTE, sendNoteToServer);
 			
 			//Keyboard events
 			enableKeyboardListeners();
@@ -139,12 +148,12 @@ package slideslive.controller
 			return true;			
 		}
 		
-		private function enableKeyboardListeners(){
+		private function enableKeyboardListeners(e:Event=null){
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyboardInteraction);
 			stage.addEventListener(Event.FULLSCREEN, fullScreenEventFired);
 		}
 		
-		private function disableKeyboardListeners(){
+		private function disableKeyboardListeners(e:Event=null){
 			stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyboardInteraction);
 			stage.removeEventListener(Event.FULLSCREEN, fullScreenEventFired);			
 		}
@@ -156,7 +165,6 @@ package slideslive.controller
 		}
 		
 		private function keyboardInteraction(e:KeyboardEvent):void{
-			trace(e.keyCode);
 			if (e.keyCode == 39){
 				nextSlideHandler(new ControlsEvents(ControlsEvents.NEXTSLIDE));
 			} else if(e.keyCode == 37){
@@ -484,6 +492,47 @@ package slideslive.controller
 			currentSlideIndex = searchedIndex;
 			reloadSlide();		
 			return true;
+		}	
+		
+		private function sendNoteToServer(e:GeneralEvents){
+			trace("note taken at"+Math.round(videoModule.thcGetCurrTime()));
+			var requestVars:URLVariables = new URLVariables();
+			requestVars.presentationID = playerValues.getPresentationID();
+			requestVars.timecode = Math.round(videoModule.thcGetCurrTime());
+			requestVars.noteContent = e.data2;
+			
+			var request:URLRequest = new URLRequest();
+			
+			request.url = playerValues.playerAPIAddNote;
+			request.method = URLRequestMethod.POST;
+			request.data = requestVars;
+			
+			var loader:URLLoader = new URLLoader();
+			loader.addEventListener(Event.COMPLETE, noteAddedHandler);
+			loader.addEventListener(HTTPStatusEvent.HTTP_STATUS, httpStatusHandler);
+			loader.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityErrorHandler);
+			loader.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);			
+			
+			try {
+				loader.load(request);
+			} catch (error:Error) {
+				trace("Unable to load URL");
+			}	
+		}
+		
+		private function noteAddedHandler(e:Event):void {
+			ExternalInterface.call("refreshNotes");
+		}
+		
+		private function httpStatusHandler (e:HTTPStatusEvent):void {
+			//trace("httpStatusHandler:" + e.status);
+		}
+		
+		private function securityErrorHandler (e:Event):void{
+			//trace("\n\nsecurityErrorHandler:" + e);
+		}
+		private function ioErrorHandler(e:Event):void{
+			//trace("ioErrorHandler: " + e);
 		}		
 		
 	}

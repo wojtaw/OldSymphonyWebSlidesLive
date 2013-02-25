@@ -79,6 +79,7 @@ package slideslive.start
 		//1 - local HDD testing, 2 - local HDD anything, 3 - localhost, 4 - production
 		private function loadHTMLParameters():Boolean
 		{
+			//playerValues.playerAPIUserAuth = "http://localhost/SlidesLive/web/app_dev.php/player_api/user_auth";
 			if(PlayerValues.buildConfiguration == 1){
 				playerValues.setPresentationID(38889130);
 				playerValues.setPresentationModule("YOUTUBE");
@@ -110,6 +111,9 @@ package slideslive.start
 				playerValues.setPathToImages("SAMPLE_DATA/presentationImages/");
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");
 				playerValues.setPathToWebsiteWatch("http://slideslive.com/w/");
+				
+				playerValues.playerAPIUserAuth = "http://localhost/SlidesLive/web/app_dev.php/player_api/user_auth";
+				playerValues.playerAPIAddNote = "http://localhost/SlidesLive/web/app_dev.php/player_api/add_note";				
 				
 			}else if(PlayerValues.buildConfiguration == 3){
 				playerValues.setDebugMode(false);
@@ -152,6 +156,9 @@ package slideslive.start
 				playerValues.setPathToImages("http://www.slideslive.com/data/PresentationSlides/");
 				playerValues.setPathToXMLStorage("http://www.slideslive.com/data/PresentationXMLs/");	
 				playerValues.setPathToWebsiteWatch("http://slideslive.com/w/");
+				
+				playerValues.playerAPIUserAuth = "http://slideslive.com/SlidesLive_dev/web/app_dev.php/player_api/user_auth";
+				playerValues.playerAPIAddNote = "http://slideslive.com/SlidesLive_dev/web/app_dev.php/player_api/add_note";				
 				
 			}else if(PlayerValues.buildConfiguration == 4){
 				

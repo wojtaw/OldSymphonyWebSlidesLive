@@ -51,6 +51,7 @@
 		private var videoStream:PlayerClip;
 		private var tmpFill:TmpWrap = new TmpWrap();
 		private var buyDialog:BuyDialog;
+		private var noteTaker:NoteTaker;
 		
 		private var slider:Slider;
 		private var embedLogo:EmbedLogo;
@@ -85,6 +86,7 @@
 			if(playerValues.isEmbedded()) displayEmbedComponents();
 			//Above all slider
 			initSlider();
+			initNoteTaker();
 
 			if(!playerValues.isZoomingOn()){
 				videoSlideWrapper.y = 0;
@@ -187,6 +189,12 @@
 			slider.initSlider();
 			slider.x = slidesContainer.x;
 			slider.y = slider.height/2;			
+		}
+		
+		private function initNoteTaker():void {
+			noteTaker = new NoteTaker(playerValues);
+			addChild(noteTaker);
+			
 		}
 		
 		private function sliderMoved(e:GeneralEvents){
@@ -474,6 +482,7 @@
 			buyDialog.y = (playerValues.playerStageHeight - buyDialog.height) / 2;
 			addChild(buyDialog);
 		}
+		
 		
 		public function disablePlayer():void {
 			videoSlideWrapper.alpha = 0.2;

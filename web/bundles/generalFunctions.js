@@ -7,7 +7,7 @@
  var appDownloadLinux = "http://slideslive.com/data/SL_Recorder/SL_Linux.zip";
  var appDownloadMac = "http://slideslive.com/data/SL_Recorder/SlidesLive-Mac.dmg";
  var appDownloadAll = "http://slideslive.com/data/SL_Recorder/SL_AllPlatforms.zip";
- var playerRetrieveNotesURL = "http://localhost/SlidesLive/web/app_dev.php/player_api/get_notes";
+ var playerRetrieveNotesURL = "http://slideslive.com/SlidesLive_dev/web/app_dev.php/player_api/get_notes";
  var presentationID;
  
  var notesInterval;
@@ -64,7 +64,7 @@ function resizePlayerContainer(playerHeight) {
 	$('#playerPanel').css({ height: playerHeight });
 	$('.gradientLeftPlayer').css({ height: (playerHeight + 144) });	
 	$('.gradientRightPlayer').css({ height: (playerHeight + 144) });		
-	$('.gradientRightPlayer').css({ top: -(playerHeight + 144) });			
+	$('.gradientRightPlayer').css({ top: -(playerHeight + 144) });	
 }
 
 function websiteOutput(outputMessage){
@@ -164,7 +164,7 @@ function incorrectLoginAction(){
 
 function startPresentationNotesRefresh(presentationID){
 	if(typeof(presentationID)!=='undefined') this.presentationID = presentationID;
-	notesInterval = setTimeout(refreshNotes,1000);    
+	notesInterval = setTimeout(refreshNotes,10000);    
 }
 
 function refreshNotes(){
@@ -185,8 +185,19 @@ function refreshNotes(){
 function notesResponse(responseText){
 	if(notesList.length != responseText.length){
 		notesList = responseText;
-		console.log("updating list");
+		updateNoteList();
 	}
+}
+
+function updateNoteList(){
+	console.log("updating list");
+	$("#userNotesList").empty()	
+	for (var i = 0; i < notesList.length; i++) {
+		$('#userNotesList').append($('<li>', {
+			 text: "At: "+notesList[i].timecode+" "+ notesList[i].noteText
+		}));
+	}	
+	$('.presentationDetailsVideo').css({ height: ($('#userNotesList').height() + 100) });			
 }
 
 

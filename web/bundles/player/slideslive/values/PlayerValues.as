@@ -10,6 +10,9 @@
 		private var pathToXMLStorage:String;
 		private var pathToImages:String;
 		private var pathToWebsiteWatch:String;
+
+		public var playerAPIUserAuth:String;
+		public var playerAPIAddNote:String;
 		
 		//Slides records
 		private var slidesRecords:Array = new Array();

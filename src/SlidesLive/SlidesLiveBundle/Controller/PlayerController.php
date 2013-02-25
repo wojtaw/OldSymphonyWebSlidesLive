@@ -86,17 +86,12 @@ class PlayerController extends Controller {
 			//Check if not to append	
 			$timecode = $note->getTimecode();
 			$noteText = $note->getTextContent();
-			if($exportedNotes[$timecode] === null) echo "prdel";
-			
-			/*
-			 $exportedNotes[$timecode] = $noteText;
-			else $exportedNotes[$timecode] = $exportedNotes[$timecode].$noteText;
-			*/
-			
+			if(isset($exportedNotes[$timecode])){
+				$exportedNotes[$timecode] = $exportedNotes[$timecode]."\r\n".$noteText;
+			} else {
+				$exportedNotes[$timecode] = $noteText;
+			}
 		}  		
-		
-		print_r($exportedNotes);
-		
 		$jsonData = json_encode(array($exportedNotes));
 		
 		$headers = array(

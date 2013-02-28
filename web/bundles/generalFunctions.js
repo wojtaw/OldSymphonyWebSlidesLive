@@ -168,6 +168,8 @@ function startPresentationNotesRefresh(presentationID){
 }
 
 function refreshNotes(){
+	//Turning off notes for a while
+	/*
 	var request = $.ajax({
         url: playerRetrieveNotesURL,
         type: "post",
@@ -180,6 +182,7 @@ function refreshNotes(){
 		},
 		complete: startPresentationNotesRefresh
     });
+	*/
 }
 
 function notesResponse(responseText){

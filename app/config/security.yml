@@ -49,9 +49,14 @@ security:
             logout:
                 path:   /logout
                 target: /
+                
+            facebook: ~
 
     access_control:
         - { path: ^/account, roles: 'ROLE_USER'}#, requires_channel: https }
         - { path: ^/app/(create_account|news), roles: 'IS_AUTHENTICATED_ANONYMOUSLY' }
         - { path: ^/app, roles: 'ROLE_USER' }
         - { path: ^/admin, roles: 'ROLE_ADMIN'}
+    
+    factories:
+        - "%kernel.root_dir%/../src/SlidesLive/SlidesLiveBundle/Resources/config/security_factories.xml"		

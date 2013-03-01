@@ -50,7 +50,7 @@ security:
                 path:   /logout
                 target: /
                 
-            facebook: ~
+            #facebook: ~
 
     access_control:
         - { path: ^/account, roles: 'ROLE_USER'}#, requires_channel: https }
@@ -59,4 +59,4 @@ security:
         - { path: ^/admin, roles: 'ROLE_ADMIN'}
     
     factories:
-        - "%kernel.root_dir%/../src/SlidesLive/SlidesLiveBundle/Resources/config/security_factories.xml"		
+        #- "%kernel.root_dir%/../src/SlidesLive/SlidesLiveBundle/Resources/config/security_factories.xml"		

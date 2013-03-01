@@ -10,6 +10,15 @@ category:
     requirements:
      categoryCanonicalName: '[^wh/]|[^/][^/]+'		
 
+# -----LANDING PAGES------------------------------------------------------
+schools:
+    pattern: /schools
+    defaults: { _controller: SlidesLiveBundle:LandingPage:schools}
+    
+schools2:
+    pattern: /schools/
+    defaults: { _controller: SlidesLiveBundle:LandingPage:schools} 	 
+    
 # -----LOGIN/LOGOUT ROUTES------------------------------------------------------
 login:
     pattern: /login

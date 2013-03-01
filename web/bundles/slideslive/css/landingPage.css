@@ -1,0 +1,27 @@
+/* CSS Document */
+.topBar {
+	background-color:#243a25;
+	width:100%;
+	height:330px;
+	margin-bottom:166px;
+}
+
+.topCenterImage {
+	background-image:url(../images/top-image-243a25.jpg);
+	width:1600px;
+	height:496px;
+}
+
+.embedWrapper {
+	width:960px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#996600;	
+}
+
+.imageBar {
+	width:100%;
+	background-color:#f4f4f5;
+}
+
+

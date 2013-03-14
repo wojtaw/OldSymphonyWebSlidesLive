@@ -61,6 +61,7 @@ function slidesLiveEmbedBox(){
 	
 	
 	this.resizePlayerContainer = function(newHeight) {
+		if(thisInstance.hasSlides && !thisInstance.hasVideo) newHeight = (thisInstance.width * 3) / 4;
 		thisInstance.height = newHeight;
 		console.log(thisInstance.height);		
 		thisInstance.playerContainer.style.height = thisInstance.height+"px";		

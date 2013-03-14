@@ -1,4 +1,23 @@
 /* CSS Document */
+.blueTopBar {
+	position: fixed;
+    top:0;
+    left:0;	
+	width:100%;
+	background-color:#167dda;
+	background-image:url(../images/landingpage/logo-hello-bar.png);
+	background-repeat:no-repeat;
+	background-position:98%;	
+	z-index:20;		
+}
+
+.blueTopActionBar {
+	font-style:italic;	
+	margin:10px;
+	margin-left:20px;
+	color:#FFFFFF;
+}
+
 .topBar {
 	overflow:hidden;
 	background-image:url(../images/topBarBg.jpg);	
@@ -7,7 +26,7 @@
 }
 
 .topCenterImage {
-	background-image:url(../images/top-image-243a25.jpg);
+	background-image:url(../images/landingpage/top-image-schools-243a25.jpg);
 	width:1600px;
 	height:496px;
 }
@@ -48,7 +67,80 @@
 	margin:100px;
 }
 
+.lp-title-down {
+	margin:20px;
+	float:left;	
+}
+
 .lp-videoSlide {
 	font-size:20px;	
+	font-style:italic;	
+	padding-top:50px;
 }
+
+.generalButton {
+	display:block;
+	float:left;
+	width:252px;
+	height:55px;
+	margin-top:10px;
+	margin-bottom:40px;
+	background-image:url(../../static/images/btn-all.png);
+	background-repeat:no-repeat;
+	border:none;
+	cursor:pointer;
+}
+
+.generalButton:hover{
+	display:block;
+	background-position:0 -60px;
+}
+
+.generalButtonText {
+	display:block;
+	font-family:'Ropa Sans', sans-serif;
+	font-weight:normal;
+	font-size:25px;
+	padding-top:14px;
+	color:#FFFFFF !important;
+	text-decoration:none;
+	text-align:center;
+	text-shadow: 2px 2px #0066CC;
+}
+
+.lp-centerWrapper {
+	display:block;
+	width:900px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:20px;
+}
+
+.lp-centerWrapper-content {
+	display:block;
+}
+
+.videoSlideImage {
+	float:left;	
+}
+
+.footerBlue {
+	width:100%;
+	height:10px;
+	background-color:#027BF7;
+}
+
+.footerBlack {
+	width:100%;
+	height:120px;
+	background-color:#000;
+}
+
+.footerLogo {
+	width:280px;
+	height:39px;
+	padding-right:680px;
+	padding-top:40px;
+}
+
 

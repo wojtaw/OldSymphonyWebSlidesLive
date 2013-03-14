@@ -7,5 +7,5 @@ function embedSchoolPresentation(){
     slidesLive.bgColor="transparent";
     //slidesLive.zoomingOn=true;
     slidesLive.videoSlideRatio=45;			
-	slidesLive.embedPresentation(38889017,embedSize);		
+	slidesLive.embedPresentation(38889038,embedSize);		
 }

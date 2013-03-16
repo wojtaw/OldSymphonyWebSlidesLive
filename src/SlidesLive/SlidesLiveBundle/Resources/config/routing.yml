@@ -11,14 +11,30 @@ category:
      categoryCanonicalName: '[^wh/]|[^/][^/]+'		
 
 # -----LANDING PAGES------------------------------------------------------
-schools:
-    pattern: /schools
-    defaults: { _controller: SlidesLiveBundle:LandingPage:schools}
+school:
+    pattern: /school
+    defaults: { _controller: SlidesLiveBundle:LandingPage:school}
     
-schools2:
-    pattern: /schools/
-    defaults: { _controller: SlidesLiveBundle:LandingPage:schools} 	 
+school2:
+    pattern: /school/
+    defaults: { _controller: SlidesLiveBundle:LandingPage:school}
     
+speaker:
+    pattern: /speaker
+    defaults: { _controller: SlidesLiveBundle:LandingPage:speaker}
+    
+speaker2:
+    pattern: /speaker/
+    defaults: { _controller: SlidesLiveBundle:LandingPage:speaker} 	
+    
+conference:
+    pattern: /conference
+    defaults: { _controller: SlidesLiveBundle:LandingPage:conference}
+    
+conference2:
+    pattern: /conference/
+    defaults: { _controller: SlidesLiveBundle:LandingPage:conference} 			 	 
+        
 # -----LOGIN/LOGOUT ROUTES------------------------------------------------------
 login:
     pattern: /login

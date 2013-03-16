@@ -1,40 +1,93 @@
 /* CSS Document */
-.blueTopBar {
+h2 {
+	font-size:60px;	
+	font-weight:normal;	
+	margin:40px;
+}
+
+h3 {
+	font-size:30px;	
+	font-weight:normal;	
+	font-style:italic;
+	margin-top:80px;
+	margin-bottom:10px;
+}
+
+
+#blueTopBar {
 	position: fixed;
-    top:0;
     left:0;	
 	width:100%;
+	height:40px;
 	background-color:#167dda;
 	background-image:url(../images/landingpage/logo-hello-bar.png);
 	background-repeat:no-repeat;
 	background-position:98%;	
-	z-index:20;		
+	z-index:20;	
+	opacity:0;
+    top:-60px;	
 }
 
 .blueTopActionBar {
 	font-style:italic;	
-	margin:10px;
+	margin:12px;
 	margin-left:20px;
 	color:#FFFFFF;
 }
 
+.blueTopActionBar a {
+	color:#FFF;		
+	text-decoration:none;
+}
+
+.blueTopActionBar a:hover {
+	color:#FFF;		
+	text-decoration:underline;
+	position:relative;
+}
+
 .topBar {
 	overflow:hidden;
-	background-image:url(../images/topBarBg.jpg);	
-	background-color:#243a25;
 	width:100%;
 }
 
 .topCenterImage {
-	background-image:url(../images/landingpage/top-image-schools-243a25.jpg);
 	width:1600px;
-	height:496px;
+	height:456px;
+}
+
+.schoolsBGImage {
+	background-image:url(../images/landingpage/top-image-schools-243a25.jpg);		
+}
+
+.conferenceBGImage {
+	background-image:url(../images/landingpage/top-image-conf-000000.jpg);		
+}
+
+.speakerBGImage {
+	background-image:url(../images/landingpage/top-image-speakers-000000.jpg);	
+}
+
+.schoolsBG {
+	background-color:#243a25;
+	background-image:url(../images/landingpage/topBarBgSchools.jpg);		
+}
+
+.conferenceBG {
+	background-color:#000000;
+	background-image:url(../images/landingpage/topBarBgBlack.jpg);			
+}
+
+.speakerBG {
+	background-color:#000000;
+	background-image:url(../images/landingpage/topBarBgBlack.jpg);		
 }
 
 .embedWrapper {
 	width:960px;
 	margin-left:auto;
 	margin-right:auto;
+	margin-bottom:60px;
 }
 
 .videoSlideBar {
@@ -61,21 +114,36 @@
 }
 
 .lp-title {
+	font-size:80px;
+	color:#000;
+}
+
+.lp-subtitle {
 	font-size:30px;
 	color:#000;
 	font-style:italic;
-	margin:100px;
+	margin:10px;
+	margin-bottom:40px;
 }
 
 .lp-title-down {
 	margin:20px;
 	float:left;	
+	padding-left:40px;
+	padding-right:20px;
 }
 
 .lp-videoSlide {
 	font-size:20px;	
 	font-style:italic;	
 	padding-top:50px;
+}
+
+.lp-presentationTitle {
+	text-align:left;
+	margin-left:15px;
+	margin-top:10px;
+	font-size:20px;
 }
 
 .generalButton {
@@ -110,18 +178,35 @@
 
 .lp-centerWrapper {
 	display:block;
-	width:900px;
+	width:980px;
 	margin-left:auto;
 	margin-right:auto;
 	padding-top:20px;
+	margin-top:50px;
 }
 
 .lp-centerWrapper-content {
 	display:block;
 }
 
+.lp-accountLogo {
+	border:0px;
+	float:left;	
+}
+
 .videoSlideImage {
 	float:left;	
+}
+
+.lp-featureBox {
+	float:left;
+	display:block;
+	width:490px;
+}
+
+.lp-textContentBox {
+	padding:15px;	
+	padding-top:50px;
 }
 
 .footerBlue {

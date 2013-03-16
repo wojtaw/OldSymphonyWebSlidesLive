@@ -9,8 +9,16 @@ class LandingPageController extends Controller {
 
     protected $data = array();                                         
                                                   
-    public function schoolsAction() {
-        return $this->render('SlidesLiveBundle:LandingPage:schools.html.twig', $this->data);
+    public function schoolAction() {
+        return $this->render('SlidesLiveBundle:LandingPage:school.html.twig', $this->data);
     }
+	
+    public function speakerAction() {
+        return $this->render('SlidesLiveBundle:LandingPage:speaker.html.twig', $this->data);
+    }	
+	
+    public function conferenceAction() {
+        return $this->render('SlidesLiveBundle:LandingPage:conference.html.twig', $this->data);
+    }	
                      
 }

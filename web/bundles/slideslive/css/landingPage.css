@@ -2,15 +2,16 @@
 h2 {
 	font-size:60px;	
 	font-weight:normal;	
-	margin:40px;
+	margin-bottom:40px;
+	margin-top:120px;	
 }
 
 h3 {
 	font-size:30px;	
 	font-weight:normal;	
 	font-style:italic;
-	margin-top:80px;
-	margin-bottom:10px;
+	margin-top:50px;
+	margin-bottom:50px;
 }
 
 
@@ -93,6 +94,11 @@ h3 {
 .videoSlideBar {
 	width:100%;
 	background-color:#f4f4f5;
+
+}
+
+.iWantButtonWrapper {
+	width:260px;
 }
 
 .lp-headerText {
@@ -134,7 +140,7 @@ h3 {
 }
 
 .lp-videoSlide {
-	font-size:20px;	
+	font-size:17px;	
 	font-style:italic;	
 	padding-top:50px;
 }
@@ -192,6 +198,7 @@ h3 {
 
 .lp-accountLogo {
 	border:0px;
+	margin-right:10px;
 	float:left;	
 }
 
@@ -205,6 +212,12 @@ h3 {
 	width:490px;
 }
 
+.lp-textContent {
+	padding-left:50px;		
+	padding-right:50px;			
+	width:390px;
+}
+
 .lp-textContentBox {
 	padding:15px;	
 	padding-top:50px;
@@ -214,6 +227,7 @@ h3 {
 	width:100%;
 	height:10px;
 	background-color:#027BF7;
+	margin-top:20px;
 }
 
 .footerBlack {
@@ -227,6 +241,31 @@ h3 {
 	height:39px;
 	padding-right:680px;
 	padding-top:40px;
+}
+
+.academicBlock {
+	display:block;
+	float:left;
+	background-image:url(../images/landingpage/partners-schools.jpg);		
+	background-repeat:no-repeat;
+	width:240px;
+	height:275px;	
+}
+
+.academicPartner1 {
+	background-position:0px 0px;
+}
+
+.academicPartner2 {
+	background-position:-250px 0px;
+}
+
+.academicPartner3 {
+	background-position:-500px 0px;
+}
+
+.academicPartner4 {
+	background-position:-750px 0px;
 }
 
 

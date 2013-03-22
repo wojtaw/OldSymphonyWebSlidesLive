@@ -60,7 +60,7 @@ function showEmbedModalWindow(){
 function resizePlayerContainer(playerHeight) { 
 	//Add kind of padding
 	playerHeight += 0;
-	console.log("setting height -------------------------------------------------------------------------");
+	printDebug("setting height -------------------------------------------------------------------------");
 	$('#playerPanel').css({ height: playerHeight });
 	$('.gradientLeftPlayer').css({ height: (playerHeight + 144) });	
 	$('.gradientRightPlayer').css({ height: (playerHeight + 144) });		
@@ -68,7 +68,7 @@ function resizePlayerContainer(playerHeight) {
 }
 
 function websiteOutput(outputMessage){
-	console.log(outputMessage);	
+	printDebug(outputMessage);	
 }
 
 function playerDimensionsAccordingScreen(playerType){
@@ -177,8 +177,8 @@ function refreshNotes(){
 		dataType: "json",
 		success: notesResponse,
 		error: function(e) {
-			if(e.status == 401) console.log("User is not logged, no notes available");
-			if(e.status == 412) console.log("Presentation ID not provided");			
+			if(e.status == 401) printDebug("User is not logged, no notes available");
+			if(e.status == 412) printDebug("Presentation ID not provided");			
 		},
 		complete: startPresentationNotesRefresh
     });
@@ -193,7 +193,7 @@ function notesResponse(responseText){
 }
 
 function updateNoteList(){
-	console.log("updating list");
+	printDebug("updating list");
 	$("#userNotesList").empty()	
 	for (var i = 0; i < notesList.length; i++) {
 		$('#userNotesList').append($('<li>', {
@@ -201,6 +201,10 @@ function updateNoteList(){
 		}));
 	}	
 	$('.presentationDetailsVideo').css({ height: ($('#userNotesList').height() + 100) });			
+}
+
+function printDebug(message){
+	//console.log("SL LOG:"+message);	
 }
 
 

@@ -193,6 +193,7 @@
 		
 		private function initNoteTaker():void {
 			noteTaker = new NoteTaker(playerValues);
+			noteTaker.visible = false;
 			addChild(noteTaker);
 			
 		}

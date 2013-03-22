@@ -14,6 +14,7 @@ package slideslive.gui
 	import flash.net.URLVariables;
 	import flash.text.TextField;
 	import flash.ui.Keyboard;
+	import flash.events.IOErrorEvent;	
 	
 	import slideslive.event.GeneralEvents;
 	import slideslive.values.PlayerValues;

@@ -25,6 +25,33 @@ function embedConferencePresentation(){
 
 function documentReadyHandler(){
 	setTimeout(animateBlueBar, 3000);
+	animateTryBox();
+	animateArrow();
+	initListeners();
+}
+
+function initListeners() {
+	$("#circleArrow").click(function(event) {
+  		event.preventDefault();
+		$("html, body").animate({ scrollTop: $('#embedPoint').offset().top }, 2000);
+		console.log("scrollliing");
+	});	
+}
+
+function animateTryBox(e){
+	$('#tryThisBox').animate({left:'+=275px',opacity:'0.85'},4000,"swing",animateTryBoxBack);	
+}
+
+function animateTryBoxBack(e){
+	$('#tryThisBox').animate({left:'-=275px',opacity:'1'},4000,"swing",animateTryBox);	
+}
+
+function animateArrow(e){
+	$('.circleArrow').animate({top:'+=30px',opacity:'0.3'},2000,"swing",animateArrowBack);	
+}
+
+function animateArrowBack(e){
+	$('.circleArrow').animate({top:'-=30px',opacity:'0.15'},2000,"swing",animateArrow);	
 }
 
 function animateBlueBar(){

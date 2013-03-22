@@ -56,10 +56,10 @@
 				loadPlayer5_thc("flashResizableContainer","{{ presentation.id }}",serviceType,serviceID);					
 		{% else %}
 			if (swfobject.hasFlashPlayerVersion("9.0.18")) {
-				console.log("Has flash");
+				printDebug("Has flash");
 				swfobject.embedSWF("{{ asset('bundles/player/Player_5_THC.swf') }}", "flashResizableContainer", "100%", "100%", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
 			} else {
-				console.log("Flash disabled");			
+				printDebug("Flash disabled");			
 				loadPlayer5_thc("flashResizableContainer","{{ presentation.id }}",serviceType,serviceID);							
 			}
 		{% endif %}

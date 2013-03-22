@@ -19,54 +19,72 @@
 		</script>         
         			 		  				
     <link href="{{ asset('bundles/favicon-sl-1.png') }}" rel="icon" type="image/png" />
-    <title>Join the EDU movement!</title>
+    <title>SlidesLive - One place, one click</title>
 </head>
 
 <body>
 <div id="blueTopBar">
-	<div class="blueTopActionBar globalFont">Join the EDU Revolution! <a href="mailto:vojta@slideslive.com">Get in touch</a></div>
+	<div class="blueTopActionBar globalFont">One place, one click. <a href="mailto:vojta@slideslive.com" target="_blank" onClick="javascript: _gaq.push(['_trackPageview', '/lp-speaker/want/topBar']);">Get in touch</a></div>
 </div>
 
 <div class="topBar clearfix speakerBG">
     <div class="topCenterImage speakerBGImage center">
-    <div class="lp-headerText globalFont">Welcome to<br /> a more engaging<br />learning experience</div>
-    <div class="lp-join globalFont"><a href="http://slideslive.com/" target="_blank">Join the EDU Revolution!</a></div>
+    <a href="http://slideslive.com/democoach" target="_blank" class="notebookButton" onClick="javascript: _gaq.push(['_trackPageview', '/lp-conference/notebookClick']);"></a>
+    <div class="lp-headerMessageWrapper">
+        <div class="lp-headerText globalFont">Hello speakers,<br /> we have a new awesome<br />technology for you.</div>
+        <div class="lp-join globalFont"><a href="http://slideslive.com/registration" target="_blank" onClick="javascript: _gaq.push(['_trackPageview', '/lp-speaker/want/headerMessage']);">Join for free</a></div>
+	</div>        
     </div>
 </div>
 
-<div class="lp-title globalFont center">One place, one click</div>
-<div class="lp-subtitle globalFont center slidesLiveBlue">Ready to start your new learning experience?</div>
 
-<div class="lp-centerWrapper center">
-	<img alt="OI account logo" class="lp-accountLogo" width="194" height="62" src="{{ asset('bundles/slideslive/images/landingpage/logo-pionnrs.jpg') }}" />
-    <div class="lp-presentationTitle globalFont">Pioneers Festival<br />
-	Fadi Bishara &#124; <span class="slidesLiveBlue">Air Traffic: Who controls What?</span></div>
-</div>
-
-
-<div class="embedWrapper">
-<script type="text/javascript" id="sle81767">
-	embedConferencePresentation();
-</script>
-</div>
-
-<h2 class="globalFont center slidesLiveBlue">All you need ...</h2>
-<img alt="You need laptop app and camera only" class="center" src="{{ asset('bundles/slideslive/images/need.jpg') }}" />
-
-
-<div class="lp-centerWrapper">
-    <div class="lp-centerWrapper-content clearfix">
-        <div class="generalButton center">
-            <a href="mailto:vojta@slideslive.com" target="_blank" class="generalButtonText">I want this technology</a>       
-        </div>   
-    </div>    
+<div class="tableWrapper center">
+	<div class="clearfix">
+        <div class="onePlaceLeft">
+            <div class="lp-title globalFont center">One place, one click</div>
+            <div class="lp-subtitle globalFont center slidesLiveBlue">Ready for showtime?</div>
+        </div>
+        <div class="onePlaceRight">
+            <div id="circleArrow" class="circleArrow center"><div class="arrowObject center"></div></div>
+        </div>
+    </div>
 </div>
 
 
 <div class="videoSlideBar">
+<div class="horizontalLineTop" id="embedPoint"></div>
+<div class="lp-centerWrapper center">
+	<a href="http://slideslive.com/democoach" target="_blank"><img alt="OI account logo" class="lp-accountLogo" width="78" height="78" src="{{ asset('bundles/slideslive/images/landingpage/logo-dc.png') }}" /></a>
+    <div class="lp-presentationTitle globalFont">DEMOCOACH<br />
+	Nathan Gold &#124; <span class="slidesLiveBlue">How To Captivate Any Audience In Less Than 30 Seconds</span></div>
+    
+	<div class="tryThisBox" id="tryThisBox"></div>    
+</div>
+
+<div class="embedWrapper">
+<script type="text/javascript" id="sle81767">
+	embedSpeakerPresentation();
+</script>
+</div>
+<div class="horizontalLineBottom"></div>
+</div>
+
+
+<h2 class="globalFont center slidesLiveBlue">All you need ...</h2>
+<img alt="You need laptop app and camera only" class="center" src="{{ asset('bundles/slideslive/images/need.jpg') }}" />
+
+<div class="lp-centerWrapper-content clearfix">
+    <div class="iWantButtonWrapper center">
+        <a href="http://slideslive.com/thankyou" target="_blank" class="slidesLiveButton globalFont center" id="contactUs" onClick="javascript: _gaq.push(['_trackPageview', '/lp-conference/want/middleButton']);">I want this technoogy</a>
+    </div>
+</div> 
+
+
+<div class="videoSlideBar">
+<div class="horizontalLineTop"></div>
 <div class="lp-centerWrapper">
     <div class="lp-centerWrapper-content clearfix">
-        <div class="lp-featureBox">
+        <div class="lp-featureBox lp-textContent">
             <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">One place</span> - Traditional videos only tell half of the story, especially for detailed presentations.<br /><br />But with SlidesLive, you can have it all video and slides - in a single package.</div>
         </div>
         <div class="lp-featureBox">
@@ -74,6 +92,7 @@
         </div>        
     </div>    
 </div>
+<div class="horizontalLineBottom"></div>
 </div>
 
 <div class="lp-centerWrapper">
@@ -81,21 +100,25 @@
         <div class="lp-featureBox">
             <img alt="Video plus slides" src="{{ asset('bundles/slideslive/images/landingpage/money.jpg') }}" class="videoSlideImage" />
         </div>       
-        <div class="lp-featureBox">
-            <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">No format hassles</span> - SlidesLive records all visual elements regardless of format.<br /><br />Wether presenting PDF of PPT slides, JPEG photos, showing an HTML website, or switching between text and spreadsheets - SlidesLive has you covered.</div>       
+        <div class="lp-featureBox lp-textContent">
+            <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">Increase your revenue</span> - Select presentations and pay wall conditions, we take care of the rest.<br /><br />Record and post presentations for your targeted audiences.<br />Create new revenue streams with just a few clicks. </div>       
         </div>     
     </div>    
 </div>
 
+<div class="videoSlideBar">
+<div class="horizontalLineTop"></div>
 <div class="lp-centerWrapper">
     <div class="lp-centerWrapper-content clearfix">
-        <div class="lp-featureBox">
+        <div class="lp-featureBox lp-textContent">
             <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">No format hassles</span> - SlidesLive records all visual elements regardless of format.<br /><br />Wether presenting PDF of PPT slides, JPEG photos, showing an HTML website, or switching between text and spreadsheets - SlidesLive has you covered.</div>       
         </div>       
         <div class="lp-featureBox">
-            <img alt="Video plus slides" src="{{ asset('bundles/slideslive/images/landingpage/no-formats-white.jpg') }}" class="videoSlideImage" />
+            <img alt="Video plus slides" src="{{ asset('bundles/slideslive/images/landingpage/no-formats-grey.jpg') }}" class="videoSlideImage" />
         </div>         
     </div>    
+</div>
+<div class="horizontalLineBottom"></div>
 </div>
 
 
@@ -104,7 +127,7 @@
         <div class="lp-featureBox">
             <img alt="Video plus slides" src="{{ asset('bundles/slideslive/images/landingpage/no-edit-white.jpg') }}" class="videoSlideImage" />
         </div>  
-        <div class="lp-featureBox">
+        <div class="lp-featureBox lp-textContent">
             <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">No post presentation headaches</span> - After completing your presentation, just stop recording. With both audio and slides on a simple timeline, it's easy to edit those first and final moments<br /><br />After uploading, the newly synchronized audio slideshow will be available in your account within minutes.</div>       
         </div>                  
     </div>    
@@ -112,7 +135,7 @@
 
 <div class="footerBlue"></div>
 <div class="footerBlack">
-<img alt="SlidesLive footer logo" class="footerLogo center" src="{{ asset('bundles/slideslive/images/sl-logo.png') }}" />
+<a href="http://slideslive.com" target="_blank"><img alt="SlidesLive footer logo" class="footerLogo" src="{{ asset('bundles/slideslive/images/landingpage/SlidesLive-footer-logo.png') }}" /></a>
 </div>
     
 </body>

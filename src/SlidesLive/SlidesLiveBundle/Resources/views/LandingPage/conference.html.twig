@@ -24,15 +24,15 @@
 
 <body>
 <div id="blueTopBar">
-	<div class="blueTopActionBar globalFont">One place, one click. <a href="mailto:vojta@slideslive.com" target="_blank">Get in touch</a></div>
+	<div class="blueTopActionBar globalFont">One place, one click. <a href="mailto:vojta@slideslive.com" target="_blank" onClick="javascript: _gaq.push(['_trackPageview', '/lp-conference/want/topBar']);">Get in touch</a></div>
 </div>
 
 <div class="topBar clearfix conferenceBG">
     <div class="topCenterImage conferenceBGImage center">
-    <a href="http://slideslive.com/pioneersfestival" target="_blank" class="notebookButton"></a>
+    <a href="http://slideslive.com/pioneersfestival" target="_blank" class="notebookButton" onClick="javascript: _gaq.push(['_trackPageview', '/lp-conference/notebookClick']);"></a>
     <div class="lp-headerMessageWrapper">
         <div class="lp-headerText globalFont">Hello conferences,<br /> we have a new awesome<br />technology for you.</div>
-        <div class="lp-join globalFont"><a href="mailto:vojta@slideslive.com" target="_blank">Contact us</a></div>
+        <div class="lp-join globalFont"><a href="mailto:vojta@slideslive.com" target="_blank" onClick="javascript: _gaq.push(['_trackPageview', '/lp-conference/want/headerMessage']);">Contact us</a></div>
 	</div>        
     </div>
 </div>
@@ -54,7 +54,7 @@
 <div class="videoSlideBar">
 <div class="horizontalLineTop" id="embedPoint"></div>
 <div class="lp-centerWrapper center">
-	<a href="http://slideslive.com/pioneersfestival"¨ target="_blank"><img alt="OI account logo" class="lp-accountLogo" width="194" height="62" src="{{ asset('bundles/slideslive/images/landingpage/logo-pionnrs.jpg') }}" /></a>
+	<a href="http://slideslive.com/pioneersfestival" target="_blank"><img alt="OI account logo" class="lp-accountLogo" width="194" height="62" src="{{ asset('bundles/slideslive/images/landingpage/logo-pionnrs.jpg') }}" /></a>
     <div class="lp-presentationTitle globalFont">Pioneers Festival<br />
 	Fadi Bishara &#124; <span class="slidesLiveBlue">What Can European Entrepreneurs Learn from Silicon Valley?</span></div>
     
@@ -75,7 +75,7 @@
 
 <div class="lp-centerWrapper-content clearfix">
     <div class="iWantButtonWrapper center">
-        <a href="mailto:vojta@slideslive.com" target="_blank" class="slidesLiveButton globalFont center" id="contactUs" >I want this technoogy</a>
+        <a href="mailto:vojta@slideslive.com" target="_blank" class="slidesLiveButton globalFont center" id="contactUs" onClick="javascript: _gaq.push(['_trackPageview', '/lp-conference/want/middleButton']);">I want this technoogy</a>
     </div>
 </div> 
 
@@ -135,7 +135,7 @@
 
 <div class="footerBlue"></div>
 <div class="footerBlack">
-<a href="http://slideslive.com" target="_blank"><img alt="SlidesLive footer logo" class="footerLogo center" src="{{ asset('bundles/slideslive/images/landingpage/SlidesLive-footer-logo.png') }}" /></a>
+<a href="http://slideslive.com" target="_blank"><img alt="SlidesLive footer logo" class="footerLogo" src="{{ asset('bundles/slideslive/images/landingpage/SlidesLive-footer-logo.png') }}" /></a>
 </div>
     
 </body>

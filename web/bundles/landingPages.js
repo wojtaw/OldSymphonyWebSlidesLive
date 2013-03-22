@@ -23,6 +23,20 @@ function embedConferencePresentation(){
 	slidesLive.embedPresentation(38889565,embedSize);		
 }
 
+function embedSpeakerPresentation(){
+	var embedSize = 0.8 * $(window).width();
+	$('.embedWrapper').css("width", embedSize);
+	
+	slidesLive = createSlidesLiveBox();
+    slidesLive.bgColor="transparent";
+    //slidesLive.zoomingOn=true;
+    slidesLive.videoSlideRatio=45;			
+	slidesLive.embedPresentation(38889293,embedSize);		
+}
+
+
+
+
 function documentReadyHandler(){
 	setTimeout(animateBlueBar, 3000);
 	animateTryBox();

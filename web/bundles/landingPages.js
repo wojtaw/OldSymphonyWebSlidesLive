@@ -33,9 +33,10 @@ function documentReadyHandler(){
 function initListeners() {
 	$("#circleArrow").click(function(event) {
   		event.preventDefault();
-		$("html, body").animate({ scrollTop: $('#embedPoint').offset().top }, 2000);
+		$("html, body").animate({ scrollTop: $('#embedPoint').offset().top +20}, 2000);
 		console.log("scrollliing");
 	});	
+	
 }
 
 function animateTryBox(e){

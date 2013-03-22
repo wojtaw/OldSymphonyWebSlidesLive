@@ -12,7 +12,7 @@ h3 {
 	font-size:30px;	
 	font-weight:normal;	
 	font-style:italic;
-	margin-top:50px;
+	margin-top:70px;
 	margin-bottom:50px;
 }
 
@@ -220,9 +220,10 @@ h3 {
 }
 
 .lp-videoSlide {
-	font-size:17px;	
+	font-size:19px;	
 	font-style:italic;	
 	padding-top:50px;
+	color:#666666;
 }
 
 .lp-presentationTitle {
@@ -283,7 +284,12 @@ h3 {
 }
 
 .videoSlideImage {
-	float:left;	
+	float:left;		
+	margin-bottom:50px;		
+}
+
+.videoSlideImageSpecial {
+
 }
 
 .lp-featureBox {
@@ -312,13 +318,13 @@ h3 {
 
 .footerBlack {
 	width:100%;
-	height:120px;
+	height:150px;
 	background-color:#000;
 }
 
 .footerLogo {
-	width:280px;
-	height:39px;
+	width:368px;
+	height:97px;
 	padding-right:680px;
 	padding-top:40px;
 }
@@ -326,10 +332,54 @@ h3 {
 .academicBlock {
 	display:block;
 	float:left;
-	background-image:url(../images/landingpage/partners-schools.jpg);		
+	background-image:url(../images/landingpage/partners-schools-white.jpg);		
 	background-repeat:no-repeat;
 	width:240px;
 	height:275px;	
+}
+
+.slidesLiveButton, .slidesLiveButton:visited {
+	background: #017bf6; /* Old browsers */
+	background: -moz-linear-gradient(top,  #017bf6 0%, #035dbd 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#017bf6), color-stop(100%,#035dbd)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #017bf6 0%,#035dbd 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #017bf6 0%,#035dbd 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #017bf6 0%,#035dbd 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #017bf6 0%,#035dbd 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#017bf6', endColorstr='#035dbd',GradientType=0 ); /* IE6-9 */
+
+	text-decoration:none;	
+	color:#FFFFFF;
+	font-size:25px;
+	padding:10px 20px 10px 20px;
+	border:1px solid #01509d;
+
+    -webkit-box-shadow: inset 0 0 2px #9ecdfc;
+    -moz-box-shadow: inset 0 0 2px #9ecdfc;
+    box-shadow: inset 0 0 2px #9ecdfc;
+	border-radius:6px;
+}
+
+.slidesLiveButton:hover {
+	background: #017bf6; /* Old browsers */
+	background: -moz-linear-gradient(top,  #017bf6 0%, #014d9f 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#017bf6), color-stop(100%,#014d9f)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #017bf6 0%,#014d9f 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #017bf6 0%,#014d9f 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #017bf6 0%,#014d9f 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #017bf6 0%,#014d9f 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#017bf6', endColorstr='#014d9f',GradientType=0 ); /* IE6-9 */	
+}
+
+.bottomBuySpecial {
+	margin-left:40px;
+	margin-bottom:60px;
+}
+
+
+
+#contactUs {
+	margin-left:70px;	
 }
 
 .academicPartner1 {

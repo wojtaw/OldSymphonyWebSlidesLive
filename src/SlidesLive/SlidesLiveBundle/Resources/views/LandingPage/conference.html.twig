@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:fb="http://www.fa cebook.com/2008/fbml"
+<html xmlns:fb="http://www.facebook.com/2008/fbml"
       xmlns:og="http://opengraphprotocol.org/schema/">
 <head>
   <meta charset="utf-8" />  
@@ -19,53 +19,69 @@
 		</script>         
         			 		  				
     <link href="{{ asset('bundles/favicon-sl-1.png') }}" rel="icon" type="image/png" />
-    <title>Join the EDU movement!</title>
+    <title>SlidesLive - One place, one click</title>
 </head>
 
 <body>
 <div id="blueTopBar">
-	<div class="blueTopActionBar globalFont"><a href="mailto:vojta@slideslive.com" target="_blank">Contact us</a></div>
+	<div class="blueTopActionBar globalFont">One place, one click. <a href="mailto:vojta@slideslive.com" target="_blank">Get in touch</a></div>
 </div>
 
 <div class="topBar clearfix conferenceBG">
     <div class="topCenterImage conferenceBGImage center">
-    <div class="lp-headerText globalFont">Hello conferences,<br /> we have a new awesome<br />technology for you ...</div>
-    <div class="lp-join globalFont"><a href="http://slideslive.com/" target="_blank">Contact us</a></div>
+    <a href="http://slideslive.com/pioneersfestival" target="_blank" class="notebookButton"></a>
+    <div class="lp-headerMessageWrapper">
+        <div class="lp-headerText globalFont">Hello conferences,<br /> we have a new awesome<br />technology for you.</div>
+        <div class="lp-join globalFont"><a href="mailto:vojta@slideslive.com" target="_blank">Contact us</a></div>
+	</div>        
     </div>
 </div>
 
-<div class="lp-title globalFont center">One place, one click</div>
-<div class="lp-subtitle globalFont center slidesLiveBlue">Ready for showtime?</div>
 
-<div class="lp-centerWrapper center">
-	<img alt="OI account logo" class="lp-accountLogo" width="194" height="62" src="{{ asset('bundles/slideslive/images/landingpage/logo-pionnrs.jpg') }}" />
-    <div class="lp-presentationTitle globalFont">Pioneers Festival<br />
-	Fadi Bishara &#124; <span class="slidesLiveBlue">What Can European Entrepreneurs Learn from Silicon Valley?</span></div>
+<div class="tableWrapper center">
+	<div class="clearfix">
+        <div class="onePlaceLeft">
+            <div class="lp-title globalFont center">One place, one click</div>
+            <div class="lp-subtitle globalFont center slidesLiveBlue">Ready for showtime?</div>
+        </div>
+        <div class="onePlaceRight">
+            <div id="circleArrow" class="circleArrow center"><div class="arrowObject center"></div></div>
+        </div>
+    </div>
 </div>
 
+
+<div class="videoSlideBar">
+<div class="horizontalLineTop" id="embedPoint"></div>
+<div class="lp-centerWrapper center">
+	<a href="http://slideslive.com/pioneersfestival"¨ target="_blank"><img alt="OI account logo" class="lp-accountLogo" width="194" height="62" src="{{ asset('bundles/slideslive/images/landingpage/logo-pionnrs.jpg') }}" /></a>
+    <div class="lp-presentationTitle globalFont">Pioneers Festival<br />
+	Fadi Bishara &#124; <span class="slidesLiveBlue">What Can European Entrepreneurs Learn from Silicon Valley?</span></div>
+    
+	<div class="tryThisBox" id="tryThisBox"></div>    
+</div>
 
 <div class="embedWrapper">
 <script type="text/javascript" id="sle81767">
 	embedConferencePresentation();
 </script>
 </div>
+<div class="horizontalLineBottom"></div>
+</div>
+
 
 <h2 class="globalFont center slidesLiveBlue">All you need ...</h2>
 <img alt="You need laptop app and camera only" class="center" src="{{ asset('bundles/slideslive/images/need.jpg') }}" />
 
-
-<div class="lp-centerWrapper">
-    <div class="lp-centerWrapper-content clearfix">
-    	<div class="iWantButtonWrapper center">
-            <div class="generalButton">
-                <a href="mailto:vojta@slideslive.com" target="_blank" class="generalButtonText">I want this technology</a>       
-            </div>   
-        </div>
-    </div>    
-</div>
+<div class="lp-centerWrapper-content clearfix">
+    <div class="iWantButtonWrapper center">
+        <a href="mailto:vojta@slideslive.com" target="_blank" class="slidesLiveButton globalFont center" id="contactUs" >I want this technoogy</a>
+    </div>
+</div> 
 
 
 <div class="videoSlideBar">
+<div class="horizontalLineTop"></div>
 <div class="lp-centerWrapper">
     <div class="lp-centerWrapper-content clearfix">
         <div class="lp-featureBox lp-textContent">
@@ -76,6 +92,7 @@
         </div>        
     </div>    
 </div>
+<div class="horizontalLineBottom"></div>
 </div>
 
 <div class="lp-centerWrapper">
@@ -84,12 +101,13 @@
             <img alt="Video plus slides" src="{{ asset('bundles/slideslive/images/landingpage/money.jpg') }}" class="videoSlideImage" />
         </div>       
         <div class="lp-featureBox lp-textContent">
-            <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">Increase your revenue</span> - Select presentations and pay wall condiitons, we take care of the rest.<br /><br />Record and post presentations for your targeted audiences.<br />Create new revenue streams with a few clicks. </div>       
+            <div class="lp-videoSlide globalFont center lp-textContentBox"><span class="slidesLiveBlue">Increase your revenue</span> - Select presentations and pay wall conditions, we take care of the rest.<br /><br />Record and post presentations for your targeted audiences.<br />Create new revenue streams with just a few clicks. </div>       
         </div>     
     </div>    
 </div>
 
 <div class="videoSlideBar">
+<div class="horizontalLineTop"></div>
 <div class="lp-centerWrapper">
     <div class="lp-centerWrapper-content clearfix">
         <div class="lp-featureBox lp-textContent">
@@ -100,6 +118,7 @@
         </div>         
     </div>    
 </div>
+<div class="horizontalLineBottom"></div>
 </div>
 
 
@@ -116,7 +135,7 @@
 
 <div class="footerBlue"></div>
 <div class="footerBlack">
-<img alt="SlidesLive footer logo" class="footerLogo center" src="{{ asset('bundles/slideslive/images/sl-logo.png') }}" />
+<a href="http://slideslive.com" target="_blank"><img alt="SlidesLive footer logo" class="footerLogo center" src="{{ asset('bundles/slideslive/images/landingpage/SlidesLive-footer-logo.png') }}" /></a>
 </div>
     
 </body>

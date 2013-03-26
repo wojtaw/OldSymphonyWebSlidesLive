@@ -243,6 +243,33 @@ class AccountController extends Controller
       return $this->render('SlidesLiveBundle:Account:managePresentations.html.twig', $this->data);
     }
     
+    public function deletePresentationAction($presentationId)
+    {
+        $presentation = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Presentation')->find($presentationId);
+        if (empty($presentation))
+        {
+            $this->get('session')->setFlash('notice', "Presentation with id $presentationId does not exist.");
+        }
+        else
+        {
+            $account = $this->get('security.context')->getToken()->getUser();
+            if ($account !== $presentation->getAccount())
+            {
+                $this->get('session')->setFlash('notice', "Log in to your account to delete presentation.");
+            }
+            else
+            {
+                $em = $this->getDoctrine()->getEntityManager();
+                $toBeDeletedAccount = $this->getDoctrine()->getEntityManager()->getRepository('SlidesLiveBundle:Account')->find(213);
+                $presentation->setAccount($toBeDeletedAccount);
+                $presentation->setFolder($toBeDeletedAccount->getPrimaryFolder());
+                $em->flush();
+            }
+        }
+
+        return $this->redirect($this->generateUrl('managePresentations', array('presentationId' => '-1')));
+    }
+    
     // -------------------------------------------------------------------------
     public function folderEditFormAction(Request $request, $account, $folder = null) {
       $em = $this->getDoctrine()->getEntityManager();

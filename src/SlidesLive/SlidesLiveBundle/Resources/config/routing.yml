@@ -90,6 +90,9 @@ managePresentations:
   pattern:  /account/managePresentations/{presentationId}
   defaults: { _controller: SlidesLiveBundle:Account:managePresentations, presentationsId: -1 }
 
+deletePresentation:
+  pattern: /account/managePresentations/{presentationId}/delete
+  defaults: { _controller: SlidesLiveBundle:Account:deletePresentation }
 
 manageFolders:
   pattern: /account/manageFolders/{folderId}

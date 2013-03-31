@@ -15,17 +15,19 @@ function slidesLiveEmbedBox(){
 	
 	//Private vars
 	this.playerContainer = document.createElement('div'),
+	this.lightboxShadow = document.createElement('div'),	
+	this.lightboxClose = document.createElement('div'),		
 	this.hasVideo = true,
 	this.hasSlides = true,
 	this.mediaType = "",
 	this.mediaID = "",
-	this.isPaird = false,
+	this.isPaid = false,
 	this.playerURL = "http://slideslive.com/bundles/player/Player_5_THC.swf",
 	//this.playerURL = "http://localhost/SlidesLive/web/bundles/player/Player_5_THC.swf",
 	this.presentationJsonApiUrl = "http://slideslive.com/embedjsonapi/",
 	
 	this.embedPresentation = function(presentationID, width, videoSlideRatio, forceLightbox, zoomingOn, startSlide) {
-		console.log("Embeding presentation"+presentationID);
+		thisInstance.printLog("Embeding presentation"+presentationID);
 		if(typeof(presentationID)!=='undefined') thisInstance.presentationID = presentationID;
 		if(typeof(width)!=='undefined') thisInstance.width = width;		
 		if(typeof(videoSlideRatio)!=='undefined') thisInstance.videoSlideRatio = videoSlideRatio;		
@@ -37,7 +39,7 @@ function slidesLiveEmbedBox(){
 	},
 
 	this.createPlayerContainer = function() {
-		console.log("creating container");
+		thisInstance.printLog("creating container");
 		thisInstance.playerContainer.style.width = thisInstance.width+'px';	
 		thisInstance.playerContainer.style.height = thisInstance.height+'px';		
 		thisInstance.playerContainer.style.color = "white";
@@ -63,26 +65,28 @@ function slidesLiveEmbedBox(){
 	this.resizePlayerContainer = function(newHeight) {
 		if(thisInstance.hasSlides && !thisInstance.hasVideo) newHeight = (thisInstance.width * 3) / 4;
 		thisInstance.height = newHeight;
-		console.log(thisInstance.height);		
+		thisInstance.printLog(thisInstance.height);		
 		thisInstance.playerContainer.style.height = thisInstance.height+"px";		
 	},
 			
 	
-	this.createPlayerHtml = function(){
+	this.createPlayerHtml = function(scaledWidth, lightboxCode){
+		if(typeof(scaledWidth)=='undefined') scaledWidth = thisInstance.width;
+		
 		var flashVarString = "hasVideo="+thisInstance.hasVideo+
 							"&hasSlides="+thisInstance.hasSlides+
 							"&presentationID="+thisInstance.presentationID+
 							"&mediaType="+thisInstance.mediaType+
 							"&mediaID="+thisInstance.mediaID+
-							"&widthScale="+thisInstance.width+
+							"&widthScale="+scaledWidth+
 							"&isEmbed=true"+																							
-							"&isPaid=true"+thisInstance.isPaid+																											
+							"&isPaid="+thisInstance.isPaid+																											
 							"&videoSlideRatio="+thisInstance.videoSlideRatio+
 							"&zoomingOn="+thisInstance.zoomingOn+
 							"&startSlide="+thisInstance.startSlide;																																																
 	
 		
-		if(thisInstance.bgColor == "transparent"){
+		if(thisInstance.bgColor == "transparent" || lightboxCode){
 			var colorParameter = "<param name=\"wmode\" value=\"transparent\">";
 			var colorEmbed = "wmode=\"transparent\"";			
 		} else {
@@ -119,7 +123,7 @@ function slidesLiveEmbedBox(){
 			var json = thisInstance.xmlhttp.responseText;
 			var presentations = JSON.parse(json);
 			var presentation = presentations[0];
-			console.log(json);				
+			thisInstance.printLog(json);				
 			thisInstance.hasVideo = presentation.hasVideo;
 			thisInstance.hasSlides = presentation.hasSlides;
 			thisInstance.mediaType = presentation.mediaType;
@@ -127,7 +131,76 @@ function slidesLiveEmbedBox(){
 			thisInstance.isPaid = presentation.isPaid;			
 		}	
 		thisInstance.playerContainer.innerHTML = thisInstance.createPlayerHtml();	  	
+	}
+	
+	this.hideLightBox = function() {
+		thisInstance.lightboxShadow.style.display = "none";
+
+		//Find script tag that called creation
+		var scripts = document.getElementsByTagName("script");
+		var embedScript = document.getElementById('sle81767'); 
+		
+		thisInstance.playerContainer.style.width = thisInstance.width+'px';	
+		thisInstance.playerContainer.style.marginLeft = "0px";		
+		thisInstance.playerContainer.style.marginRight = "0px";				
+		thisInstance.playerContainer.innerHTML = thisInstance.createPlayerHtml();				
+
+		//Try to find exact one
+		for (var i=0; i<scripts.length; ++i ) {
+		  if ( scripts[i].innerHTML.indexOf("embedPresentation("+thisInstance.presentationID) != -1 ) {
+			embedScript = scripts[i];
+		  }
+		}
+		
+		embedScript.parentNode.insertBefore(thisInstance.playerContainer, embedScript);			
+	}
+	
+	this.displayLightBox = function() {
+		if(thisInstance.width >= 650 || !thisInstance.forceLightbox) return false;
+
+		document.onkeypress=function(e){
+			var e=window.event || e
+			if(e.keyCode == 27) thisInstance.hideLightBox();
+		}		
+		
+		lbPlayerWidth = (0.8 * window.innerWidth)
+		thisInstance.lightboxShadow.style.width = "100%";	
+		thisInstance.lightboxShadow.style.height = "100%";
+		thisInstance.lightboxShadow.style.backgroundColor = "#000";
+		thisInstance.lightboxShadow.style.backgroundColor = "rgba(0, 0, 0, 0.8)";		
+		
+		thisInstance.lightboxShadow.style.display = "block";		
+		thisInstance.lightboxShadow.style.position = "fixed";				
+		thisInstance.lightboxShadow.style.zIndex = "9999";						
+		thisInstance.lightboxShadow.style.left = "0px";						
+		thisInstance.lightboxShadow.style.top = "0px";
+
+		thisInstance.lightboxClose.addEventListener("click",thisInstance.hideLightBox,true);
+		thisInstance.lightboxClose.style.width = "50px";	
+		thisInstance.lightboxClose.style.height = "50px";
+		thisInstance.lightboxClose.style.backgroundColor = "#CC6633";
+		thisInstance.lightboxClose.style.display = "block";		
+		thisInstance.lightboxClose.style.position = "fixed";				
+		thisInstance.lightboxClose.style.zIndex = "9999";						
+		thisInstance.lightboxClose.style.right = "0px";						
+		thisInstance.lightboxClose.style.top = "0px";		
+		
+		thisInstance.playerContainer.style.width = lbPlayerWidth+'px';	
+		thisInstance.playerContainer.style.height = "500px";
+		thisInstance.playerContainer.style.marginLeft = "auto";		
+		thisInstance.playerContainer.style.marginRight = "auto";				
+
+		document.body.appendChild(thisInstance.lightboxShadow);
+		thisInstance.lightboxShadow.appendChild(thisInstance.playerContainer);		
+		thisInstance.lightboxShadow.appendChild(thisInstance.lightboxClose);				
+
+		thisInstance.playerContainer.innerHTML = thisInstance.createPlayerHtml(lbPlayerWidth,true);		
+		//document.body.insertBefore(thisInstance.lightboxShadow, document.body.firstChild);
 	}	
+	
+	this.printLog = function(message){
+		console.log(message);
+	}
 };
 
 function createSlidesLiveBox(){

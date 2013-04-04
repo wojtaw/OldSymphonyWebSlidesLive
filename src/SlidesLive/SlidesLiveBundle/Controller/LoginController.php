@@ -30,7 +30,6 @@ class LoginController extends Controller {
             // last username entered by the user
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
-			'facebookAppId' => $this->container->getParameter('facebookAppId')
         ));
     }                                         
 

@@ -342,6 +342,7 @@ a.metaBlue {
 
 .secondSidebar {
 	padding-top:0px;	
+	display:none;
 }
 
 .channelSidebarContent {

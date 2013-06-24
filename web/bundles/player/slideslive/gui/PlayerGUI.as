@@ -467,14 +467,14 @@
 		
 		public function showFullscreenState():void
 		{
+			recalculateGUI();
 			videoControls.showFullscreenState();
-			
 		}
 		
 		public function showNormalState():void
 		{
+			recalculateGUI();
 			videoControls.showNormalState();
-			
 		}
 		
 		public function showBuyDialog(presentationID:int):void {

@@ -14,6 +14,8 @@
 		public var playerAPIUserAuth:String;
 		public var playerAPIAddNote:String;
 		
+		public var autoplay:Boolean=false;
+		
 		//Slides records
 		private var slidesRecords:Array = new Array();
 		 
@@ -21,7 +23,7 @@
 		public var playerStageWidth:int = 960;
 		public var playerStageHeight:int = 400;
 		
-		//FlashVars parameters
+		//FlashVars parametersR
 		private var videoAvailable:Boolean;
 		private var slideAvailable:Boolean;
 		private var presentationID:int;
@@ -91,7 +93,12 @@
 		public function setPaid(value:Boolean):void
 		{
 			isLecturePaid = value;
-		}			
+		}	
+		
+		public function setAutoplay(value:Boolean):void
+		{
+			autoplay = value;
+		}		
 		
 		public function isPaid():Boolean
 		{

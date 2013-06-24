@@ -88,6 +88,7 @@ package slideslive.start
 				playerValues.setVideoAvailable(true);
 				playerValues.setEmbed(true);
 				playerValues.setPaid(false);
+				playerValues.setAutoplay(false);
 				
 				playerValues.setPathToImages("SAMPLE_DATA/presentationImages/");
 				playerValues.setPathToXMLStorage("SAMPLE_DATA/XMLstorage/");
@@ -98,11 +99,12 @@ package slideslive.start
 				playerValues.setPresentationID(38889365);
 				playerValues.setPresentationModule("YOUTUBE");
 				//playerValues.setPresentationParameter("54191131");
-				playerValues.setPresentationParameter("cY3OiRyqqw8");
+				playerValues.setPresentationParameter("CErbh9FrBiQ");
 				playerValues.setSlideAvailable(true);
 				playerValues.setVideoAvailable(true);
 				playerValues.setEmbed(true);
 				playerValues.setPaid(false);
+				playerValues.setAutoplay(false);
 				//playerValues.scaleToWidth = 1400;
 				playerValues.setVideoSlideRatio(-1);
 				playerValues.setZooming(true);
@@ -134,8 +136,7 @@ package slideslive.start
 				else if(flashVarObject["isEmbed"] == "false") playerValues.setEmbed(false);
 				
 				//paid is optional
-				if(flashVarObject["isPaid"] == "true") playerValues.setPaid(true);
-				else if(flashVarObject["isPaid"] == "false") playerValues.setPaid(false);				
+				playerValues.setPaid(false);				
 				
 				//Scaling
 				if(flashVarObject["widthScale"] == null) playerValues.scaleToWidth = -1;
@@ -144,6 +145,10 @@ package slideslive.start
 				//zooming is optional
 				if(flashVarObject["zoomingOn"] == "true") playerValues.setZooming(true);
 				else if(flashVarObject["zoomingOn"] == "false") playerValues.setZooming(false);	
+				
+				//autoplay is optional
+				if(flashVarObject["autoplay"] == "true") playerValues.setAutoplay(true);
+				else if(flashVarObject["autoplay"] == "false") playerValues.setAutoplay(false);	
 				
 				//VideoSlide ratio
 				if(flashVarObject["videoSlideRatio"] == null) playerValues.setVideoSlideRatio(-1);

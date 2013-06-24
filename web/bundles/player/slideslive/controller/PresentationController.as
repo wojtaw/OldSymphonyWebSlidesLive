@@ -10,6 +10,7 @@ package slideslive.controller
 	import flash.events.KeyboardEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.events.TimerEvent;
+	import flash.external.ExternalInterface;
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -18,7 +19,6 @@ package slideslive.controller
 	import flash.net.navigateToURL;
 	import flash.ui.Keyboard;
 	import flash.utils.Timer;
-	import flash.external.ExternalInterface;	
 	
 	import slideslive.event.ControlsEvents;
 	import slideslive.event.GeneralEvents;
@@ -78,6 +78,7 @@ package slideslive.controller
 			else if(!initSlides()) return PlayerOutput.printError("Slides addition failed");
 			else {
 				playerGUI.recalculateGUI();
+				if(playerValues.autoplay) playHandler(new ControlsEvents(ControlsEvents.PLAYBTN));
 				return true;
 			}
 		}		
@@ -195,10 +196,17 @@ package slideslive.controller
 		protected function decideSlideQuality(e:GeneralEvents):void
 		{
 			var tmpMode:String;
-			if(e.data > 800) tmpMode = SlideQuality.ORIGINAL;
-			else if(e.data > 450) tmpMode = SlideQuality.BIG;
-			else if(e.data > 150) tmpMode = SlideQuality.MEDIUM;
-			else tmpMode = SlideQuality.SMALL;
+			if(isFullscreen || playerValues.scaleToWidth > 1000){
+				if(e.data > 450) tmpMode = SlideQuality.ORIGINAL;
+				else if(e.data > 150) tmpMode = SlideQuality.BIG;
+				else tmpMode = SlideQuality.MEDIUM;				
+			}else{
+				if(e.data > 800) tmpMode = SlideQuality.ORIGINAL;
+				else if(e.data > 450) tmpMode = SlideQuality.BIG;
+				else if(e.data > 150) tmpMode = SlideQuality.MEDIUM;
+				else tmpMode = SlideQuality.SMALL;
+			}
+			
 			
 			if(tmpMode != slidesMode){
 				slidesMode = tmpMode;
@@ -236,6 +244,7 @@ package slideslive.controller
 			if(buyCountdown == null) runBuyContdown();
 			if(firstPlay){
 				firstPlay = false;
+				ExternalInterface.call("slFirstPlayBridge", playerValues.getPresentationID());
 				checkStartSlide();
 			}
 			if(isPlaying){
@@ -306,10 +315,10 @@ package slideslive.controller
 			if(isFullscreen){
 				isFullscreen = false;
 				stage.scaleMode = StageScaleMode.NO_SCALE;					
-				stage.invalidate();	
+				stage.invalidate();
+				playerGUI.scalePlayer();
 				playerGUI.showNormalState();
 				if(!playerValues.isVideoAvailable()){
-					playerGUI.scalePlayer();
 					playerGUI.x = 0;
 				}
 			}else{
@@ -320,11 +329,12 @@ package slideslive.controller
 					playerGUI.scalePlayer(calculatedWidth);
 					playerGUI.x = (stage.stageWidth - calculatedWidth) / 2;
 				} else {
-					stage.scaleMode = StageScaleMode.SHOW_ALL;				
+					playerGUI.scalePlayer(960);
+					stage.scaleMode = StageScaleMode.SHOW_ALL;	
 				}
 				stage.invalidate();
 				playerGUI.showFullscreenState();
-			}			
+			}	
 		}
 		
 		private function videoSeekHandler(e:ControlsEvents):void{
